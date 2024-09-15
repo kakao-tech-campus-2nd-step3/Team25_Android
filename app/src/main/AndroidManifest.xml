@@ -19,6 +19,9 @@
             android:name=".ui.main.companion.LiveCompanionActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.login.LoginEntryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
