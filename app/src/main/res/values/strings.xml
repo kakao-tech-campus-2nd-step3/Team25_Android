@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ManagerPracticeApp</string>
+    <string name="app_name">병원동행매니저</string>
     <string name="main_welcome">환영합니다 산지니님</string>
     <string name="hospital_companion">병원동행</string>
     <string name="need_hospital_companion">믿을 수 있는 병원 동행이 필요할 때</string>
