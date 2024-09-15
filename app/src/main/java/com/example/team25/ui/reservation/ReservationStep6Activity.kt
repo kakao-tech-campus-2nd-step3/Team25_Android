@@ -1,8 +1,8 @@
 package com.example.team25.ui.reservation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.team25.R
 import com.example.team25.databinding.ActivityReservationStep6Binding
 
 class ReservationStep6Activity : AppCompatActivity() {
@@ -14,6 +14,7 @@ class ReservationStep6Activity : AppCompatActivity() {
         setContentView(binding.root)
 
         navigateToPrevious()
+        navigateToNext()
     }
 
     private fun navigateToPrevious() {
@@ -23,6 +24,13 @@ class ReservationStep6Activity : AppCompatActivity() {
 
         binding.previousBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(this, ReservationStep7Activity::class.java)
+            startActivity(intent)
         }
     }
 }

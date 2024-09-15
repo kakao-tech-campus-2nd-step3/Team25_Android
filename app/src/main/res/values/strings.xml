@@ -143,6 +143,8 @@
     <string name="choose">선택하기</string>
     <string name="_50000">50000</string>
     <string name="basic_fee">기본 이용료</string>
+    <string name="pusan_university_hospital">부산대학교병원</string>
+    <string name="address_example">부산대학교 서구 구덕로 179(아미동...</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>
