@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.databinding.ActivityReservationStep6Binding
 
 class ReservationStep6Activity : AppCompatActivity() {
-    lateinit var binding: ActivityReservationStep6Binding
+    private lateinit var binding: ActivityReservationStep6Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
