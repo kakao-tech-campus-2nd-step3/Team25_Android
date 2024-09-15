@@ -27,16 +27,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_height="0dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/payment_infor"
+        app:layout_constraintBottom_toTopOf="@id/next_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_text_view"
-        app:layout_constraintBottom_toTopOf="@id/next_btn"
-        android:layout_marginBottom="30dp">
+        app:layout_constraintTop_toBottomOf="@id/title_text_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/info_payment_layout"
@@ -108,10 +108,10 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/from"
                 android:layout_width="match_parent"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
                 android:layout_height="46dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/from_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -149,9 +149,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/to"
                 android:layout_width="match_parent"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
                 android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/to_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -201,9 +201,11 @@
             <include
                 android:id="@+id/manager"
                 layout="@layout/item_manager"
-                android:layout_width="290dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -213,30 +215,28 @@
                 android:id="@+id/vehicle_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/vehicle"
-                app:layout_constraintTop_toBottomOf="@id/manager"
                 android:layout_marginTop="30dp"
-                app:layout_constraintStart_toStartOf="@id/manager"
+                android:text="@string/vehicle"
                 android:textSize="18sp"
-                />
+                app:layout_constraintStart_toStartOf="@id/manager"
+                app:layout_constraintTop_toBottomOf="@id/manager" />
 
             <TextView
                 android:id="@+id/selected_vehicle_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/taxi"
-                app:layout_constraintTop_toBottomOf="@id/vehicle_text_view"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@id/vehicle_text_view"
+                android:text="@string/taxi"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                />
+                app:layout_constraintStart_toStartOf="@id/vehicle_text_view"
+                app:layout_constraintTop_toBottomOf="@id/vehicle_text_view" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                app:layout_constraintTop_toBottomOf="@id/selected_vehicle_text_view"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selected_vehicle_text_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
