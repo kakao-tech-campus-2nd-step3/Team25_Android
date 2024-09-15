@@ -103,7 +103,7 @@
         <item>064</item>
     </string-array>
 
-    <string-array name="select_service">
+    <string-array name="service_option">
         <item>정기검진</item>
         <item>하루동행</item>
         <item>기타동행</item>

@@ -18,6 +18,7 @@ class ReservationStep1Activity : AppCompatActivity() {
         setContentView(binding.root)
 
         navigateToMain()
+        navigateToNext()
         setPhoneNumDropDown()
     }
 
@@ -28,6 +29,13 @@ class ReservationStep1Activity : AppCompatActivity() {
 
         binding.previousBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(this, ReservationStep2Activity::class.java)
+            startActivity(intent)
         }
     }
 
