@@ -1,5 +1,6 @@
 package com.example.team25.ui.reservation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -18,6 +19,7 @@ class ReservationStep5Activity : AppCompatActivity() {
 
         setBirthdayTextChangedListener()
         navigateToPrevious()
+        navigateToNext()
     }
 
     private fun setBirthdayTextChangedListener() {
@@ -62,6 +64,13 @@ class ReservationStep5Activity : AppCompatActivity() {
 
         binding.previousBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(this, ReservationStep6Activity::class.java)
+            startActivity(intent)
         }
     }
 }
