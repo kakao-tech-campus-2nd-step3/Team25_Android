@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_02">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/manager_info_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/manager_info"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/manager_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/woman"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manager_info_text_view" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manager_img" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/payment_infor"
+        app:layout_constraintBottom_toTopOf="@id/next_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/manager_infor_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/introduction_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/introduction"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/introduction_detail_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/introduction_detail"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/introduction_text_view"
+                app:layout_constraintTop_toBottomOf="@id/introduction_text_view" />
+
+            <TextView
+                android:id="@+id/active_location_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/active_location"
+                android:textSize="18sp"
+
+                app:layout_constraintStart_toStartOf="@id/introduction_detail_text_view"
+                app:layout_constraintTop_toBottomOf="@id/introduction_detail_text_view" />
+
+            <TextView
+                android:id="@+id/active_location_child"
+                android:layout_width="wrap_content"
+                android:layout_height="35sp"
+                android:layout_marginTop="10dp"
+                android:text="@string/busan_namgu"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/active_location_parent"
+                app:layout_constraintTop_toBottomOf="@id/active_location_parent" />
+
+            <TextView
+                android:id="@+id/active_time_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/active_time"
+                android:textSize="18sp"
+
+
+                app:layout_constraintStart_toStartOf="@id/active_location_child"
+                app:layout_constraintTop_toBottomOf="@id/active_location_child" />
+
+            <LinearLayout
+                android:id="@+id/monday_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/active_time_parent"
+                app:layout_constraintTop_toBottomOf="@id/active_time_parent">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/day_of_week"
+                    android:gravity="center"
+                    android:text="@string/monday"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/_00_00_00_00"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tuesday_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/monday_layout"
+                app:layout_constraintTop_toBottomOf="@id/monday_layout">
+
+                <TextView
+                    android:id="@+id/monday"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/day_of_week"
+                    android:gravity="center"
+                    android:text="@string/tuesday"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/monday_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/_00_00_00_00"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wednesday_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/tuesday_layout"
+                app:layout_constraintTop_toBottomOf="@id/tuesday_layout">
+
+                <TextView
+                    android:id="@+id/wednesday"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/day_of_week"
+                    android:gravity="center"
+                    android:text="@string/wednesday"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/wednesday_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/_00_00_00_00"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/thursday_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/wednesday_layout"
+                app:layout_constraintTop_toBottomOf="@id/wednesday_layout">
+
+                <TextView
+                    android:id="@+id/thursday"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/day_of_week"
+                    android:gravity="center"
+                    android:text="@string/Thrusday"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/thursday_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/_00_00_00_00"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/friday_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/thursday_layout"
+                app:layout_constraintTop_toBottomOf="@id/thursday_layout">
+
+                <TextView
+                    android:id="@+id/friday"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/day_of_week"
+                    android:gravity="center"
+                    android:text="@string/friday"
+                    android:textColor="@color/blue"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/friday_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/_00_00_00_00"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/career_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/career_infor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/friday_layout"
+                app:layout_constraintTop_toBottomOf="@id/friday_layout" />
+
+            <TextView
+                android:id="@+id/career"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/x"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/career_title"
+                app:layout_constraintTop_toBottomOf="@id/career_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="@string/choose"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

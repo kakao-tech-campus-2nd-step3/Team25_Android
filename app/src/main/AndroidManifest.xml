@@ -25,14 +25,55 @@
             android:name=".ui.main.status.ReservationStatusActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.reservation.ReservationPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep11Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep10Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep9Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep8Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.ReservationStep1Activity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.companion.LiveCompanionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginEntryActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
