@@ -1,5 +1,6 @@
 package com.example.team25.ui.reservation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.R
@@ -14,11 +15,19 @@ class ReservationCheckActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setVehicle()
+        navigateToNext()
     }
 
     private fun setVehicle() {
         val vehicle = intent.getStringExtra("vehicle")
         binding.selectedVehicleTextView.text = vehicle ?: "이동 수단이 선택되지 않음"
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(this, ReservationPaymentActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }
