@@ -1,5 +1,6 @@
 package com.example.team25.ui.reservation
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -18,6 +19,7 @@ class ReservationStep3Activity : AppCompatActivity() {
 
         setRelationDropDown()
         navigateToPrevious()
+        navigateToNext()
     }
 
     private fun setRelationDropDown() {
@@ -39,6 +41,13 @@ class ReservationStep3Activity : AppCompatActivity() {
 
         binding.previousBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(this, ReservationStep4Activity::class.java)
+            startActivity(intent)
         }
     }
 }
