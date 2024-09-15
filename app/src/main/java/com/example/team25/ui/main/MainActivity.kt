@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.databinding.ActivityMainBinding
 import com.example.team25.ui.login.LoginEntryActivity
+import com.example.team25.ui.reservation.ReservationStep1Activity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,11 +16,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navigateToLogin()
+        navigateToReservation()
     }
 
     private fun navigateToLogin() {
         binding.welcomeTextView.setOnClickListener {
             val intent = Intent(this, LoginEntryActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun navigateToReservation() {
+        binding.goReservationBtn.setOnClickListener {
+            val intent = Intent(this, ReservationStep1Activity::class.java)
             startActivity(intent)
         }
     }
