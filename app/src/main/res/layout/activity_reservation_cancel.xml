@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.status.ReservationCancelActivity">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reservation_check_report_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reservation_cancel"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/back_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_btn" />
+
+    <TextView
+        android:id="@+id/reservation_cancel_description_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/reservation_cancle_description"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservation_check_report_title_text_view" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/reservation_info"
+        android:layout_width="300dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/light_gray_outline_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reservation_cancel_description_text_view">
+
+        <TextView
+            android:id="@+id/manager_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="매니저 이름" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/manager"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/manager_name_text_view"
+            app:layout_constraintStart_toEndOf="@id/manager_name_text_view" />
+
+        <TextView
+            android:id="@+id/reservation_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/manager_name_text_view"
+            app:layout_constraintTop_toBottomOf="@id/manager_name_text_view"
+            tools:text="7월 14일 오후 8시" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/reservation_cancel_reason_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/cancel_reason"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/reservation_info"
+        app:layout_constraintTop_toBottomOf="@id/reservation_info" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reservation_cancel_reason_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_weight="6"
+        android:background="@drawable/light_gray_outline_box"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/blue"
+        app:layout_constraintStart_toStartOf="@+id/reservation_cancel_reason_text_view"
+        app:layout_constraintTop_toBottomOf="@id/reservation_cancel_reason_text_view">
+
+        <AutoCompleteTextView
+            android:id="@+id/reservation_cancel_reason_auto_complete_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/select"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/reservation_cancel_reason_detail_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/cancel_reason_detail"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/reservation_cancel_reason_input"
+        app:layout_constraintTop_toBottomOf="@id/reservation_cancel_reason_input" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/light_gray_input_box"
+        android:hint="구체적인 사유를 적어주세요"
+        android:padding="20dp"
+        app:layout_constraintStart_toStartOf="@id/reservation_cancel_reason_detail_text_view"
+        app:layout_constraintTop_toBottomOf="@id/reservation_cancel_reason_detail_text_view" />
+
+    <TextView
+        android:id="@+id/call_manager_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="@string/deposit_refund_cancel"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
