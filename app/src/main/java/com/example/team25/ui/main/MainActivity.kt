@@ -3,6 +3,7 @@ package com.example.team25.ui.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.team25.ui.main.companion.LiveCompanionActivity
 import com.example.team25.databinding.ActivityMainBinding
 import com.example.team25.ui.login.LoginEntryActivity
 import com.example.team25.ui.reservation.ReservationStep1Activity
@@ -15,8 +16,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        navigateToLiveCompanion()
         navigateToLogin()
         navigateToReservation()
+    }
+
+    private fun navigateToLiveCompanion() {
+        binding.realTimeCompanionSeeAllBtn.setOnClickListener {
+            val intent = Intent(this, LiveCompanionActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun navigateToLogin() {
