@@ -38,7 +38,7 @@
     <string name="patient">환자</string>
     <string name="from">출발지</string>
     <string name="to">도착지</string>
-    <string name="damdangManger">담당 매니저</string>
+    <string name="dedicated_manger">담당 매니저</string>
     <string name="pay">결제하기</string>
     <string name="pay_info">결제정보</string>
     <string name="deposit">보증금</string>
@@ -146,6 +146,10 @@
     <string name="pusan_university_hospital">부산대학교병원</string>
     <string name="address_example">부산대학교 서구 구덕로 179(아미동...</string>
     <string name="friday">금</string>
+    <string name="name_02">NAME</string>
+    <string name="gender_02">GENDER</string>
+    <string name="phonenumber">PhoneNumber</string>
+    <string name="vehicle">이동수단</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>

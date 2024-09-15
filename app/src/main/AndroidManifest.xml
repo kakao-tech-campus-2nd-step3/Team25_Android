@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Team25"
         tools:targetApi="31">
         <activity
+            android:name=".ui.reservation.ReservationCheckActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.reservation.ReservationStep11Activity"
             android:exported="false" />
         <activity
