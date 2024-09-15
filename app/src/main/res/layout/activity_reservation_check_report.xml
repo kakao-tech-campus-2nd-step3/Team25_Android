@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.status.ReservationCheckReportActivity">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reservation_check_report_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_report"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/back_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_btn" />
+
+    <TextView
+        android:id="@+id/writer_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/writer"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/back_btn"
+        app:layout_constraintTop_toBottomOf="@id/back_btn" />
+
+    <TextView
+        android:id="@+id/manager_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/writer_text_view"
+        app:layout_constraintTop_toBottomOf="@id/writer_text_view"
+        tools:text="매니저 이름" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/manager"
+        app:layout_constraintBottom_toBottomOf="@id/manager_name_text_view"
+        app:layout_constraintStart_toEndOf="@id/manager_name_text_view" />
+
+    <TextView
+        android:id="@+id/write_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="@string/writer_date"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/writer_text_view" />
+
+    <TextView
+        android:id="@+id/date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/manager_name_text_view"
+        app:layout_constraintEnd_toEndOf="@id/write_date_text_view"
+        tools:text="2024.09.02" />
+
+    <TextView
+        android:id="@+id/doctor_opinion_summary_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/doctor_opinion_summary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/manager_name_text_view"
+        app:layout_constraintTop_toBottomOf="@id/manager_name_text_view" />
+
+    <TextView
+        android:id="@+id/doctor_opinion_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/doctor_opinion_summary_text_view"
+        app:layout_constraintTop_toBottomOf="@id/doctor_opinion_summary_text_view"
+        tools:text="과음 과식 금지" />
+
+    <TextView
+        android:id="@+id/doctor_opinion_content_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/medication_guidance"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/doctor_opinion_text_view"
+        app:layout_constraintTop_toBottomOf="@id/doctor_opinion_text_view" />
+
+    <TextView
+        android:id="@+id/time_cycle_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toStartOf="@id/doctor_opinion_content_text_view"
+        app:layout_constraintTop_toBottomOf="@id/doctor_opinion_content_text_view"
+        tools:text="매일 2회" />
+
+    <TextView
+        android:id="@+id/meal_before_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/meal_before"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toStartOf="@id/time_cycle_btn"
+        app:layout_constraintTop_toBottomOf="@id/time_cycle_btn" />
+
+    <TextView
+        android:id="@+id/meal_after_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/meal_after"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toEndOf="@id/meal_before_btn"
+        app:layout_constraintTop_toTopOf="@id/meal_before_btn" />
+
+    <TextView
+        android:id="@+id/time_30min_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/min_30"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toStartOf="@id/meal_before_btn"
+        app:layout_constraintTop_toBottomOf="@id/meal_before_btn" />
+
+    <TextView
+        android:id="@+id/time_1hour_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/hour"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toEndOf="@id/time_30min_btn"
+        app:layout_constraintTop_toTopOf="@id/time_30min_btn" />
+
+    <TextView
+        android:id="@+id/morning_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/morning"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toStartOf="@id/time_30min_btn"
+        app:layout_constraintTop_toBottomOf="@id/time_30min_btn" />
+
+    <TextView
+        android:id="@+id/lunch_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/lunch"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toEndOf="@id/morning_btn"
+        app:layout_constraintTop_toTopOf="@id/morning_btn" />
+
+    <TextView
+        android:id="@+id/dinner_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:background="@drawable/light_purple_btn_box"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/dinner"
+        android:textColor="@color/purple"
+        app:layout_constraintStart_toEndOf="@id/lunch_btn"
+        app:layout_constraintTop_toTopOf="@id/lunch_btn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

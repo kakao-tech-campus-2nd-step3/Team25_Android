@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemReservationHistoryBinding
+import com.example.team25.ui.main.status.ReservationCheckReportActivity
 import com.example.team25.ui.main.status.data.ReservationInfo
 import java.text.SimpleDateFormat
 import java.util.Locale
