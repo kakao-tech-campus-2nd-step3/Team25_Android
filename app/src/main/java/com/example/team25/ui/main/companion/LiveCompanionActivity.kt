@@ -1,4 +1,4 @@
-package com.example.managerpracticeapp.ui.main.companion
+package com.example.team25.ui.main.companion
 
 import LiveCompanionRecyclerViewAdapter
 import android.os.Bundle
