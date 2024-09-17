@@ -14,15 +14,20 @@ import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import com.example.team25.ui.reservation.network.KakaoApi
 import com.example.team25.ui.reservation.network.LocalSearchHospitalService
 import com.example.team25.ui.reservation.network.RemoteSearchHospitalService
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ReservationStep7Activity : AppCompatActivity() {
+    @Inject
+    lateinit var searchHospitalService: SearchHospitalService
+
     private lateinit var binding: ActivityReservationStep7Binding
-    private lateinit var searchHospitalService: SearchHospitalService
     private lateinit var hospitalRecyclerViewAdapter: HospitalRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,14 +35,9 @@ class ReservationStep7Activity : AppCompatActivity() {
         binding = ActivityReservationStep7Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initializeSearchHospitalService()
         setHospitalSearchListener()
         setSearchResultRecyclerView()
         navigateToPrevious()
-    }
-
-    private fun initializeSearchHospitalService() {
-        searchHospitalService = LocalSearchHospitalService(this)
     }
 
     private fun setHospitalSearchListener() {
