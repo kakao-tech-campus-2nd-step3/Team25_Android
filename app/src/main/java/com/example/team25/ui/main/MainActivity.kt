@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.ui.main.companion.LiveCompanionActivity
 import com.example.team25.databinding.ActivityMainBinding
+import com.example.team25.ui.main.status.ReservationStatusActivity
 import com.example.team25.ui.login.LoginEntryActivity
 import com.example.team25.ui.reservation.ReservationStep1Activity
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navigateToLiveCompanion()
+        navigateToReservationStatus()
         navigateToLogin()
         navigateToReservation()
     }
@@ -27,6 +29,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private fun navigateToReservationStatus() {
+        binding.reservationSeeAllBtn.setOnClickListener {
+            val intent = Intent(this, ReservationStatusActivity::class.java)
 
     private fun navigateToLogin() {
         binding.welcomeTextView.setOnClickListener {
