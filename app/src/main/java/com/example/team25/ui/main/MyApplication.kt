@@ -33,13 +33,16 @@ class MyApplication : Application() {
 
     private fun loadHospitalsFromJson() {
         CoroutineScope(Dispatchers.IO).launch {
-            val inputStream = assets.open("hospital_data_202406.json")
-            val reader = InputStreamReader(inputStream, "UTF-8")
-            val hospitals: List<HospitalDomain> = Gson().fromJson(
-                reader, object : TypeToken<List<HospitalDomain>>() {}.type
-            )
+            val isDatabaseEmpty = hospitalDao.getAnyHospital() == null
 
-            hospitalDao.insertAll(hospitals)
+            if (isDatabaseEmpty) {
+                val inputStream = assets.open("hospital_data_202406.json")
+                val reader = InputStreamReader(inputStream, "UTF-8")
+                val hospitals: List<HospitalDomain> = Gson().fromJson(
+                    reader, object : TypeToken<List<HospitalDomain>>() {}.type
+                )
+                hospitalDao.insertAll(hospitals)
+            }
         }
     }
 }
