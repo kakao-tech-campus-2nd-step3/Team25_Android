@@ -33,18 +33,21 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToReservationStatus() {
         binding.reservationSeeAllBtn.setOnClickListener {
             val intent = Intent(this, ReservationStatusActivity::class.java)
-
-    private fun navigateToLogin() {
-        binding.welcomeTextView.setOnClickListener {
-            val intent = Intent(this, LoginEntryActivity::class.java)
-            startActivity(intent)
         }
     }
 
-    private fun navigateToReservation() {
-        binding.goReservationBtn.setOnClickListener {
-            val intent = Intent(this, ReservationStep1Activity::class.java)
-            startActivity(intent)
+        private fun navigateToLogin() {
+            binding.welcomeTextView.setOnClickListener {
+                val intent = Intent(this, LoginEntryActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        private fun navigateToReservation() {
+            binding.goReservationBtn.setOnClickListener {
+                val intent = Intent(this, ReservationStep1Activity::class.java)
+                startActivity(intent)
+            }
         }
     }
-}
+
