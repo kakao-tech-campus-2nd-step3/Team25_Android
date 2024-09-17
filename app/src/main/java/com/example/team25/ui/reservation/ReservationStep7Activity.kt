@@ -12,6 +12,7 @@ import com.example.team25.ui.reservation.adapters.HospitalRecyclerViewAdapter
 import com.example.team25.ui.reservation.interfaces.OnHospitalClickListener
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import com.example.team25.ui.reservation.network.KakaoApi
+import com.example.team25.ui.reservation.network.LocalSearchHospitalService
 import com.example.team25.ui.reservation.network.RemoteSearchHospitalService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +37,7 @@ class ReservationStep7Activity : AppCompatActivity() {
     }
 
     private fun initializeSearchHospitalService() {
-        searchHospitalService = RemoteSearchHospitalService()
+        searchHospitalService = LocalSearchHospitalService(this)
     }
 
     private fun setHospitalSearchListener() {
