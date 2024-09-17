@@ -3,9 +3,16 @@ package com.example.team25.ui.reservation.network
 import com.example.team25.BuildConfig
 import com.example.team25.domain.HospitalDomain
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RemoteSearchHospitalService(private val kakaoApi: KakaoApi): SearchHospitalService {
+class RemoteSearchHospitalService: SearchHospitalService {
+    private val kakaoApi: KakaoApi = Retrofit.Builder()
+        .baseUrl("https://dapi.kakao.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(KakaoApi::class.java)
 
     override suspend fun getSearchedResult(keyword: String, page: Int): List<HospitalDomain> {
         val hospitals = mutableListOf<HospitalDomain>()

@@ -10,6 +10,7 @@ import com.example.team25.databinding.ActivityReservationStep7Binding
 import com.example.team25.domain.HospitalDomain
 import com.example.team25.ui.reservation.adapters.HospitalRecyclerViewAdapter
 import com.example.team25.ui.reservation.interfaces.OnHospitalClickListener
+import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import com.example.team25.ui.reservation.network.KakaoApi
 import com.example.team25.ui.reservation.network.RemoteSearchHospitalService
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ReservationStep7Activity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationStep7Binding
-    private lateinit var remoteService: RemoteSearchHospitalService
+    private lateinit var searchHospitalService: SearchHospitalService
     private lateinit var hospitalRecyclerViewAdapter: HospitalRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,20 +29,14 @@ class ReservationStep7Activity : AppCompatActivity() {
         binding = ActivityReservationStep7Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initializeRemoteSearchHospitalService()
+        initializeSearchHospitalService()
         setHospitalSearchListener()
         setSearchResultRecyclerView()
         navigateToPrevious()
     }
 
-    private fun initializeRemoteSearchHospitalService() {
-        val retrofitService = Retrofit.Builder()
-            .baseUrl("https://dapi.kakao.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(KakaoApi::class.java)
-
-        remoteService = RemoteSearchHospitalService(retrofitService)
+    private fun initializeSearchHospitalService() {
+        searchHospitalService = RemoteSearchHospitalService()
     }
 
     private fun setHospitalSearchListener() {
@@ -62,7 +57,7 @@ class ReservationStep7Activity : AppCompatActivity() {
     private fun searchHospitals(keyword: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val hospitals = remoteService.getSearchedResult(keyword, 1)
+                val hospitals = searchHospitalService.getSearchedResult(keyword, 1)
                 val sortedHospitals = sortHospitals(hospitals, keyword)
 
                 hospitalRecyclerViewAdapter.submitList(sortedHospitals)
