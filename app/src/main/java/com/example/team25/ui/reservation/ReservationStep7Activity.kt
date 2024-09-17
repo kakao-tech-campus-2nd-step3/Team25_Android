@@ -11,15 +11,10 @@ import com.example.team25.domain.HospitalDomain
 import com.example.team25.ui.reservation.adapters.HospitalRecyclerViewAdapter
 import com.example.team25.ui.reservation.interfaces.OnHospitalClickListener
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
-import com.example.team25.ui.reservation.network.KakaoApi
-import com.example.team25.ui.reservation.network.LocalSearchHospitalService
-import com.example.team25.ui.reservation.network.RemoteSearchHospitalService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint
