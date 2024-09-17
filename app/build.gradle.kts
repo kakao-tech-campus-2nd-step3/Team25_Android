@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.gradle.ktlint)
+    alias(libs.plugins.dagger.hilt)
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
@@ -50,6 +51,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.retrofit2.retrofit)
@@ -65,6 +67,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     kapt(libs.androidx.room.compiler)
+    kapt(libs.dagger.hilt.compiler)
 }
 
 fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
