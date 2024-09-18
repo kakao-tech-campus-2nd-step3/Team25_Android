@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToReservationStatus() {
         binding.reservationSeeAllBtn.setOnClickListener {
             val intent = Intent(this, ReservationStatusActivity::class.java)
+        }
+    }
 
     private fun navigateToLogin() {
         binding.welcomeTextView.setOnClickListener {
