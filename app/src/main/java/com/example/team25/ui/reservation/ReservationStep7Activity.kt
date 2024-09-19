@@ -66,8 +66,6 @@ class ReservationStep7Activity : AppCompatActivity() {
     /*
     정렬 기준
     1. 검색어가 이름에서 더 앞쪽에 나올수록 우선
-    ( 검색어가 이름에 포함되어 있지 않은 경우 가장 낮은 우선순위 )
-
     ex)
     검색어: 부산대
     우선순위: 부산대학교 병원 > 양산부산대학교병원
@@ -75,10 +73,12 @@ class ReservationStep7Activity : AppCompatActivity() {
     2. 글자수가 적은 항목이 우선
     */
     private fun sortHospitals(hospitals: List<HospitalDomain>, keyword: String): List<HospitalDomain> {
-        return hospitals.sortedWith(compareBy(
-            { if (it.name.indexOf(keyword) == -1) Int.MAX_VALUE else it.name.indexOf(keyword) },
-            { it.name.length }
-        ))
+        return hospitals
+            .filter { it.name.contains(keyword) }
+            .sortedWith(compareBy(
+                { it.name.indexOf(keyword) },
+                { it.name.length }
+            ))
     }
 
     private fun setSearchResultRecyclerView() {
