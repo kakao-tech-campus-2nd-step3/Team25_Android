@@ -85,7 +85,7 @@ class ReservationStep7Activity : AppCompatActivity() {
         val hospitalClickListener =
             object : OnHospitalClickListener {
                 override fun onHospitalClicked() {
-                    val intent = Intent(this@ReservationStep7Activity, ReservationStep7Activity::class.java)
+                    val intent = Intent(this@ReservationStep7Activity, ReservationStep8Activity::class.java)
                     startActivity(intent)
                 }
             }
