@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.status.ReservationStatusActivity">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reservation_status_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reservation_status"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/back_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_btn" />
+
+    <TextView
+        android:id="@+id/reservation_status_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/reservation_status"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/back_btn"
+        app:layout_constraintTop_toBottomOf="@id/back_btn" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reservation_status_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/reservation_status_text_view"
+        app:layout_constraintTop_toBottomOf="@id/reservation_status_text_view" />
+
+    <TextView
+        android:id="@+id/reservation_history_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/reservation_history"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/reservation_status_recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/reservation_status_recycler_view" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reservation_history_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="@id/reservation_history_text_view"
+        app:layout_constraintTop_toBottomOf="@id/reservation_history_text_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
