@@ -24,6 +24,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 kakao-sdk-all = { group = "com.kakao.sdk", name = "v2-all", version.ref = "kakaoSdk" }
 kakao-map = { group = "com.kakao.maps.open", name = "android", version.ref = "kakaoMap"}
+v2-user = { module = "com.kakao.sdk:v2-user", version.ref = "kakaoSdk" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
