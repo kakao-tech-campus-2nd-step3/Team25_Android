@@ -21,6 +21,13 @@
 
 </br>
 
+## ERD
+
+![image](https://github.com/user-attachments/assets/3e494ae1-4385-4df8-b7f3-7ec5ba2e4e89)
+
+## API 명세서
+![image](https://github.com/user-attachments/assets/a8369b59-9b32-4ff9-a7f0-1e2741bd142e)
+
 </br>
 
 ## 코드 유지 관리자
