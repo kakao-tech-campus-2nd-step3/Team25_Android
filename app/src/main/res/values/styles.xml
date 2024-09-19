@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 커스텀 DatePicker 스타일 -->
+    <style name="CustomDatePicker" parent="android:Widget.Material.DatePicker">
+        <!-- 전체적인 텍스트 색상 -->
+        <item name="android:textColorPrimary">#FF5722</item>
+        <!-- 날짜 선택기 헤더 배경색 -->
+        <item name="android:headerBackground">@color/blue</item>
+        <!-- 선택된 날짜의 텍스트 색상 -->
+        <item name="android:textColorHighlight">@color/white</item>
+        <!-- 날짜 선택기의 버튼 색상 -->
+        <item name="android:headerMonthTextAppearance">@style/DatePickerHeaderMonthTextAppearance</item>
+    </style>
+
+    <style name="DatePickerHeaderMonthTextAppearance">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="CustomDatePickerDayStyle">
+        <item name="android:background">#FF5722</item> <!-- 선택된 날짜의 배경색을 변경 -->
+    </style>
+
+</resources>
