@@ -3,8 +3,8 @@ package com.example.team25.di
 import com.example.team25.dao.HospitalDao
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import com.example.team25.ui.reservation.network.KakaoApi
-import com.example.team25.ui.reservation.network.LocalSearchHospitalService
-import com.example.team25.ui.reservation.network.RemoteSearchHospitalService
+import com.example.team25.ui.reservation.services.LocalSearchHospitalService
+import com.example.team25.ui.reservation.services.RemoteSearchHospitalService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

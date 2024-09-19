@@ -1,8 +1,9 @@
-package com.example.team25.ui.reservation.network
+package com.example.team25.ui.reservation.services
 
 import com.example.team25.BuildConfig
 import com.example.team25.domain.HospitalDomain
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
+import com.example.team25.ui.reservation.network.KakaoApi
 import javax.inject.Inject
 
 

@@ -1,4 +1,4 @@
-package com.example.team25.ui.reservation.network
+package com.example.team25.ui.reservation.services
 
 import com.example.team25.dao.HospitalDao
 import com.example.team25.domain.HospitalDomain
