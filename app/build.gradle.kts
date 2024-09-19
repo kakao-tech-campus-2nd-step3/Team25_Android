@@ -21,6 +21,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "KAKAO_API_KEY", getApiKey("KAKAO_API_KEY"))
+        manifestPlaceholders["kakaoApiKey"] = getApiKey("KAKAO_API_KEY")
     }
 
     buildTypes {
@@ -51,6 +52,7 @@ dependencies {
 
     implementation(libs.kakao.sdk.all)
     implementation(libs.kakao.map)
+    implementation(libs.v2.user)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

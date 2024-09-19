@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         navigateToReservationStatus()
         navigateToLogin()
         navigateToReservation()
+        setWelcomeTextView()
     }
 
     private fun navigateToLiveCompanion() {
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToReservationStatus() {
         binding.reservationSeeAllBtn.setOnClickListener {
             val intent = Intent(this, ReservationStatusActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -47,6 +49,14 @@ class MainActivity : AppCompatActivity() {
         binding.goReservationBtn.setOnClickListener {
             val intent = Intent(this, ReservationStep1Activity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun setWelcomeTextView() {
+        val userNickname = intent.getStringExtra("user_nickname")
+        val welcomeMessage = "환영합니다 ${userNickname}님"
+        if (userNickname != null) {
+            binding.welcomeTextView.text = welcomeMessage
         }
     }
 }
