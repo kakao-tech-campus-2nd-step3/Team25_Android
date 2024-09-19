@@ -38,6 +38,3 @@
 |      | <img src="https://github.com/Normenghub.png" width=100px> | <img src="https://github.com/Pjhn.png" width=100px> | <img src="https://github.com/ichanguk.png" width=100px> |
 
 </br>
-
-## 라이선스 정보
-[MIT licensed](https://github.com/see-realview/see-realview-backend/blob/main/LICENSE)
