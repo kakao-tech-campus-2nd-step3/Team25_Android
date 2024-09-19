@@ -17,16 +17,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val userNickname = intent.getStringExtra("user_nickname")
-        if (userNickname != null) {
-            // 사용자 정보를 UI에 설정하거나 다른 작업을 수행합니다.
-            binding.welcomeTextView.text = "Welcome, $userNickname"
-        }
-
         navigateToLiveCompanion()
         navigateToReservationStatus()
         navigateToLogin()
         navigateToReservation()
+        setWelcomeTextView()
     }
 
     private fun navigateToLiveCompanion() {
@@ -54,6 +49,14 @@ class MainActivity : AppCompatActivity() {
         binding.goReservationBtn.setOnClickListener {
             val intent = Intent(this, ReservationStep1Activity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun setWelcomeTextView() {
+        val userNickname = intent.getStringExtra("user_nickname")
+        val welcomeMessage = "환영합니다 ${userNickname}님"
+        if (userNickname != null) {
+            binding.welcomeTextView.text = welcomeMessage
         }
     }
 }

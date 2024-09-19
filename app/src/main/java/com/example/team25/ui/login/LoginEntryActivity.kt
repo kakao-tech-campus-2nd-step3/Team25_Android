@@ -12,7 +12,9 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 
 class LoginEntryActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityLoginEntryBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginEntryBinding.inflate(layoutInflater)
@@ -23,6 +25,8 @@ class LoginEntryActivity : AppCompatActivity() {
 
     private fun kakaoLogin() {
         binding.kakaoLoginBtn.setOnClickListener {
+
+
             val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                 if (error != null) {
                     Log.e(TAG, "카카오계정으로 로그인 실패", error)
@@ -34,12 +38,6 @@ class LoginEntryActivity : AppCompatActivity() {
                             Log.e(TAG, "사용자 정보 요청 실패", error)
                         } else if (user != null) {
                             Log.i(TAG, "사용자 정보 요청 성공: ${user.kakaoAccount?.profile?.nickname}")
-
-                            // 로그인 성공 후 MainActivity로 사용자 정보를 전달합니다.
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.putExtra("user_nickname", user.kakaoAccount?.profile?.nickname)
-                            startActivity(intent)
-                            finish()
                         }
                     }
                 }
@@ -66,13 +64,13 @@ class LoginEntryActivity : AppCompatActivity() {
                             if (error != null) {
                                 Log.e(TAG, "사용자 정보 요청 실패", error)
                             } else if (user != null) {
-                                Log.i(TAG, "사용자 정보 요청 성공: ${user.kakaoAccount?.profile?.nickname}")
+                                Log.i(TAG, "사용자 정보 요청 성공: ${user.kakaoAccount?.profile?.nickname}, ${user.id}")
 
-                                // 로그인 성공 후 MainActivity로 사용자 정보를 전달합니다.
                                 val intent = Intent(this, MainActivity::class.java)
                                 intent.putExtra("user_nickname", user.kakaoAccount?.profile?.nickname)
+                                intent.putExtra("user_id", user.id)
                                 startActivity(intent)
-                                finish() // 현재 액티비티를 종료합니다 (선택 사항)
+                                finish()
                             }
                         }
                     }
