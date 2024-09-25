@@ -1,13 +1,11 @@
 package com.example.team25.ui.main.status.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemReservationHistoryBinding
-import com.example.team25.ui.main.status.ReservationCheckReportActivity
 import com.example.team25.ui.main.status.data.ReservationInfo
 import com.example.team25.ui.main.status.interfaces.OnCheckReportClickListener
 import java.text.SimpleDateFormat
@@ -20,8 +18,7 @@ class ReservationHistoryRecyclerViewAdapter(private val clicklistener: OnCheckRe
     class ReservationHistoryViewHolder(
         private val binding: ItemReservationHistoryBinding,
         private val clicklistener: OnCheckReportClickListener
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
@@ -30,10 +27,6 @@ class ReservationHistoryRecyclerViewAdapter(private val clicklistener: OnCheckRe
 
             binding.checkReportBtn.setOnClickListener {
                 clicklistener.onCheckReportClicked(item)
-                /*val intent =
-                    Intent(binding.root.context, ReservationCheckReportActivity::class.java)
-                        .putExtra("ReservationInfo", item)
-                binding.root.context.startActivity(intent)*/
             }
         }
     }

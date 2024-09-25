@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemReservationStatusBinding
 import com.example.team25.ui.main.status.data.ReservationInfo
-import com.example.team25.ui.main.status.interfaces.OnCheckReportClickListener
 import com.example.team25.ui.main.status.interfaces.OnRequestCancelClickListener
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -20,8 +19,7 @@ class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestC
     class ReservationStatusViewHolder(
         private val binding: ItemReservationStatusBinding,
         private val clickListener: OnRequestCancelClickListener
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
