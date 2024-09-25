@@ -60,7 +60,7 @@ class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, Reser
             oldItem: ReservationInfo,
             newItem: ReservationInfo,
         ): Boolean {
-            return oldItem.name == newItem.name && oldItem.date == newItem.date
+            return oldItem == newItem
         }
     }
 }
