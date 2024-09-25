@@ -17,7 +17,7 @@ class ReservationStatusRecyclerViewAdapter :
         ReservationInfo,
         ReservationStatusRecyclerViewAdapter.ReservationStatusViewHolder,
         >(DiffCallback()) {
-    inner class ReservationStatusViewHolder(val binding: ItemReservationStatusBinding) :
+    class ReservationStatusViewHolder(val binding: ItemReservationStatusBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
@@ -50,7 +50,7 @@ class ReservationStatusRecyclerViewAdapter :
         holder.bind(item)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
+    private class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
         override fun areItemsTheSame(
             oldItem: ReservationInfo,
             newItem: ReservationInfo,

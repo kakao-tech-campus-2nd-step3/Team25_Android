@@ -15,7 +15,7 @@ import java.util.Locale
 class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, ReservationHistoryRecyclerViewAdapter.ReservationHistoryViewHolder>(
     DiffCallback(),
 ) {
-    inner class ReservationHistoryViewHolder(val binding: ItemReservationHistoryBinding) :
+    class ReservationHistoryViewHolder(val binding: ItemReservationHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
@@ -48,7 +48,7 @@ class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, Reser
         holder.bind(item)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
+    private class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
         override fun areItemsTheSame(
             oldItem: ReservationInfo,
             newItem: ReservationInfo,
