@@ -8,11 +8,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "hospitals")
 data class HospitalDomain(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "name")
     @SerializedName("place_name") val name: String,
-    @ColumnInfo(name = "address")
     @SerializedName("road_address_name") val address: String,
-):Parcelable
+) : Parcelable
