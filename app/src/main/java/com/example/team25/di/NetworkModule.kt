@@ -13,6 +13,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     @Provides
+    @Singleton
     fun provideRetrofit(): Retrofit {
         val url = "https://dapi.kakao.com/"
 
@@ -23,6 +24,7 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideKakaoApi(retrofit: Retrofit): KakaoApi {
         return retrofit.create(KakaoApi::class.java)
     }
