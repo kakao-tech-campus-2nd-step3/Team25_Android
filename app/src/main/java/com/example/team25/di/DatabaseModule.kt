@@ -2,7 +2,6 @@ package com.example.team25.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.team25.HospitalInitializer
 import com.example.team25.dao.HospitalDao
 import com.example.team25.database.HospitalDatabase
 import dagger.Module
