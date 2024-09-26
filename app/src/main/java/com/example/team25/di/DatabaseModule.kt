@@ -15,16 +15,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
     @Provides
     @Singleton
     fun provideHospitalDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): HospitalDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
             HospitalDatabase::class.java,
-            "hospital_database"
+            "hospital_database",
         ).build()
     }
 

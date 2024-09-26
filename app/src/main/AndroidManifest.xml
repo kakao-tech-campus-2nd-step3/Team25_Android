@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Team25"
         tools:targetApi="31">
         <activity
+            android:name=".ui.reservation.ReservationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.reservation.AddCreditcardActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.status.ReservationCancelActivity"
             android:exported="false" />
         <activity
@@ -28,53 +34,19 @@
             android:name=".ui.reservation.ReservationPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.reservation.ReservationCheckActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep11Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep10Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep9Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep8Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep7Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep6Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep5Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep4Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep3Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep2Activity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep1Activity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.companion.LiveCompanionActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginEntryActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakao${kakaoApiKey}" />
             </intent-filter>
         </activity>
@@ -83,6 +55,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
