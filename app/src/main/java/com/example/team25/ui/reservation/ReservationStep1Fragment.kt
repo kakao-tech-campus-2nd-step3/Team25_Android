@@ -11,11 +11,14 @@ import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep1Binding
 
 class ReservationStep1Fragment : Fragment() {
-    private lateinit var _binding: FragmentReservationStep1Binding
-    private val binding get() = _binding
+    private var _binding: FragmentReservationStep1Binding? = null
+    private val binding get() = _binding!!
     private var firstPhoneNum = "010"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentReservationStep1Binding.inflate(inflater, container, false)
         return binding.root
     }
@@ -23,7 +26,16 @@ class ReservationStep1Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPhoneNumDropDown()
+        navigateToNext()
+    }
 
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep2Fragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun setPhoneNumDropDown() {
@@ -38,4 +50,8 @@ class ReservationStep1Fragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
