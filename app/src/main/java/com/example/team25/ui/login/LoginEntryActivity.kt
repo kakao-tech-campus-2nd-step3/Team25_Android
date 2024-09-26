@@ -16,7 +16,6 @@ import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.launch
 
 class LoginEntryActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityLoginEntryBinding
     private val loginViewModel: LoginViewModel by viewModels()
 
@@ -48,7 +47,7 @@ class LoginEntryActivity : AppCompatActivity() {
                     SocialLoginUiState.SocialLoginUiFail -> {
                         showToast("Login Failed")
                     }
-                    SocialLoginUiState.IDle -> {  }
+                    SocialLoginUiState.IDle -> { }
                 }
             }
         }

@@ -1,12 +1,15 @@
 package com.example.team25.ui.reservation
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.team25.databinding.ActivityReservationStep7Binding
+import com.example.team25.R
+import com.example.team25.databinding.FragmentReservationStep7Binding
 import com.example.team25.domain.HospitalDomain
 import com.example.team25.ui.reservation.adapters.HospitalRecyclerViewAdapter
 import com.example.team25.ui.reservation.interfaces.OnHospitalClickListener
@@ -18,18 +21,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ReservationStep7Activity : AppCompatActivity() {
+class ReservationStep7Fragment : Fragment() {
     @Inject
     lateinit var searchHospitalService: SearchHospitalService
 
-    private lateinit var binding: ActivityReservationStep7Binding
+    private var _binding: FragmentReservationStep7Binding? = null
+    private val binding get() = _binding!!
     private lateinit var hospitalRecyclerViewAdapter: HospitalRecyclerViewAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityReservationStep7Binding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentReservationStep7Binding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHospitalSearchListener()
         setSearchResultRecyclerView()
         navigateToPrevious()
@@ -56,48 +65,50 @@ class ReservationStep7Activity : AppCompatActivity() {
                 val hospitals = searchHospitalService.getSearchedResult(keyword, 1)
                 val sortedHospitals = sortHospitals(hospitals, keyword)
 
-                hospitalRecyclerViewAdapter.submitList(sortedHospitals)
+                // UI 업데이트는 Main Thread에서 수행해야 하므로 withContext 사용
+                launch(Dispatchers.Main) {
+                    hospitalRecyclerViewAdapter.submitList(sortedHospitals)
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    /*
-    정렬 기준
-    1. 검색어가 이름에서 더 앞쪽에 나올수록 우선
-    ex)
-    검색어: 부산대
-    우선순위: 부산대학교 병원 > 양산부산대학교병원
-
-    2. 글자수가 적은 항목이 우선
-    */
     private fun sortHospitals(hospitals: List<HospitalDomain>, keyword: String): List<HospitalDomain> {
         return hospitals
             .filter { it.name.contains(keyword) }
-            .sortedWith(compareBy(
-                { it.name.indexOf(keyword) },
-                { it.name.length }
-            ))
+            .sortedWith(
+                compareBy(
+                    { it.name.indexOf(keyword) },
+                    { it.name.length },
+                )
+            )
     }
 
     private fun setSearchResultRecyclerView() {
-        val hospitalClickListener =
-            object : OnHospitalClickListener {
-                override fun onHospitalClicked() {
-                    val intent = Intent(this@ReservationStep7Activity, ReservationStep8Activity::class.java)
-                    startActivity(intent)
-                }
+        val hospitalClickListener = object : OnHospitalClickListener {
+            override fun onHospitalClicked() {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, ReservationStep8Fragment())
+                    .addToBackStack(null)
+                    .commit()
             }
+        }
 
         hospitalRecyclerViewAdapter = HospitalRecyclerViewAdapter(hospitalClickListener)
         binding.hospitalRecyclerView.adapter = hospitalRecyclerViewAdapter
-        binding.hospitalRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.hospitalRecyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun navigateToPrevious() {
         binding.backBtn.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            parentFragmentManager.popBackStack()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.reservation.ReservationStep3Activity">
+    tools:context=".ui.reservation.ReservationStep5Fragment">
 
     <ImageView
         android:id="@+id/back_btn"
@@ -18,105 +18,88 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/input_next_of_kin_text_view"
+        android:id="@+id/input_birthday_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/input_next_of_kin"
+        android:text="@string/input_birthday"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back_btn" />
 
-    <TextView
-        android:id="@+id/notify_by_message_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/notify_by_message"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_next_of_kin_text_view" />
-
-    <TextView
-        android:id="@+id/phone_num_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/phone_num"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/notify_by_message_text_view"
-        app:layout_constraintTop_toBottomOf="@id/notify_by_message_text_view" />
-
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/input_phone_num_layout"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/phone_num_text_view"
-        app:layout_constraintTop_toBottomOf="@id/phone_num_text_view">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_birthday_text_view">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        <EditText
+            android:id="@+id/year_input"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/blue">
-
-            <AutoCompleteTextView
-                android:id="@+id/phone_num_auto_complete_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="none"
-                android:text="@string/_010" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="2"
+            android:background="@drawable/edit_text_box"
+            android:gravity="center"
+            android:hint="@string/_1970"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textAlignment="center" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/dash"
-            android:textSize="30sp" />
+            android:text="년"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
 
         <EditText
-            android:background="@drawable/edit_text_box"
-            android:id="@+id/num_middle_edit_text"
+            android:id="@+id/month_input"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="5"
-            android:hint="@string/_0000"
+            android:layout_weight="2"
+            android:background="@drawable/edit_text_box"
+            android:gravity="center"
+            android:hint="@string/_01"
             android:inputType="number"
-            android:paddingStart="10dp"
-            android:textSize="20sp" />
+            android:maxLength="2"
+            android:textAlignment="center" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/dash"
-            android:textSize="30sp" />
+            android:text="월"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
-            android:background="@drawable/edit_text_box"
-            android:id="@+id/num_end_edit_text"
+            android:id="@+id/day_input"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="5"
-            android:hint="@string/_0000"
+            android:layout_weight="2"
+            android:background="@drawable/edit_text_box"
+            android:gravity="center"
+            android:hint="@string/_01"
             android:inputType="number"
-            android:paddingStart="10dp"
-            android:textSize="20sp" />
+            android:maxLength="2"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="일"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

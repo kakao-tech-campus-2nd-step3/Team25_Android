@@ -13,10 +13,10 @@ interface KakaoApi {
         @Query("category_group_code") categoryGroupCode: String,
         @Query("query") query: String,
         @Query("size") size: Int = 15,
-        @Query("page") page: Int = 1
+        @Query("page") page: Int = 1,
     ): Response<ResultSearchedKeyword>
 }
 
 data class ResultSearchedKeyword(
-    val documents: List<HospitalDomain>
+    val documents: List<HospitalDomain>,
 )

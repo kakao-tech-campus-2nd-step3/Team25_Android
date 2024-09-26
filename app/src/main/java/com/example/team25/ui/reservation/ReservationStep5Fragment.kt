@@ -1,22 +1,35 @@
 package com.example.team25.ui.reservation
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import com.example.team25.databinding.ActivityReservationStep5Binding
+import androidx.fragment.app.Fragment
+import com.example.team25.R
+import com.example.team25.databinding.FragmentReservationStep5Binding
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
 
-class ReservationStep5Activity : AppCompatActivity() {
-    private lateinit var binding: ActivityReservationStep5Binding
+class ReservationStep5Fragment : Fragment() {
+    private var _binding: FragmentReservationStep5Binding? = null
+    private val binding get() = _binding!!
     private var birthday: LocalDate? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityReservationStep5Binding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentReservationStep5Binding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
+        super.onViewCreated(view, savedInstanceState)
         setBirthdayTextChangedListener()
         navigateToPrevious()
         navigateToNext()
@@ -59,18 +72,25 @@ class ReservationStep5Activity : AppCompatActivity() {
 
     private fun navigateToPrevious() {
         binding.backBtn.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            parentFragmentManager.popBackStack()
         }
 
         binding.previousBtn.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            parentFragmentManager.popBackStack()
         }
     }
 
     private fun navigateToNext() {
         binding.nextBtn.setOnClickListener {
-            val intent = Intent(this, ReservationStep6Activity::class.java)
-            startActivity(intent)
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep6Fragment())
+                .addToBackStack(null)
+                .commit()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
