@@ -16,8 +16,7 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 class MyApplication : Application() {
-    @Inject
-    lateinit var hospitalDao: HospitalDao
+    @Inject lateinit var hospitalInitializer: HospitalInitializer
 
     override fun onCreate() {
         super.onCreate()
@@ -35,19 +34,6 @@ class MyApplication : Application() {
     }
 
     private fun loadHospitalsFromJson() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val isDatabaseEmpty = hospitalDao.getAnyHospital() == null
-
-            if (isDatabaseEmpty) {
-                val inputStream = assets.open("hospital_data_202406.json")
-                val reader = InputStreamReader(inputStream, "UTF-8")
-                val hospitals: List<HospitalDomain> =
-                    Gson().fromJson(
-                        reader,
-                        object : TypeToken<List<HospitalDomain>>() {}.type,
-                    )
-                hospitalDao.insertAll(hospitals)
-            }
-        }
+        hospitalInitializer.initialize()
     }
 }
