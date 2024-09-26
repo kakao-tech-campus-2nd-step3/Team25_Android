@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep8Binding
 import java.util.Calendar
 
@@ -35,6 +36,7 @@ class ReservationStep8Fragment : Fragment() {
         setDatePicker()
         setTimePicker()
         navigateToPrevious()
+        navigateToNext()
     }
 
     private fun getCurrentTime() {
@@ -105,6 +107,15 @@ class ReservationStep8Fragment : Fragment() {
 
         binding.previousBtn.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep9Fragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
