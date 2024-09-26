@@ -27,6 +27,7 @@ class ReservationStep3Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setRelationDropDown()
         navigateToPrevious()
+        navigateToNext()
     }
 
     private fun setRelationDropDown() {
@@ -48,6 +49,15 @@ class ReservationStep3Fragment : Fragment() {
 
         binding.previousBtn.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep4Fragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
