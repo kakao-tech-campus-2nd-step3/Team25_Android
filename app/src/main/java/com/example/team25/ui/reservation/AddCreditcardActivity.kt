@@ -14,7 +14,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddCreditcardActivity : AppCompatActivity() {
-
     @Inject
     lateinit var cardService: CardService
 
@@ -30,30 +29,26 @@ class AddCreditcardActivity : AppCompatActivity() {
     }
 
     private fun initCardInfor() {
-        val creditCardNumber = binding.numFirstEditText.text.toString() +
-            binding.numSecondEditText.text.toString() +
-            binding.numThirdEditText.text.toString() +
-            binding.numFourthEditText.text.toString()
+        val creditCardNumber =
+            binding.numFirstEditText.text.toString() +
+                binding.numSecondEditText.text.toString() +
+                binding.numThirdEditText.text.toString() +
+                binding.numFourthEditText.text.toString()
 
         val expireDate = binding.expireDayEditText.text.toString()
         val twoPassword = binding.passwordEditText.text.toString()
         val birth = binding.birthEditText.text.toString()
 
+        val cardInfor = cardService.createCardInfo(creditCardNumber, expireDate, twoPassword, birth)
 
-        val cardInfor = cardService.createCardInfo(creditCardNumber, expireDate, twoPassword,birth)
-
-        if (validateCard(cardInfor).count() {it} == 4) {
+        if (validateCard(cardInfor).count { it } == 4) {
             presentError(validateCard(cardInfor))
             val encryptedData = CardInformationEncryption().encryptCBC(cardInfor)
-            Log.d("123123", "initCardInfor: ${encryptedData}") // 암호화키 확인 로그
-
-        }else{
-            presentError(validateCard(cardInfor))
-
-
-
-
-        }
+            Log.d("123123", "initCardInfor: $encryptedData") // 암호화키 확인 로그
+        } else
+            {
+                presentError(validateCard(cardInfor))
+            }
     }
 
     private fun selectAddCreditCard() {
@@ -61,21 +56,29 @@ class AddCreditcardActivity : AppCompatActivity() {
             initCardInfor()
         }
     }
+
     private fun presentError(array: Array<Boolean>) {
         showError(array[0], binding.inputCardNumberErrorTextView, binding.inputCreditCardLayout)
         showError(array[1], binding.inputExpireDayErrorTextView, binding.expireDayEditText)
         showError(array[2], binding.inputPasswordErrorTextView, binding.passwordEditText)
-        showError(array[3],binding.inputCardBirthTextView,binding.birthEditText)
+        showError(array[3], binding.inputCardBirthTextView, binding.birthEditText)
     }
-    private fun showError(isValid: Boolean, errorTextView: View, inputField: View) {
+
+    private fun showError(
+        isValid: Boolean,
+        errorTextView: View,
+        inputField: View,
+    ) {
         if (!isValid) {
             errorTextView.visibility = View.VISIBLE
             inputField.setBackgroundResource(R.drawable.edit_text_box_red)
-        }else{
-            errorTextView.visibility = View.GONE
-            inputField.setBackgroundResource(R.drawable.edit_text_box)
-        }
+        } else
+            {
+                errorTextView.visibility = View.GONE
+                inputField.setBackgroundResource(R.drawable.edit_text_box)
+            }
     }
+
     private fun validateCard(card: CardInfor): Array<Boolean> {
         val isCardNumberValid = card.getCardNumber().length in 15..16
         val isExpireDateValid = card.getExpiredDate().length == 4
@@ -84,8 +87,4 @@ class AddCreditcardActivity : AppCompatActivity() {
 
         return arrayOf(isCardNumberValid, isExpireDateValid, isPasswordValid, isBirthValid)
     }
-
-
-
-
 }

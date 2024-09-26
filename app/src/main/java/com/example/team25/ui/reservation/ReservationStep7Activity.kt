@@ -36,18 +36,30 @@ class ReservationStep7Activity : AppCompatActivity() {
     }
 
     private fun setHospitalSearchListener() {
-        binding.destinationEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        binding.destinationEditText.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val keyword = s.toString()
-                if (keyword.isNotBlank()) {
-                    searchHospitals(keyword)
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    val keyword = s.toString()
+                    if (keyword.isNotBlank()) {
+                        searchHospitals(keyword)
+                    }
                 }
-            }
 
-            override fun afterTextChanged(s: Editable?) {}
-        })
+                override fun afterTextChanged(s: Editable?) {}
+            },
+        )
     }
 
     private fun searchHospitals(keyword: String) {
@@ -71,14 +83,19 @@ class ReservationStep7Activity : AppCompatActivity() {
     우선순위: 부산대학교 병원 > 양산부산대학교병원
 
     2. 글자수가 적은 항목이 우선
-    */
-    private fun sortHospitals(hospitals: List<HospitalDomain>, keyword: String): List<HospitalDomain> {
+     */
+    private fun sortHospitals(
+        hospitals: List<HospitalDomain>,
+        keyword: String,
+    ): List<HospitalDomain> {
         return hospitals
             .filter { it.name.contains(keyword) }
-            .sortedWith(compareBy(
-                { it.name.indexOf(keyword) },
-                { it.name.length }
-            ))
+            .sortedWith(
+                compareBy(
+                    { it.name.indexOf(keyword) },
+                    { it.name.length },
+                ),
+            )
     }
 
     private fun setSearchResultRecyclerView() {

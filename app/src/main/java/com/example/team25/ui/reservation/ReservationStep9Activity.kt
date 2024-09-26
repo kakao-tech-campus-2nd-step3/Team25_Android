@@ -29,7 +29,6 @@ class ReservationStep9Activity : AppCompatActivity() {
                     val intent = Intent(this@ReservationStep9Activity, ReservationStep10Activity::class.java)
                     startActivity(intent)
                 }
-
             }
 
         val adapter = ManagerRecyclerViewAdapter(managerClickListener)
@@ -41,8 +40,14 @@ class ReservationStep9Activity : AppCompatActivity() {
     }
 
     private fun getListFromDb(): ArrayList<ManagerDomain> {
-        val managerDomainLists: ArrayList<ManagerDomain> = arrayListOf(ManagerDomain("김지수"), ManagerDomain("임지수"),
-            ManagerDomain("신지수"), ManagerDomain("이지수"), ManagerDomain("박지수")) // DB에서 데이터 받아옴
+        val managerDomainLists: ArrayList<ManagerDomain> =
+            arrayListOf(
+                ManagerDomain("김지수"),
+                ManagerDomain("임지수"),
+                ManagerDomain("신지수"),
+                ManagerDomain("이지수"),
+                ManagerDomain("박지수"),
+            ) // DB에서 데이터 받아옴
         return managerDomainLists
     }
 

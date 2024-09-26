@@ -8,19 +8,19 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.team25.R
-import com.example.team25.databinding.FragmentReservationStep2Binding
+import com.example.team25.databinding.FragmentReservationStep4Binding
 
-class ReservationStep2Fragment : Fragment() {
-    private var _binding: FragmentReservationStep2Binding? = null
+class ReservationStep4Fragment : Fragment() {
+    private var _binding: FragmentReservationStep4Binding? = null
     private val binding get() = _binding!!
-    private var service = "외래진료"
+    private var firstPhoneNum = "010"
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentReservationStep2Binding.inflate(inflater, container, false)
+        _binding = FragmentReservationStep4Binding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -29,20 +29,20 @@ class ReservationStep2Fragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        setServiceDropDown()
+        setPhoneNumDropDown()
         navigateToPrevious()
         navigateToNext()
     }
 
-    private fun setServiceDropDown() {
-        val serviceOptions = resources.getStringArray(R.array.service_option)
+    private fun setPhoneNumDropDown() {
+        val phoneNumOptions = resources.getStringArray(R.array.phone_num_option)
 
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, serviceOptions)
-        binding.serviceAutoCompleteTextView.setAdapter(arrayAdapter)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, phoneNumOptions)
+        binding.phoneNumAutoCompleteTextView.setAdapter(arrayAdapter)
 
-        binding.serviceAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
-            service = parent.getItemAtPosition(position).toString()
-            Toast.makeText(requireContext(), "선택된 값: $service", Toast.LENGTH_SHORT).show()
+        binding.phoneNumAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            firstPhoneNum = parent.getItemAtPosition(position).toString()
+            Toast.makeText(requireContext(), "선택된 값: $firstPhoneNum", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -59,7 +59,7 @@ class ReservationStep2Fragment : Fragment() {
     private fun navigateToNext() {
         binding.nextBtn.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, ReservationStep3Fragment())
+                .replace(R.id.fragment_container_view, ReservationStep5Fragment())
                 .addToBackStack(null)
                 .commit()
         }
