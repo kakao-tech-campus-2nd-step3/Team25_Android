@@ -15,7 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkModule {
 
     @Provides
-    @Singleton
     fun provideRetrofit(): Retrofit {
         val url = "https://dapi.kakao.com/"
 
@@ -26,13 +25,11 @@ object NetworkModule {
     }
 
     @Provides
-    @Singleton
     fun provideKakaoApi(retrofit: Retrofit): KakaoApi {
         return retrofit.create(KakaoApi::class.java)
     }
 
     @Provides
-    @Singleton
     fun provideSearchHospitalService(
         kakaoApi: KakaoApi,
     ): SearchHospitalService =

@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
-    @Singleton
     fun provideHospitalDatabase(
         @ApplicationContext context: Context,
     ): HospitalDatabase {
@@ -27,7 +26,6 @@ object DatabaseModule {
     }
 
     @Provides
-    @Singleton
     fun provideHospitalDao(database: HospitalDatabase): HospitalDao {
         return database.hospitalDao()
     }
