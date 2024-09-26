@@ -1,8 +1,9 @@
 package com.example.team25.ui.reservation
 
 import androidx.lifecycle.ViewModel
-import com.example.team25.data.Patient
-import com.example.team25.data.ReservationInfo
+import com.example.team25.domain.Gender
+import com.example.team25.domain.Patient
+import com.example.team25.domain.ReservationInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -21,7 +22,7 @@ class ReservationInfoViewModel : ViewModel() {
             patient = Patient(
                 patientName = "",
                 patientPhone = "",
-                patientGender = "",
+                patientGender = Gender.MALE,
                 patientRelation = "",
                 patientBirth = "",
                 nokPhone = ""
@@ -67,7 +68,38 @@ class ReservationInfoViewModel : ViewModel() {
         _reservationInfo.value = _reservationInfo.value.copy(price = price)
     }
 
-    fun updatePatientInfo(patient: Patient) {
+    private fun updatePatientInfo(patient: Patient) {
         _reservationInfo.value = _reservationInfo.value.copy(patient = patient)
     }
+
+    fun updatePatientName(name: String) {
+        val updatedPatient = _reservationInfo.value.patient.copy(patientName = name)
+        updatePatientInfo(updatedPatient)
+    }
+
+    fun updatePatientPhone(phone: String) {
+        val updatedPatient = _reservationInfo.value.patient.copy(patientPhone = phone)
+        updatePatientInfo(updatedPatient)
+    }
+
+    fun updatePatientGender(gender: Gender) {
+        val updatedPatient = _reservationInfo.value.patient.copy(patientGender = gender)
+        updatePatientInfo(updatedPatient)
+    }
+
+    fun updatePatientRelation(relation: String) {
+        val updatedPatient = _reservationInfo.value.patient.copy(patientRelation = relation)
+        updatePatientInfo(updatedPatient)
+    }
+
+    fun updatePatientBirth(birth: String) {
+        val updatedPatient = _reservationInfo.value.patient.copy(patientBirth = birth)
+        updatePatientInfo(updatedPatient)
+    }
+
+    fun updateNokPhone(nokPhone: String) {
+        val updatedPatient = _reservationInfo.value.patient.copy(nokPhone = nokPhone)
+        updatePatientInfo(updatedPatient)
+    }
+
 }
