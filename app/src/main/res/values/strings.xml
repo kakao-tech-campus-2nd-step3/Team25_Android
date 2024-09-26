@@ -72,6 +72,20 @@
     <string name="public_transportation">대중교통</string>
     <string name="taxi">택시</string>
     <string name="low_fees">추가비용: 낮음</string>
+    <string name="add_card">카드를 등록해주세요.</string>
+    <string name="card_number">카드 번호</string>
+    <string name="expire_day">유효 기간</string>
+    <string name="card_password">카드 비밀번호</string>
+    <string name="card_add">카드등록</string>
+    <string name="front_two_password">앞 2자리 숫자</string>
+    <string name="_00_00">00/00</string>
+    <string name="add">등록하기</string>
+    <string name="error_card_number">카드 정보 입력 오류</string>
+    <string name="error_expired_day">유효 기간 입력 오류</string>
+    <string name="error_password">비밀번호 입력 오류</string>
+    <string name="birth">생년월일</string>
+    <string name="card_birth">생년월일 6자리 숫자</string>
+
     <string-array name="relation_option">
         <item>본인</item>
         <item>자식</item>
