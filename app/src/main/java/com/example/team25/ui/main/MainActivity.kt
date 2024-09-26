@@ -7,7 +7,8 @@ import com.example.team25.ui.main.companion.LiveCompanionActivity
 import com.example.team25.databinding.ActivityMainBinding
 import com.example.team25.ui.main.status.ReservationStatusActivity
 import com.example.team25.ui.login.LoginEntryActivity
-import com.example.team25.ui.reservation.ReservationStep1Activity
+import com.example.team25.ui.reservation.ReservationActivity
+import com.example.team25.ui.reservation.ReservationStep1Fragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToReservation() {
         binding.goReservationBtn.setOnClickListener {
-            val intent = Intent(this, ReservationStep1Activity::class.java)
+            val intent = Intent(this, ReservationActivity::class.java)
             startActivity(intent)
         }
     }
