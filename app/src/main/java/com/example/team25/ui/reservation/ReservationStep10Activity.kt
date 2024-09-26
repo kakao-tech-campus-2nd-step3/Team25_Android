@@ -7,6 +7,7 @@ import com.example.team25.databinding.ActivityReservationStep10Binding
 
 class ReservationStep10Activity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationStep10Binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReservationStep10Binding.inflate(layoutInflater)

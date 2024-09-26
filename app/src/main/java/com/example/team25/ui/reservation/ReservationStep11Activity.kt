@@ -15,7 +15,6 @@ class ReservationStep11Activity : AppCompatActivity() {
 
         navigateToPrevious()
         navigateToNext()
-
     }
 
     private fun navigateToPrevious() {

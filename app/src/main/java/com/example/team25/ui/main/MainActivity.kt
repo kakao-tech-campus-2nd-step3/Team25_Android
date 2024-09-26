@@ -3,12 +3,11 @@ package com.example.team25.ui.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.team25.ui.main.companion.LiveCompanionActivity
 import com.example.team25.databinding.ActivityMainBinding
-import com.example.team25.ui.main.status.ReservationStatusActivity
 import com.example.team25.ui.login.LoginEntryActivity
+import com.example.team25.ui.main.companion.LiveCompanionActivity
+import com.example.team25.ui.main.status.ReservationStatusActivity
 import com.example.team25.ui.reservation.ReservationActivity
-import com.example.team25.ui.reservation.ReservationStep1Fragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

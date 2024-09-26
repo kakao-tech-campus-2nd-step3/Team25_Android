@@ -15,4 +15,4 @@ data class HospitalDomain(
     @SerializedName("place_name") val name: String,
     @ColumnInfo(name = "address")
     @SerializedName("road_address_name") val address: String,
-):Parcelable
+) : Parcelable

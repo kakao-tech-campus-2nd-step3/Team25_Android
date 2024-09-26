@@ -3,7 +3,6 @@ package com.example.team25.ui.reservation
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -14,7 +13,7 @@ import com.example.team25.databinding.ActivityReservationStep6Binding
 
 class ReservationStep6Activity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationStep6Binding
-    private lateinit var selectedAddress : String
+    private lateinit var selectedAddress: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +25,8 @@ class ReservationStep6Activity : AppCompatActivity() {
         navigateToPrevious()
         navigateToNext()
     }
-    inner class AndroidBridge {
 
+    inner class AndroidBridge {
         @JavascriptInterface
         fun processAddress(address: String) {
             // 선택한 주소를 EditText에 표시
@@ -35,18 +34,19 @@ class ReservationStep6Activity : AppCompatActivity() {
 
             runOnUiThread {
                 binding.roadAddressEditText.setText(address)
-
             }
         }
         // 추후 다시 보완 (좌표 가져와야함)
     }
-    private fun createWeb(){
-        binding.roadAddressEditText.setOnClickListener{
-            showWebViewDialog();
+
+    private fun createWeb()  {
+        binding.roadAddressEditText.setOnClickListener {
+            showWebViewDialog()
         }
     }
-    private fun showWebViewDialog(){
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.search_address_dialog,null)
+
+    private fun showWebViewDialog()  {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.search_address_dialog, null)
         val builder = AlertDialog.Builder(this).setView(dialogView)
         val alertDialog = builder.create()
         val webView = dialogView.findViewById<WebView>(R.id.dialog_webview)
@@ -63,6 +63,7 @@ class ReservationStep6Activity : AppCompatActivity() {
 
         alertDialog.show()
     }
+
     private fun navigateToPrevious() {
         binding.backBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()

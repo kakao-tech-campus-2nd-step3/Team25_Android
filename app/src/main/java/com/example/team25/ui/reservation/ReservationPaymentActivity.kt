@@ -2,7 +2,6 @@ package com.example.team25.ui.reservation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.team25.R
 import com.example.team25.databinding.ActivityReservationPaymentBinding
 
 class ReservationPaymentActivity : AppCompatActivity() {
