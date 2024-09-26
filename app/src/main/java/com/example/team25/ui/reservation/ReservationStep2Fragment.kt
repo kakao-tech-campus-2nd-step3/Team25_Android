@@ -27,6 +27,7 @@ class ReservationStep2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setServiceDropDown()
         navigateToPrevious()
+        navigateToNext()
     }
 
     private fun setServiceDropDown() {
@@ -48,6 +49,15 @@ class ReservationStep2Fragment : Fragment() {
 
         binding.previousBtn.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep3Fragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 

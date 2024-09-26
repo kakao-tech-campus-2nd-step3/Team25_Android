@@ -58,9 +58,6 @@
             android:name=".ui.reservation.ReservationStep4Activity"
             android:exported="false" />
         <activity
-            android:name=".ui.reservation.ReservationStep3Activity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.companion.LiveCompanionActivity"
             android:exported="false" />
         <activity
