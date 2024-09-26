@@ -34,12 +34,6 @@
             android:name=".ui.reservation.ReservationPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.reservation.ReservationCheckActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationStep11Activity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.companion.LiveCompanionActivity"
             android:exported="false" />
         <activity
