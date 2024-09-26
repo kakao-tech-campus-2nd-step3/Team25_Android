@@ -3,7 +3,9 @@ package com.example.team25.ui.reservation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReservationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

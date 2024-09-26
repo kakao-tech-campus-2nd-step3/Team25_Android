@@ -29,6 +29,7 @@ class ReservationStep6Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         createWeb()
         navigateToPrevious()
+        navigateToNext()
     }
 
     inner class AndroidBridge {
@@ -75,6 +76,15 @@ class ReservationStep6Fragment : Fragment() {
 
         binding.previousBtn.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep7Fragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
