@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.team25.dao.HospitalDao
 import com.example.team25.domain.HospitalDomain
 
-@Database(entities = [HospitalDomain::class], version = 1)
+@Database(entities = [HospitalDomain::class], version = 1, exportSchema = false)
 abstract class HospitalDatabase : RoomDatabase() {
     abstract fun hospitalDao(): HospitalDao
 }
