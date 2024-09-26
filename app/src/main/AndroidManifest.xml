@@ -52,9 +52,6 @@
             android:name=".ui.reservation.ReservationStep7Activity"
             android:exported="false" />
         <activity
-            android:name=".ui.reservation.ReservationStep6Activity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.companion.LiveCompanionActivity"
             android:exported="false" />
         <activity

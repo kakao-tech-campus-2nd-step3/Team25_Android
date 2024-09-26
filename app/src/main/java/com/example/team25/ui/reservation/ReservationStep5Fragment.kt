@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep5Binding
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
@@ -31,6 +32,7 @@ class ReservationStep5Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setBirthdayTextChangedListener()
         navigateToPrevious()
+        navigateToNext()
     }
 
     private fun setBirthdayTextChangedListener() {
@@ -75,6 +77,15 @@ class ReservationStep5Fragment : Fragment() {
 
         binding.previousBtn.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun navigateToNext() {
+        binding.nextBtn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep6Fragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
