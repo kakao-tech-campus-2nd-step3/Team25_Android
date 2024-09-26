@@ -53,6 +53,7 @@ android {
 
 dependencies {
     implementation(libs.dagger.hilt.android)
+
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.retrofit2.retrofit)
