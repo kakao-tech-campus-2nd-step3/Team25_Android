@@ -3,6 +3,7 @@ package com.example.team25.ui.login
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class LoginViewModel : ViewModel() {
     private val _socialLoginUiState = MutableStateFlow<SocialLoginUiState>(SocialLoginUiState.IDle)
@@ -13,14 +14,14 @@ class LoginViewModel : ViewModel() {
     }
 
     fun kakaoLoginSuccess() {
-        _socialLoginUiState.tryEmit(SocialLoginUiState.SocialLoginUiSuccess)
+        _socialLoginUiState.update { SocialLoginUiState.SocialLoginUiSuccess }
     }
 
     fun kakaoLoginFail() {
-        _socialLoginUiState.tryEmit(SocialLoginUiState.SocialLoginUiFail)
+        _socialLoginUiState.update { SocialLoginUiState.SocialLoginUiFail }
     }
 
     fun setUiStateIdle() {
-        _socialLoginUiState.tryEmit(SocialLoginUiState.IDle)
+        _socialLoginUiState.update { SocialLoginUiState.IDle }
     }
 }
