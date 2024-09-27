@@ -1,14 +1,10 @@
 package com.example.team25.domain
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class HospitalDomain(
-    @SerializedName("place_name") val name: String,
-    @SerializedName("road_address_name") val address: String,
+    val name: String,
+    val address: String
 ) : Parcelable
