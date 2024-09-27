@@ -35,8 +35,15 @@ class ReservationStep2Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setServiceDropDown()
+        restoreForm()
         navigateToPrevious()
         navigateToNext()
+    }
+
+    private fun restoreForm() {
+        val savedServiceType = reservationInfoViewModel.reservationInfo.value.serviceType
+        binding.serviceAutoCompleteTextView.setText(savedServiceType, false)
+        serviceType = savedServiceType
     }
 
     private fun setServiceDropDown() {

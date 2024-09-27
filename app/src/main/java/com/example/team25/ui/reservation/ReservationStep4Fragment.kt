@@ -35,8 +35,24 @@ class ReservationStep4Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setPhoneNumDropDown()
+        restoreForm()
         navigateToPrevious()
         navigateToNext()
+    }
+
+    private fun restoreForm() {
+        val savedPhoneNumber = reservationInfoViewModel.reservationInfo.value.patient.nokPhone
+
+        if (savedPhoneNumber.isNotEmpty()) {
+            val phoneParts = savedPhoneNumber.split("-")
+            firstPhoneNum = phoneParts[0]
+            val secondPhoneNumMiddle = phoneParts[1]
+            val secondPhoneNumEnd = phoneParts[2]
+
+            binding.phoneNumAutoCompleteTextView.setText(firstPhoneNum, false)
+            binding.numMiddleEditText.setText(secondPhoneNumMiddle)
+            binding.numEndEditText.setText(secondPhoneNumEnd)
+        }
     }
 
     private fun setPhoneNumDropDown() {
@@ -88,8 +104,8 @@ class ReservationStep4Fragment : Fragment() {
     }
 
     private fun getFullPhoneNumber(secondPhoneNumMiddle: String, secondPhoneNumEnd: String): String {
-        val secondPhoneNum = secondPhoneNumMiddle + secondPhoneNumEnd
-        return firstPhoneNum + secondPhoneNum
+        val secondPhoneNum = "$secondPhoneNumMiddle-$secondPhoneNumEnd"
+        return "$firstPhoneNum-$secondPhoneNum"
     }
 
     override fun onResume() {

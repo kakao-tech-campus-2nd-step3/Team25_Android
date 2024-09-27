@@ -88,8 +88,8 @@ class ReservationStep1Fragment : Fragment() {
     }
 
     private fun getFullPhoneNumber(secondPhoneNumMiddle: String, secondPhoneNumEnd: String): String {
-        val secondPhoneNum = secondPhoneNumMiddle + secondPhoneNumEnd
-        return firstPhoneNum + secondPhoneNum
+        val secondPhoneNum = "$secondPhoneNumMiddle-$secondPhoneNumEnd"
+        return "$firstPhoneNum-$secondPhoneNum"
     }
 
     private fun getSelectedGender(): Gender {

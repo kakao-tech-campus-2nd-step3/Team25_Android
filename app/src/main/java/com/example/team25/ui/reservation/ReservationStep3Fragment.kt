@@ -34,8 +34,15 @@ class ReservationStep3Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setRelationDropDown()
+        restoreForm()
         navigateToPrevious()
         navigateToNext()
+    }
+
+    private fun restoreForm() {
+        val savedRelation = reservationInfoViewModel.reservationInfo.value.patient.patientRelation
+        binding.relationAutoCompleteTextView.setText(savedRelation, false)
+        patientRelation = savedRelation
     }
 
     private fun setRelationDropDown() {
