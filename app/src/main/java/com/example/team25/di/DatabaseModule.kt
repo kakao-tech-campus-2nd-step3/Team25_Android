@@ -9,19 +9,19 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
     @Provides
     fun provideHospitalDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): HospitalDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
             HospitalDatabase::class.java,
-            "hospital_database"
+            "hospital_database",
         ).build()
     }
 

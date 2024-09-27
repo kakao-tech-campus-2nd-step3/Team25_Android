@@ -1,6 +1,6 @@
 package com.example.team25.ui.reservation.network
 
-import com.example.team25.domain.HospitalDomain
+import com.example.team25.ui.reservation.network.dto.HospitalDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -13,10 +13,10 @@ interface KakaoApi {
         @Query("category_group_code") categoryGroupCode: String,
         @Query("query") query: String,
         @Query("size") size: Int = 15,
-        @Query("page") page: Int = 1
+        @Query("page") page: Int = 1,
     ): Response<ResultSearchedKeyword>
 }
 
 data class ResultSearchedKeyword(
-    val documents: List<HospitalDomain>
+    val documents: List<HospitalDto>
 )

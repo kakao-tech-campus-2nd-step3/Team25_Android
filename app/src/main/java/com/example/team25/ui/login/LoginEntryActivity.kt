@@ -13,10 +13,11 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LoginEntryActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityLoginEntryBinding
     private val loginViewModel: LoginViewModel by viewModels()
 
@@ -48,7 +49,7 @@ class LoginEntryActivity : AppCompatActivity() {
                     SocialLoginUiState.SocialLoginUiFail -> {
                         showToast("Login Failed")
                     }
-                    SocialLoginUiState.IDle -> {  }
+                    SocialLoginUiState.IDle -> { }
                 }
             }
         }

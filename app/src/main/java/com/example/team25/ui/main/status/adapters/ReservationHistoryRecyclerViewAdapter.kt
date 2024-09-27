@@ -1,22 +1,24 @@
 package com.example.team25.ui.main.status.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemReservationHistoryBinding
-import com.example.team25.ui.main.status.ReservationCheckReportActivity
 import com.example.team25.ui.main.status.data.ReservationInfo
+import com.example.team25.ui.main.status.interfaces.OnCheckReportClickListener
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, ReservationHistoryRecyclerViewAdapter.ReservationHistoryViewHolder>(
-    DiffCallback(),
-) {
-    inner class ReservationHistoryViewHolder(val binding: ItemReservationHistoryBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+class ReservationHistoryRecyclerViewAdapter(private val clicklistener: OnCheckReportClickListener) :
+    ListAdapter<ReservationInfo, ReservationHistoryRecyclerViewAdapter.ReservationHistoryViewHolder>(
+        DiffCallback(),
+    ) {
+    class ReservationHistoryViewHolder(
+        private val binding: ItemReservationHistoryBinding,
+        private val clicklistener: OnCheckReportClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
@@ -24,10 +26,7 @@ class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, Reser
             binding.reservationDateTextView.text = dateFormat.format(item.date)
 
             binding.checkReportBtn.setOnClickListener {
-                val intent =
-                    Intent(binding.root.context, ReservationCheckReportActivity::class.java)
-                        .putExtra("ReservationInfo", item)
-                binding.root.context.startActivity(intent)
+                clicklistener.onCheckReportClicked(item)
             }
         }
     }
@@ -37,7 +36,7 @@ class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, Reser
         viewType: Int,
     ): ReservationHistoryViewHolder {
         val binding = ItemReservationHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ReservationHistoryViewHolder(binding)
+        return ReservationHistoryViewHolder(binding, clicklistener)
     }
 
     override fun onBindViewHolder(
@@ -48,7 +47,7 @@ class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, Reser
         holder.bind(item)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
+    private class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
         override fun areItemsTheSame(
             oldItem: ReservationInfo,
             newItem: ReservationInfo,
@@ -60,7 +59,7 @@ class ReservationHistoryRecyclerViewAdapter : ListAdapter<ReservationInfo, Reser
             oldItem: ReservationInfo,
             newItem: ReservationInfo,
         ): Boolean {
-            return oldItem.name == newItem.name && oldItem.date == newItem.date
+            return oldItem == newItem
         }
     }
 }
