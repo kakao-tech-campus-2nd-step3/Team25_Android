@@ -2,7 +2,6 @@ package com.example.team25.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.team25.HospitalInitializer
 import com.example.team25.dao.HospitalDao
 import com.example.team25.database.HospitalDatabase
 import dagger.Module
@@ -16,7 +15,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
-    @Singleton
     fun provideHospitalDatabase(
         @ApplicationContext context: Context,
     ): HospitalDatabase {
@@ -28,7 +26,6 @@ object DatabaseModule {
     }
 
     @Provides
-    @Singleton
     fun provideHospitalDao(database: HospitalDatabase): HospitalDao {
         return database.hospitalDao()
     }

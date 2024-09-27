@@ -16,13 +16,11 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 class MyApplication : Application() {
-    @Inject lateinit var hospitalInitializer: HospitalInitializer
 
     override fun onCreate() {
         super.onCreate()
         initializeKakaoMapSdk()
         initializeKakaoSdk()
-        loadHospitalsFromJson()
     }
 
     private fun initializeKakaoMapSdk() {
@@ -31,9 +29,5 @@ class MyApplication : Application() {
 
     private fun initializeKakaoSdk() {
         KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
-    }
-
-    private fun loadHospitalsFromJson() {
-        hospitalInitializer.initialize()
     }
 }

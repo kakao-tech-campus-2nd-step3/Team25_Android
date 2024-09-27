@@ -1,16 +1,21 @@
 package com.example.team25.ui.main.status
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.team25.R
 import com.example.team25.databinding.ActivityReservationCheckReportBinding
+import com.example.team25.ui.main.status.data.DoctorCommentInfo
 import com.example.team25.ui.main.status.data.ReservationInfo
-import org.json.JSONObject
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class ReservationCheckReportActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationCheckReportBinding
+    private val viewModel: ReservationCheckReportViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +25,7 @@ class ReservationCheckReportActivity : AppCompatActivity() {
 
         navigateToPrevious()
         setWriterInfo()
-        setDoctorComment(mockJsonResponse())
+        collectDoctorComment()
     }
 
     private fun navigateToPrevious() {
@@ -39,49 +44,35 @@ class ReservationCheckReportActivity : AppCompatActivity() {
         }
     }
 
-    private fun mockJsonResponse(): String {
-        return """
-            {
-              "status": "200: OK",
-              "message": "리포트 조회가 성공하였습니다.",
-              "data": {
-                "doctor_comment": "환자의 상태는 안정적입니다.",
-                "medication_guidance": "매일 3회 식후 30분 복용"
-              }
+    private fun collectDoctorComment() {
+        lifecycleScope.launch {
+            viewModel.doctorCommentInfo.collectLatest { data ->
+                data?.let {
+                    updateReportUI(it)
+                }
             }
-            """.trimIndent()
+        }
     }
 
-    private fun setDoctorComment(jsonResponse: String) {
-        val jsonObject = JSONObject(jsonResponse)
-        val dataObject = jsonObject.getJSONObject("data")
+    private fun updateReportUI(info: DoctorCommentInfo) {
+        binding.doctorOpinionTextView.text = info.doctorOpinion
 
-        val doctorOpinion = dataObject.getString("doctor_comment")
-        val medicationGuidance = dataObject.getString("medication_guidance")
-
-        val guidanceParts = medicationGuidance.split(" ")
-
-        binding.doctorOpinionTextView.text = doctorOpinion
-
-        if (guidanceParts.size >= 2) {
-            binding.timeCycleBtn.text = guidanceParts[0] + " " + guidanceParts[1]
+        info.timeCycle?.let {
+            binding.timeCycleBtn.text = it
             binding.timeCycleBtn.setBackgroundResource(R.drawable.purple_btn_box)
         }
 
-        for (i in 2 until guidanceParts.size) {
-            when (guidanceParts[i]) {
-                "식후" -> {
-                    binding.mealAfterBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                }
-                "식전" -> {
-                    binding.mealBeforeBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                }
-                "30분" -> {
-                    binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                }
-                "1시간" -> {
-                    binding.time1hourBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                }
+        info.mealTime?.let {
+            when (it) {
+                "식후" -> binding.mealAfterBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                "식전" -> binding.mealBeforeBtn.setBackgroundResource(R.drawable.purple_btn_box)
+            }
+        }
+
+        info.time?.let {
+            when (it) {
+                "30분" -> binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                "1시간" -> binding.time1hourBtn.setBackgroundResource(R.drawable.purple_btn_box)
             }
         }
     }

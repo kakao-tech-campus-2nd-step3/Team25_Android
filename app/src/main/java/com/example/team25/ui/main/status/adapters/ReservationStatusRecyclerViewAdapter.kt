@@ -1,24 +1,25 @@
 package com.example.team25.ui.main.status.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemReservationStatusBinding
-import com.example.team25.ui.main.status.ReservationCancelActivity
 import com.example.team25.ui.main.status.data.ReservationInfo
+import com.example.team25.ui.main.status.interfaces.OnRequestCancelClickListener
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ReservationStatusRecyclerViewAdapter :
+class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestCancelClickListener) :
     ListAdapter<
         ReservationInfo,
         ReservationStatusRecyclerViewAdapter.ReservationStatusViewHolder,
         >(DiffCallback()) {
-    inner class ReservationStatusViewHolder(val binding: ItemReservationStatusBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ReservationStatusViewHolder(
+        private val binding: ItemReservationStatusBinding,
+        private val clickListener: OnRequestCancelClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
@@ -26,10 +27,8 @@ class ReservationStatusRecyclerViewAdapter :
             binding.reservationDateTextView.text = dateFormat.format(item.date)
 
             binding.requestCancelBtn.setOnClickListener {
-                val intent =
-                    Intent(binding.root.context, ReservationCancelActivity::class.java)
-                        .putExtra("ReservationInfo", item)
-                binding.root.context.startActivity(intent)
+                clickListener.onRequestCancelClicked(item)
+
             }
         }
     }
@@ -39,7 +38,7 @@ class ReservationStatusRecyclerViewAdapter :
         viewType: Int,
     ): ReservationStatusViewHolder {
         val binding = ItemReservationStatusBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ReservationStatusViewHolder(binding)
+        return ReservationStatusViewHolder(binding, clicklistener)
     }
 
     override fun onBindViewHolder(
@@ -50,7 +49,7 @@ class ReservationStatusRecyclerViewAdapter :
         holder.bind(item)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
+    private class DiffCallback : DiffUtil.ItemCallback<ReservationInfo>() {
         override fun areItemsTheSame(
             oldItem: ReservationInfo,
             newItem: ReservationInfo,
@@ -62,7 +61,7 @@ class ReservationStatusRecyclerViewAdapter :
             oldItem: ReservationInfo,
             newItem: ReservationInfo,
         ): Boolean {
-            return oldItem.name == newItem.name && oldItem.date == newItem.date
+            return oldItem == newItem
         }
     }
 }

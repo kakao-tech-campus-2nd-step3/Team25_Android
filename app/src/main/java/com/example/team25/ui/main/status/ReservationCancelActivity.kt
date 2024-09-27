@@ -31,7 +31,7 @@ class ReservationCancelActivity : AppCompatActivity() {
     }
 
     private fun setReservationInfo() {
-        val reservationInfo: ReservationInfo? = intent.getParcelableExtra("ReservationInfo")
+        val reservationInfo: ReservationInfo? = intent.getParcelableExtra(KEY_RESERVATION_INFO)
         reservationInfo?.let {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
@@ -50,5 +50,9 @@ class ReservationCancelActivity : AppCompatActivity() {
             val resCancelReason = parent.getItemAtPosition(position).toString()
             Toast.makeText(this, "선택된 값: $resCancelReason", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    companion object {
+        const val KEY_RESERVATION_INFO = "ReservationInfo"
     }
 }
