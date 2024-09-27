@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -12,7 +13,6 @@ import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep5Binding
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
-import java.time.format.DateTimeParseException
 
 @AndroidEntryPoint
 class ReservationStep5Fragment : Fragment() {
@@ -93,6 +93,16 @@ class ReservationStep5Fragment : Fragment() {
 
     private fun navigateToNext() {
         binding.nextBtn.setOnClickListener {
+            val year = binding.yearInput.text.toString()
+            val month = binding.monthInput.text.toString()
+            val day = binding.dayInput.text.toString()
+
+            // 유효성 검사
+            if (!isValidBirthday(year, month, day)) {
+                Toast.makeText(requireContext(), "생일이 올바른 형식이 아닙니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             Log.d("ReservationInfo", reservationInfoViewModel.reservationInfo.value.toString())
 
             parentFragmentManager.beginTransaction()
@@ -100,6 +110,21 @@ class ReservationStep5Fragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    private fun isValidBirthday(year: String, month: String, day: String): Boolean {
+        if (year.length != 4 || year.toInt() < 1900 || year.toInt() > LocalDate.now().year) {
+            return false
+        }
+        if (month.isEmpty() || month.toInt() < 1 || month.toInt() > 12) {
+            return false
+        }
+
+        if (day.isEmpty() || day.toInt() < 1 || day.toInt() > 31) {
+            return false
+        }
+
+        return true
     }
 
     override fun onDestroyView() {
