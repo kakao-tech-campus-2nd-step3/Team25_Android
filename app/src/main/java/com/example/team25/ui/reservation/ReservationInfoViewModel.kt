@@ -4,19 +4,21 @@ import androidx.lifecycle.ViewModel
 import com.example.team25.domain.Gender
 import com.example.team25.domain.Patient
 import com.example.team25.domain.ReservationInfo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class ReservationInfoViewModel : ViewModel() {
+@HiltViewModel
+class ReservationInfoViewModel @Inject constructor() : ViewModel() {
 
     private val _reservationInfo = MutableStateFlow(
         ReservationInfo(
-            userId = "",
             managerId = "",
             departure = "",
             destination = "",
             serviceDate = "",
-            serviceType = "",
+            serviceType = "외래진료",
             transportation = "",
             price = 0,
             patient = Patient(
@@ -34,10 +36,6 @@ class ReservationInfoViewModel : ViewModel() {
 
     fun updateReservationInfo(reservationInfo: ReservationInfo) {
         _reservationInfo.value = reservationInfo
-    }
-
-    fun updateUserId(userId: String) {
-        _reservationInfo.value = _reservationInfo.value.copy(userId = userId)
     }
 
     fun updateManagerId(managerId: String) {

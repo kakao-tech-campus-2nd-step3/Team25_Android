@@ -1,7 +1,6 @@
 package com.example.team25.domain
 
 data class ReservationInfo(
-    val userId: String,
     val managerId: String,
     val departure: String,
     val destination: String,

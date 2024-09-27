@@ -106,6 +106,11 @@ class ReservationStep1Fragment : Fragment() {
         return regex.matches(middle + end)
     }
 
+    override fun onResume() {
+        super.onResume()
+        setPhoneNumDropDown()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
