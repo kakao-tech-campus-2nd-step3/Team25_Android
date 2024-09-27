@@ -1,3 +1,175 @@
 <resources>
-    <string name="app_name">Team25</string>
+    <string name="app_name">병원동행매니저</string>
+    <string name="main_welcome">로그인하기</string>
+    <string name="hospital_companion">병원동행</string>
+    <string name="need_hospital_companion">믿을 수 있는 병원 동행이 필요할 때</string>
+    <string name="go_reservation">예약하러 바로 가기</string>
+    <string name="real_time_companion_status">실시간 동행 현황</string>
+    <string name="see_all">모두 보기</string>
+    <string name="service_available_after_log_in">로그인 후 이용 가능한 서비스입니다.</string>
+    <string name="reservation_status">예약 현황</string>
+    <string name="service_description">전문 매니저와 함께해서\n믿을 수 있는 병원 동행 서비스</string>
+    <string name="application_name">앱이름</string>
+    <string name="input_information">환자분의 정보를 입력해주세요</string>
+    <string name="name">이름</string>
+    <string name="input_name_hint">이름 입력</string>
+    <string name="gender">성별</string>
+    <string name="man">남</string>
+    <string name="woman">여</string>
+    <string name="previous">이전</string>
+    <string name="next">다음</string>
+    <string name="select_relation">환자분과의 관계를 선택해주세요</string>
+    <string name="myself">본인</string>
+    <string name="phone_num">전화번호</string>
+    <string name="_010">010</string>
+    <string name="_0000">0000</string>
+    <string name="dash">-</string>
+    <string name="input_next_of_kin">보호자의 연락처를 입력해주세요</string>
+    <string name="notify_by_message">(동행 현황을 보호자분께도 문자로 알려드립니다.)</string>
+    <string name="input_birthday">환자분의 생년월일을 입력해주세요</string>
+    <string name="dd">DD</string>
+    <string name="mm">MM</string>
+    <string name="yyyy">YYYY</string>
+    <string name="_01">01</string>
+    <string name="_1970">1970</string>
+    <string name="all">전체</string>
+    <string name="manager">매니저</string>
+    <string name="check_reservation">예약 내용을 한번 더 확인해주세요</string>
+    <string name="patient">환자</string>
+    <string name="from">출발지</string>
+    <string name="to">도착지</string>
+    <string name="dedicated_manger">담당 매니저</string>
+    <string name="pay">결제하기</string>
+    <string name="pay_info">결제정보</string>
+    <string name="deposit">보증금</string>
+    <string name="won">원</string>
+    <string name="total_payment_amount">총 결제금액</string>
+    <string name="pay_credit_card">신용/체크카드 결제하기</string>
+    <string name="pay_toss">토스로 결제하기</string>
+    <string name="manager_list">매니저 리스트</string>
+    <string name="select_manager">담당 매니저를 선택해주세요.</string>
+    <string name="manager_info">매니저 정보</string>
+    <string name="introduction">한마디</string>
+    <string name="active_location">활동 지역</string>
+    <string name="active_time">활동 시간</string>
+    <string name="career_infor">경력 사항</string>
+    <string name="reserve">예약 하기</string>
+    <string name="input_departures">출발지를 입력해주세요</string>
+    <string name="road_address">도로명 주소</string>
+    <string name="search_by_road_address">도로명 주소(지번 주소)로 검색</string>
+    <string name="detail_address">상세주소</string>
+    <string name="input_detail_address">상세한 주소를 작성해주세요</string>
+    <string name="choose_destination">도착 병원을 선택해주세요</string>
+    <string name="search_destination">도착 병원 검색</string>
+    <string name="input_query">검색어 입력(ex. 부산대, 세브란스)</string>
+    <string name="choose_date">이용일자를 선택해주세요</string>
+    <string name="choose_time">매니저 만남 시간을 선택해주세요</string>
+    <string name="same_day_reservation">당일 예약은 불가합니다</string>
+    <string name="select_service">이용하실 서비스 선택해주세요</string>
+    <string name="outpatient_treatment">외래진료</string>
+    <string name="select_vehicle">이동수단 선택</string>
+    <string name="walk">도보</string>
+    <string name="public_transportation">대중교통</string>
+    <string name="taxi">택시</string>
+    <string name="low_fees">추가비용: 낮음</string>
+    <string name="add_card">카드를 등록해주세요.</string>
+    <string name="card_number">카드 번호</string>
+    <string name="expire_day">유효 기간</string>
+    <string name="card_password">카드 비밀번호</string>
+    <string name="card_add">카드등록</string>
+    <string name="front_two_password">앞 2자리 숫자</string>
+    <string name="_00_00">00/00</string>
+    <string name="add">등록하기</string>
+    <string name="error_card_number">카드 정보 입력 오류</string>
+    <string name="error_expired_day">유효 기간 입력 오류</string>
+    <string name="error_password">비밀번호 입력 오류</string>
+    <string name="birth">생년월일</string>
+    <string name="card_birth">생년월일 6자리 숫자</string>
+
+    <string-array name="relation_option">
+        <item>본인</item>
+        <item>자식</item>
+        <item>부모</item>
+        <item>친척</item>
+        <item>기타</item>
+    </string-array>
+    <string-array name="phone_num_option">
+        <item>010</item>
+        <item>011</item>
+        <item>016</item>
+        <item>017</item>
+        <item>019</item>
+        <item>02</item>
+        <item>031</item>
+        <item>032</item>
+        <item>033</item>
+        <item>041</item>
+        <item>042</item>
+        <item>043</item>
+        <item>044</item>
+        <item>051</item>
+        <item>052</item>
+        <item>053</item>
+        <item>054</item>
+        <item>061</item>
+        <item>062</item>
+        <item>063</item>
+        <item>064</item>
+    </string-array>
+
+    <string-array name="service_option">
+        <item>정기검진</item>
+        <item>하루동행</item>
+        <item>기타동행</item>
+    </string-array>
+    <string name="reservation_history">예약 내역</string>
+    <string name="reservation_cancel">예약 취소</string>
+    <string name="call_manager">매니저에게 연락하기</string>
+    <string name="write_review">리뷰 작성하기</string>
+    <string name="check_report">리포트 확인</string>
+    <string name="request_cancel">취소 요청하기</string>
+    <string name="reservation_cancle_description">예약 2시간 전 부터는 예약 취소가 불가합니다</string>
+    <string name="cancel_reason">취소 사유(필수)</string>
+    <string name="cancel_reason_detail">취소 상세</string>
+    <string name="cancel_reason_detail_description">구체적인 사유를 적어주세요</string>
+    <string name="select">선택</string>
+    <string name="deposit_refund_cancel">보증금 환불 및 취소</string>
+    <string name="writer">작성자</string>
+    <string name="writer_date">작성일자</string>
+    <string name="doctor_opinion_summary">의사 소견 요약</string>
+    <string name="medication_guidance">약 복용 방법</string>
+    <string name="meal_before">식전</string>
+    <string name="meal_after">식후</string>
+    <string name="min_30">30분</string>
+    <string name="hour">1시간</string>
+    <string name="morning">아침</string>
+    <string name="lunch">점심</string>
+    <string name="dinner">저녁</string>
+    <string name="nursing_care_worker">요양보호사</string>
+    <string name="x">X</string>
+    <string name="introduction_detail">친부모님처럼 따듯하게 모시겠습니다 ^^</string>
+    <string name="busan_namgu">부산광역시 남구</string>
+    <string name="_00_00_00_00">00:00 ~ 00:00</string>
+    <string name="Thrusday">목</string>
+    <string name="wednesday">수</string>
+    <string name="tuesday">화</string>
+    <string name="monday">월</string>
+    <string name="choose">선택하기</string>
+    <string name="_50000">50000</string>
+    <string name="basic_fee">기본 이용료</string>
+    <string name="pusan_university_hospital">부산대학교병원</string>
+    <string name="address_example">부산대학교 서구 구덕로 179(아미동...</string>
+    <string name="friday">금</string>
+    <string name="name_02">NAME</string>
+    <string name="gender_02">GENDER</string>
+    <string name="phonenumber">PhoneNumber</string>
+    <string name="vehicle">이동수단</string>
+
+    <string-array name="reservation_cancel_reason_option">
+        <item>고객변심</item>
+        <item>재예약</item>
+        <item>원하는 매니저 없음</item>
+        <item>기타</item>
+    </string-array>
+
 </resources>
