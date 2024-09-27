@@ -1,19 +1,24 @@
 package com.example.team25.ui.reservation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep2Binding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReservationStep2Fragment : Fragment() {
     private var _binding: FragmentReservationStep2Binding? = null
     private val binding get() = _binding!!
-    private var service = "외래진료"
+
+    private val reservationInfoViewModel: ReservationInfoViewModel by activityViewModels()
+    private var serviceType = "외래진료"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,8 +35,15 @@ class ReservationStep2Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setServiceDropDown()
+        restoreForm()
         navigateToPrevious()
         navigateToNext()
+    }
+
+    private fun restoreForm() {
+        val savedServiceType = reservationInfoViewModel.reservationInfo.value.serviceType
+        binding.serviceAutoCompleteTextView.setText(savedServiceType, false)
+        serviceType = savedServiceType
     }
 
     private fun setServiceDropDown() {
@@ -40,9 +52,9 @@ class ReservationStep2Fragment : Fragment() {
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, serviceOptions)
         binding.serviceAutoCompleteTextView.setAdapter(arrayAdapter)
 
-        binding.serviceAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
-            service = parent.getItemAtPosition(position).toString()
-            Toast.makeText(requireContext(), "선택된 값: $service", Toast.LENGTH_SHORT).show()
+        binding.serviceAutoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
+            serviceType = parent.getItemAtPosition(position).toString()
+            reservationInfoViewModel.updateServiceType(serviceType)
         }
     }
 
@@ -58,11 +70,18 @@ class ReservationStep2Fragment : Fragment() {
 
     private fun navigateToNext() {
         binding.nextBtn.setOnClickListener {
+            Log.d("ReservationInfo", reservationInfoViewModel.reservationInfo.value.toString())
+
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, ReservationStep3Fragment())
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setServiceDropDown()
     }
 
     override fun onDestroyView() {
