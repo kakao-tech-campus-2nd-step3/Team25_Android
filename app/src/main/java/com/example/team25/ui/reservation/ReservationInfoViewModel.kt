@@ -25,7 +25,7 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
                 patientName = "",
                 patientPhone = "",
                 patientGender = Gender.MALE,
-                patientRelation = "",
+                patientRelation = "본인",
                 patientBirth = "",
                 nokPhone = ""
             )

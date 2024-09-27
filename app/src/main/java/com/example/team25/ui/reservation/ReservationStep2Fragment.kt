@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep2Binding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReservationStep2Fragment : Fragment() {
     private var _binding: FragmentReservationStep2Binding? = null
     private val binding get() = _binding!!
