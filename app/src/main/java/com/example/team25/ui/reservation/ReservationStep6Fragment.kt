@@ -1,20 +1,26 @@
 package com.example.team25.ui.reservation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
 import android.webkit.WebView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep6Binding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReservationStep6Fragment : Fragment() {
     private var _binding: FragmentReservationStep6Binding? = null
     private val binding get() = _binding!!
+    private val reservationInfoViewModel: ReservationInfoViewModel by activityViewModels()
     private lateinit var selectedAddress: String
 
     override fun onCreateView(
@@ -27,7 +33,7 @@ class ReservationStep6Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createWeb()
+        // createWeb() 개발 중
         navigateToPrevious()
         navigateToNext()
     }
@@ -81,6 +87,19 @@ class ReservationStep6Fragment : Fragment() {
 
     private fun navigateToNext() {
         binding.nextBtn.setOnClickListener {
+            val roadAddress = binding.roadAddressEditText.text.toString()
+            val detailAddress = binding.detailAddressEditText.text.toString()
+
+            if (roadAddress.isEmpty() || detailAddress.isEmpty()) {
+                Toast.makeText(requireContext(), "주소를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val departure = "$roadAddress $detailAddress"
+            reservationInfoViewModel.updateDeparture(departure)
+
+            Log.d("ReservationInfo", reservationInfoViewModel.reservationInfo.value.toString())
+
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, ReservationStep7Fragment())
                 .addToBackStack(null)
