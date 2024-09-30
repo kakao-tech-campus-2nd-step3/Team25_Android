@@ -88,7 +88,7 @@ class ReservationStep7Fragment : Fragment() {
 
     private fun setSearchResultRecyclerView() {
         val hospitalClickListener = object : OnHospitalClickListener {
-            override fun onHospitalClicked() {
+            override fun onHospitalClicked(hospital: HospitalDomain) {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep8Fragment())
                     .addToBackStack(null)

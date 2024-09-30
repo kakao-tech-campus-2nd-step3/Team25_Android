@@ -37,7 +37,7 @@ class HospitalRecyclerViewAdapter(private val clickListener: OnHospitalClickList
 
         init {
             itemView.setOnClickListener {
-                clickListener.onHospitalClicked()
+                clickListener.onHospitalClicked(selectedHospital)
             }
         }
 
@@ -53,7 +53,7 @@ class HospitalRecyclerViewAdapter(private val clickListener: OnHospitalClickList
             oldItem: HospitalDomain,
             newItem: HospitalDomain,
         ): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.placeId == newItem.placeId
         }
 
         override fun areContentsTheSame(
