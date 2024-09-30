@@ -31,6 +31,7 @@ class RemoteSearchHospitalService
                     hospitals.addAll(
                         documents.map { document ->
                             HospitalDomain(
+                                placeId = document.id,
                                 name = document.name,
                                 address = document.address,
                             )
