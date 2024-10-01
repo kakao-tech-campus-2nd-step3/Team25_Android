@@ -27,7 +27,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideKakaoApi(retrofit: Retrofit): KakaoApi {
+    fun provideKakaoApi(@KakaoRetrofit retrofit: Retrofit): KakaoApi {
         return retrofit.create(KakaoApi::class.java)
     }
 
