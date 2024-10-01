@@ -1,5 +1,6 @@
 package com.example.team25.data.repository
 
+import com.example.team25.data.Utils
 import com.example.team25.data.network.dto.AccountLoginDto
 import com.example.team25.data.network.dto.TokenDto
 import com.example.team25.data.remote.SignIn
@@ -12,7 +13,11 @@ class DefaultLoginRepository @Inject constructor(
     override suspend fun login(accountLoginDto: AccountLoginDto): TokenDto? {
         val response = signIn.getSignIn(accountLoginDto)
         return if (response.isSuccessful) {
-            response.body()
+            response.body()?.let { tokenDto ->
+                Utils.setAccessToken(tokenDto.accessToken)
+                Utils.setRefreshToken(tokenDto.refreshToken)
+                tokenDto
+            }
         } else {
             null
         }
