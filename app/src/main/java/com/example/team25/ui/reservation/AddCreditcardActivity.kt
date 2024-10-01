@@ -8,7 +8,7 @@ import com.example.team25.R
 import com.example.team25.databinding.ActivityAddCreditcardBinding
 import com.example.team25.security.CardInformationEncryption
 import com.example.team25.ui.main.status.data.CardInfor
-import com.example.team25.ui.reservation.services.CardService
+import com.example.team25.data.network.services.CardService
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

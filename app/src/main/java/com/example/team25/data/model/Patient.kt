@@ -1,4 +1,4 @@
-package com.example.team25.data
+package com.example.team25.data.model
 
 data class Patient(
     val patientName: String,

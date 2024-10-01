@@ -1,6 +1,6 @@
-package com.example.team25.ui.reservation.network
+package com.example.team25.data.network
 
-import com.example.team25.ui.reservation.network.dto.HospitalDto
+import com.example.team25.data.network.dto.HospitalDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

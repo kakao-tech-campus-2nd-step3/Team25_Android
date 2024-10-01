@@ -1,8 +1,8 @@
 package com.example.team25.di
 
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
-import com.example.team25.ui.reservation.network.KakaoApi
-import com.example.team25.ui.reservation.services.RemoteSearchHospitalService
+import com.example.team25.data.network.KakaoApi
+import com.example.team25.data.network.services.RemoteSearchHospitalService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

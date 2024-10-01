@@ -1,7 +1,7 @@
 package com.example.team25
 
 import android.app.Application
-import com.example.team25.dao.HospitalDao
+import com.example.team25.data.dao.HospitalDao
 import com.example.team25.domain.HospitalDomain
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

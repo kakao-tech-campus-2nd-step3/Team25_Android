@@ -2,8 +2,8 @@ package com.example.team25.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.team25.dao.HospitalDao
-import com.example.team25.database.HospitalDatabase
+import com.example.team25.data.dao.HospitalDao
+import com.example.team25.data.database.HospitalDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
