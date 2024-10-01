@@ -2,6 +2,8 @@ package com.example.team25.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -15,6 +17,12 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.math.BigInteger
+import java.security.KeyPairGenerator
+import java.security.KeyStore
+import java.security.MessageDigest
+import java.security.PrivateKey
+import java.security.Signature
 
 @AndroidEntryPoint
 class LoginEntryActivity : AppCompatActivity() {
@@ -43,13 +51,16 @@ class LoginEntryActivity : AppCompatActivity() {
                     SocialLoginUiState.KakaoSocialLoginUi -> {
                         handleKakaoLogin()
                     }
+
                     SocialLoginUiState.SocialLoginUiSuccess -> {
                         navigateToMainActivity()
                     }
+
                     SocialLoginUiState.SocialLoginUiFail -> {
                         showToast("Login Failed")
                     }
-                    SocialLoginUiState.IDle -> { }
+
+                    SocialLoginUiState.IDle -> {}
                 }
             }
         }
@@ -96,11 +107,17 @@ class LoginEntryActivity : AppCompatActivity() {
                         } else if (user != null) {
                             Log.i(TAG, "사용자 정보 요청 성공: ${user.kakaoAccount?.profile?.nickname}, ${user.id}")
 
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.putExtra("user_nickname", user.kakaoAccount?.profile?.nickname)
-                            intent.putExtra("user_id", user.id)
-                            startActivity(intent)
-                            finish()
+                            if (user.id == null) {
+                                showToast("유저 정보를 찾을 수 없습니다.")
+                            } else {
+                                val signedUserId = hashUserId(user.id!!)
+                                Log.d(TAG, signedUserId)
+
+                                val intent = Intent(this, MainActivity::class.java)
+                                intent.putExtra("user_nickname", user.kakaoAccount?.profile?.nickname)
+                                startActivity(intent)
+                                finish()
+                            }
                         }
                     }
                 }
@@ -122,5 +139,12 @@ class LoginEntryActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "kakaoLogin"
+    }
+
+    private fun hashUserId(userId: Long): String {
+        val bytes = userId.toString().toByteArray()
+        val md = MessageDigest.getInstance("SHA-256")
+        val digest = md.digest(bytes)
+        return digest.fold("") { str, it -> str + "%02x".format(it) }
     }
 }
