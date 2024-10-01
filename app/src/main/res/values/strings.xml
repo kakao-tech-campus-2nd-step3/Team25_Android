@@ -57,6 +57,7 @@
     <string name="input_departures">출발지를 입력해주세요</string>
     <string name="road_address">도로명 주소</string>
     <string name="search_by_road_address">도로명 주소(지번 주소)로 검색</string>
+    <string name="search_by_name">이름으로 검색</string>
     <string name="detail_address">상세주소</string>
     <string name="input_detail_address">상세한 주소를 작성해주세요</string>
     <string name="choose_destination">도착 병원을 선택해주세요</string>
