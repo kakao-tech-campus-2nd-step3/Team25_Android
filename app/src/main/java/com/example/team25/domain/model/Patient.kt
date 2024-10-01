@@ -1,4 +1,6 @@
-package com.example.team25.domain
+package com.example.team25.domain.model
+
+import com.example.team25.domain.Gender
 
 data class Patient(
     val patientName: String,

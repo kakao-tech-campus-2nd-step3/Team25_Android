@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep7Binding
-import com.example.team25.domain.HospitalDomain
+import com.example.team25.domain.model.HospitalDomain
 import com.example.team25.ui.reservation.adapters.HospitalRecyclerViewAdapter
 import com.example.team25.ui.reservation.interfaces.OnHospitalClickListener
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService

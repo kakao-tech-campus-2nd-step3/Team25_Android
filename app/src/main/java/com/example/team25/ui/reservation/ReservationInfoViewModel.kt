@@ -2,8 +2,8 @@ package com.example.team25.ui.reservation
 
 import androidx.lifecycle.ViewModel
 import com.example.team25.domain.Gender
-import com.example.team25.domain.Patient
-import com.example.team25.domain.ReservationInfo
+import com.example.team25.domain.model.Patient
+import com.example.team25.domain.model.ReservationInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

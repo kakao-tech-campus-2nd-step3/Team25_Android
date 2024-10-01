@@ -1,6 +1,6 @@
 package com.example.team25.data.entity.mapper
 
-import com.example.team25.domain.HospitalDomain
+import com.example.team25.domain.model.HospitalDomain
 import com.example.team25.data.entity.HospitalEntity
 
 object HospitalEntityMapper : EntityMapper<List<HospitalDomain>, List<HospitalEntity>> {
