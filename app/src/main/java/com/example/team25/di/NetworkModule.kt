@@ -3,6 +3,7 @@ package com.example.team25.di
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import com.example.team25.data.network.KakaoApi
 import com.example.team25.data.network.services.RemoteSearchHospitalService
+import com.example.team25.data.remote.SignIn
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkModule {
 
     @Provides
-    fun provideRetrofit(): Retrofit {
+    @KakaoRetrofit
+    fun provideKakaoRetrofit(): Retrofit {
         val url = "https://dapi.kakao.com/"
 
         return Retrofit.Builder()
@@ -30,8 +32,22 @@ object NetworkModule {
     }
 
     @Provides
+    fun provideRetrofit(): Retrofit {
+        val url = "https://api.base.url/"
+        return Retrofit.Builder()
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
     fun provideSearchHospitalService(
         kakaoApi: KakaoApi,
     ): SearchHospitalService =
         RemoteSearchHospitalService(kakaoApi)
+
+    @Provides
+    fun provideSignIn(retrofit: Retrofit): SignIn {
+        return retrofit.create(SignIn::class.java)
+    }
 }

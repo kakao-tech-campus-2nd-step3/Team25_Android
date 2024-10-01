@@ -1,4 +1,4 @@
-package com.example.team25.domain
+package com.example.team25.domain.model
 
 data class ReservationInfo(
     val managerId: String,
