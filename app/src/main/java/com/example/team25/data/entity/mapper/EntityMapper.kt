@@ -1,4 +1,4 @@
-package com.example.team25.entity.mapper
+package com.example.team25.data.entity.mapper
 
 interface EntityMapper<Domain, Entity> {
 

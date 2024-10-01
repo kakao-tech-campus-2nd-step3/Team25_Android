@@ -1,4 +1,4 @@
-package com.example.team25.ui.reservation.services
+package com.example.team25.data.network.services
 
 import com.example.team25.ui.main.status.data.CardInfor
 import javax.inject.Inject

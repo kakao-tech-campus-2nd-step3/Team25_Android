@@ -1,7 +1,7 @@
-package com.example.team25.entity.mapper
+package com.example.team25.data.entity.mapper
 
 import com.example.team25.domain.HospitalDomain
-import com.example.team25.entity.HospitalEntity
+import com.example.team25.data.entity.HospitalEntity
 
 object HospitalEntityMapper : EntityMapper<List<HospitalDomain>, List<HospitalEntity>> {
 
