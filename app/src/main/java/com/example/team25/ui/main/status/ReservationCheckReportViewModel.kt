@@ -21,7 +21,7 @@ class ReservationCheckReportViewModel : ViewModel() {
                 "medication_guidance": "매일 3회 식후 30분 복용"
               }
             }
-            """.trimIndent()
+            """.trimIndent(),
         )
     }
 
@@ -51,12 +51,13 @@ class ReservationCheckReportViewModel : ViewModel() {
             }
         }
 
-        val doctorCommentInfo = DoctorCommentInfo(
-            doctorOpinion = doctorOpinion,
-            timeCycle = timeCycle,
-            mealTime = mealTime,
-            time = time
-        )
+        val doctorCommentInfo =
+            DoctorCommentInfo(
+                doctorOpinion = doctorOpinion,
+                timeCycle = timeCycle,
+                mealTime = mealTime,
+                time = time,
+            )
 
         _doctorCommentInfo.value = doctorCommentInfo
     }

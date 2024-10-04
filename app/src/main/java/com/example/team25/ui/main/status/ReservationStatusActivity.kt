@@ -27,13 +27,15 @@ class ReservationStatusActivity : AppCompatActivity() {
     }
 
     private fun setReservationStatusRecyclerViewAdapter() {
-        val requestCancelClickListener = object : OnRequestCancelClickListener {
-            override fun onRequestCancelClicked(item: ReservationInfo) {
-                val intent = Intent(this@ReservationStatusActivity, ReservationCancelActivity::class.java)
-                    .putExtra("ReservationInfo", item)
-                startActivity(intent)
+        val requestCancelClickListener =
+            object : OnRequestCancelClickListener {
+                override fun onRequestCancelClicked(item: ReservationInfo) {
+                    val intent =
+                        Intent(this@ReservationStatusActivity, ReservationCancelActivity::class.java)
+                            .putExtra("ReservationInfo", item)
+                    startActivity(intent)
+                }
             }
-        }
         val adapter = ReservationStatusRecyclerViewAdapter(requestCancelClickListener)
 
         binding.reservationStatusRecyclerView.adapter = adapter
@@ -44,13 +46,15 @@ class ReservationStatusActivity : AppCompatActivity() {
     }
 
     private fun setReservationHistoryRecyclerViewAdapter() {
-        val checkReportClickListener = object : OnCheckReportClickListener {
-            override fun onCheckReportClicked(item: ReservationInfo) {
-                val intent = Intent(this@ReservationStatusActivity, ReservationCheckReportActivity::class.java)
-                    .putExtra("ReservationInfo", item)
-                startActivity(intent)
+        val checkReportClickListener =
+            object : OnCheckReportClickListener {
+                override fun onCheckReportClicked(item: ReservationInfo) {
+                    val intent =
+                        Intent(this@ReservationStatusActivity, ReservationCheckReportActivity::class.java)
+                            .putExtra("ReservationInfo", item)
+                    startActivity(intent)
+                }
             }
-        }
 
         val adapter = ReservationHistoryRecyclerViewAdapter(checkReportClickListener)
 

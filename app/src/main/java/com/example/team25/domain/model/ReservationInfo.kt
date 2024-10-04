@@ -1,7 +1,6 @@
-package com.example.team25.data
+package com.example.team25.domain.model
 
 data class ReservationInfo(
-    val userId: String,
     val managerId: String,
     val departure: String,
     val destination: String,
@@ -9,5 +8,5 @@ data class ReservationInfo(
     val serviceType: String,
     val transportation: String,
     val price: Int,
-    val patient: Patient
+    val patient: Patient,
 )

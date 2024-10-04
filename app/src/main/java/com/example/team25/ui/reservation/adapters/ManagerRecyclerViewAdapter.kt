@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemManagerBinding
-import com.example.team25.domain.ManagerDomain
+import com.example.team25.domain.model.ManagerDomain
 import com.example.team25.ui.reservation.interfaces.OnManagerClickListener
 
 class ManagerRecyclerViewAdapter(private val clickListener: OnManagerClickListener) :

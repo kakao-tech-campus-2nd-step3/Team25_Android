@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.team25.data.Utils
 import com.example.team25.databinding.ActivityLoginEntryBinding
 import com.example.team25.ui.main.MainActivity
 import com.kakao.sdk.auth.model.OAuthToken
@@ -15,11 +16,15 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginEntryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginEntryBinding
     private val loginViewModel: LoginViewModel by viewModels()
+
+    @Inject
+    lateinit var utils: Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,29 +32,32 @@ class LoginEntryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setKakaoLoginBtnClickListener()
-        observeLoginUiState()
+        observeLoginState()
     }
 
     private fun setKakaoLoginBtnClickListener() {
         binding.kakaoLoginBtn.setOnClickListener {
-            loginViewModel.kakaoLogin()
+            handleKakaoLogin()
         }
     }
 
-    private fun observeLoginUiState() {
+    private fun observeLoginState() {
         lifecycleScope.launch {
-            loginViewModel.socialLoginUiState.collect { uiState ->
-                when (uiState) {
-                    SocialLoginUiState.KakaoSocialLoginUi -> {
-                        handleKakaoLogin()
+            loginViewModel.loginState.collect { state ->
+                when (state) {
+                    is LoginState.Loading -> {
+                        // 로딩 상태 처리 (프로그레스바 표시)
                     }
-                    SocialLoginUiState.SocialLoginUiSuccess -> {
-                        navigateToMainActivity()
+
+                    is LoginState.Success -> {
+                        Log.i(TAG, "로그인 성공: ${state.token}")
                     }
-                    SocialLoginUiState.SocialLoginUiFail -> {
-                        showToast("Login Failed")
+
+                    is LoginState.Error -> {
+                        binding.loginErrorTextView.text = state.message
                     }
-                    SocialLoginUiState.IDle -> { }
+
+                    LoginState.Idle -> {}
                 }
             }
         }
@@ -58,19 +66,28 @@ class LoginEntryActivity : AppCompatActivity() {
     private fun handleKakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                Log.e(TAG, "카카오계정으로 로그인 실패", error)
-                loginViewModel.kakaoLoginFail()
+                Log.e(TAG, "카카오 계정으로 로그인 실패", error)
+                loginViewModel.updateErrorMessage("카카오 로그인 실패")
             } else if (token != null) {
-                Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                Log.i(TAG, "카카오 계정으로 로그인 성공 ${token.accessToken}")
                 UserApiClient.instance.me { user, error ->
                     if (error != null) {
                         Log.e(TAG, "사용자 정보 요청 실패", error)
-                        loginViewModel.kakaoLoginFail()
+                        loginViewModel.updateErrorMessage("사용자 정보 요청 실패")
                     } else if (user != null) {
                         Log.i(TAG, "사용자 정보 요청 성공: ${user.kakaoAccount?.profile?.nickname}, ${user.id}")
 
-                        // 로그인 성공 시 처리
-                        loginViewModel.kakaoLoginSuccess()
+                        UserApiClient.instance.me { user, error ->
+                            if (error != null) {
+                                Log.e(TAG, "사용자 정보 요청 실패", error)
+                            } else if (user != null) {
+                                Log.i(TAG, "사용자 정보 요청 성공: ${user.kakaoAccount?.profile?.nickname}, ${user.id}")
+
+                                loginViewModel.login(token.accessToken)
+                                Log.d(TAG, token.accessToken)
+                                navigateToMainActivity(user.kakaoAccount?.profile?.nickname)
+                            }
+                        }
                     }
                 }
             }
@@ -88,7 +105,6 @@ class LoginEntryActivity : AppCompatActivity() {
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
                     Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
-                    loginViewModel.kakaoLoginSuccess()
 
                     UserApiClient.instance.me { user, error ->
                         if (error != null) {
@@ -96,11 +112,9 @@ class LoginEntryActivity : AppCompatActivity() {
                         } else if (user != null) {
                             Log.i(TAG, "사용자 정보 요청 성공: ${user.kakaoAccount?.profile?.nickname}, ${user.id}")
 
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.putExtra("user_nickname", user.kakaoAccount?.profile?.nickname)
-                            intent.putExtra("user_id", user.id)
-                            startActivity(intent)
-                            finish()
+                            loginViewModel.login(token.accessToken)
+                            Log.d(TAG, token.accessToken)
+                            navigateToMainActivity(user.kakaoAccount?.profile?.nickname)
                         }
                     }
                 }
@@ -110,8 +124,9 @@ class LoginEntryActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToMainActivity() {
+    private fun navigateToMainActivity(nickname: String?) {
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("userNickname", nickname)
         startActivity(intent)
         finish()
     }

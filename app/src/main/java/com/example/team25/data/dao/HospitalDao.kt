@@ -1,9 +1,9 @@
-package com.example.team25.dao
+package com.example.team25.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.team25.entity.HospitalEntity
+import com.example.team25.data.entity.HospitalEntity
 
 @Dao
 interface HospitalDao {
