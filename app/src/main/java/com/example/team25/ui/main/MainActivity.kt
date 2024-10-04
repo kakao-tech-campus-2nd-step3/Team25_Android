@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setWelcomeTextView() {
-        val userNickname = intent.getStringExtra("user_nickname")
+        val userNickname = intent.getStringExtra("userNickname")
         val welcomeMessage = "환영합니다 ${userNickname}님"
         if (userNickname != null) {
             binding.welcomeTextView.text = welcomeMessage

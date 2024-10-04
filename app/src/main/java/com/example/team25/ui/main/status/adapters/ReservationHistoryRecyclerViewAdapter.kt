@@ -17,7 +17,7 @@ class ReservationHistoryRecyclerViewAdapter(private val clicklistener: OnCheckRe
     ) {
     class ReservationHistoryViewHolder(
         private val binding: ItemReservationHistoryBinding,
-        private val clicklistener: OnCheckReportClickListener
+        private val clicklistener: OnCheckReportClickListener,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)

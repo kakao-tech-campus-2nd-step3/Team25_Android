@@ -13,17 +13,21 @@ class ReservationStep10Fragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentReservationStep10Binding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.name.text = "김지수"  // 필요한 데이터로 업데이트
+        binding.name.text = "김지수" // 필요한 데이터로 업데이트
         navigateToPrevious()
         navigateToNext()
     }
