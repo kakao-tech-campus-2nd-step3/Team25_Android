@@ -2,8 +2,12 @@ package com.example.team25.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Utils private constructor(context: Context) {
+@Singleton
+class Utils @Inject constructor(@ApplicationContext context: Context) {
 
     companion object {
         private const val PREFS = "prefs"
