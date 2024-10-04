@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class HospitalDomain(
     val placeId: String,
     val name: String,
-    val address: String
+    val address: String,
 ) : Parcelable

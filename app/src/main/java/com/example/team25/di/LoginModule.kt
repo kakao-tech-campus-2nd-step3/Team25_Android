@@ -10,10 +10,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class LoginModule {
-
     @Binds
-    abstract fun bindLoginRepository(
-        loginRepositoryImpl: DefaultLoginRepository
-    ): LoginRepository
-
+    abstract fun bindLoginRepository(loginRepositoryImpl: DefaultLoginRepository): LoginRepository
 }

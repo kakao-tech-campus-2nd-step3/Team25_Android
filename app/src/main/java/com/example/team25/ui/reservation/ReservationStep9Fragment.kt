@@ -17,14 +17,18 @@ class ReservationStep9Fragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentReservationStep9Binding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setManagerRecyclerView()
         navigateToPrevious()
@@ -32,14 +36,15 @@ class ReservationStep9Fragment : Fragment() {
 
     private fun setManagerRecyclerView() {
         val managerDomainList: ArrayList<ManagerDomain> = getListFromDb()
-        val managerClickListener = object : OnManagerClickListener {
-            override fun onManagerClicked() {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, ReservationStep10Fragment())
-                    .addToBackStack(null)
-                    .commit()
+        val managerClickListener =
+            object : OnManagerClickListener {
+                override fun onManagerClicked() {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_view, ReservationStep10Fragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
-        }
 
         val adapter = ManagerRecyclerViewAdapter(managerClickListener)
 

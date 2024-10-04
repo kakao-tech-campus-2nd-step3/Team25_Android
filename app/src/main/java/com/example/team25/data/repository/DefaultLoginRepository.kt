@@ -8,23 +8,25 @@ import com.example.team25.data.remote.SignIn
 import com.example.team25.domain.repository.LoginRepository
 import javax.inject.Inject
 
-class DefaultLoginRepository @Inject constructor(
-    private val signIn: SignIn
-) : LoginRepository {
-    override suspend fun login(accountLoginDto: AccountLoginDto): TokenDto? {
-        val response = signIn.getSignIn(accountLoginDto)
-        return if (response.isSuccessful) {
-            response.body()?.let { tokenDto ->
-                Log.d("testt", response.code().toString())
-                Log.d("testt", response.body().toString())
-                Utils.setAccessToken(tokenDto.data.accessToken)
-                Log.d("testt", Utils.getAccessToken("none").toString())
-                Utils.setRefreshToken(tokenDto.data.refreshToken)
-                Log.d("testt", Utils.getRefreshToken("none").toString())
-                tokenDto
-            }
-        } else {
-            null
+class DefaultLoginRepository
+    @Inject
+    constructor(
+        private val signIn: SignIn,
+    ) : LoginRepository {
+        override suspend fun login(accountLoginDto: AccountLoginDto): TokenDto? {
+            val response = signIn.getSignIn(accountLoginDto)
+            return if (response.isSuccessful) {
+                response.body()?.let { tokenDto ->
+                    Log.d("testt", response.code().toString())
+                    Log.d("testt", response.body().toString())
+                    Utils.setAccessToken(tokenDto.data.accessToken)
+                    Log.d("testt", Utils.getAccessToken("none").toString())
+                    Utils.setRefreshToken(tokenDto.data.refreshToken)
+                    Log.d("testt", Utils.getRefreshToken("none").toString())
+                    tokenDto
+                }
+            } else {
+                null
 //            if (response.code() == 401) {
 //                Log.d("LoginRepository", "액세스 토큰 만료됨, 리프레시 토큰으로 갱신 시도")
 //                val newTokenDto = refreshToken()
@@ -36,10 +38,10 @@ class DefaultLoginRepository @Inject constructor(
 //                Log.e("LoginRepository", "로그인 실패: ${response.message()}")
 //                null
 //            }
+            }
         }
-    }
 
-    // 백엔드 api 구현중
+        // 백엔드 api 구현중
 //    private suspend fun refreshToken(): TokenDto? {
 //        val refreshToken = Utils.getRefreshToken("")
 //
@@ -61,4 +63,4 @@ class DefaultLoginRepository @Inject constructor(
 //            null
 //        }
 //    }
-}
+    }

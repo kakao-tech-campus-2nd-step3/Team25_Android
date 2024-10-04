@@ -18,5 +18,5 @@ interface KakaoApi {
 }
 
 data class ResultSearchedKeyword(
-    val documents: List<HospitalDto>
+    val documents: List<HospitalDto>,
 )
