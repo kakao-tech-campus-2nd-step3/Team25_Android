@@ -33,7 +33,7 @@ object NetworkModule {
 
     @Provides
     fun provideRetrofit(): Retrofit {
-        val url = "https://api.base.url/"
+        val url = "https://ollagaljido.net/"
         return Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
