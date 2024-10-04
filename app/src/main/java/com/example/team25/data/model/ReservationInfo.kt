@@ -9,5 +9,5 @@ data class ReservationInfo(
     val serviceType: String,
     val transportation: String,
     val price: Int,
-    val patient: Patient
+    val patient: Patient,
 )

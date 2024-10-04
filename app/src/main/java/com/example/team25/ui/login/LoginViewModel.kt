@@ -13,34 +13,35 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase
-) : ViewModel() {
+class LoginViewModel
+    @Inject
+    constructor(
+        private val loginUseCase: LoginUseCase,
+    ) : ViewModel() {
+        private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
+        val loginState: StateFlow<LoginState> = _loginState
 
-    private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
-    val loginState: StateFlow<LoginState> = _loginState
+        fun login(oauthAccessToken: String) {
+            viewModelScope.launch {
+                _loginState.value = LoginState.Loading
 
-    fun login(oauthAccessToken: String) {
-        viewModelScope.launch {
-            _loginState.value = LoginState.Loading
+                val accountLoginDto = AccountLoginDto(oauthAccessToken)
+                val tokenDto: TokenDto? = loginUseCase(accountLoginDto)
+                if (tokenDto != null) {
+                    _loginState.value = LoginState.Success(tokenDto)
+                } else {
+                    _loginState.value = LoginState.Error("로그인 실패")
+                }
+            }
+        }
 
-            val accountLoginDto = AccountLoginDto(oauthAccessToken)
-            val tokenDto: TokenDto? = loginUseCase(accountLoginDto)
-            if (tokenDto != null) {
-                _loginState.value = LoginState.Success(tokenDto)
-            } else {
-                _loginState.value = LoginState.Error("로그인 실패")
+        fun updateErrorMessage(message: String) {
+            _loginState.update { currentState ->
+                if (currentState is LoginState.Error) {
+                    currentState.copy(message = message)
+                } else {
+                    LoginState.Error(message)
+                }
             }
         }
     }
-
-    fun updateErrorMessage(message: String) {
-        _loginState.update { currentState ->
-            if (currentState is LoginState.Error) {
-                currentState.copy(message = message)
-            } else {
-                LoginState.Error(message)
-            }
-        }
-    }
-}

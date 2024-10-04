@@ -1,9 +1,9 @@
 package com.example.team25.di
 
-import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import com.example.team25.data.network.KakaoApi
 import com.example.team25.data.network.services.RemoteSearchHospitalService
 import com.example.team25.data.remote.SignIn
+import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     @Provides
     @KakaoRetrofit
     fun provideKakaoRetrofit(): Retrofit {
@@ -41,10 +40,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideSearchHospitalService(
-        kakaoApi: KakaoApi,
-    ): SearchHospitalService =
-        RemoteSearchHospitalService(kakaoApi)
+    fun provideSearchHospitalService(kakaoApi: KakaoApi): SearchHospitalService = RemoteSearchHospitalService(kakaoApi)
 
     @Provides
     fun provideSignIn(retrofit: Retrofit): SignIn {

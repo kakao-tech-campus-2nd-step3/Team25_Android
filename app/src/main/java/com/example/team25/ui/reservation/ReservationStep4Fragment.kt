@@ -97,13 +97,19 @@ class ReservationStep4Fragment : Fragment() {
         }
     }
 
-    private fun isValidPhoneNumber(middle: String, end: String): Boolean {
+    private fun isValidPhoneNumber(
+        middle: String,
+        end: String,
+    ): Boolean {
         // 중간 번호가 3자리 또는 4자리이고, 뒷 번호가 4자리인지 검사
         val regex = Regex("^(\\d{3}|\\d{4})\\d{4}$")
         return regex.matches(middle + end)
     }
 
-    private fun getFullPhoneNumber(secondPhoneNumMiddle: String, secondPhoneNumEnd: String): String {
+    private fun getFullPhoneNumber(
+        secondPhoneNumMiddle: String,
+        secondPhoneNumEnd: String,
+    ): String {
         val secondPhoneNum = "$secondPhoneNumMiddle-$secondPhoneNumEnd"
         return "$firstPhoneNum-$secondPhoneNum"
     }

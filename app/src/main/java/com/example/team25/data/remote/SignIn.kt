@@ -8,5 +8,7 @@ import retrofit2.http.POST
 
 interface SignIn {
     @POST("/auth/kakao/login")
-    suspend fun getSignIn(@Body accountLoginDto: AccountLoginDto): Response<TokenDto>
+    suspend fun getSignIn(
+        @Body accountLoginDto: AccountLoginDto,
+    ): Response<TokenDto>
 }

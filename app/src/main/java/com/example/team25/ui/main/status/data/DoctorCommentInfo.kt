@@ -4,6 +4,5 @@ data class DoctorCommentInfo(
     val doctorOpinion: String,
     val timeCycle: String?,
     val mealTime: String?,
-    val time: String?
+    val time: String?,
 )
-

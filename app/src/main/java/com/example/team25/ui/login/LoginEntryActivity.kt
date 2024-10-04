@@ -16,7 +16,6 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.security.MessageDigest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -69,7 +68,6 @@ class LoginEntryActivity : AppCompatActivity() {
             if (error != null) {
                 Log.e(TAG, "카카오 계정으로 로그인 실패", error)
                 loginViewModel.updateErrorMessage("카카오 로그인 실패")
-
             } else if (token != null) {
                 Log.i(TAG, "카카오 계정으로 로그인 성공 ${token.accessToken}")
                 UserApiClient.instance.me { user, error ->
@@ -140,5 +138,4 @@ class LoginEntryActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "kakaoLogin"
     }
-
 }
