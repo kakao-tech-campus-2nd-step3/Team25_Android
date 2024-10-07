@@ -11,11 +11,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     @Provides
+    @Singleton
     @KakaoRetrofit
     fun provideKakaoRetrofit(): Retrofit {
         val url = BuildConfig.KAKAO_BASE_URL
@@ -27,11 +29,13 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideKakaoApi(retrofit: Retrofit): KakaoApi {
+    fun provideKakaoApi(@KakaoRetrofit retrofit: Retrofit): KakaoApi {
         return retrofit.create(KakaoApi::class.java)
     }
 
     @Provides
+    @Singleton
+    @GeneralRetrofit
     fun provideRetrofit(): Retrofit {
         val url = BuildConfig.API_BASE_URL
         return Retrofit.Builder()
@@ -44,7 +48,7 @@ object NetworkModule {
     fun provideSearchHospitalService(kakaoApi: KakaoApi): SearchHospitalService = RemoteSearchHospitalService(kakaoApi)
 
     @Provides
-    fun provideSignIn(retrofit: Retrofit): SignIn {
+    fun provideSignIn(@GeneralRetrofit retrofit: Retrofit): SignIn {
         return retrofit.create(SignIn::class.java)
     }
 }
