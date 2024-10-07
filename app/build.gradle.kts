@@ -6,7 +6,9 @@ plugins {
     alias(libs.plugins.gradle.ktlint)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.google.protobuf)
     id("kotlin-parcelize")
+
 }
 
 android {
@@ -54,6 +56,7 @@ android {
 dependencies {
     implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.datastore)
+    implementation(libs.protobuf.javalite)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.retrofit2.retrofit)
@@ -74,6 +77,21 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     ksp(libs.androidx.room.compiler)
     ksp(libs.dagger.hilt.compiler)
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.1"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }
 
 fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
