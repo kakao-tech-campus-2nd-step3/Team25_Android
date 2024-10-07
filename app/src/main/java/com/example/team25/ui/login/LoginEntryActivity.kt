@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.team25.data.Utils
 import com.example.team25.databinding.ActivityLoginEntryBinding
 import com.example.team25.ui.main.MainActivity
 import com.kakao.sdk.auth.model.OAuthToken
@@ -21,9 +20,6 @@ import javax.inject.Inject
 class LoginEntryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginEntryBinding
     private val loginViewModel: LoginViewModel by viewModels()
-
-    @Inject
-    lateinit var utils: Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
