@@ -1,6 +1,7 @@
 [versions]
 activityKtx = "1.9.2"
 agp = "8.3.2"
+datastore = "1.1.1"
 fragmentKtx = "1.8.3"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -23,6 +24,7 @@ ksp = "1.9.0-1.0.13"
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
