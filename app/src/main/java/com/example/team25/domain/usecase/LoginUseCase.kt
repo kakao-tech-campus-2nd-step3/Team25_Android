@@ -10,7 +10,7 @@ class LoginUseCase
     constructor(
         private val loginRepository: LoginRepository,
     ) {
-        suspend operator fun invoke(accountLoginDto: AccountLoginDto): TokenDto? {
-            return loginRepository.login(accountLoginDto)
+        suspend operator fun invoke(oauthAccessToken: String): TokenDto? {
+            return loginRepository.login(oauthAccessToken)
         }
     }

@@ -2,7 +2,6 @@ package com.example.team25.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.team25.data.network.dto.AccountLoginDto
 import com.example.team25.data.network.dto.TokenDto
 import com.example.team25.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,10 +24,9 @@ class LoginViewModel
             viewModelScope.launch {
                 _loginState.value = LoginState.Loading
 
-                val accountLoginDto = AccountLoginDto(oauthAccessToken)
-                val tokenDto: TokenDto? = loginUseCase(accountLoginDto)
+                val tokenDto: TokenDto? = loginUseCase(oauthAccessToken)
                 if (tokenDto != null) {
-                    _loginState.value = LoginState.Success(tokenDto)
+                    _loginState.value = LoginState.Success
                 } else {
                     _loginState.value = LoginState.Error("로그인 실패")
                 }

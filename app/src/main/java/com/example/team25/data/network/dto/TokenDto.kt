@@ -1,12 +1,14 @@
 package com.example.team25.data.network.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class TokenDto(
-    val status: Boolean,
-    val message: String,
-    val data: TokenData,
+    @SerializedName("status") val status: Boolean,
+    @SerializedName("message") val message: String,
+    @SerializedName("data") val data: TokenData,
 )
 
 data class TokenData(
-    val accessToken: String,
-    val refreshToken: String,
+    @SerializedName("accessToken") val accessToken: String,
+    @SerializedName("refreshToken") val refreshToken: String,
 )
