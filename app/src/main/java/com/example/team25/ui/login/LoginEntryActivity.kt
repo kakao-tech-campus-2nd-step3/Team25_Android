@@ -50,7 +50,7 @@ class LoginEntryActivity : AppCompatActivity() {
                     }
 
                     is LoginState.Success -> {
-                        Log.i(TAG, "로그인 성공: ${state.token}")
+                        Log.i(TAG, "로그인 성공")
                     }
 
                     is LoginState.Error -> {
