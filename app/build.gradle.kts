@@ -6,7 +6,9 @@ plugins {
     alias(libs.plugins.gradle.ktlint)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.google.protobuf)
     id("kotlin-parcelize")
+
 }
 
 android {
@@ -24,6 +26,8 @@ android {
 
         buildConfigField("String", "KAKAO_API_KEY", getApiKey("KAKAO_API_KEY"))
         buildConfigField("String", "KAKAO_REST_API_KEY", getApiKey("KAKAO_REST_API_KEY"))
+        buildConfigField("String", "KAKAO_BASE_URL", getApiUrl("KAKAO_BASE_URL"))
+        buildConfigField("String", "API_BASE_URL", getApiUrl("API_BASE_URL"))
         manifestPlaceholders["kakaoApiKey"] = getApiKey("KAKAO_API_KEY")
     }
 
@@ -53,7 +57,8 @@ android {
 
 dependencies {
     implementation(libs.dagger.hilt.android)
-
+    implementation(libs.androidx.datastore)
+    implementation(libs.protobuf.javalite)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.retrofit2.retrofit)
@@ -76,4 +81,20 @@ dependencies {
     ksp(libs.dagger.hilt.compiler)
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.1"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
+fun getApiUrl(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
