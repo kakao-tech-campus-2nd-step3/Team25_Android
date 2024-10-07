@@ -26,6 +26,8 @@ android {
 
         buildConfigField("String", "KAKAO_API_KEY", getApiKey("KAKAO_API_KEY"))
         buildConfigField("String", "KAKAO_REST_API_KEY", getApiKey("KAKAO_REST_API_KEY"))
+        buildConfigField("String", "KAKAO_BASE_URL", getApiUrl("KAKAO_BASE_URL"))
+        buildConfigField("String", "API_BASE_URL", getApiUrl("API_BASE_URL"))
         manifestPlaceholders["kakaoApiKey"] = getApiKey("KAKAO_API_KEY")
     }
 
@@ -95,3 +97,4 @@ protobuf {
 }
 
 fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
+fun getApiUrl(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")

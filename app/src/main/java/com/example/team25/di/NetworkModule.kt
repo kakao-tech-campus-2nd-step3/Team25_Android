@@ -1,5 +1,6 @@
 package com.example.team25.di
 
+import com.example.team25.BuildConfig
 import com.example.team25.data.network.KakaoApi
 import com.example.team25.data.network.services.RemoteSearchHospitalService
 import com.example.team25.data.remote.SignIn
@@ -17,7 +18,7 @@ object NetworkModule {
     @Provides
     @KakaoRetrofit
     fun provideKakaoRetrofit(): Retrofit {
-        val url = "https://dapi.kakao.com/"
+        val url = BuildConfig.KAKAO_BASE_URL
 
         return Retrofit.Builder()
             .baseUrl(url)
@@ -32,7 +33,7 @@ object NetworkModule {
 
     @Provides
     fun provideRetrofit(): Retrofit {
-        val url = "https://ollagaljido.net/"
+        val url = BuildConfig.API_BASE_URL
         return Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
