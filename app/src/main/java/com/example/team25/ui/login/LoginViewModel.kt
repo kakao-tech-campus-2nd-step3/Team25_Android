@@ -25,8 +25,7 @@ class LoginViewModel
             viewModelScope.launch {
                 _loginState.value = LoginState.Loading
 
-                val accountLoginDto = AccountLoginDto(oauthAccessToken)
-                val tokenDto: TokenDto? = loginUseCase(accountLoginDto)
+                val tokenDto: TokenDto? = loginUseCase(oauthAccessToken)
                 if (tokenDto != null) {
                     _loginState.value = LoginState.Success(tokenDto)
                 } else {
