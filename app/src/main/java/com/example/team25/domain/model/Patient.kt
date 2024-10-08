@@ -8,5 +8,5 @@ data class Patient(
     val patientGender: Gender,
     val patientRelation: String,
     val patientBirth: String,
-    val nokPhone: String
+    val nokPhone: String,
 )

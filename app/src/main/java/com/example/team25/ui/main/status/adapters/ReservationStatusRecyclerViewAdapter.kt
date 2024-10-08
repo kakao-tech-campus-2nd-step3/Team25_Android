@@ -18,7 +18,7 @@ class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestC
         >(DiffCallback()) {
     class ReservationStatusViewHolder(
         private val binding: ItemReservationStatusBinding,
-        private val clickListener: OnRequestCancelClickListener
+        private val clickListener: OnRequestCancelClickListener,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
@@ -28,7 +28,6 @@ class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestC
 
             binding.requestCancelBtn.setOnClickListener {
                 clickListener.onRequestCancelClicked(item)
-
             }
         }
     }

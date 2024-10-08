@@ -1,6 +1,7 @@
 package com.example.team25.data.network.dto
 
-data class AccountLoginDto(
-    val username: String
-)
+import com.google.gson.annotations.SerializedName
 
+data class AccountLoginDto(
+    @SerializedName("oauthAccessToken") val oauthAccessToken: String,
+)

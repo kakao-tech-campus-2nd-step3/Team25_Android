@@ -6,6 +6,14 @@ import javax.inject.Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class IoDispatcher
 
-@Retention(AnnotationRetention.BINARY)
 @Qualifier
+@Retention(AnnotationRetention.BINARY)
 annotation class KakaoRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class GeneralRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class TokenDataStore

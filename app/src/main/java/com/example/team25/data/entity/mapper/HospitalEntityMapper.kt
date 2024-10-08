@@ -1,16 +1,15 @@
 package com.example.team25.data.entity.mapper
 
-import com.example.team25.domain.model.HospitalDomain
 import com.example.team25.data.entity.HospitalEntity
+import com.example.team25.domain.model.HospitalDomain
 
 object HospitalEntityMapper : EntityMapper<List<HospitalDomain>, List<HospitalEntity>> {
-
     override fun asEntity(domain: List<HospitalDomain>): List<HospitalEntity> {
         return domain.map { hospital ->
             HospitalEntity(
                 placeId = hospital.placeId,
                 name = hospital.name,
-                address = hospital.address
+                address = hospital.address,
             )
         }
     }
@@ -20,7 +19,7 @@ object HospitalEntityMapper : EntityMapper<List<HospitalDomain>, List<HospitalEn
             HospitalDomain(
                 placeId = hospitalEntity.placeId,
                 name = hospitalEntity.name,
-                address = hospitalEntity.address
+                address = hospitalEntity.address,
             )
         }
     }
