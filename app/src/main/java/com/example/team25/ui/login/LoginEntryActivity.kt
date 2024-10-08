@@ -105,12 +105,13 @@ class LoginEntryActivity : AppCompatActivity() {
 
     private fun navigateToMainActivity(nickname: String?) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("userNickname", nickname)
+        intent.putExtra(EXTRA_USER_NICKNAME, nickname)
         startActivity(intent)
         finish()
     }
 
     companion object {
         private const val TAG = "kakaoLogin"
+        const val EXTRA_USER_NICKNAME = "userNickname"
     }
 }
