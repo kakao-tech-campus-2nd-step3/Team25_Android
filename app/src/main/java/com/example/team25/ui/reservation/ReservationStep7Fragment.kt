@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep7Binding
-import com.example.team25.domain.HospitalDomain
+import com.example.team25.domain.model.HospitalDomain
 import com.example.team25.ui.reservation.adapters.HospitalRecyclerViewAdapter
 import com.example.team25.ui.reservation.interfaces.OnHospitalClickListener
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
@@ -30,14 +30,18 @@ class ReservationStep7Fragment : Fragment() {
     private lateinit var hospitalRecyclerViewAdapter: HospitalRecyclerViewAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentReservationStep7Binding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setHospitalSearchListener()
         setSearchResultRecyclerView()
@@ -45,18 +49,30 @@ class ReservationStep7Fragment : Fragment() {
     }
 
     private fun setHospitalSearchListener() {
-        binding.destinationEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        binding.destinationEditText.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val keyword = s.toString()
-                if (keyword.isNotBlank()) {
-                    searchHospitals(keyword)
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    val keyword = s.toString()
+                    if (keyword.isNotBlank()) {
+                        searchHospitals(keyword)
+                    }
                 }
-            }
 
-            override fun afterTextChanged(s: Editable?) {}
-        })
+                override fun afterTextChanged(s: Editable?) {}
+            },
+        )
     }
 
     private fun searchHospitals(keyword: String) {
@@ -75,26 +91,30 @@ class ReservationStep7Fragment : Fragment() {
         }
     }
 
-    private fun sortHospitals(hospitals: List<HospitalDomain>, keyword: String): List<HospitalDomain> {
+    private fun sortHospitals(
+        hospitals: List<HospitalDomain>,
+        keyword: String,
+    ): List<HospitalDomain> {
         return hospitals
             .filter { it.name.contains(keyword) }
             .sortedWith(
                 compareBy(
                     { it.name.indexOf(keyword) },
                     { it.name.length },
-                )
+                ),
             )
     }
 
     private fun setSearchResultRecyclerView() {
-        val hospitalClickListener = object : OnHospitalClickListener {
-            override fun onHospitalClicked(hospital: HospitalDomain) {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, ReservationStep8Fragment())
-                    .addToBackStack(null)
-                    .commit()
+        val hospitalClickListener =
+            object : OnHospitalClickListener {
+                override fun onHospitalClicked(hospital: HospitalDomain) {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_view, ReservationStep8Fragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
-        }
 
         hospitalRecyclerViewAdapter = HospitalRecyclerViewAdapter(hospitalClickListener)
         binding.hospitalRecyclerView.adapter = hospitalRecyclerViewAdapter

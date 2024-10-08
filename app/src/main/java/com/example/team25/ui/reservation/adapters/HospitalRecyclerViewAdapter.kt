@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemHospitalBinding
-import com.example.team25.domain.HospitalDomain
+import com.example.team25.domain.model.HospitalDomain
 import com.example.team25.ui.reservation.interfaces.OnHospitalClickListener
 
 class HospitalRecyclerViewAdapter(private val clickListener: OnHospitalClickListener) :

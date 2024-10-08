@@ -112,7 +112,11 @@ class ReservationStep5Fragment : Fragment() {
         }
     }
 
-    private fun isValidBirthday(year: String, month: String, day: String): Boolean {
+    private fun isValidBirthday(
+        year: String,
+        month: String,
+        day: String,
+    ): Boolean {
         if (year.length != 4 || year.toInt() < 1900 || year.toInt() > LocalDate.now().year) {
             return false
         }

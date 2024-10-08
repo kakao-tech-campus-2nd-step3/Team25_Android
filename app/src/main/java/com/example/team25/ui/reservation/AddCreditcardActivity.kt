@@ -5,10 +5,10 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.R
+import com.example.team25.data.network.services.CardService
 import com.example.team25.databinding.ActivityAddCreditcardBinding
 import com.example.team25.security.CardInformationEncryption
 import com.example.team25.ui.main.status.data.CardInfor
-import com.example.team25.ui.reservation.services.CardService
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -45,10 +45,9 @@ class AddCreditcardActivity : AppCompatActivity() {
             presentError(validateCard(cardInfor))
             val encryptedData = CardInformationEncryption().encryptCBC(cardInfor)
             Log.d("123123", "initCardInfor: $encryptedData") // 암호화키 확인 로그
-        } else
-            {
-                presentError(validateCard(cardInfor))
-            }
+        } else {
+            presentError(validateCard(cardInfor))
+        }
     }
 
     private fun selectAddCreditCard() {
@@ -72,11 +71,10 @@ class AddCreditcardActivity : AppCompatActivity() {
         if (!isValid) {
             errorTextView.visibility = View.VISIBLE
             inputField.setBackgroundResource(R.drawable.edit_text_box_red)
-        } else
-            {
-                errorTextView.visibility = View.GONE
-                inputField.setBackgroundResource(R.drawable.edit_text_box)
-            }
+        } else {
+            errorTextView.visibility = View.GONE
+            inputField.setBackgroundResource(R.drawable.edit_text_box)
+        }
     }
 
     private fun validateCard(card: CardInfor): Array<Boolean> {

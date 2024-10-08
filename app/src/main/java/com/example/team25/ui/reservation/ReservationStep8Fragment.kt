@@ -22,14 +22,18 @@ class ReservationStep8Fragment : Fragment() {
     private var selectedDay = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentReservationStep8Binding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         getCurrentTime()
         getCurrentDate()
@@ -53,24 +57,26 @@ class ReservationStep8Fragment : Fragment() {
     }
 
     private fun setDatePicker() {
-        val tomorrow = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_MONTH, 1)
-        }
+        val tomorrow =
+            Calendar.getInstance().apply {
+                add(Calendar.DAY_OF_MONTH, 1)
+            }
 
         val year = tomorrow.get(Calendar.YEAR)
         val month = tomorrow.get(Calendar.MONTH)
         val day = tomorrow.get(Calendar.DAY_OF_MONTH)
 
         binding.datePicker.minDate = tomorrow.timeInMillis
-        val oneMonthLater = Calendar.getInstance().apply {
-            add(Calendar.MONTH, 1)
-        }
+        val oneMonthLater =
+            Calendar.getInstance().apply {
+                add(Calendar.MONTH, 1)
+            }
         binding.datePicker.maxDate = oneMonthLater.timeInMillis
 
         binding.datePicker.init(
             year,
             month,
-            day
+            day,
         ) { _, selectedYear, selectedMonth, selectedDay ->
             this.selectedYear = selectedYear
             this.selectedMonth = selectedMonth
@@ -79,7 +85,7 @@ class ReservationStep8Fragment : Fragment() {
             Toast.makeText(
                 requireContext(),
                 "Selected Date: $selectedYear/${selectedMonth + 1}/$selectedDay",
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_SHORT,
             ).show()
         }
     }
@@ -118,7 +124,6 @@ class ReservationStep8Fragment : Fragment() {
                 .commit()
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
