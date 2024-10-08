@@ -1,20 +1,28 @@
 package com.example.team25.ui.reservation
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep9Binding
-import com.example.team25.domain.model.ManagerDomain
 import com.example.team25.ui.reservation.adapters.ManagerRecyclerViewAdapter
 import com.example.team25.ui.reservation.interfaces.OnManagerClickListener
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ReservationStep9Fragment : Fragment() {
     private var _binding: FragmentReservationStep9Binding? = null
     private val binding get() = _binding!!
+    private val viewModel: ManagerDataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,11 +35,22 @@ class ReservationStep9Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setManagerRecyclerView()
+        collectManagerData()
+        setManagerSearchListener()
         navigateToPrevious()
     }
 
+    private fun collectManagerData() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.managers.collectLatest {
+                    (binding.managerRecyclerView.adapter as? ManagerRecyclerViewAdapter)?.submitList(it)
+                }
+            }
+        }
+    }
+
     private fun setManagerRecyclerView() {
-        val managerDomainList: ArrayList<ManagerDomain> = getListFromDb()
         val managerClickListener = object : OnManagerClickListener {
             override fun onManagerClicked() {
                 parentFragmentManager.beginTransaction()
@@ -45,18 +64,18 @@ class ReservationStep9Fragment : Fragment() {
 
         binding.managerRecyclerView.adapter = adapter
         binding.managerRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        adapter.submitList(managerDomainList)
     }
 
-    private fun getListFromDb(): ArrayList<ManagerDomain> {
-        return arrayListOf(
-            ManagerDomain("김지수"),
-            ManagerDomain("임지수"),
-            ManagerDomain("신지수"),
-            ManagerDomain("이지수"),
-            ManagerDomain("박지수"),
-        ) // DB에서 데이터 받아옴
+    private fun setManagerSearchListener(){
+        binding.searchManagerEditText.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.updateManagersByName(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun navigateToPrevious() {
