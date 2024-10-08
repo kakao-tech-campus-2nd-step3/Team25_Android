@@ -29,6 +29,7 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideKakaoApi(@KakaoRetrofit retrofit: Retrofit): KakaoApi {
         return retrofit.create(KakaoApi::class.java)
     }
@@ -45,9 +46,11 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideSearchHospitalService(kakaoApi: KakaoApi): SearchHospitalService = RemoteSearchHospitalService(kakaoApi)
 
     @Provides
+    @Singleton
     fun provideSignIn(@GeneralRetrofit retrofit: Retrofit): SignIn {
         return retrofit.create(SignIn::class.java)
     }
