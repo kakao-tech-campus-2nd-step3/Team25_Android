@@ -2,6 +2,7 @@ package com.example.team25.di
 
 import com.example.team25.BuildConfig
 import com.example.team25.data.network.KakaoApi
+import com.example.team25.data.network.authenticator.HttpAuthenticator
 import com.example.team25.data.network.interceptor.TokenInterceptor
 import com.example.team25.data.network.services.RemoteSearchHospitalService
 import com.example.team25.data.remote.ManagerApiService
@@ -11,7 +12,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -76,7 +76,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(tokenInterceptor: TokenInterceptor, httpAuthenticator: Authenticator): OkHttpClient =
+    fun provideOkHttpClient(tokenInterceptor: TokenInterceptor, httpAuthenticator: HttpAuthenticator): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(tokenInterceptor)
             .authenticator(httpAuthenticator)
