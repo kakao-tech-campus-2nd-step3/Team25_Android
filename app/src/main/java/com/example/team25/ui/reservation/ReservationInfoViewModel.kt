@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.team25.domain.Gender
 import com.example.team25.domain.model.Patient
 import com.example.team25.domain.model.ReservationInfo
+import com.example.team25.domain.model.ReservationStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,6 +18,8 @@ class ReservationInfoViewModel
             MutableStateFlow(
                 ReservationInfo(
                     managerId = "",
+                    managerName = "",
+                    reservationStatus = ReservationStatus.PEND,
                     departure = "",
                     destination = "",
                     serviceDate = "",
