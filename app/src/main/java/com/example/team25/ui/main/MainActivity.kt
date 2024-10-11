@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.databinding.ActivityMainBinding
 import com.example.team25.ui.login.LoginEntryActivity
+import com.example.team25.ui.login.LoginEntryActivity.Companion.EXTRA_USER_NICKNAME
 import com.example.team25.ui.main.companion.LiveCompanionActivity
 import com.example.team25.ui.main.status.ReservationStatusActivity
 import com.example.team25.ui.reservation.ReservationActivity
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setWelcomeTextView() {
-        val userNickname = intent.getStringExtra("userNickname")
+        val userNickname = intent.getStringExtra(EXTRA_USER_NICKNAME)
         val welcomeMessage = "환영합니다 ${userNickname}님"
         if (userNickname != null) {
             binding.welcomeTextView.text = welcomeMessage
