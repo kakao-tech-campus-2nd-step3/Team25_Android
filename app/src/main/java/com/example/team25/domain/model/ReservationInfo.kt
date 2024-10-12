@@ -1,6 +1,7 @@
 package com.example.team25.domain.model
 
 import android.os.Parcelable
+import com.example.team25.domain.ReservationStatus
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
