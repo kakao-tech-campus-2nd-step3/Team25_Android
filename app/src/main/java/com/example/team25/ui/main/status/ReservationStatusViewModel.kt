@@ -3,8 +3,11 @@ package com.example.team25.ui.main.status
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.team25.domain.model.ReservationInfo
-import com.example.team25.domain.model.ReservationStatus
+import com.example.team25.domain.ReservationStatus
+import com.example.team25.domain.ReservationStatus.CONFIRM
 import com.example.team25.domain.repository.ReservationRepository
+import com.example.team25.domain.usecase.FetchRepositoriesUseCase
+import com.example.team25.domain.usecase.LoadReservationsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReservationStatusViewModel @Inject constructor(
-    private val reservationRepository: ReservationRepository,
+    private val fetchRepositoriesUseCase: FetchRepositoriesUseCase,
+    private val loadReservationsUseCase: LoadReservationsUseCase,
 ) : ViewModel() {
     private val _reservationStatus = MutableStateFlow<List<ReservationInfo>>(emptyList())
     val reservationStatus: StateFlow<List<ReservationInfo>> = _reservationStatus
@@ -22,22 +26,22 @@ class ReservationStatusViewModel @Inject constructor(
     val reservationHistory: StateFlow<List<ReservationInfo>> = _reservationHistory
 
     init {
-        fetchReservations()
+        fetchRepositories()
+        loadReservations()
     }
 
-    fun fetchReservations() {
+    private fun fetchRepositories() {
         viewModelScope.launch {
-            reservationRepository.fetchRepository()
+            fetchRepositoriesUseCase.invoke()
         }
     }
 
-    fun getReservationsByStatus(status: ReservationStatus) {
+    private fun loadReservations() {
         viewModelScope.launch {
-            if (status == ReservationStatus.CONFIRM) {
-                _reservationHistory.value = reservationRepository.getReservationsByStatus(status)
-            } else {
-                _reservationStatus.value = reservationRepository.getReservationsByStatus(status)
-            }
+            val reservations = loadReservationsUseCase.invoke()
+
+            _reservationStatus.value = reservations.filter { it.reservationStatus == CONFIRM }
+            _reservationHistory.value = reservations.filter { it.reservationStatus != CONFIRM }
         }
     }
 }
