@@ -12,34 +12,32 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel
-    @Inject
-    constructor(
-        private val loginUseCase: LoginUseCase,
-    ) : ViewModel() {
-        private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
-        val loginState: StateFlow<LoginState> = _loginState
+class LoginViewModel @Inject constructor(
+    private val loginUseCase: LoginUseCase,
+) : ViewModel() {
+    private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
+    val loginState: StateFlow<LoginState> = _loginState
 
-        fun login(oauthAccessToken: String) {
-            viewModelScope.launch {
-                _loginState.value = LoginState.Loading
+    fun login(oauthAccessToken: String) {
+        viewModelScope.launch {
+            _loginState.value = LoginState.Loading
 
-                val tokenDto: TokenDto? = loginUseCase(oauthAccessToken)
-                if (tokenDto != null) {
-                    _loginState.value = LoginState.Success
-                } else {
-                    _loginState.value = LoginState.Error("로그인 실패")
-                }
-            }
-        }
-
-        fun updateErrorMessage(message: String) {
-            _loginState.update { currentState ->
-                if (currentState is LoginState.Error) {
-                    currentState.copy(message = message)
-                } else {
-                    LoginState.Error(message)
-                }
+            val tokenDto: TokenDto? = loginUseCase(oauthAccessToken)
+            if (tokenDto != null) {
+                _loginState.value = LoginState.Success
+            } else {
+                _loginState.value = LoginState.Error("로그인 실패")
             }
         }
     }
+
+    fun updateErrorMessage(message: String) {
+        _loginState.update { currentState ->
+            if (currentState is LoginState.Error) {
+                currentState.copy(message = message)
+            } else {
+                LoginState.Error(message)
+            }
+        }
+    }
+}
