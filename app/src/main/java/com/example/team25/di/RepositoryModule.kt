@@ -12,12 +12,13 @@ import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class ViewModelModule {
+abstract class RepositoryModule {
+
     @Binds
     @ViewModelScoped
     abstract fun bindManagerRepository(
         defaultManagerRepository: DefaultManagerRepository
-    ):ManagerRepository
+    ): ManagerRepository
 
     @Binds
     @ViewModelScoped
