@@ -1,4 +1,4 @@
-package com.example.team25.domain.model
+package com.example.team25.domain
 
 enum class ReservationStatus {
     PEND, CONFIRM, CANCEL

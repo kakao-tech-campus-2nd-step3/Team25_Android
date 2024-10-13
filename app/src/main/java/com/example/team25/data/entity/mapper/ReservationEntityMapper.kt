@@ -3,12 +3,11 @@ package com.example.team25.data.entity.mapper
 import com.example.team25.data.entity.ReservationEntity
 import com.example.team25.domain.model.ReservationInfo
 
-object ReservationEntityMapper: EntityMapper<List<ReservationInfo>, List<ReservationEntity>> {
+object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<ReservationEntity>> {
     override fun asEntity(domain: List<ReservationInfo>): List<ReservationEntity> {
         return domain.map { reservationInfo ->
             ReservationEntity(
                 managerId = reservationInfo.managerId,
-                managerName = reservationInfo.managerName,
                 reservationStatus = reservationInfo.reservationStatus,
                 departure = reservationInfo.departure,
                 destination = reservationInfo.destination,
@@ -25,7 +24,7 @@ object ReservationEntityMapper: EntityMapper<List<ReservationInfo>, List<Reserva
         return entity.map { reservationEntity ->
             ReservationInfo(
                 managerId = reservationEntity.managerId,
-                managerName = reservationEntity.managerName,
+                managerName = "",
                 reservationStatus = reservationEntity.reservationStatus,
                 departure = reservationEntity.departure,
                 destination = reservationEntity.destination,

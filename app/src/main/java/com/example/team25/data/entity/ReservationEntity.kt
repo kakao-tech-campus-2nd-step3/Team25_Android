@@ -4,13 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.team25.domain.model.Patient
-import com.example.team25.domain.model.ReservationStatus
+import com.example.team25.domain.ReservationStatus
 
 @Entity("reservations")
 data class ReservationEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo("manager_id") val managerId: String,
-    @ColumnInfo("manager_name") val managerName: String,
     @ColumnInfo("reservation_status") val reservationStatus: ReservationStatus,
     @ColumnInfo("departure") val departure: String,
     @ColumnInfo("destination") val destination: String,
