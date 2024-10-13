@@ -1,8 +1,6 @@
 package com.example.team25.data.entity.mapper
 
-import com.example.team25.data.entity.HospitalEntity
 import com.example.team25.data.entity.ManagerEntity
-import com.example.team25.domain.model.HospitalDomain
 import com.example.team25.domain.model.ManagerDomain
 
 

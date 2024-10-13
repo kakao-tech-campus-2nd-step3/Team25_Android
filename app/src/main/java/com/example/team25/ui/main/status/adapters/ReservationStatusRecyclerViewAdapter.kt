@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team25.databinding.ItemReservationStatusBinding
-import com.example.team25.ui.main.status.data.ReservationInfo
+import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.ui.main.status.interfaces.OnRequestCancelClickListener
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -23,8 +23,8 @@ class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestC
         fun bind(item: ReservationInfo) {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
-            binding.userNameTextView.text = item.name
-            binding.reservationDateTextView.text = dateFormat.format(item.date)
+            binding.userNameTextView.text = item.managerName
+            binding.reservationDateTextView.text = dateFormat.format(item.serviceDate)
 
             binding.requestCancelBtn.setOnClickListener {
                 clickListener.onRequestCancelClicked(item)
@@ -53,7 +53,7 @@ class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestC
             oldItem: ReservationInfo,
             newItem: ReservationInfo,
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(

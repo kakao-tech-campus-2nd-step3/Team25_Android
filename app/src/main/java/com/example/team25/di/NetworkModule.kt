@@ -6,6 +6,7 @@ import com.example.team25.data.network.authenticator.HttpAuthenticator
 import com.example.team25.data.network.interceptor.TokenInterceptor
 import com.example.team25.data.network.services.RemoteSearchHospitalService
 import com.example.team25.data.remote.ManagerApiService
+import com.example.team25.data.remote.ReservationApiService
 import com.example.team25.data.remote.SignIn
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import dagger.Module
@@ -68,6 +69,11 @@ object NetworkModule {
     @Singleton
     fun provideManagerApiService(@ServerRetrofit retrofit: Retrofit): ManagerApiService =
         retrofit.create(ManagerApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideReservationApiService(@ServerRetrofit retrofit: Retrofit): ReservationApiService =
+        retrofit.create(ReservationApiService::class.java)
 
     @Provides
     fun provideSignIn(@GeneralRetrofit retrofit: Retrofit): SignIn {

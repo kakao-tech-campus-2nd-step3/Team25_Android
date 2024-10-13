@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.R
 import com.example.team25.databinding.ActivityReservationCancelBinding
-import com.example.team25.ui.main.status.data.ReservationInfo
+import com.example.team25.domain.model.ReservationInfo
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -35,8 +35,8 @@ class ReservationCancelActivity : AppCompatActivity() {
         reservationInfo?.let {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
-            binding.managerNameTextView.text = it.name
-            binding.reservationDateTextView.text = dateFormat.format(it.date)
+            binding.managerNameTextView.text = it.managerName
+            binding.reservationDateTextView.text = dateFormat.format(it.serviceDate)
         }
     }
 
