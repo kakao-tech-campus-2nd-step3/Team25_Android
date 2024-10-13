@@ -3,6 +3,7 @@ package com.example.team25.di
 import com.example.team25.BuildConfig
 import com.example.team25.data.network.KakaoApi
 import com.example.team25.data.network.services.RemoteSearchHospitalService
+import com.example.team25.data.remote.ManagerApiService
 import com.example.team25.data.remote.SignIn
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import dagger.Module
@@ -51,6 +52,10 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideManagerApiService(@GeneralRetrofit retrofit: Retrofit): ManagerApiService =
+        retrofit.create(ManagerApiService::class.java)
+
+    @Provides
     fun provideSignIn(@GeneralRetrofit retrofit: Retrofit): SignIn {
         return retrofit.create(SignIn::class.java)
     }

@@ -6,13 +6,14 @@ import androidx.datastore.dataStore
 import androidx.room.Room
 import com.example.team25.TokensProto.Tokens
 import com.example.team25.data.dao.HospitalDao
+import com.example.team25.data.dao.ManagerDao
 import com.example.team25.data.database.HospitalDatabase
+import com.example.team25.data.database.ManagerDatabase
 import com.example.team25.data.database.TokenSerializer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -31,8 +32,24 @@ object DatabaseModule {
     }
 
     @Provides
+    fun provideManagerDatabase(
+        @ApplicationContext context: Context,
+    ): ManagerDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            ManagerDatabase::class.java,
+            "manager_database",
+        ).build()
+    }
+
+    @Provides
     fun provideHospitalDao(database: HospitalDatabase): HospitalDao {
         return database.hospitalDao()
+    }
+
+    @Provides
+    fun provideManagerDao(database: ManagerDatabase): ManagerDao {
+        return database.managerDao()
     }
 
     private val Context.tokenDataStore: DataStore<Tokens> by dataStore(

@@ -5,5 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ManagerDomain(
-    val name: String,
+    val managerId: String = "",
+    val name: String = "",
+    val profileImage: String = "",
+    val career: String = "",
+    val comment: String = ""
 ) : Parcelable
