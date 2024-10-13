@@ -11,32 +11,28 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class ReservationInfoViewModel
-@Inject
-constructor() : ViewModel() {
-    private val _reservationInfo =
-        MutableStateFlow(
-            ReservationInfo(
-                managerId = "",
-                managerName = "",
-                reservationStatus = ReservationStatus.PEND,
-                departure = "",
-                destination = "",
-                serviceDate = "",
-                serviceType = "외래진료",
-                transportation = "",
-                price = 0,
-                patient =
-                Patient(
-                    patientName = "",
-                    patientPhone = "",
-                    patientGender = Gender.MALE,
-                    patientRelation = "본인",
-                    patientBirth = "",
-                    nokPhone = "",
-                ),
+class ReservationInfoViewModel @Inject constructor() : ViewModel() {
+    private val _reservationInfo = MutableStateFlow(
+        ReservationInfo(
+            managerId = "",
+            managerName = "",
+            reservationStatus = ReservationStatus.PEND,
+            departure = "",
+            destination = "",
+            serviceDate = "",
+            serviceType = "외래진료",
+            transportation = "",
+            price = 0,
+            patient = Patient(
+                patientName = "",
+                patientPhone = "",
+                patientGender = Gender.MALE,
+                patientRelation = "본인",
+                patientBirth = "",
+                nokPhone = "",
             ),
-        )
+        ),
+    )
 
     val reservationInfo: StateFlow<ReservationInfo> = _reservationInfo
 
