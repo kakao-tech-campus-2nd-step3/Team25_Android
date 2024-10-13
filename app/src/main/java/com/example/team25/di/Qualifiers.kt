@@ -16,4 +16,8 @@ annotation class GeneralRetrofit
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
+annotation class ServerRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
 annotation class TokenDataStore

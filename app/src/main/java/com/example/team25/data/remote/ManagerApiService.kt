@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ManagerApiService {
-    @GET("managers")
+    @GET("/api/managers")
     suspend fun fetchManagers(): Response<List<ManagerEntity>>
 }
