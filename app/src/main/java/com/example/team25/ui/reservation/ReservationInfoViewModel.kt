@@ -15,6 +15,8 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
     private val _reservationInfo = MutableStateFlow(
         ReservationInfo(
             managerId = "",
+            managerName = "",
+            reservationStatus = ReservationStatus.PEND,
             departure = "",
             destination = "",
             serviceDate = "",
