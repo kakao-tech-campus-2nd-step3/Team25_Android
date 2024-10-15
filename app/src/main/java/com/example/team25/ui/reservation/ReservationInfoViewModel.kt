@@ -17,9 +17,9 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
             managerId = "",
             managerName = "",
             reservationStatus = ReservationStatus.PEND,
-            departure = "",
-            destination = "",
-            serviceDate = "",
+            departureLocation = "",
+            arrivalLocation = "",
+            reservationDate = "",
             serviceType = "외래진료",
             transportation = "",
             price = 0,
@@ -45,15 +45,15 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
     }
 
     fun updateDeparture(departure: String) {
-        _reservationInfo.value = _reservationInfo.value.copy(departure = departure)
+        _reservationInfo.value = _reservationInfo.value.copy(departureLocation = departure)
     }
 
     fun updateDestination(destination: String) {
-        _reservationInfo.value = _reservationInfo.value.copy(destination = destination)
+        _reservationInfo.value = _reservationInfo.value.copy(arrivalLocation = destination)
     }
 
     fun updateServiceDate(serviceDate: String) {
-        _reservationInfo.value = _reservationInfo.value.copy(serviceDate = serviceDate)
+        _reservationInfo.value = _reservationInfo.value.copy(reservationDate = serviceDate)
     }
 
     fun updateServiceType(serviceType: String) {

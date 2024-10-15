@@ -1,7 +1,9 @@
 package com.example.team25.data.entity.mapper
 
-interface EntityMapper<Domain, Entity> {
+interface EntityMapper<Domain, Entity, Dto> {
     fun asEntity(domain: Domain): Entity
 
-    fun asDomain(entity: Entity): Domain
+    fun asDomainFromEntity(entity: Entity): Domain
+
+    fun asDomainFromDto(dto: Dto): Domain
 }

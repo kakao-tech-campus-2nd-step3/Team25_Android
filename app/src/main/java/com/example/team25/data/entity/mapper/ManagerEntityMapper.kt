@@ -1,10 +1,11 @@
 package com.example.team25.data.entity.mapper
 
 import com.example.team25.data.entity.ManagerEntity
+import com.example.team25.data.network.dto.ManagerDto
 import com.example.team25.domain.model.ManagerDomain
 
 
-object ManagerEntityMapper: EntityMapper<List<ManagerDomain>, List<ManagerEntity>> {
+object ManagerEntityMapper: EntityMapper<List<ManagerDomain>, List<ManagerEntity>, List<ManagerDto>> {
     override fun asEntity(domain: List<ManagerDomain>): List<ManagerEntity> {
         return domain.map { manager ->
             ManagerEntity(
@@ -17,7 +18,7 @@ object ManagerEntityMapper: EntityMapper<List<ManagerDomain>, List<ManagerEntity
         }
     }
 
-    override fun asDomain(entity: List<ManagerEntity>): List<ManagerDomain> {
+    override fun asDomainFromEntity(entity: List<ManagerEntity>): List<ManagerDomain> {
         return entity.map { managerEntity ->
             ManagerDomain(
                 managerId = managerEntity.managerId,
@@ -28,12 +29,28 @@ object ManagerEntityMapper: EntityMapper<List<ManagerDomain>, List<ManagerEntity
             )
         }
     }
+
+    override fun asDomainFromDto(dto: List<ManagerDto>): List<ManagerDomain> {
+        return dto.map { managerDto ->
+            ManagerDomain(
+                managerId = managerDto.managerId,
+                name = managerDto.name,
+                profileImage = managerDto.profileImage,
+                career = managerDto.career,
+                comment = managerDto.comment
+            )
+        }
+    }
 }
 
 fun List<ManagerDomain>.asEntity(): List<ManagerEntity> {
     return ManagerEntityMapper.asEntity(this)
 }
 
-fun List<ManagerEntity>?.asDomain(): List<ManagerDomain> {
-    return ManagerEntityMapper.asDomain(this.orEmpty())
+fun List<ManagerEntity>?.asDomainFromEntity(): List<ManagerDomain> {
+    return ManagerEntityMapper.asDomainFromEntity(this.orEmpty())
+}
+
+fun List<ManagerDto>?.asDomainFromDto(): List<ManagerDomain> {
+    return ManagerEntityMapper.asDomainFromDto(this.orEmpty())
 }
