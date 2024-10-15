@@ -5,7 +5,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.room.Room
 import com.example.team25.TokensProto.Tokens
-import com.example.team25.data.dao.HospitalDao
 import com.example.team25.data.dao.ManagerDao
 import com.example.team25.data.dao.ReservationDao
 import com.example.team25.data.database.AppDatabase
@@ -17,10 +16,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
+    @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context,
     ): AppDatabase {
@@ -32,16 +33,13 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideHospitalDao(database: AppDatabase): HospitalDao {
-        return database.hospitalDao()
-    }
-
-    @Provides
+    @Singleton
     fun provideManagerDao(database: AppDatabase): ManagerDao {
         return database.managerDao()
     }
 
     @Provides
+    @Singleton
     fun provideReservationDao(database: AppDatabase): ReservationDao {
         return database.reservationDao()
     }
