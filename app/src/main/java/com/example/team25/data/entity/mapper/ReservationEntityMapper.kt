@@ -1,6 +1,7 @@
 package com.example.team25.data.entity.mapper
 
 import com.example.team25.data.entity.ReservationEntity
+import com.example.team25.domain.model.Patient
 import com.example.team25.domain.model.ReservationInfo
 
 object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<ReservationEntity>> {
@@ -9,13 +10,12 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
             ReservationEntity(
                 managerId = reservationInfo.managerId,
                 reservationStatus = reservationInfo.reservationStatus,
-                departure = reservationInfo.departure,
-                destination = reservationInfo.destination,
-                serviceDate = reservationInfo.serviceDate,
+                departureLocation = reservationInfo.departureLocation,
+                arrivalLocation = reservationInfo.arrivalLocation,
+                reservationDate = reservationInfo.reservationDate,
                 serviceType = reservationInfo.serviceType,
                 transportation = reservationInfo.transportation,
-                price = reservationInfo.price,
-                patient = reservationInfo.patient
+                price = reservationInfo.price
             )
         }
     }
@@ -26,13 +26,13 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
                 managerId = reservationEntity.managerId,
                 managerName = "",
                 reservationStatus = reservationEntity.reservationStatus,
-                departure = reservationEntity.departure,
-                destination = reservationEntity.destination,
-                serviceDate = reservationEntity.serviceDate,
+                departureLocation = reservationEntity.departureLocation,
+                arrivalLocation = reservationEntity.arrivalLocation,
+                reservationDate = reservationEntity.reservationDate,
                 serviceType = reservationEntity.serviceType,
                 transportation = reservationEntity.transportation,
                 price = reservationEntity.price,
-                patient = reservationEntity.patient
+                patient = Patient()
             )
         }
     }
