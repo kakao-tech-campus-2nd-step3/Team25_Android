@@ -1,10 +1,11 @@
 package com.example.team25.data.entity.mapper
 
 import com.example.team25.data.entity.ReservationEntity
+import com.example.team25.data.network.dto.ReservationDto
 import com.example.team25.domain.model.Patient
 import com.example.team25.domain.model.ReservationInfo
 
-object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<ReservationEntity>> {
+object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<ReservationEntity>, List<ReservationDto>> {
     override fun asEntity(domain: List<ReservationInfo>): List<ReservationEntity> {
         return domain.map { reservationInfo ->
             ReservationEntity(
@@ -20,7 +21,7 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
         }
     }
 
-    override fun asDomain(entity: List<ReservationEntity>): List<ReservationInfo> {
+    override fun asDomainFromEntity(entity: List<ReservationEntity>): List<ReservationInfo> {
         return entity.map { reservationEntity ->
             ReservationInfo(
                 managerId = reservationEntity.managerId,
@@ -36,12 +37,33 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
             )
         }
     }
+
+    override fun asDomainFromDto(dto: List<ReservationDto>): List<ReservationInfo> {
+        return dto.map { reservationDto ->
+            ReservationInfo(
+                managerId = reservationDto.managerId,
+                managerName = "",
+                reservationStatus = reservationDto.reservationStatus,
+                departureLocation = reservationDto.departureLocation,
+                arrivalLocation = reservationDto.arrivalLocation,
+                reservationDate = reservationDto.reservationDate,
+                serviceType = reservationDto.serviceType,
+                transportation = reservationDto.transportation,
+                price = reservationDto.price,
+                patient = Patient()
+            )
+        }
+    }
 }
 
 fun List<ReservationInfo>.asEntity(): List<ReservationEntity> {
     return ReservationEntityMapper.asEntity(this)
 }
 
-fun List<ReservationEntity>?.asDomain(): List<ReservationInfo> {
-    return ReservationEntityMapper.asDomain(this.orEmpty())
+fun List<ReservationEntity>?.asDomainFromEntity(): List<ReservationInfo> {
+    return ReservationEntityMapper.asDomainFromEntity(this.orEmpty())
+}
+
+fun List<ReservationDto>?.asDomainFromDto(): List<ReservationInfo> {
+    return ReservationEntityMapper.asDomainFromDto(this.orEmpty())
 }
