@@ -5,7 +5,7 @@ import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.domain.ReservationStatus
 
 interface ReservationRepository {
-    suspend fun fetchRepository()
+    suspend fun fetchReservations()
 
     suspend fun insertReservation(reservations :List<ReservationInfo>)
 

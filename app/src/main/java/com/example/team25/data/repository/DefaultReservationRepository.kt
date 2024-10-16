@@ -27,7 +27,7 @@ class DefaultReservationRepository @Inject constructor(
         return reservationDao.insertReservations(reservations.asEntity())
     }
 
-    override suspend fun fetchRepository() {
+    override suspend fun fetchReservations() {
         val result = reservationApiService.fetchReservations()
         if (result is Success) result.body?.data?.let { reservationDtos ->
             insertReservation(reservationDtos.asDomainFromDto())
