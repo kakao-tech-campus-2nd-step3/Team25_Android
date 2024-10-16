@@ -23,12 +23,11 @@ import javax.inject.Inject
 class HttpAuthenticator @Inject constructor(
     @TokenDataStore private val tokenDataStore: DataStore<Tokens>
 ) : Authenticator {
+    private val mutex = Mutex()
     override fun authenticate(route: Route?, response: Response): Request? {
         // 401에러 발생 시(엑세스 토큰 만료, 권한 x)
         if (response.code == HTTP_UNAUTHORIZED) {
             return runBlocking {
-                val mutex = Mutex()
-
                 mutex.withLock {
                     val refreshToken = withContext(Dispatchers.IO) { tokenDataStore.data.first().refreshToken }
                     if (refreshToken.isNullOrEmpty()) {
