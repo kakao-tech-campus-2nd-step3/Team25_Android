@@ -4,6 +4,7 @@ import com.example.team25.domain.model.ManagerDomain
 import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.domain.repository.ManagerRepository
 import com.example.team25.domain.repository.ReservationRepository
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class LoadReservationsUseCase
@@ -12,8 +13,8 @@ class LoadReservationsUseCase
     private val managerRepository: ManagerRepository
 ) {
     suspend operator fun invoke(): List<ReservationInfo> {
-        val reservations = reservationRepository.getAllReservations()
-        val managers = managerRepository.getAllManagers()
+        val reservations = reservationRepository.reservationsFlow.first()
+        val managers = managerRepository.managersFlow.first()
         val managerMapById = managers.associateBy { it.managerId }
 
         return mapManagerNameToReservations(reservations, managerMapById)
