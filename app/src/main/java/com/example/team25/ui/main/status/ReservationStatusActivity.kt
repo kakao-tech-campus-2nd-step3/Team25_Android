@@ -2,18 +2,26 @@ package com.example.team25.ui.main.status
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team25.databinding.ActivityReservationStatusBinding
+import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.ui.main.status.adapters.ReservationHistoryRecyclerViewAdapter
 import com.example.team25.ui.main.status.adapters.ReservationStatusRecyclerViewAdapter
-import com.example.team25.ui.main.status.data.ReservationInfo
 import com.example.team25.ui.main.status.interfaces.OnCheckReportClickListener
 import com.example.team25.ui.main.status.interfaces.OnRequestCancelClickListener
-import java.util.Date
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ReservationStatusActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationStatusBinding
+    private val viewModel: ReservationStatusViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +32,7 @@ class ReservationStatusActivity : AppCompatActivity() {
         navigateToPrevious()
         setReservationStatusRecyclerViewAdapter()
         setReservationHistoryRecyclerViewAdapter()
+        setObserves()
     }
 
     private fun setReservationStatusRecyclerViewAdapter() {
@@ -40,9 +49,6 @@ class ReservationStatusActivity : AppCompatActivity() {
 
         binding.reservationStatusRecyclerView.adapter = adapter
         binding.reservationStatusRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        // mock 테스트
-        adapter.submitList(createMock())
     }
 
     private fun setReservationHistoryRecyclerViewAdapter() {
@@ -60,16 +66,32 @@ class ReservationStatusActivity : AppCompatActivity() {
 
         binding.reservationHistoryRecyclerView.adapter = adapter
         binding.reservationHistoryRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        // mock 테스트
-        adapter.submitList(createMock())
     }
 
-    private fun createMock(): List<ReservationInfo> =
-        listOf(
-            ReservationInfo(id = "1", name = "김지수", date = Date()),
-            ReservationInfo(id = "2", name = "홍길동", date = Date()),
-        )
+    private fun setObserves(){
+        collectReservationStatus()
+        collectReservationHistory()
+    }
+
+    private fun collectReservationStatus(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.reservationStatus.collectLatest {
+                    (binding.reservationStatusRecyclerView.adapter as? ReservationStatusRecyclerViewAdapter)?.submitList(it)
+                }
+            }
+        }
+    }
+
+    private fun collectReservationHistory(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.reservationStatus.collectLatest {
+                    (binding.reservationHistoryRecyclerView.adapter as? ReservationHistoryRecyclerViewAdapter)?.submitList(it)
+                }
+            }
+        }
+    }
 
     private fun navigateToPrevious() {
         binding.backBtn.setOnClickListener {

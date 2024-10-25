@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.team25.R
 import com.example.team25.databinding.ActivityReservationCheckReportBinding
+import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.ui.main.status.data.DoctorCommentInfo
-import com.example.team25.ui.main.status.data.ReservationInfo
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -39,8 +39,8 @@ class ReservationCheckReportActivity : AppCompatActivity() {
         reservationInfo?.let {
             val dateFormat = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
 
-            binding.managerNameTextView.text = it.name
-            binding.dateTextView.text = dateFormat.format(it.date)
+            binding.managerNameTextView.text = it.managerName
+            binding.dateTextView.text = dateFormat.format(it.serviceDate)
         }
     }
 
