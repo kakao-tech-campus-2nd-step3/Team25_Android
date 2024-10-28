@@ -9,14 +9,17 @@ import com.example.team25.data.remote.ReservationApiService
 import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.domain.ReservationStatus
 import com.example.team25.domain.repository.ReservationRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DefaultReservationRepository @Inject constructor(
     private val reservationDao: ReservationDao,
     private val reservationApiService: ReservationApiService
 ) : ReservationRepository {
-    override suspend fun getAllReservations(): List<ReservationInfo> {
-        return reservationDao.getAllReservations().asDomainFromEntity()
+    override val reservationsFlow: Flow<List<ReservationInfo>> = getAllReservationsFlow()
+    private fun getAllReservationsFlow(): Flow<List<ReservationInfo>> {
+        return reservationDao.getAllReservationsFlow().map { it.asDomainFromEntity()}
     }
 
     override suspend fun getReservationsByStatus(status: ReservationStatus): List<ReservationInfo> {
