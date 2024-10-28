@@ -3,6 +3,7 @@ package com.example.team25.di
 import com.example.team25.BuildConfig
 import com.example.team25.data.network.KakaoApi
 import com.example.team25.data.network.authenticator.HttpAuthenticator
+import com.example.team25.data.network.calladapter.ResultCallAdapter
 import com.example.team25.data.network.interceptor.TokenInterceptor
 import com.example.team25.data.network.services.RemoteSearchHospitalService
 import com.example.team25.data.remote.ManagerApiService
@@ -54,9 +55,11 @@ object NetworkModule {
     @ServerRetrofit
     fun provideServerRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val url = BuildConfig.API_BASE_URL
+
         return Retrofit.Builder()
             .baseUrl(url)
             .client(okHttpClient)
+            .addCallAdapterFactory(ResultCallAdapter.Factory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

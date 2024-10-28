@@ -1,9 +1,10 @@
 package com.example.team25.data.repository
 
 import com.example.team25.data.dao.ReservationDao
-import com.example.team25.data.entity.ReservationEntity
-import com.example.team25.data.entity.mapper.asDomain
+import com.example.team25.data.entity.mapper.asDomainFromDto
+import com.example.team25.data.entity.mapper.asDomainFromEntity
 import com.example.team25.data.entity.mapper.asEntity
+import com.example.team25.data.network.calladapter.Result.*
 import com.example.team25.data.remote.ReservationApiService
 import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.domain.ReservationStatus
@@ -15,11 +16,11 @@ class DefaultReservationRepository @Inject constructor(
     private val reservationApiService: ReservationApiService
 ) : ReservationRepository {
     override suspend fun getAllReservations(): List<ReservationInfo> {
-        return reservationDao.getAllReservations().asDomain()
+        return reservationDao.getAllReservations().asDomainFromEntity()
     }
 
     override suspend fun getReservationsByStatus(status: ReservationStatus): List<ReservationInfo> {
-        return reservationDao.getReservationsByStatus(status).asDomain()
+        return reservationDao.getReservationsByStatus(status).asDomainFromEntity()
     }
 
     override suspend fun insertReservation(reservations: List<ReservationInfo>) {
@@ -27,27 +28,9 @@ class DefaultReservationRepository @Inject constructor(
     }
 
     override suspend fun fetchRepository() {
-        val reservations = mutableListOf<ReservationEntity>()
-        val response = reservationApiService.fetchReservations()
-        if (response.isSuccessful) {
-            response.body()?.let { reservationDtos ->
-                reservations.addAll(
-                    reservationDtos.map { reservationDto ->
-                        ReservationEntity(
-                            managerId = reservationDto.managerId,
-                            reservationStatus = reservationDto.reservationStatus,
-                            departure = reservationDto.departure,
-                            destination = reservationDto.destination,
-                            serviceDate = reservationDto.serviceDate,
-                            serviceType = reservationDto.serviceType,
-                            transportation = reservationDto.transportation,
-                            price = reservationDto.price,
-                            patient = reservationDto.patient
-                        )
-                    }
-                )
-            }
-            reservationDao.insertReservations(reservations)
+        val result = reservationApiService.fetchReservations()
+        if (result is Success) result.body?.data?.let { reservationDtos ->
+            insertReservation(reservationDtos.asDomainFromDto())
         }
     }
 }
