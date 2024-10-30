@@ -7,31 +7,31 @@ import javax.inject.Inject
 class DefaultPaymentRepository @Inject constructor(
     private val paymentService: PaymentApiService
 ) {
-    suspend fun requestPayment(payRequest: BillingKeyDto): Result<String?> {
+    suspend fun requestPayment(payRequest: BillingKeyDto): Result<PaymentResponse> {
         return try {
             val response = paymentService.requestPay(payRequest)
             if (response.isSuccessful) {
                 val responseBody = response.body()
-                if (responseBody != null && responseBody.status) {
-                    Result.success(responseBody.message)
+                if (responseBody != null) {
+                    Result.success(responseBody)
                 } else {
-                    Result.failure(Exception("Invalid response"))
+                    Result.failure(Exception("Empty response body"))
                 }
             } else {
-                Result.failure(Exception("Payment failed"))
+                Result.failure(Exception("Payment request failed"))
             }
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
 
-    suspend fun createBillingKey(createRequest: CreateBillingKeyRequest): Result<String?> {
+    suspend fun createBillingKey(createRequest: CreateBillingKeyRequest): Result<CreateBillingKeyResponse> {
         return try {
             val response = paymentService.createBillingKey(createRequest)
             if (response.isSuccessful) {
                 val responseBody = response.body()
-                if (responseBody != null && responseBody.status) {
-                    Result.success(responseBody.message)
+                if (responseBody != null) {
+                    Result.success(responseBody)
                 } else {
                     Result.failure(Exception("Invalid response"))
                 }
@@ -43,13 +43,13 @@ class DefaultPaymentRepository @Inject constructor(
         }
     }
 
-    suspend fun expireBillingKey(deleteRequest: DeletePaymentRequest): Result<String?> {
+    suspend fun expireBillingKey(deleteRequest: DeletePaymentRequest): Result<DeletePaymentResponse> {
         return try {
             val response = paymentService.deleteBillingKey(deleteRequest)
             if (response.isSuccessful) {
                 val responseBody = response.body()
-                if (responseBody != null && responseBody.status) {
-                    Result.success(responseBody.message)
+                if (responseBody != null) {
+                    Result.success(responseBody)
                 } else {
                     Result.failure(Exception("Invalid response"))
                 }
@@ -61,13 +61,13 @@ class DefaultPaymentRepository @Inject constructor(
         }
     }
 
-    suspend fun checkBillingKeyExists(): Result<String?>{
+    suspend fun checkBillingKeyExists(): Result<BillingKeyExistsResponse>{
         return try {
             val response = paymentService.checkBillingKeyExists()
             if (response.isSuccessful) {
                 val responseBody = response.body()
-                if (responseBody != null && responseBody.status) {
-                    Result.success(responseBody.message)
+                if (responseBody != null) {
+                    Result.success(responseBody)
                 } else {
                     Result.failure(Exception("Invalid response"))
                 }
