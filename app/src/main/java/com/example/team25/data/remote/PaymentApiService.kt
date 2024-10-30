@@ -1,4 +1,4 @@
-package com.example.team25.data.network.services
+package com.example.team25.data.network.remote
 
 import com.example.team25.data.network.dto.BillingKeyDto
 import com.example.team25.data.network.dto.BillingKeyExistsResponse
@@ -13,13 +13,13 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface PaymentService {
+interface PaymentApiService {
 
-    @POST("/api/payment/payment")
+    @POST("api/payment/payment")
     suspend fun requestPay(
         @Body payRequest: BillingKeyDto
     ) : Response<PaymentResponse>
-    @POST("/api/payment/billing-key")
+    @POST("api/payment/billing-key")
     suspend fun createBillingKey(
         @Body createRequest: CreateBillingKeyRequest
     ) : Response<CreateBillingKeyResponse>
@@ -28,6 +28,5 @@ interface PaymentService {
         @Body deletePaymentRequest: DeletePaymentRequest
     ) : Response<DeletePaymentResponse>
     @GET("api/payment/billing-key/exists")
-        suspend fun checkBillingKeyExists(): Response<BillingKeyExistsResponse>
-
+    suspend fun checkBillingKeyExists(): Response<BillingKeyExistsResponse>
 }
