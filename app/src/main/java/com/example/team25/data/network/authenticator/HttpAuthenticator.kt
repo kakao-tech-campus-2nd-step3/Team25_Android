@@ -29,30 +29,30 @@ class HttpAuthenticator @Inject constructor(
     private val signIn: SignIn,
     private val loginRepository: LoginRepository
 ) : Authenticator {
-    private val mutex = Mutex()
     override fun authenticate(route: Route?, response: Response): Request? {
         return runBlocking {
-            mutex.withLock {
-                val refreshToken = withContext(Dispatchers.IO) { tokenDataStore.data.first().refreshToken }
-
-                if (refreshToken.isNullOrEmpty()) {
-                    Log.e("HttpAuthenticator", "리프레시 토큰이 없습니다.")
-                    redirectToLogin()
-                    return@withLock null
+            val refreshToken = getRefreshToken()
+            if (refreshToken.isNullOrEmpty()) {
+                Log.e("HttpAuthenticator", "리프레시 토큰이 없습니다.")
+                redirectToLogin()
+                return@runBlocking null
+            } else {
+                val newAccessToken = refreshAccessToken(refreshToken)
+                if (newAccessToken != null) {
+                    response.request.newBuilder()
+                        .header("Authorization", "Bearer $newAccessToken")
+                        .build()
                 } else {
-                    val newAccessToken = refreshAccessToken(refreshToken)
-                    if (newAccessToken != null) {
-                        response.request.newBuilder()
-                            .header("Authorization", "Bearer $newAccessToken")
-                            .build()
-                    } else {
-                        Log.e("HttpAuthenticator", "토큰 갱신 실패")
-                        redirectToLogin()
-                        null
-                    }
+                    Log.e("HttpAuthenticator", "토큰 갱신 실패")
+                    redirectToLogin()
+                    null
                 }
             }
         }
+    }
+
+    private suspend fun getRefreshToken(): String? = withContext(Dispatchers.IO) {
+        tokenDataStore.data.first().refreshToken
     }
 
     private suspend fun refreshAccessToken(refreshToken: String): String? {
