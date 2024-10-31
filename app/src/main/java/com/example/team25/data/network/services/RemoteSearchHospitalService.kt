@@ -1,6 +1,7 @@
 package com.example.team25.data.network.services
 
 import com.example.team25.BuildConfig
+import com.example.team25.data.entity.mapper.asDomainFromDto
 import com.example.team25.data.network.KakaoApi
 import com.example.team25.domain.model.HospitalDomain
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
@@ -15,8 +16,6 @@ class RemoteSearchHospitalService
             keyword: String,
             page: Int,
         ): List<HospitalDomain> {
-            val hospitals = mutableListOf<HospitalDomain>()
-
             val response =
                 kakaoApi.getSearchKeyword(
                     key = BuildConfig.KAKAO_REST_API_KEY,
@@ -28,19 +27,9 @@ class RemoteSearchHospitalService
 
             if (response.isSuccessful) {
                 response.body()?.documents?.let { documents ->
-                    hospitals.addAll(
-                        documents.map { document ->
-                            HospitalDomain(
-                                placeId = document.id,
-                                name = document.name,
-                                address = document.address,
-                            )
-                        },
-                    )
+                    return documents.asDomainFromDto()
                 }
-            } else {
-                throw RuntimeException("API 요청 실패: ${response.errorBody()?.string()}")
             }
-            return hospitals
+            throw RuntimeException("API 요청 실패: ${response.errorBody()?.string()}")
         }
     }
