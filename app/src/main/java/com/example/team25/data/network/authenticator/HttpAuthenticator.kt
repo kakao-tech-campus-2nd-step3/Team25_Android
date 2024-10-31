@@ -1,7 +1,5 @@
 package com.example.team25.data.network.authenticator
 
-import android.app.Application
-import android.content.Intent
 import android.util.Log
 import androidx.datastore.core.DataStore
 import com.example.team25.TokensProto.Tokens
@@ -9,33 +7,28 @@ import com.example.team25.data.network.dto.RefreshTokenDto
 import com.example.team25.data.remote.SignIn
 import com.example.team25.di.TokenDataStore
 import com.example.team25.domain.repository.LoginRepository
-import com.example.team25.ui.login.LoginEntryActivity
+import com.example.team25.exceptions.TokenExpiredException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
-import java.net.HttpURLConnection.HTTP_UNAUTHORIZED
 import javax.inject.Inject
 
 class HttpAuthenticator @Inject constructor(
-    private val application: Application,
     @TokenDataStore private val tokenDataStore: DataStore<Tokens>,
     private val signIn: SignIn,
     private val loginRepository: LoginRepository
 ) : Authenticator {
-    override fun authenticate(route: Route?, response: Response): Request? {
+    override fun authenticate(route: Route?, response: Response): Request {
         return runBlocking {
             val refreshToken = getRefreshToken()
             if (refreshToken.isNullOrEmpty()) {
                 Log.e("HttpAuthenticator", "리프레시 토큰이 없습니다.")
-                redirectToLogin()
-                return@runBlocking null
+                throw TokenExpiredException("리프레시 토큰이 없습니다.")
             } else {
                 val newAccessToken = refreshAccessToken(refreshToken)
                 if (newAccessToken != null) {
@@ -44,8 +37,7 @@ class HttpAuthenticator @Inject constructor(
                         .build()
                 } else {
                     Log.e("HttpAuthenticator", "토큰 갱신 실패")
-                    redirectToLogin()
-                    null
+                    throw TokenExpiredException("토큰 갱신 실패")
                 }
             }
         }
@@ -78,10 +70,4 @@ class HttpAuthenticator @Inject constructor(
         }
     }
 
-    private fun redirectToLogin() {
-        val intent = Intent(application, LoginEntryActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        }
-        application.startActivity(intent)
-    }
 }
