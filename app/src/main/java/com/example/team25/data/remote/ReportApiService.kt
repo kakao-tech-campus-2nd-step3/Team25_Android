@@ -10,5 +10,5 @@ interface ReportApiService {
     @GET("/api/reports/{reservation_id}")
     suspend fun getReportInfo(
         @Path("reservation_id") reservationId: String
-    ): Result<ServiceResponse<List<ReportDto>>>
+    ): Result<ServiceResponse<ReportDto>>
 }
