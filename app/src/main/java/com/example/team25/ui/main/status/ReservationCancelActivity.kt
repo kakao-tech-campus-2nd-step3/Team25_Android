@@ -36,7 +36,7 @@ class ReservationCancelActivity : AppCompatActivity() {
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
             binding.managerNameTextView.text = it.managerName
-            binding.reservationDateTextView.text = dateFormat.format(it.serviceDate)
+            binding.reservationDateTextView.text = dateFormat.format(it.reservationDate)
         }
     }
 

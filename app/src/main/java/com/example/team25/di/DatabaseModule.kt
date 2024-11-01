@@ -5,12 +5,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.room.Room
 import com.example.team25.TokensProto.Tokens
-import com.example.team25.data.dao.HospitalDao
 import com.example.team25.data.dao.ManagerDao
 import com.example.team25.data.dao.ReservationDao
-import com.example.team25.data.database.HospitalDatabase
-import com.example.team25.data.database.ManagerDatabase
-import com.example.team25.data.database.ReservationDatabase
+import com.example.team25.data.database.AppDatabase
 import com.example.team25.data.database.TokenSerializer
 import dagger.Module
 import dagger.Provides
@@ -19,54 +16,31 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
-    fun provideHospitalDatabase(
+    @Singleton
+    fun provideDatabase(
         @ApplicationContext context: Context,
-    ): HospitalDatabase {
+    ): AppDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
-            HospitalDatabase::class.java,
-            "hospital_database",
+            AppDatabase::class.java,
+            "app_database",
         ).build()
     }
 
     @Provides
-    fun provideManagerDatabase(
-        @ApplicationContext context: Context,
-    ): ManagerDatabase {
-        return Room.databaseBuilder(
-            context.applicationContext,
-            ManagerDatabase::class.java,
-            "manager_database",
-        ).build()
-    }
-
-    @Provides
-    fun provideReservationDatabase(
-        @ApplicationContext context: Context,
-    ): ReservationDatabase {
-        return Room.databaseBuilder(
-            context.applicationContext,
-            ReservationDatabase::class.java,
-            "reservation_database",
-        ).build()
-    }
-
-    @Provides
-    fun provideHospitalDao(database: HospitalDatabase): HospitalDao {
-        return database.hospitalDao()
-    }
-
-    @Provides
-    fun provideManagerDao(database: ManagerDatabase): ManagerDao {
+    @Singleton
+    fun provideManagerDao(database: AppDatabase): ManagerDao {
         return database.managerDao()
     }
 
     @Provides
-    fun provideReservationDao(database: ReservationDatabase): ReservationDao {
+    @Singleton
+    fun provideReservationDao(database: AppDatabase): ReservationDao {
         return database.reservationDao()
     }
 
