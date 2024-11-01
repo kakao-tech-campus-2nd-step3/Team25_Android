@@ -14,7 +14,4 @@ interface ManagerDao {
 
     @Query("SELECT * FROM managers")
     fun getAllManagers(): Flow<List<ManagerEntity>>
-
-    @Query("SELECT * FROM managers WHERE name LIKE '%' || :name || '%'")
-    suspend fun getManagersByName(name: String): List<ManagerEntity>
 }
