@@ -6,14 +6,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ReservationInfo(
-    val managerId: String,
-    val managerName: String,
-    val reservationStatus: ReservationStatus,
-    val departureLocation: String,
-    val arrivalLocation: String,
-    val reservationDate: String,
-    val serviceType: String,
-    val transportation: String,
-    val price: Int,
-    val patient: Patient
+    val reservationId: String = "",
+    val managerId: String = "",
+    val managerName: String = "",
+    val reservationStatus: ReservationStatus = ReservationStatus.PEND,
+    val departureLocation: String = "",
+    val arrivalLocation: String = "",
+    val reservationDate: String = "",
+    val serviceType: String = "",
+    val transportation: String = "",
+    val price: Int = 0,
+    val patient: Patient = Patient()
 ) : Parcelable
