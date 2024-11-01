@@ -10,5 +10,7 @@ data class TokenDto(
 
 data class TokenData(
     @SerializedName("accessToken") val accessToken: String,
+    @SerializedName("expiresIn") val expiresIn: Long,
     @SerializedName("refreshToken") val refreshToken: String,
+    @SerializedName("refreshTokenExpiresIn") val refreshTokenExpiresIn: Long
 )
