@@ -50,6 +50,7 @@
         android:hint="@string/search_by_road_address"
         android:paddingStart="50dp"
         android:paddingEnd="20dp"
+        android:focusable="false"
         app:layout_constraintTop_toBottomOf="@id/road_address_text_view" />
 
     <ImageView
