@@ -2,6 +2,7 @@ package com.example.team25.data.entity.mapper
 
 import com.example.team25.data.entity.ReservationEntity
 import com.example.team25.data.network.dto.ReservationDto
+import com.example.team25.domain.ReservationStatus
 import com.example.team25.domain.model.Patient
 import com.example.team25.domain.model.ReservationInfo
 
@@ -10,6 +11,7 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
         return domain.map { reservationInfo ->
             ReservationEntity(
                 managerId = reservationInfo.managerId,
+                reservationId = reservationInfo.reservationId,
                 reservationStatus = reservationInfo.reservationStatus,
                 departureLocation = reservationInfo.departureLocation,
                 arrivalLocation = reservationInfo.arrivalLocation,
@@ -26,6 +28,7 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
             ReservationInfo(
                 managerId = reservationEntity.managerId,
                 managerName = "",
+                reservationId = reservationEntity.reservationId,
                 reservationStatus = reservationEntity.reservationStatus,
                 departureLocation = reservationEntity.departureLocation,
                 arrivalLocation = reservationEntity.arrivalLocation,
@@ -43,7 +46,13 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
             ReservationInfo(
                 managerId = reservationDto.managerId,
                 managerName = "",
-                reservationStatus = reservationDto.reservationStatus,
+                reservationStatus = when (reservationDto.reservationStatus) {
+                    "동행 중" -> ReservationStatus.RUNNING
+                    "보류" -> ReservationStatus.PEND
+                    "확정" -> ReservationStatus.CONFIRM
+                    "취소" -> ReservationStatus.CANCEL
+                    else -> ReservationStatus.PEND
+                },
                 departureLocation = reservationDto.departureLocation,
                 arrivalLocation = reservationDto.arrivalLocation,
                 reservationDate = reservationDto.reservationDate,
