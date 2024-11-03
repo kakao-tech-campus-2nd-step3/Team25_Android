@@ -1,7 +1,9 @@
 package com.example.team25.di
 
+import com.example.team25.data.repository.DefaultAccompanyRepository
 import com.example.team25.data.repository.DefaultManagerRepository
 import com.example.team25.data.repository.DefaultReservationRepository
+import com.example.team25.domain.repository.AccompanyRepository
 import com.example.team25.domain.repository.ManagerRepository
 import com.example.team25.domain.repository.ReservationRepository
 import dagger.Binds
@@ -25,4 +27,10 @@ abstract class RepositoryModule {
     abstract fun bindReservationRepository(
         defaultReservationRepository: DefaultReservationRepository
     ): ReservationRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindAccompanyRepository(
+        defaultAccompanyRepository: DefaultAccompanyRepository
+    ): AccompanyRepository
 }
