@@ -10,5 +10,5 @@ interface AccompanyApiService {
     @GET("/api/tracking/{reservation_id}")
     suspend fun getAccompanyInfo(
         @Path("reservation_id") reservationId: String
-    ): Result<ServiceResponse<AccompanyDto>>
+    ): Result<ServiceResponse<List<AccompanyDto>>>
 }
