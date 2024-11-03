@@ -1,27 +1,29 @@
 package com.example.team25.ui.reservation
 
+import android.net.http.SslError
 import android.os.Bundle
+import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.JavascriptInterface
-import android.webkit.WebChromeClient
-import android.webkit.WebView
+import android.webkit.*
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.team25.R
 import com.example.team25.databinding.FragmentReservationStep6Binding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ReservationStep6Fragment : Fragment() {
     private var _binding: FragmentReservationStep6Binding? = null
     private val binding get() = _binding!!
     private val reservationInfoViewModel: ReservationInfoViewModel by activityViewModels()
-    private lateinit var selectedAddress: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,46 +39,81 @@ class ReservationStep6Fragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        // createWeb() 개발 중
+        setupWebView()
         navigateToPrevious()
         navigateToNext()
     }
 
-    inner class AndroidBridge {
+    private inner class WebViewData {
         @JavascriptInterface
-        fun processAddress(address: String) {
-            // 선택한 주소를 EditText에 표시
-            selectedAddress = address
+        fun getAddress(zoneCode: String, roadAddress: String, buildingName: String) {
 
-            requireActivity().runOnUiThread {
-                binding.roadAddressEditText.setText(address)
+            CoroutineScope(Dispatchers.Default).launch {
+
+                withContext(CoroutineScope(Dispatchers.Main).coroutineContext) {
+
+                    binding.roadAddressEditText.setText("($zoneCode) $roadAddress $buildingName")
+                    binding.fullscreenWebView.visibility= View.GONE
+
+                }
             }
         }
-        // 추후 다시 보완 (좌표 가져와야함)
     }
 
-    private fun createWeb() {
+    private fun setupWebView() {
         binding.roadAddressEditText.setOnClickListener {
-            showWebViewDialog()
+            binding.fullscreenWebView.visibility = View.VISIBLE // WebView 표시
+            loadAddressSearchPage()
         }
+        binding.main.setOnTouchListener { _, _ ->
+            if (binding.fullscreenWebView.visibility == View.VISIBLE) {
+                binding.fullscreenWebView.visibility = View.GONE
+            }
+            false
+        }
+
     }
 
-    private fun showWebViewDialog() {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.search_address_dialog, null)
-        val builder = AlertDialog.Builder(requireContext()).setView(dialogView)
-        val alertDialog = builder.create()
-        val webView = dialogView.findViewById<WebView>(R.id.dialog_webview)
-
-        webView.settings.apply {
+    private fun loadAddressSearchPage() {
+        binding.fullscreenWebView.settings.apply {
             javaScriptEnabled = true
-            allowFileAccess = true
             domStorageEnabled = true
             javaScriptCanOpenWindowsAutomatically = true
+            setSupportMultipleWindows(true)
         }
-        webView.webChromeClient = WebChromeClient()
-        webView.addJavascriptInterface(AndroidBridge(), "androidInterface")
 
-        alertDialog.show()
+        binding.fullscreenWebView.apply {
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                    return false
+                }
+
+                override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
+                    handler?.proceed() // SSL 오류 무시
+                }
+            }
+
+            webChromeClient = object : WebChromeClient() {
+                override fun onCreateWindow(view: WebView?, isDialog: Boolean, isUserGesture: Boolean, resultMsg: Message?): Boolean {
+                    val newWebView = WebView(requireContext()).apply {
+                        settings.javaScriptEnabled = true
+                    }
+
+                    newWebView.webChromeClient = object : WebChromeClient() {
+                        override fun onCloseWindow(window: WebView?) {
+                            newWebView.visibility = View.GONE // 창 닫을 때 숨기기
+                        }
+                    }
+
+                    (resultMsg?.obj as? WebView.WebViewTransport)?.webView = newWebView
+                    resultMsg?.sendToTarget()
+                    return true
+                }
+            }
+
+            binding.fullscreenWebView.addJavascriptInterface(WebViewData(), "androidInterface")
+            loadUrl("https://ollagaljido.net/address") // URL 로드
+        }
     }
 
     private fun navigateToPrevious() {
