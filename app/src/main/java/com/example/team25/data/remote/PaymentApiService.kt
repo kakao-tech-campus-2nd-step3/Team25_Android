@@ -15,18 +15,18 @@ import retrofit2.http.POST
 
 interface PaymentApiService {
 
-    @POST("api/payment/payment")
+    @POST("https://ollagaljido.net/api/payment/payment")
     suspend fun requestPay(
         @Body payRequest: BillingKeyDto
     ) : Response<PaymentResponse>
-    @POST("api/payment/billing-key")
+    @POST("https://ollagaljido.net/api/payment/billing-key")
     suspend fun createBillingKey(
         @Body createRequest: CreateBillingKeyRequest
     ) : Response<CreateBillingKeyResponse>
-    @POST("api/payment/billing-key/expire")
+    @POST("https://ollagaljido.net/api/payment/billing-key/expire")
     suspend fun deleteBillingKey(
         @Body deletePaymentRequest: DeletePaymentRequest
     ) : Response<DeletePaymentResponse>
-    @GET("api/payment/billing-key/exists")
+    @GET("https://ollagaljido.net/api/payment/billing-key/exists")
     suspend fun checkBillingKeyExists(): Response<BillingKeyExistsResponse>
 }

@@ -1,8 +1,8 @@
 package com.example.team25.ui.reservation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -98,7 +98,7 @@ class AddCreditcardActivity : AppCompatActivity() {
                 if (it.status!!) {
                     finish()
                 } else {
-                        // 빌링키 발급 실패
+                    Toast.makeText(this.getApplicationContext(),"${it.data!!.resultMsg}", Toast.LENGTH_SHORT).show();
                 }
             }
         })

@@ -1,12 +1,13 @@
 package com.example.team25.data.repository
 
+import android.util.Log
 import com.example.team25.data.network.dto.*
 import com.example.team25.data.network.remote.PaymentApiService
 import javax.inject.Inject
 
 class DefaultPaymentRepository @Inject constructor(
     private val paymentService: PaymentApiService
-) {
+){
     suspend fun requestPayment(payRequest: BillingKeyDto): Result<PaymentResponse> {
         return try {
             val response = paymentService.requestPay(payRequest)
@@ -64,17 +65,23 @@ class DefaultPaymentRepository @Inject constructor(
     suspend fun checkBillingKeyExists(): Result<BillingKeyExistsResponse>{
         return try {
             val response = paymentService.checkBillingKeyExists()
+            Log.d("Repository", "checkBillingKeyExists API 호출 성공: ${response.isSuccessful}")
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 if (responseBody != null) {
+                    Log.d("Repository", "checkBillingKeyExists 응답: $responseBody")
                     Result.success(responseBody)
                 } else {
-                    Result.failure(Exception("Invalid response"))
+                    Log.e("Repository", "Empty response body")
+                    Result.failure(Exception("Empty response body"))
                 }
             } else {
-                Result.failure(Exception("Payment failed"))
+                val errorBody = response.errorBody()?.string()
+                Log.e("Repository", "Payment request failed: $errorBody")
+                Result.failure(Exception("Payment failed: $errorBody"))
             }
         } catch (e: Exception) {
+            Log.e("Repository", "Exception during API call", e)
             Result.failure(e)
         }
 

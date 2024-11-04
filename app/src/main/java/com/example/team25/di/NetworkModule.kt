@@ -80,7 +80,7 @@ object NetworkModule {
         retrofit.create(ReservationApiService::class.java)
     @Provides
     @Singleton
-    fun providePaymentApiService(@GeneralRetrofit retrofit: Retrofit) : PaymentApiService =
+    fun providePaymentApiService(@ServerRetrofit retrofit: Retrofit) : PaymentApiService =
         retrofit.create(PaymentApiService::class.java)
 
     @Provides
