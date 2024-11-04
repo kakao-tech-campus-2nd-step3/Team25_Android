@@ -23,6 +23,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/check_card_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textSize="16sp"
+        android:textColor="@color/blue_02"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/info_payment_layout"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/info_payment_layout"
@@ -133,14 +146,5 @@
         app:layout_constraintStart_toStartOf="@id/info_payment_layout"
         app:layout_constraintTop_toBottomOf="@id/info_payment_layout" />
 
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/toss_payment_background"
-        android:gravity="center"
-        android:text="@string/pay_toss"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@id/info_payment_layout"
-        app:layout_constraintTop_toBottomOf="@+id/creditView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

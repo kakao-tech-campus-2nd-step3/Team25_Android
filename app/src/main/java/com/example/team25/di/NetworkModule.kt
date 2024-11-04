@@ -5,6 +5,7 @@ import com.example.team25.data.network.KakaoApi
 import com.example.team25.data.network.authenticator.HttpAuthenticator
 import com.example.team25.data.network.calladapter.ResultCallAdapter
 import com.example.team25.data.network.interceptor.TokenInterceptor
+import com.example.team25.data.network.remote.PaymentApiService
 import com.example.team25.data.network.services.RemoteSearchHospitalService
 import com.example.team25.data.remote.ManagerApiService
 import com.example.team25.data.remote.ReservationApiService
@@ -77,6 +78,10 @@ object NetworkModule {
     @Singleton
     fun provideReservationApiService(@ServerRetrofit retrofit: Retrofit): ReservationApiService =
         retrofit.create(ReservationApiService::class.java)
+    @Provides
+    @Singleton
+    fun providePaymentApiService(@ServerRetrofit retrofit: Retrofit) : PaymentApiService =
+        retrofit.create(PaymentApiService::class.java)
 
     @Provides
     fun provideSignIn(@GeneralRetrofit retrofit: Retrofit): SignIn {

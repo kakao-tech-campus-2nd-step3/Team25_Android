@@ -1,10 +1,13 @@
 package com.example.team25.ui.reservation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.team25.R
+import com.example.team25.data.network.dto.CreateBillingKeyRequest
 import com.example.team25.data.network.services.CardService
 import com.example.team25.databinding.ActivityAddCreditcardBinding
 import com.example.team25.security.CardInformationEncryption
@@ -16,15 +19,14 @@ import javax.inject.Inject
 class AddCreditcardActivity : AppCompatActivity() {
     @Inject
     lateinit var cardService: CardService
-
     private lateinit var binding: ActivityAddCreditcardBinding
-
+    private val viewModel: AddCreditcardViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityAddCreditcardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        observeViewModel()
         selectAddCreditCard()
     }
 
@@ -44,7 +46,11 @@ class AddCreditcardActivity : AppCompatActivity() {
         if (validateCard(cardInfor).count { it } == 4) {
             presentError(validateCard(cardInfor))
             val encryptedData = CardInformationEncryption().encryptCBC(cardInfor)
-            Log.d("123123", "initCardInfor: $encryptedData") // 암호화키 확인 로그
+            val cardData = CreateBillingKeyRequest(
+                encData = encryptedData,
+                cardAlias = ""
+                )
+            viewModel.createBillingKey(cardData)
         } else {
             presentError(validateCard(cardInfor))
         }
@@ -84,5 +90,22 @@ class AddCreditcardActivity : AppCompatActivity() {
         val isBirthValid = card.getBirth().length == 6
 
         return arrayOf(isCardNumberValid, isExpireDateValid, isPasswordValid, isBirthValid)
+    }
+
+    private fun observeViewModel() {
+        viewModel.billingKeyResponse.observe(this, Observer { response ->
+            response?.let {
+                if (it.status!!) {
+                    finish()
+                } else {
+                    Toast.makeText(this.getApplicationContext(),"${it.data!!.resultMsg}", Toast.LENGTH_SHORT).show();
+                }
+            }
+        })
+        viewModel.error.observe(this, Observer { errorMessage ->
+            errorMessage?.let {
+
+            }
+        })
     }
 }
