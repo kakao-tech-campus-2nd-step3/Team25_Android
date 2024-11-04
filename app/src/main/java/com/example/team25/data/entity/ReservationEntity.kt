@@ -11,6 +11,7 @@ import com.google.gson.annotations.SerializedName
 data class ReservationEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo("manager_id") val managerId: String,
+    @ColumnInfo("reservation_id") val reservationId: String,
     @ColumnInfo("reservation_status") val reservationStatus: ReservationStatus,
     @ColumnInfo("departure_location") val departureLocation: String,
     @ColumnInfo("arrival_location") val arrivalLocation: String,

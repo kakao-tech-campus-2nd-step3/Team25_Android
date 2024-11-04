@@ -1,5 +1,5 @@
 package com.example.team25.domain
 
 enum class ReservationStatus {
-    PEND, CONFIRM, CANCEL
+    PEND, CONFIRM, CANCEL, RUNNING
 }
