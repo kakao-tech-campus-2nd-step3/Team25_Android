@@ -26,10 +26,6 @@ class DefaultManagerRepository @Inject constructor(
         return managerDao.insertManagers(managers.asEntity())
     }
 
-    override suspend fun getManagersByName(name: String): List<ManagerDomain> {
-        return managerDao.getManagersByName(name).asDomainFromEntity()
-    }
-
     override suspend fun fetchManagers() {
         val result = managerApiService.fetchManagers("2024-09-01", "Seoul")
         if (result is Success) result.body?.data?.let { managerDtos ->
