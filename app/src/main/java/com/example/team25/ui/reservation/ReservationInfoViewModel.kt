@@ -16,7 +16,7 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
         ReservationInfo(
             managerId = "",
             managerName = "",
-            reservationStatus = ReservationStatus.PEND,
+            reservationStatus = ReservationStatus.보류,
             departureLocation = "",
             arrivalLocation = "",
             reservationDate = "",

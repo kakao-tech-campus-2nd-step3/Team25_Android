@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.team25.domain.model.ReservationInfo
 import com.example.team25.domain.ReservationStatus
-import com.example.team25.domain.ReservationStatus.CONFIRM
+import com.example.team25.domain.ReservationStatus.확정
 import com.example.team25.domain.repository.ReservationRepository
 import com.example.team25.domain.usecase.FetchRepositoriesUseCase
 import com.example.team25.domain.usecase.LoadReservationsUseCase
@@ -40,8 +40,8 @@ class ReservationStatusViewModel @Inject constructor(
         viewModelScope.launch {
             val reservations = loadReservationsUseCase.invoke()
 
-            _reservationStatus.value = reservations.filter { it.reservationStatus == CONFIRM }
-            _reservationHistory.value = reservations.filter { it.reservationStatus != CONFIRM }
+            _reservationStatus.value = reservations.filter { it.reservationStatus == 확정 }
+            _reservationHistory.value = reservations.filter { it.reservationStatus != 확정 }
         }
     }
 }
