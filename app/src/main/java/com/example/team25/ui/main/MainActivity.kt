@@ -2,16 +2,19 @@ package com.example.team25.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team25.databinding.ActivityMainBinding
 import com.example.team25.ui.login.LoginEntryActivity
-import com.example.team25.ui.login.LoginEntryActivity.Companion.EXTRA_USER_NICKNAME
 import com.example.team25.ui.main.companion.LiveCompanionActivity
 import com.example.team25.ui.main.status.ReservationStatusActivity
 import com.example.team25.ui.reservation.ReservationActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +23,17 @@ class MainActivity : AppCompatActivity() {
 
         navigateToLiveCompanion()
         navigateToReservationStatus()
-        navigateToLogin()
         navigateToReservation()
-        setWelcomeTextView()
+        setLogoutClickListener()
     }
+
+    private fun setLogoutClickListener() {
+        binding.logoutTextView.setOnClickListener {
+            mainViewModel.logout()
+            navigateToLogin()
+        }
+    }
+
 
     private fun navigateToLiveCompanion() {
         binding.realTimeCompanionSeeAllBtn.setOnClickListener {
@@ -39,13 +49,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToLogin() {
-        binding.welcomeTextView.setOnClickListener {
-            val intent = Intent(this, LoginEntryActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
     private fun navigateToReservation() {
         binding.goReservationBtn.setOnClickListener {
             val intent = Intent(this, ReservationActivity::class.java)
@@ -53,11 +56,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setWelcomeTextView() {
-        val userNickname = intent.getStringExtra(EXTRA_USER_NICKNAME)
-        val welcomeMessage = "환영합니다 ${userNickname}님"
-        if (userNickname != null) {
-            binding.welcomeTextView.text = welcomeMessage
-        }
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginEntryActivity::class.java)
+        startActivity(intent)
+        finish()
     }
+
 }

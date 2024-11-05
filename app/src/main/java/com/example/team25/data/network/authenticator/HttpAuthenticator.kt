@@ -23,12 +23,12 @@ class HttpAuthenticator @Inject constructor(
     private val signIn: SignIn,
     private val loginRepository: LoginRepository
 ) : Authenticator {
-    override fun authenticate(route: Route?, response: Response): Request {
+    override fun authenticate(route: Route?, response: Response): Request? {
         return runBlocking {
             val refreshToken = getRefreshToken()
             if (refreshToken.isNullOrEmpty()) {
                 Log.e("HttpAuthenticator", "리프레시 토큰이 없습니다.")
-                throw TokenExpiredException("리프레시 토큰이 없습니다.")
+                null
             } else {
                 val newAccessToken = refreshAccessToken(refreshToken)
                 if (newAccessToken != null) {
@@ -37,7 +37,7 @@ class HttpAuthenticator @Inject constructor(
                         .build()
                 } else {
                     Log.e("HttpAuthenticator", "토큰 갱신 실패")
-                    throw TokenExpiredException("토큰 갱신 실패")
+                    null
                 }
             }
         }

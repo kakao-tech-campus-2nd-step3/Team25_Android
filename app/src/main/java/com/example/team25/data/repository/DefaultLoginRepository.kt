@@ -9,6 +9,7 @@ import com.example.team25.data.remote.SignIn
 import com.example.team25.di.TokenDataStore
 import com.example.team25.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
 class DefaultLoginRepository @Inject constructor(
@@ -56,6 +57,21 @@ class DefaultLoginRepository @Inject constructor(
                 .setRefreshToken(refreshToken)
                 .setAccessTokenExpiresIn(accessTokenExpiresIn)
                 .setRefreshTokenExpiresIn(refreshTokenExpiresIn)
+                .build()
+        }
+    }
+
+    override suspend fun getSavedTokens(): Tokens? {
+        return tokenDataStore.data.firstOrNull()
+    }
+
+    override suspend fun logout() {
+        tokenDataStore.updateData { currentTokens ->
+            currentTokens.toBuilder()
+                .clearAccessToken()
+                .clearRefreshToken()
+                .clearAccessTokenExpiresIn()
+                .clearRefreshTokenExpiresIn()
                 .build()
         }
     }
