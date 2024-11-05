@@ -18,22 +18,16 @@ class DefaultAccompanyRepository @Inject constructor(
     private val coordinatesApiService: CoordinatesApiService
 ) : AccompanyRepository {
     override fun getAccompanyFlow(reservationId: String): Flow<List<AccompanyInfo>> = flow {
-        while (true) {
-            val result = accompanyApiService.getAccompanyInfo(reservationId)
-            if (result is Result.Success) result.body?.data?.let { accompanyDtos ->
-                emit(accompanyDtos.asDomainFromDto())
-            }
-            delay(5_000L)
+        val result = accompanyApiService.getAccompanyInfo(reservationId)
+        if (result is Result.Success) result.body?.data?.let { accompanyDtos ->
+            emit(accompanyDtos.asDomainFromDto())
         }
     }
 
     override fun getCoordinatesFlow(reservationId: String): Flow<LatLng> = flow {
-        while (true) {
-            val result = coordinatesApiService.getCoordinates(reservationId)
-            if (result is Result.Success) result.body?.data?.let { coords ->
-                emit(LatLng.from(coords.latitude, coords.longitude))
-            }
-            delay(3_000L)
+        val result = coordinatesApiService.getCoordinates(reservationId)
+        if (result is Result.Success) result.body?.data?.let { coords ->
+            emit(LatLng.from(coords.latitude, coords.longitude))
         }
     }
 }

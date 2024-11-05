@@ -9,7 +9,7 @@ data class ReservationInfo(
     val reservationId: String = "",
     val managerId: String = "",
     val managerName: String = "",
-    val reservationStatus: ReservationStatus = ReservationStatus.PEND,
+    val reservationStatus: ReservationStatus = ReservationStatus.보류,
     val departureLocation: String = "",
     val arrivalLocation: String = "",
     val reservationDate: String = "",

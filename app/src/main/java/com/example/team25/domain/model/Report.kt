@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Report(
-    val doctorSummary: String = "",
-    val frequency: String = "",
-    val medicineTime: MedicineTime = MedicineTime.UNKNOWN,
-    val timeOfDays: String = ""
+    val doctorSummary: String? = "",
+    val frequency: Int? = 1,
+    val medicineTime: MedicineTime? = null,
+    val timeOfDays: String? = ""
 ): Parcelable

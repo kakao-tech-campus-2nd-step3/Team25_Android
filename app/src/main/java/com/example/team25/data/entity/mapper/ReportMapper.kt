@@ -9,11 +9,7 @@ object ReportMapper {
         return Report(
                 doctorSummary = reportDto.doctorSummary,
                 frequency = reportDto.frequency,
-                medicineTime = when (reportDto.medicinTime) {
-                    "BEFORE_MEAL" -> MedicineTime.BEFORE_MEAL
-                    "AFTER_MEAL" -> MedicineTime.AFTER_MEAL
-                    else -> MedicineTime.UNKNOWN
-                },
+                medicineTime = reportDto.medicinTime,
                 timeOfDays = reportDto.timeOfDays
             )
     }
