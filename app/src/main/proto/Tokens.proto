@@ -4,6 +4,8 @@ option java_package = "com.example.team25";
 option java_outer_classname = "TokensProto";
 
 message Tokens {
-    string access_token = 1;
-    string refresh_token = 2;
+    string accessToken = 1;
+    string refreshToken = 2;
+    int64 accessTokenExpiresIn = 3;
+    int64 refreshTokenExpiresIn = 4;
 }

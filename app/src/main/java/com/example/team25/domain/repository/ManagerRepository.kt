@@ -9,6 +9,4 @@ interface ManagerRepository {
     suspend fun fetchManagers()
 
     suspend fun insertManagers(managers: List<ManagerDomain>)
-
-    suspend fun getManagersByName(name: String): List<ManagerDomain>
 }
