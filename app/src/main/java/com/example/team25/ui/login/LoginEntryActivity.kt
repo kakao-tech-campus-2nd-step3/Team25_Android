@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.team25.databinding.ActivityLoginEntryBinding
 import com.example.team25.ui.main.MainActivity
 import com.kakao.sdk.auth.model.OAuthToken
@@ -14,7 +16,6 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginEntryActivity : AppCompatActivity() {
@@ -26,8 +27,20 @@ class LoginEntryActivity : AppCompatActivity() {
         binding = ActivityLoginEntryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        checkAutoLogin()
         setKakaoLoginBtnClickListener()
         observeLoginState()
+    }
+
+    private fun checkAutoLogin() {
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val tokens = loginViewModel.getSavedTokens()
+                if (tokens != null && tokens.accessToken.isNotEmpty()) {
+                    navigateToMainActivity()
+                }
+            }
+        }
     }
 
     private fun setKakaoLoginBtnClickListener() {
@@ -98,14 +111,13 @@ class LoginEntryActivity : AppCompatActivity() {
 
                 loginViewModel.login(accessToken)
                 Log.d(TAG, accessToken)
-                navigateToMainActivity(user.kakaoAccount?.profile?.nickname)
+                navigateToMainActivity()
             }
         }
     }
 
-    private fun navigateToMainActivity(nickname: String?) {
+    private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(EXTRA_USER_NICKNAME, nickname)
         startActivity(intent)
         finish()
     }

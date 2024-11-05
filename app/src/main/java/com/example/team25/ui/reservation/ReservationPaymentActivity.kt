@@ -100,7 +100,7 @@ class ReservationPaymentActivity : AppCompatActivity() {
                     finish()
                 } else {
                     Log.e("ReservationPayment", "Payment failed: ${it.message}")
-                   Toast.makeText(this.getApplicationContext(), "${it.message}",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.getApplicationContext(), "${it.message}",Toast.LENGTH_SHORT).show()
                 }
             }
         })

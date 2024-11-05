@@ -165,6 +165,9 @@
     <string name="gender_02">GENDER</string>
     <string name="phonenumber">PhoneNumber</string>
     <string name="vehicle">이동수단</string>
+    <string name="logout">로그아웃</string>
+    <string name="no_reservation_data">예약 내역이 없습니다.</string>
+    <string name="not_companion_main">현재 동행 중이 아닙니다.</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>
