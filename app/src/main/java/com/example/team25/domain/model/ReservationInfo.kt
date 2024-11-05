@@ -11,6 +11,7 @@ data class ReservationInfo(
     val managerName: String = "",
     val reservationStatus: ReservationStatus = ReservationStatus.보류,
     val departureLocation: String = "",
+    val sido : String = "", 
     val arrivalLocation: String = "",
     val reservationDate: String = "",
     val serviceType: String = "",

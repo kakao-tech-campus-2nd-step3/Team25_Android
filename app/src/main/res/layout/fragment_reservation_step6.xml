@@ -120,7 +120,7 @@
     <WebView
         android:id="@+id/fullscreenWebView"
         android:layout_width="350dp"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
