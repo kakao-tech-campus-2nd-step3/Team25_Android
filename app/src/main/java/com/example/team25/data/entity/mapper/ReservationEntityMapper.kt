@@ -46,13 +46,7 @@ object ReservationEntityMapper : EntityMapper<List<ReservationInfo>, List<Reserv
             ReservationInfo(
                 managerId = reservationDto.managerId,
                 managerName = "",
-                reservationStatus = when (reservationDto.reservationStatus) {
-                    "동행 중" -> ReservationStatus.RUNNING
-                    "보류" -> ReservationStatus.PEND
-                    "확정" -> ReservationStatus.CONFIRM
-                    "취소" -> ReservationStatus.CANCEL
-                    else -> ReservationStatus.PEND
-                },
+                reservationStatus = reservationDto.reservationStatus,
                 departureLocation = reservationDto.departureLocation,
                 arrivalLocation = reservationDto.arrivalLocation,
                 reservationDate = reservationDto.reservationDate,
