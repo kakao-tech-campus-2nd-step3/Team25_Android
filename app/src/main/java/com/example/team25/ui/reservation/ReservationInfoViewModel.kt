@@ -18,6 +18,7 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
             managerName = "",
             reservationStatus = ReservationStatus.PEND,
             departureLocation = "",
+            sido = "",
             arrivalLocation = "",
             reservationDate = "",
             serviceType = "외래진료",
@@ -30,6 +31,7 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
                 patientRelation = "본인",
                 patientBirth = "",
                 nokPhone = "",
+
             ),
         ),
     )
@@ -46,6 +48,9 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
 
     fun updateDeparture(departure: String) {
         _reservationInfo.value = _reservationInfo.value.copy(departureLocation = departure)
+    }
+    fun updateSido(sido: String){
+        _reservationInfo.value = _reservationInfo.value.copy(sido = sido)
     }
 
     fun updateDestination(destination: String) {

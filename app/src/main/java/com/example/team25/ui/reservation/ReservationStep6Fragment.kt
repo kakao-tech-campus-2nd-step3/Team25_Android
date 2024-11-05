@@ -46,7 +46,7 @@ class ReservationStep6Fragment : Fragment() {
 
     private inner class WebViewData {
         @JavascriptInterface
-        fun getAddress(zoneCode: String, roadAddress: String, buildingName: String) {
+        fun getAddress(zoneCode: String, roadAddress: String, buildingName: String, sido: String) {
 
             CoroutineScope(Dispatchers.Default).launch {
 
@@ -54,6 +54,8 @@ class ReservationStep6Fragment : Fragment() {
 
                     binding.roadAddressEditText.setText("($zoneCode) $roadAddress $buildingName")
                     binding.fullscreenWebView.visibility= View.GONE
+                    reservationInfoViewModel.updateSido(sido)
+                    reservationInfoViewModel.updateDeparture("($zoneCode) $roadAddress $buildingName")
 
                 }
             }
