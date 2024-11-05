@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class ReservationDto(
     @SerializedName("managerId") val managerId: String,
     @SerializedName("reservationId") val reservationId: String,
-    @SerializedName("reservationStatus") val reservationStatus: String,
+    @SerializedName("reservationStatus") val reservationStatus: ReservationStatus,
     @SerializedName("departureLocation") val departureLocation: String,
     @SerializedName("arrivalLocation") val arrivalLocation: String,
     @SerializedName("reservationDate") val reservationDate: String,
