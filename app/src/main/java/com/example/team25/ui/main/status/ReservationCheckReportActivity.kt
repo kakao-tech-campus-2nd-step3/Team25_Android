@@ -78,13 +78,13 @@ class ReservationCheckReportActivity : AppCompatActivity() {
             when (medicineTime) {
                 MedicineTime.AFTER_MEAL -> binding.mealAfterBtn.setBackgroundResource(R.drawable.purple_btn_box)
                 MedicineTime.BEFORE_MEAL -> binding.mealBeforeBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                MedicineTime.UNKNOWN -> {}
+                null -> {}
             }
         }
 
         reportInfo.timeOfDays.let { timeOfDays ->
-            val times = timeOfDays.split(" ")
-            times.forEach { time ->
+            val times = timeOfDays?.split(" ")
+            times?.forEach { time ->
                 when (time) {
                     "아침" -> binding.morningBtn.setBackgroundResource(R.drawable.purple_btn_box)
                     "점심" -> binding.lunchBtn.setBackgroundResource(R.drawable.purple_btn_box)
