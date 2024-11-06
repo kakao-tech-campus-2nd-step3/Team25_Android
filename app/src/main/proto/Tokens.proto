@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "com.example.team25";
+option java_package = "com.kakaotech.team25";
 option java_outer_classname = "TokensProto";
 
 message Tokens {
