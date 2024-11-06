@@ -3,8 +3,10 @@ package com.example.team25.data.remote
 import com.example.team25.data.network.dto.AccountLoginDto
 import com.example.team25.data.network.dto.RefreshTokenDto
 import com.example.team25.data.network.dto.TokenDto
+import com.example.team25.data.network.dto.WithdrawDto
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.POST
 
 interface SignIn {
@@ -17,4 +19,5 @@ interface SignIn {
     suspend fun refreshToken(
         @Body refreshTokenDto: RefreshTokenDto,
     ): Response<TokenDto>
+
 }

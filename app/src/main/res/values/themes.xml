@@ -5,5 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Team25" parent="Base.Theme.Team25" />
+    <style name="Theme.Team25" parent="Base.Theme.Team25" >
+        <item name="android:windowBackground">@color/light_gray</item>
+    </style>
 </resources>

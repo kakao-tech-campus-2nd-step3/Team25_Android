@@ -13,6 +13,7 @@ import com.example.team25.data.remote.ManagerApiService
 import com.example.team25.data.remote.ReportApiService
 import com.example.team25.data.remote.ReservationApiService
 import com.example.team25.data.remote.SignIn
+import com.example.team25.data.remote.UserService
 import com.example.team25.ui.reservation.interfaces.SearchHospitalService
 import dagger.Module
 import dagger.Provides
@@ -100,6 +101,11 @@ object NetworkModule {
     @Singleton
     fun provideCoordinateApiService(@ServerRetrofit retrofit: Retrofit): CoordinatesApiService =
         retrofit.create(CoordinatesApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserService(@ServerRetrofit retrofit: Retrofit): UserService =
+        retrofit.create(UserService::class.java)
 
     @Provides
     fun provideSignIn(@GeneralRetrofit retrofit: Retrofit): SignIn {
