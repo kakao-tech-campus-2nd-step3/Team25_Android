@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">병원동행매니저</string>
+    <string name="app_name">메디투게더</string>
     <string name="main_welcome">로그인하기</string>
     <string name="hospital_companion">병원동행</string>
     <string name="need_hospital_companion">믿을 수 있는 병원 동행이 필요할 때</string>
@@ -9,7 +9,6 @@
     <string name="service_available_after_log_in">로그인 후 이용 가능한 서비스입니다.</string>
     <string name="reservation_status">예약 현황</string>
     <string name="service_description">전문 매니저와 함께해서\n믿을 수 있는 병원 동행 서비스</string>
-    <string name="application_name">앱이름</string>
     <string name="input_information">환자분의 정보를 입력해주세요</string>
     <string name="name">이름</string>
     <string name="input_name_hint">이름 입력</string>
@@ -168,6 +167,7 @@
     <string name="logout">로그아웃</string>
     <string name="no_reservation_data">예약 내역이 없습니다.</string>
     <string name="not_companion_main">현재 동행 중이 아닙니다.</string>
+    <string name="withdraw_membership">회원 탈퇴</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>
