@@ -1,0 +1,35 @@
+package com.kakaotech.team25.data.repository
+
+import com.kakaotech.team25.data.dao.ManagerDao
+import com.kakaotech.team25.data.entity.mapper.asDomainFromDto
+import com.kakaotech.team25.data.entity.mapper.asDomainFromEntity
+import com.kakaotech.team25.data.entity.mapper.asEntity
+import com.kakaotech.team25.data.network.calladapter.Result.*
+import com.kakaotech.team25.data.remote.ManagerApiService
+import com.kakaotech.team25.domain.model.ManagerDomain
+import com.kakaotech.team25.domain.repository.ManagerRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+
+class DefaultManagerRepository @Inject constructor(
+    private val managerDao: ManagerDao,
+    private val managerApiService: ManagerApiService
+) : ManagerRepository {
+    override val managersFlow: Flow<List<ManagerDomain>> = getAllManagersFlow()
+
+    private fun getAllManagersFlow(): Flow<List<ManagerDomain>> {
+        return managerDao.getAllManagers().map { it.asDomainFromEntity() }
+    }
+
+    override suspend fun insertManagers(managers: List<ManagerDomain>) {
+        return managerDao.insertManagers(managers.asEntity())
+    }
+
+    override suspend fun fetchManagers() {
+        val result = managerApiService.fetchManagers("2024-09-01", "Seoul")
+        if (result is Success) result.body?.data?.let { managerDtos ->
+            insertManagers(managerDtos.asDomainFromDto())
+        }
+    }
+}

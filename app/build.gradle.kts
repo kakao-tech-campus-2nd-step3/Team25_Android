@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.android.build.gradle.internal.dsl.NdkOptions.DebugSymbolLevel
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -12,15 +13,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.team25"
+    namespace = "com.kakaotech.team25"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.team25"
+        applicationId = "com.kakaotech.team25"
         minSdk = 27
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -33,11 +34,14 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
         }
     }
 
