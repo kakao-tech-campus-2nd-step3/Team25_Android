@@ -24,7 +24,7 @@ class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestC
             val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
             binding.userNameTextView.text = item.managerName
-            binding.reservationDateTextView.text = dateFormat.format(item.reservationDate)
+            binding.reservationDateTextView.text = dateFormat.format(item.reservationDateTime)
 
             binding.requestCancelBtn.setOnClickListener {
                 clickListener.onRequestCancelClicked(item)

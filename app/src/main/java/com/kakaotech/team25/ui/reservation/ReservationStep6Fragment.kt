@@ -52,10 +52,10 @@ class ReservationStep6Fragment : Fragment() {
 
                 withContext(CoroutineScope(Dispatchers.Main).coroutineContext) {
 
-                    binding.roadAddressEditText.setText("($zoneCode) $roadAddress $buildingName")
+                    binding.roadAddressEditText.text = "$roadAddress $buildingName"
                     binding.fullscreenWebView.visibility= View.GONE
                     reservationInfoViewModel.updateSido(sido)
-                    reservationInfoViewModel.updateDeparture("($zoneCode) $roadAddress $buildingName")
+                    reservationInfoViewModel.updateDeparture("$roadAddress $buildingName")
 
                 }
             }
@@ -91,7 +91,9 @@ class ReservationStep6Fragment : Fragment() {
                 }
 
                 override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
-                    handler?.proceed() // SSL 오류 무시
+                    Toast.makeText(requireContext(), "SSL 인증서 오류가 발생했습니다. 안전한 연결을 확인해 주세요.", Toast.LENGTH_LONG).show()
+
+                    handler?.cancel()
                 }
             }
 
