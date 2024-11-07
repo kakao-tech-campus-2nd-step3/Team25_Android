@@ -10,6 +10,6 @@ class FetchRepositoriesUseCase @Inject constructor(
 ) {
     suspend operator fun invoke() {
         reservationRepository.fetchReservations()
-        managerRepository.fetchManagers()
+        //managerRepository.fetchManagers()
     }
 }

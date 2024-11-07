@@ -20,7 +20,8 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.kakaotech.team25M.data.** { *; }
+-keep class com.kakaotech.team25.data.** { *; }
+-keep class com.kakaotech.team25.di.** { *; }
 
 # Keep Dagger Hilt classes and annotations
 -keep class dagger.hilt.** { *; }
@@ -64,6 +65,7 @@
 
 # kakao sdk
 -keep class com.kakao.sdk.** { *; }
+-keep class com.kakao.vectormap.** { *; }
 -keep class * extends com.google.gson.TypeAdapter
 -keep class * {
   @com.google.gson.annotations.SerializedName <fields>;
