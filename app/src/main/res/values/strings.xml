@@ -21,7 +21,7 @@
     <string name="myself">본인</string>
     <string name="phone_num">전화번호</string>
     <string name="_010">010</string>
-    <string name="_0000">0000</string>
+    <string name="_0000">YYMM</string>
     <string name="dash">-</string>
     <string name="input_next_of_kin">보호자의 연락처를 입력해주세요</string>
     <string name="notify_by_message">(동행 현황을 보호자분께도 문자로 알려드립니다.)</string>
