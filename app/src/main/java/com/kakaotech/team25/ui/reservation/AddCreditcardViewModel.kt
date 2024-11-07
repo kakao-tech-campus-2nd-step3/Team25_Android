@@ -1,13 +1,12 @@
 package com.kakaotech.team25.ui.reservation
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.team25.data.repository.DefaultPaymentRepository
 import com.kakaotech.team25.data.network.dto.CreateBillingKeyRequest
 import com.kakaotech.team25.data.network.dto.CreateBillingKeyResponse
+import com.kakaotech.team25.data.repository.DefaultPaymentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

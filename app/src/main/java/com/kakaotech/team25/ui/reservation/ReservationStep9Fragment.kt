@@ -3,6 +3,7 @@ package com.kakaotech.team25.ui.reservation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,11 @@ import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationStep9Binding
 import com.kakaotech.team25.ui.reservation.adapters.ManagerRecyclerViewAdapter
 import com.kakaotech.team25.ui.reservation.interfaces.OnManagerClickListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ReservationStep9Fragment : Fragment() {
     private var _binding: FragmentReservationStep9Binding? = null
     private val binding get() = _binding!!

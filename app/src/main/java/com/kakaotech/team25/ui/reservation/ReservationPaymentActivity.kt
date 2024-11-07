@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.team25.ui.reservation.AddCreditcardActivity
 import com.kakaotech.team25.data.network.dto.DeletePaymentRequest
 import com.kakaotech.team25.databinding.ActivityReservationPaymentBinding
 import dagger.hilt.android.AndroidEntryPoint

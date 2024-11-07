@@ -23,29 +23,60 @@
         android:layout_marginTop="24dp"
         android:text="@string/manager_info"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/manager_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/woman"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_edit_btn"
+        android:layout_width="120dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manager_info_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/manager_info_text_view">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/profile_imge_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/baseline_person_24" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textSize="16sp"
+        android:text=""
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manager_img" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_edit_btn" />
+
+    <TextView
+        android:id="@+id/loading_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -53,57 +84,39 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/payment_infor"
-        app:layout_constraintBottom_toTopOf="@id/next_btn"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name">
+        app:layout_constraintTop_toBottomOf="@id/name_text_view"
+        app:layout_constraintBottom_toTopOf="@id/next_btn">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/manager_infor_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/introduction_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/introduction"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/introduction_detail_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/introduction_detail"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/introduction_text_view"
-                app:layout_constraintTop_toBottomOf="@id/introduction_text_view" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/manager_infor_box_background"
+            android:paddingBottom="20dp">
 
             <TextView
                 android:id="@+id/active_location_parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/active_location"
                 android:textSize="18sp"
 
-                app:layout_constraintStart_toStartOf="@id/introduction_detail_text_view"
-                app:layout_constraintTop_toBottomOf="@id/introduction_detail_text_view" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/active_location_child"
+                android:id="@+id/location_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="35sp"
                 android:layout_marginTop="10dp"
-                android:text="@string/busan_namgu"
+                android:text=""
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/active_location_parent"
                 app:layout_constraintTop_toBottomOf="@id/active_location_parent" />
@@ -115,19 +128,20 @@
                 android:text="@string/active_time"
                 android:textSize="18sp"
 
-
-                app:layout_constraintStart_toStartOf="@id/active_location_child"
-                app:layout_constraintTop_toBottomOf="@id/active_location_child" />
+                app:layout_constraintStart_toStartOf="@id/location_text_view"
+                app:layout_constraintTop_toBottomOf="@id/location_text_view" />
 
             <LinearLayout
                 android:id="@+id/monday_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@id/active_time_parent"
                 app:layout_constraintTop_toBottomOf="@id/active_time_parent">
 
                 <TextView
+                    android:id="@+id/monday_text_view"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="@drawable/day_of_week"
@@ -136,10 +150,26 @@
                     android:textColor="@color/blue" />
 
                 <TextView
+                    android:id="@+id/monday_start_time_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:text="@string/_00_00_00_00"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tilde"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/monday_end_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/_00_00"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -149,11 +179,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@id/monday_layout"
                 app:layout_constraintTop_toBottomOf="@id/monday_layout">
 
                 <TextView
-                    android:id="@+id/monday"
+                    android:id="@+id/tuesday_text_view"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="@drawable/day_of_week"
@@ -162,11 +193,26 @@
                     android:textColor="@color/blue" />
 
                 <TextView
-                    android:id="@+id/monday_time"
+                    android:id="@+id/tuesday_start_time_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:text="@string/_00_00_00_00"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tilde"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tuesday_end_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/_00_00"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -176,11 +222,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@id/tuesday_layout"
                 app:layout_constraintTop_toBottomOf="@id/tuesday_layout">
 
                 <TextView
-                    android:id="@+id/wednesday"
+                    android:id="@+id/wednesday_text_view"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="@drawable/day_of_week"
@@ -189,11 +236,26 @@
                     android:textColor="@color/blue" />
 
                 <TextView
-                    android:id="@+id/wednesday_time"
+                    android:id="@+id/wednesday_start_time_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:text="@string/_00_00_00_00"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tilde"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/wednesday_end_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/_00_00"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -203,24 +265,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@id/wednesday_layout"
                 app:layout_constraintTop_toBottomOf="@id/wednesday_layout">
 
                 <TextView
-                    android:id="@+id/thursday"
+                    android:id="@+id/thursday_text_view"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="@drawable/day_of_week"
                     android:gravity="center"
-                    android:text="@string/Thrusday"
+                    android:text="@string/thrusday"
                     android:textColor="@color/blue" />
 
                 <TextView
-                    android:id="@+id/thursday_time"
+                    android:id="@+id/thursday_start_time_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:text="@string/_00_00_00_00"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tilde"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/thursday_end_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/_00_00"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -230,47 +308,175 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@id/thursday_layout"
                 app:layout_constraintTop_toBottomOf="@id/thursday_layout">
 
                 <TextView
-                    android:id="@+id/friday"
+                    android:id="@+id/friday_text_view"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="@drawable/day_of_week"
                     android:gravity="center"
                     android:text="@string/friday"
-                    android:textColor="@color/blue"
-                    tools:ignore="HardcodedText" />
+                    android:textColor="@color/blue" />
 
                 <TextView
-                    android:id="@+id/friday_time"
+                    android:id="@+id/friday_start_time_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:text="@string/_00_00_00_00"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tilde"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/friday_end_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/saturday_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@id/friday_layout"
+                app:layout_constraintTop_toBottomOf="@id/friday_layout">
+
+                <TextView
+                    android:id="@+id/saturday_text_view"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/day_of_week"
+                    android:gravity="center"
+                    android:text="@string/saturday"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/saturday_start_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tilde"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/saturday_end_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sunday_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@id/saturday_layout"
+                app:layout_constraintTop_toBottomOf="@id/saturday_layout">
+
+                <TextView
+                    android:id="@+id/sunday_text_view"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/day_of_week"
+                    android:gravity="center"
+                    android:text="@string/sunday"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/sunday_start_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/_00_00"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tilde"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/sunday_end_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/_00_00"
                     android:textSize="20sp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/career_title"
+                android:id="@+id/title_introduction_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/career_infor"
+                android:layout_marginTop="20dp"
+                android:text="@string/short_introduction"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@id/friday_layout"
-                app:layout_constraintTop_toBottomOf="@id/friday_layout" />
+                app:layout_constraintStart_toStartOf="@id/location_text_view"
+                app:layout_constraintTop_toBottomOf="@id/sunday_layout"/>
 
             <TextView
-                android:id="@+id/career"
+                android:id="@+id/introduction_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/gray_outlined_box"
+                android:padding="10dp"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/location_text_view"
+                app:layout_constraintTop_toBottomOf="@id/title_introduction_text_view" />
+
+            <TextView
+                android:id="@+id/title_career_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/x"
+                android:layout_marginTop="20dp"
+                android:text="@string/career_infor"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@id/career_title"
-                app:layout_constraintTop_toBottomOf="@id/career_title" />
+                app:layout_constraintStart_toStartOf="@id/title_introduction_text_view"
+                app:layout_constraintTop_toBottomOf="@id/introduction_text_view" />
+
+            <TextView
+                android:id="@+id/career_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
+                android:text=""
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/title_career_text"
+                app:layout_constraintTop_toBottomOf="@id/title_career_text" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

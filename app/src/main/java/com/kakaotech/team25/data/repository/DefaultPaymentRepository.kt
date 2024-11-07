@@ -1,4 +1,4 @@
-package com.example.team25.data.repository
+package com.kakaotech.team25.data.repository
 
 import android.util.Log
 import com.kakaotech.team25.data.network.dto.BillingKeyDto
@@ -13,18 +13,21 @@ import javax.inject.Inject
 
 class DefaultPaymentRepository @Inject constructor(
     private val paymentService: PaymentApiService
-){
+) {
     suspend fun requestPayment(payRequest: BillingKeyDto): Result<PaymentResponse> {
-                return try {
-                    Log.d("PaymentRequest", "Requesting payment with: $payRequest")
+        return try {
+            Log.d("PaymentRequest", "Requesting payment with: $payRequest")
 
-                    val response = paymentService.requestPay(payRequest)
+            val response = paymentService.requestPay(payRequest)
 
             if (response.isSuccessful) {
                 Log.d("PaymentResponse", "Response successful: ${response.body()}")
                 Result.success(response.body()!!)
             } else {
-                Log.e("PaymentResponseError", "Response failed with code: ${response.code()}, message: ${response.message()}")
+                Log.e(
+                    "PaymentResponseError",
+                    "Response failed with code: ${response.code()}, message: ${response.message()}"
+                )
                 Result.failure(Exception("Payment failed with code: ${response.code()}, message: ${response.message()}"))
             }
         } catch (e: Exception) {
@@ -34,22 +37,26 @@ class DefaultPaymentRepository @Inject constructor(
     }
 
 
-
-    suspend fun createBillingKey(createRequest: CreateBillingKeyRequest): Result<CreateBillingKeyResponse> {        return try {
-        Log.d("DefaultPaymentRepository", "Sending request to createBillingKey: $createRequest")
-        val response = paymentService.createBillingKey(createRequest)
-        if (response.isSuccessful) {
-            Log.d("DefaultPaymentRepository", "Billing key creation response: ${response.body()}")
-            Result.success(response.body()!!)
-        } else {
-            Log.e("DefaultPaymentRepository", "Billing key creation failed with response: ${response.errorBody()?.string()}")
-            Result.failure(Exception("Payment failed: ${response.errorBody()?.string()}"))
+    suspend fun createBillingKey(createRequest: CreateBillingKeyRequest): Result<CreateBillingKeyResponse> {
+        return try {
+            Log.d("DefaultPaymentRepository", "Sending request to createBillingKey: $createRequest")
+            val response = paymentService.createBillingKey(createRequest)
+            if (response.isSuccessful) {
+                Log.d("DefaultPaymentRepository", "Billing key creation response: ${response.body()}")
+                Result.success(response.body()!!)
+            } else {
+                Log.e(
+                    "DefaultPaymentRepository",
+                    "Billing key creation failed with response: ${response.errorBody()?.string()}"
+                )
+                Result.failure(Exception("Payment failed: ${response.errorBody()?.string()}"))
+            }
+        } catch (e: Exception) {
+            Log.e("DefaultPaymentRepository", "Exception in createBillingKey: ${e.message}", e)
+            Result.failure(e)
         }
-    } catch (e: Exception) {
-        Log.e("DefaultPaymentRepository", "Exception in createBillingKey: ${e.message}", e)
-        Result.failure(e)
     }
-    }
+
     suspend fun expireBillingKey(deleteRequest: DeletePaymentRequest): Result<DeletePaymentResponse> {
         return try {
             val response = paymentService.deleteBillingKey(deleteRequest)
@@ -68,7 +75,7 @@ class DefaultPaymentRepository @Inject constructor(
         }
     }
 
-    suspend fun checkBillingKeyExists(): Result<BillingKeyExistsResponse>{
+    suspend fun checkBillingKeyExists(): Result<BillingKeyExistsResponse> {
         return try {
             val response = paymentService.checkBillingKeyExists()
             Log.d("Repository", "checkBillingKeyExists API 호출 성공: ${response.isSuccessful}")

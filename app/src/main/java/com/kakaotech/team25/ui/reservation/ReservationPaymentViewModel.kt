@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.team25.data.repository.DefaultPaymentRepository
 import com.kakaotech.team25.data.network.dto.BillingKeyDto
 import com.kakaotech.team25.data.network.dto.DeletePaymentRequest
+import com.kakaotech.team25.data.repository.DefaultPaymentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +26,7 @@ class ReservationPaymentViewModel @Inject constructor(
     val cardStatusText: LiveData<String> = _cardStatusText
 
     // 결제 요청
-    fun requestPayment(payRequest: BillingKeyDto) {
+    private fun requestPayment(payRequest: BillingKeyDto) {
         viewModelScope.launch {
             try {
                 val result = repository.requestPayment(payRequest)

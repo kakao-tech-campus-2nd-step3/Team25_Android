@@ -1,5 +1,4 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import com.android.build.gradle.internal.dsl.NdkOptions.DebugSymbolLevel
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -20,15 +19,18 @@ android {
         applicationId = "com.kakaotech.team25"
         minSdk = 27
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "KAKAO_API_KEY", getApiKey("KAKAO_API_KEY"))
         buildConfigField("String", "KAKAO_REST_API_KEY", getApiKey("KAKAO_REST_API_KEY"))
         buildConfigField("String", "KAKAO_BASE_URL", getApiUrl("KAKAO_BASE_URL"))
+        buildConfigField("String", "S3_ACCESS_KEY", getApiKey("S3_ACCESS_KEY"))
+        buildConfigField("String", "S3_SECRET_KEY", getApiKey("S3_SECRET_KEY"))
         buildConfigField("String", "API_BASE_URL", getApiUrl("API_BASE_URL"))
+        buildConfigField("String", "CARD_SECRET_KEY", getApiKey("CARD_SECRET_KEY"))
         manifestPlaceholders["kakaoApiKey"] = getApiKey("KAKAO_API_KEY_NO_QUOTES")
     }
 
@@ -91,6 +93,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     ksp(libs.androidx.room.compiler)
     ksp(libs.dagger.hilt.compiler)
+    implementation(libs.aws.android.sdk.s3)
+    implementation(libs.aws.android.sdk.mobile.client)
+    implementation(libs.aws.android.sdk.core)
 }
 
 protobuf {
