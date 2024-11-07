@@ -6,13 +6,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.team25.security.CardInformationEncryption
+import com.kakaotech.team25.security.CardInformationEncryption
 import com.kakaotech.team25.R
 import com.kakaotech.team25.data.network.dto.CreateBillingKeyRequest
 import com.kakaotech.team25.data.network.services.CardService
 import com.kakaotech.team25.databinding.ActivityAddCreditcardBinding
 import com.kakaotech.team25.ui.main.status.data.CardInfor
-import com.kakaotech.team25.ui.reservation.AddCreditcardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

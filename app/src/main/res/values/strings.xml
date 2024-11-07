@@ -172,6 +172,12 @@
     <string name="month">월</string>
     <string name="day">일</string>
     <string name="pick_day">날짜 선택</string>
+    <string name="loading">로딩 중입니다.</string>
+    <string name="tilde">~</string>
+    <string name="short_introduction">한마디 자기소개</string>
+    <string name="thrusday">목</string>
+    <string name="saturday">토</string>
+    <string name="sunday">일</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>
