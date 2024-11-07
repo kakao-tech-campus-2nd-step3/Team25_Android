@@ -20,6 +20,61 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keep class com.kakaotech.team25M.data.** { *; }
+
+# Keep Dagger Hilt classes and annotations
+-keep class dagger.hilt.** { *; }
+
+-keepclassmembers class * {
+    @dagger.hilt.android.qualifiers.ApplicationContext *;
+    @dagger.hilt.android.lifecycle.HiltViewModel *;
+}
+
+# Keep Retrofit classes and annotations
+-keep class retrofit2.** { *; }
+
+# Keep attributes for Retrofit
+-keepattributes Signature, Exceptions, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+
+-keep class com.squareup.okhttp3.** { *; }
+-keepclassmembers class * {
+    @retrofit2.http.* <methods>;
+}
+# Keep OkHttp Callback interface
+-keep class okhttp3.Callback { *; }
+
+# Keep AndroidX Lifecycle classes
+-keep class androidx.lifecycle.ViewModel { *; }
+-keep class androidx.lifecycle.LiveData { *; }
+
+# Keep all classes extending Fragment
+-keep class * extends androidx.fragment.app.Fragment { *; }
+
+# Keep Gson classes and annotations
+-keep class com.google.gson.** { *; }
+
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+
+-keepclassmembers,allowobfuscation class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+
+# kakao sdk
+-keep class com.kakao.sdk.** { *; }
+-keep class * extends com.google.gson.TypeAdapter
+-keep class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+-keep,allowobfuscation,allowshrinking class kotlinx.coroutines.flow.Flow
+-keepclassmembers class * extends com.google.protobuf.GeneratedMessageLite* {
+   <fields>;
+}
+
 -dontwarn org.bouncycastle.jsse.BCSSLParameters
 -dontwarn org.bouncycastle.jsse.BCSSLSocket
 -dontwarn org.bouncycastle.jsse.provider.BouncyCastleJsseProvider

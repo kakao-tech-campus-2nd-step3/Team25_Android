@@ -168,6 +168,10 @@
     <string name="no_reservation_data">예약 내역이 없습니다.</string>
     <string name="not_companion_main">현재 동행 중이 아닙니다.</string>
     <string name="withdraw_membership">회원 탈퇴</string>
+    <string name="year">년</string>
+    <string name="month">월</string>
+    <string name="day">일</string>
+    <string name="pick_day">날짜 선택</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>

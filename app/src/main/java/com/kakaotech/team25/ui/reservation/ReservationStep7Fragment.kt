@@ -123,7 +123,10 @@ class ReservationStep7Fragment : Fragment() {
 
     private fun navigateToPrevious() {
         binding.backBtn.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, ReservationStep8Fragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 

@@ -50,7 +50,7 @@ class ReservationCheckReportActivity : AppCompatActivity() {
                 val dateFormat = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
 
                 binding.managerNameTextView.text = reservation.managerName
-                binding.dateTextView.text = dateFormat.format(reservation.reservationDate)
+                binding.dateTextView.text = dateFormat.format(reservation.reservationDateTime)
             }
         }
     }

@@ -20,7 +20,7 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
             departureLocation = "",
             sido = "",
             arrivalLocation = "",
-            reservationDate = "",
+            reservationDateTime = "",
             serviceType = "외래진료",
             transportation = "",
             price = 0,
@@ -57,8 +57,9 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
         _reservationInfo.value = _reservationInfo.value.copy(arrivalLocation = destination)
     }
 
-    fun updateServiceDate(serviceDate: String) {
-        _reservationInfo.value = _reservationInfo.value.copy(reservationDate = serviceDate)
+    fun updateServiceDate(year: Int, month: Int, day: Int, hour: Int, min: Int) {
+        val serviceDate = "${year}-${month}-${day} ${hour}:${min}"
+        _reservationInfo.value = _reservationInfo.value.copy(reservationDateTime = serviceDate)
     }
 
     fun updateServiceType(serviceType: String) {
