@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationStep11Binding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReservationStep11Fragment : Fragment() {
     private var _binding: FragmentReservationStep11Binding? = null
     private val binding get() = _binding!!

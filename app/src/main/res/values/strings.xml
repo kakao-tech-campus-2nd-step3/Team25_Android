@@ -21,7 +21,7 @@
     <string name="myself">본인</string>
     <string name="phone_num">전화번호</string>
     <string name="_010">010</string>
-    <string name="_0000">0000</string>
+    <string name="_0000">YYMM</string>
     <string name="dash">-</string>
     <string name="input_next_of_kin">보호자의 연락처를 입력해주세요</string>
     <string name="notify_by_message">(동행 현황을 보호자분께도 문자로 알려드립니다.)</string>
@@ -172,6 +172,12 @@
     <string name="month">월</string>
     <string name="day">일</string>
     <string name="pick_day">날짜 선택</string>
+    <string name="loading">로딩 중입니다.</string>
+    <string name="tilde">~</string>
+    <string name="short_introduction">한마디 자기소개</string>
+    <string name="thrusday">목</string>
+    <string name="saturday">토</string>
+    <string name="sunday">일</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>

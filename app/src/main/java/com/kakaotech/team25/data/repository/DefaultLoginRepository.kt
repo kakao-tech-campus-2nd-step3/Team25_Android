@@ -5,7 +5,9 @@ import androidx.datastore.core.DataStore
 import com.kakaotech.team25.TokensProto.Tokens
 import com.kakaotech.team25.data.network.dto.AccountLoginDto
 import com.kakaotech.team25.data.network.dto.TokenDto
+import com.kakaotech.team25.data.network.dto.UserRole
 import com.kakaotech.team25.data.remote.SignIn
+import com.kakaotech.team25.data.remote.UserService
 import com.kakaotech.team25.di.TokenDataStore
 import com.kakaotech.team25.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.first
@@ -75,4 +77,5 @@ class DefaultLoginRepository @Inject constructor(
                 .build()
         }
     }
+
 }

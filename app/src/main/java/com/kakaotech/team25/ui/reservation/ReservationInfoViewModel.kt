@@ -38,6 +38,10 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
 
     val reservationInfo: StateFlow<ReservationInfo> = _reservationInfo
 
+    fun getManagerId(): String {
+        return _reservationInfo.value.managerId
+    }
+
     fun updateReservationInfo(reservationInfo: ReservationInfo) {
         _reservationInfo.value = reservationInfo
     }

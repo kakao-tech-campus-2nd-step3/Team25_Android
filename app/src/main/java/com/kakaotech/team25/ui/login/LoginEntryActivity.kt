@@ -14,6 +14,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.kakaotech.team25.domain.usecase.Role
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -37,7 +38,8 @@ class LoginEntryActivity : AppCompatActivity() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val tokens = loginViewModel.getSavedTokens()
                 if (tokens != null && tokens.accessToken.isNotEmpty()) {
-                    navigateToMainActivity()
+                    val role = loginViewModel.getUserRole()
+                    navigateBasedOnRole(role)
                 }
             }
         }
@@ -111,12 +113,18 @@ class LoginEntryActivity : AppCompatActivity() {
 
                 loginViewModel.login(accessToken)
                 Log.d(TAG, accessToken)
-                navigateToMainActivity()
+                navigateToMain()
             }
         }
     }
 
-    private fun navigateToMainActivity() {
+    private fun navigateBasedOnRole(role: Role?) {
+        if (role == Role.ROLE_USER) {
+            navigateToMain()
+        }
+    }
+
+    private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
@@ -124,6 +132,5 @@ class LoginEntryActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "kakaoLogin"
-        const val EXTRA_USER_NICKNAME = "userNickname"
     }
 }
