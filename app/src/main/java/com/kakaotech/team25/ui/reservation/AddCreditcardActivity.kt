@@ -1,4 +1,4 @@
-package com.example.team25.ui.reservation
+package com.kakaotech.team25.ui.reservation
 
 import android.os.Bundle
 import android.util.Log

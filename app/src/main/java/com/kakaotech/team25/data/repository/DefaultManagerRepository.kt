@@ -1,5 +1,6 @@
 package com.kakaotech.team25.data.repository
 
+import android.util.Log
 import com.kakaotech.team25.data.dao.ManagerDao
 import com.kakaotech.team25.data.entity.mapper.asDomainFromDto
 import com.kakaotech.team25.data.entity.mapper.asDomainFromEntity

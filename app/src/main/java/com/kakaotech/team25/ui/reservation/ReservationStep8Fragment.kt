@@ -14,8 +14,10 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationStep8Binding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 
+@AndroidEntryPoint
 class ReservationStep8Fragment : Fragment() {
     private var _binding: FragmentReservationStep8Binding? = null
     private val reservationInfoViewModel: ReservationInfoViewModel by activityViewModels()

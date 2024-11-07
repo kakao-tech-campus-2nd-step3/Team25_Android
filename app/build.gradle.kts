@@ -1,5 +1,4 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import com.android.build.gradle.internal.dsl.NdkOptions.DebugSymbolLevel
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -20,8 +19,8 @@ android {
         applicationId = "com.kakaotech.team25"
         minSdk = 27
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
