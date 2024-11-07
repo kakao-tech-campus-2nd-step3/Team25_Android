@@ -8,5 +8,5 @@ interface ManagerRepository {
 
     suspend fun fetchManagers(formattedDate: String, region: String)
 
-    suspend fun insertManagers(managers: List<ManagerDomain>)
+    suspend fun updateManagers(managers: List<ManagerDomain>)
 }

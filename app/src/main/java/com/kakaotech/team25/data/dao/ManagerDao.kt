@@ -9,9 +9,16 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ManagerDao {
+    @Query("DELETE FROM managers")
+    suspend fun deleteManagers()
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertManagers(managers: List<ManagerEntity>)
 
     @Query("SELECT * FROM managers")
     fun getAllManagers(): Flow<List<ManagerEntity>>
+
+    suspend fun updateManagers(managers: List<ManagerEntity>){
+        deleteManagers()
+        insertManagers(managers)
+    }
 }

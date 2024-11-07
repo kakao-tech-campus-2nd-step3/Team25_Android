@@ -22,14 +22,14 @@ class DefaultManagerRepository @Inject constructor(
         return managerDao.getAllManagers().map { it.asDomainFromEntity() }
     }
 
-    override suspend fun insertManagers(managers: List<ManagerDomain>) {
-        return managerDao.insertManagers(managers.asEntity())
+    override suspend fun updateManagers(managers: List<ManagerDomain>) {
+        return managerDao.updateManagers(managers.asEntity())
     }
 
     override suspend fun fetchManagers(formattedDate: String, region: String) {
         val result = managerApiService.fetchManagers(formattedDate, region)
         if (result is Success) result.body?.data?.let { managerDtos ->
-            insertManagers(managerDtos.asDomainFromDto())
+            updateManagers(managerDtos.asDomainFromDto())
         }
     }
 }
