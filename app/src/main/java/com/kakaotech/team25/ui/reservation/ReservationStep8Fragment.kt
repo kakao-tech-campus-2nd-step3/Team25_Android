@@ -62,6 +62,7 @@ class ReservationStep8Fragment : Fragment() {
         binding.yearTextView.text = curYear.toString()
         binding.monthTextView.text = curMonth.toString()
         binding.dayTextView.text = curDay.toString()
+        reservationInfoViewModel.updateServiceDate(curYear, curMonth, curDay, h, m)
     }
 
     private fun setDatePicker() {
