@@ -15,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationStep9Binding
+import com.kakaotech.team25.domain.model.ManagerDomain
 import com.kakaotech.team25.ui.reservation.adapters.ManagerRecyclerViewAdapter
 import com.kakaotech.team25.ui.reservation.interfaces.OnManagerClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +75,8 @@ class ReservationStep9Fragment : Fragment() {
 
     private fun setManagerRecyclerView() {
         val managerClickListener = object : OnManagerClickListener {
-            override fun onManagerClicked() {
+            override fun onManagerClicked(item: ManagerDomain) {
+                managerViewModel.updateManagerId(item.managerId)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep10Fragment())
                     .addToBackStack(null)

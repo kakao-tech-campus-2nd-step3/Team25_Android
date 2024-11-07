@@ -36,11 +36,12 @@ class ManagerRecyclerViewAdapter(private val clickListener: OnManagerClickListen
 
         init {
             itemView.setOnClickListener {
-                clickListener.onManagerClicked()
+                clickListener.onManagerClicked(selectedManagerDomain)
             }
         }
 
         fun bind(managerDomain: ManagerDomain) {
+            selectedManagerDomain = managerDomain
             binding.profileName.text = managerDomain.name
         }
     }

@@ -67,7 +67,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/manager_list_text_vew"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/manager_list_text_vew"
         tools:listitem="@layout/item_manager">
 

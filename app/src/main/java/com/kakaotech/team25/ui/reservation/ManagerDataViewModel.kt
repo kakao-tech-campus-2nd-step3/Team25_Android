@@ -17,6 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class ManagerDataViewModel
 @Inject constructor(private val repository: ManagerRepository) : ViewModel() {
+    private val _selectedManagerId = MutableStateFlow<String>("")
+    val selectedManagerId: StateFlow<String> = _selectedManagerId
+
     private val managerName = MutableStateFlow<String>("")
     val managers: StateFlow<List<ManagerDomain>> = combine(
         repository.managersFlow,
@@ -42,6 +45,12 @@ class ManagerDataViewModel
     fun updateManagersByName(name: String) {
         viewModelScope.launch {
             managerName.value = name
+        }
+    }
+
+    fun updateManagerId(id: String){
+        viewModelScope.launch {
+            _selectedManagerId.value = id
         }
     }
 }
