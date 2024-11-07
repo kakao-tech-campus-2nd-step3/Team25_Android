@@ -57,6 +57,8 @@ class ReservationStep9Fragment : Fragment() {
                     val date = reservationInfo.reservationDateTime.substringBefore(" ")
                     val region = reservationInfo.sido
 
+                    Log.d("datt", date)
+
                     managerViewModel.fetchManagers(date, region)
                 }
             }

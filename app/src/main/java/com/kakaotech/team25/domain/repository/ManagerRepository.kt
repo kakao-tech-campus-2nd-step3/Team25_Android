@@ -11,8 +11,6 @@ interface ManagerRepository {
 
     suspend fun updateManagers(managers: List<ManagerDomain>)
 
-    suspend fun insertManagers(managers: List<ManagerDomain>)
-
     suspend fun getProfile(managerId: String): Result<ProfileDto?>
 
 }
