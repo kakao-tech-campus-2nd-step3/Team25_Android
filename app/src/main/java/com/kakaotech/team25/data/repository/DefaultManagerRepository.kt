@@ -26,8 +26,8 @@ class DefaultManagerRepository @Inject constructor(
         return managerDao.insertManagers(managers.asEntity())
     }
 
-    override suspend fun fetchManagers() {
-        val result = managerApiService.fetchManagers("2024-09-01", "Seoul")
+    override suspend fun fetchManagers(formattedDate: String, region: String) {
+        val result = managerApiService.fetchManagers(formattedDate, region)
         if (result is Success) result.body?.data?.let { managerDtos ->
             insertManagers(managerDtos.asDomainFromDto())
         }

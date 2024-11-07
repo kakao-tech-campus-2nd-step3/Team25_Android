@@ -33,13 +33,9 @@ class ManagerDataViewModel
         initialValue = emptyList()
     )
 
-    init {
-        fetchManagers()
-    }
-
-    private fun fetchManagers() {
+    fun fetchManagers(date: String, region: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.fetchManagers()
+            repository.fetchManagers(date, region)
         }
     }
 

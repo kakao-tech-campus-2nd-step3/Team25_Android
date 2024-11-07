@@ -22,7 +22,8 @@ import kotlinx.coroutines.launch
 class ReservationStep9Fragment : Fragment() {
     private var _binding: FragmentReservationStep9Binding? = null
     private val binding get() = _binding!!
-    private val viewModel: ManagerDataViewModel by activityViewModels()
+    private val managerViewModel: ManagerDataViewModel by activityViewModels()
+    private val reservationInfoViewModel: ReservationInfoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,15 +40,29 @@ class ReservationStep9Fragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setManagerRecyclerView()
+        collectReservationInfo()
         collectManagerData()
         setManagerSearchListener()
         navigateToPrevious()
     }
 
+    private fun collectReservationInfo() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                reservationInfoViewModel.reservationInfo.collectLatest {reservationInfo ->
+                    val date = reservationInfo.reservationDateTime.substringBefore(" ")
+                    val region = reservationInfo.sido
+
+                    managerViewModel.fetchManagers(date, region)
+                }
+            }
+        }
+    }
+
     private fun collectManagerData() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.managers.collectLatest {
+                managerViewModel.managers.collectLatest {
                     (binding.managerRecyclerView.adapter as? ManagerRecyclerViewAdapter)?.submitList(it)
                 }
             }
@@ -75,7 +90,7 @@ class ReservationStep9Fragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.updateManagersByName(s.toString())
+                managerViewModel.updateManagersByName(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {}

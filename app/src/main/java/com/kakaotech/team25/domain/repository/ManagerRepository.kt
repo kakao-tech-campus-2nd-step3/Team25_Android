@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface ManagerRepository {
     val managersFlow: Flow<List<ManagerDomain>>
 
-    suspend fun fetchManagers()
+    suspend fun fetchManagers(formattedDate: String, region: String)
 
     suspend fun insertManagers(managers: List<ManagerDomain>)
 }
