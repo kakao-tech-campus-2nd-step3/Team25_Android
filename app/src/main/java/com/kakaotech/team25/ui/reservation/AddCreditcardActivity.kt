@@ -49,7 +49,7 @@ class AddCreditcardActivity : AppCompatActivity() {
             val cardData = CreateBillingKeyRequest(
                 encData = encryptedData,
                 cardAlias = ""
-                )
+            )
             viewModel.createBillingKey(cardData)
         } else {
             presentError(validateCard(cardInfor))
