@@ -35,7 +35,7 @@ class HttpAuthenticator @Inject constructor(
                         .header("Authorization", "Bearer $newAccessToken")
                         .build()
                 } else {
-                    Log.e("HttpAuthenticator", "토큰 갱신 실패")
+                    Log.e("HttpAuthenticator", "리프레시 토큰 만료")
                     null
                 }
             }

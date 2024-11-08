@@ -1,17 +1,23 @@
 package com.kakaotech.team25.ui.reservation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.domain.Gender
 import com.kakaotech.team25.domain.model.Patient
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.domain.ReservationStatus
+import com.kakaotech.team25.domain.usecase.ReserveUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ReservationInfoViewModel @Inject constructor() : ViewModel() {
+class ReservationInfoViewModel @Inject constructor(
+    private val reserveUseCase: ReserveUseCase,
+) : ViewModel() {
     private val _reservationInfo = MutableStateFlow(
         ReservationInfo(
             managerId = "",
@@ -21,9 +27,9 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
             sido = "",
             arrivalLocation = "",
             reservationDateTime = "",
-            serviceType = "외래진료",
+            serviceType = "정기동행",
             transportation = "",
-            price = 0,
+            price = 20000,
             patient = Patient(
                 patientName = "",
                 patientPhone = "",
@@ -38,6 +44,17 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
 
     val reservationInfo: StateFlow<ReservationInfo> = _reservationInfo
 
+    private val _reserveStatus = MutableStateFlow(ReserveStatus.DEFAULT)
+    val reserveStatus: StateFlow<ReserveStatus> = _reserveStatus
+
+    fun getReservationInfo(): ReservationInfo {
+        return _reservationInfo.value
+    }
+
+    fun getManagerId(): String {
+        return _reservationInfo.value.managerId
+    }
+
     fun updateReservationInfo(reservationInfo: ReservationInfo) {
         _reservationInfo.value = reservationInfo
     }
@@ -46,8 +63,13 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
         _reservationInfo.value = _reservationInfo.value.copy(managerId = managerId)
     }
 
+    fun updateManagerName(managerName: String) {
+        _reservationInfo.value = _reservationInfo.value.copy(managerName = managerName)
+    }
+
     fun updateDeparture(departure: String) {
-        _reservationInfo.value = _reservationInfo.value.copy(departureLocation = departure)
+        val sanitizedDeparture = departure.replace(Regex("\\s{2,}"), " ")
+        _reservationInfo.value = _reservationInfo.value.copy(departureLocation = sanitizedDeparture)
     }
 
     fun updateSido(sido: String) {
@@ -59,10 +81,7 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
     }
 
     fun updateServiceDate(year: Int, month: Int, day: Int, hour: Int, min: Int) {
-        val serviceDate = String.format(
-            "%04d-%02d-%02d %02d:%02d",
-            year, month, day, hour, min
-        )
+        val serviceDate = String.format("%04d-%02d-%02d %02d:%02d:00", year, month, day, hour, min)
         _reservationInfo.value = _reservationInfo.value.copy(reservationDateTime = serviceDate)
     }
 
@@ -110,5 +129,24 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
     fun updateNokPhone(nokPhone: String) {
         val updatedPatient = _reservationInfo.value.patient.copy(nokPhone = nokPhone)
         updatePatientInfo(updatedPatient)
+    }
+
+    fun reserve() {
+        viewModelScope.launch {
+            val result = reserveUseCase(_reservationInfo.value)
+            _reserveStatus.value = if (result.isSuccess) {
+                ReserveStatus.SUCCESS
+            } else {
+                ReserveStatus.FAILURE
+            }
+        }
+    }
+
+    fun updateReserveStatus(status: ReserveStatus) {
+        _reserveStatus.value = status
+    }
+
+    fun logReservationInfo() {
+        Log.d("ReservationInfoViewModel", "Current Reservation Info: ${_reservationInfo.value}")
     }
 }

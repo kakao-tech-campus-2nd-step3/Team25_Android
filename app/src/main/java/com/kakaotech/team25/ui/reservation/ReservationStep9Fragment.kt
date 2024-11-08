@@ -3,6 +3,7 @@ package com.kakaotech.team25.ui.reservation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,12 @@ import com.kakaotech.team25.databinding.FragmentReservationStep9Binding
 import com.kakaotech.team25.domain.model.ManagerDomain
 import com.kakaotech.team25.ui.reservation.adapters.ManagerRecyclerViewAdapter
 import com.kakaotech.team25.ui.reservation.interfaces.OnManagerClickListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
+@AndroidEntryPoint
 class ReservationStep9Fragment : Fragment() {
     private var _binding: FragmentReservationStep9Binding? = null
     private val binding get() = _binding!!
@@ -54,6 +57,7 @@ class ReservationStep9Fragment : Fragment() {
                 reservationInfoViewModel.reservationInfo.collectLatest {reservationInfo ->
                     val date = reservationInfo.reservationDateTime?.substringBefore(" ")
                     val region = reservationInfo.sido
+
                     if (date != null) {
                         managerViewModel.updateManagers(date, region)
                     }
@@ -75,6 +79,9 @@ class ReservationStep9Fragment : Fragment() {
     private fun setManagerRecyclerView() {
         val managerClickListener = object : OnManagerClickListener {
             override fun onManagerClicked(item: ManagerDomain) {
+                reservationInfoViewModel.updateManagerId(item.managerId)
+                reservationInfoViewModel.updateManagerName(item.name)
+
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep10Fragment())
                     .addToBackStack(null)

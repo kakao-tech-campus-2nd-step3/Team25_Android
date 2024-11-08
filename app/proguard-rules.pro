@@ -20,8 +20,8 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.kakaotech.team25.data.** { *; }
 -keep class com.kakaotech.team25.di.** { *; }
+-keep class com.kakaotech.team25.data.** { *; }
 
 # Keep Dagger Hilt classes and annotations
 -keep class dagger.hilt.** { *; }
@@ -58,6 +58,7 @@
 -keep class * implements com.google.gson.TypeAdapter
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
+-keep class com.kakaotech.team25.domain.model.** { *; }
 
 -keepclassmembers,allowobfuscation class * {
     @com.google.gson.annotations.SerializedName <fields>;
@@ -70,6 +71,7 @@
 -keep class * {
   @com.google.gson.annotations.SerializedName <fields>;
 }
+-keep class com.kakao.vectormap.** { *; }
 
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 -keep,allowobfuscation,allowshrinking class kotlinx.coroutines.flow.Flow
@@ -86,3 +88,19 @@
 -dontwarn org.openjsse.javax.net.ssl.SSLParameters
 -dontwarn org.openjsse.javax.net.ssl.SSLSocket
 -dontwarn org.openjsse.net.ssl.OpenJSSE
+-dontwarn com.amazonaws.mobile.auth.facebook.FacebookButton
+-dontwarn com.amazonaws.mobile.auth.facebook.FacebookSignInProvider
+-dontwarn com.amazonaws.mobile.auth.google.GoogleButton
+-dontwarn com.amazonaws.mobile.auth.google.GoogleSignInProvider
+-dontwarn com.amazonaws.mobile.auth.ui.AuthUIConfiguration$Builder
+-dontwarn com.amazonaws.mobile.auth.ui.AuthUIConfiguration
+-dontwarn com.amazonaws.mobile.auth.ui.SignInUI$LoginBuilder
+-dontwarn com.amazonaws.mobile.auth.ui.SignInUI
+-dontwarn com.amazonaws.mobile.auth.userpools.CognitoUserPoolsSignInProvider
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.Auth$Builder
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.Auth
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.activities.CustomTabsManagerActivity
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.exceptions.AuthClientException
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.exceptions.AuthServiceException
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.handlers.AuthHandler
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.util.Pkce

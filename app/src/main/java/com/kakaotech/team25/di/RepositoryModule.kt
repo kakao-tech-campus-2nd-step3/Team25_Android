@@ -5,11 +5,13 @@ import com.kakaotech.team25.data.repository.DefaultMainRepository
 import com.kakaotech.team25.data.repository.DefaultManagerRepository
 import com.kakaotech.team25.data.repository.DefaultReportRepository
 import com.kakaotech.team25.data.repository.DefaultReservationRepository
+import com.kakaotech.team25.data.repository.DefaultS3Repository
 import com.kakaotech.team25.domain.repository.AccompanyRepository
 import com.kakaotech.team25.domain.repository.MainRepository
 import com.kakaotech.team25.domain.repository.ManagerRepository
 import com.kakaotech.team25.domain.repository.ReportRepository
 import com.kakaotech.team25.domain.repository.ReservationRepository
+import com.kakaotech.team25.domain.repository.S3Repository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -49,4 +51,11 @@ abstract class RepositoryModule {
     abstract fun bindMainRepository(
         defaultMainRepository: DefaultMainRepository
     ): MainRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindS3Repository(
+        defaultS3Repository: DefaultS3Repository
+    ): S3Repository
+
 }

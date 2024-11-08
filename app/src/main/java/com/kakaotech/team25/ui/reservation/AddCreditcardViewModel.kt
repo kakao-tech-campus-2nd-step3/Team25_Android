@@ -12,25 +12,27 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-
 class AddCreditcardViewModel @Inject constructor(
-    val repository: DefaultPaymentRepository
-): ViewModel(){
+    private val repository: DefaultPaymentRepository
+) : ViewModel() {
+
     private val _billingKeyResponse = MutableLiveData<CreateBillingKeyResponse?>()
     val billingKeyResponse: LiveData<CreateBillingKeyResponse?> = _billingKeyResponse
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    // 빌링 키 생성
     fun createBillingKey(createRequest: CreateBillingKeyRequest) {
         viewModelScope.launch {
             val result = repository.createBillingKey(createRequest)
+
             if (result.isSuccess) {
                 _billingKeyResponse.value = result.getOrNull()
             } else {
-                _error.value = result.exceptionOrNull()?.message
+                val exception = result.exceptionOrNull()
+                _error.value = exception?.message
             }
         }
     }
 }
+

@@ -16,6 +16,7 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.time.Instant
 
 @AndroidEntryPoint
 class LoginEntryActivity : AppCompatActivity() {
@@ -37,7 +38,15 @@ class LoginEntryActivity : AppCompatActivity() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val tokens = loginViewModel.getSavedTokens()
                 if (tokens != null && tokens.accessToken.isNotEmpty()) {
-                    navigateToMainActivity()
+                    val currentTime = Instant.now().epochSecond * 1000
+                    val expirationTime = tokens.loginTime * 1000 + tokens.refreshTokenExpiresIn
+                    val timeThreshold = 7 * 24 * 60 * 60000L
+
+                    if (currentTime >= expirationTime - timeThreshold) {
+                        loginViewModel.logout()
+                    } else {
+                        navigateToMain()
+                    }
                 }
             }
         }
@@ -111,12 +120,12 @@ class LoginEntryActivity : AppCompatActivity() {
 
                 loginViewModel.login(accessToken)
                 Log.d(TAG, accessToken)
-                navigateToMainActivity()
+                navigateToMain()
             }
         }
     }
 
-    private fun navigateToMainActivity() {
+    private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
@@ -124,6 +133,5 @@ class LoginEntryActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "kakaoLogin"
-        const val EXTRA_USER_NICKNAME = "userNickname"
     }
 }
