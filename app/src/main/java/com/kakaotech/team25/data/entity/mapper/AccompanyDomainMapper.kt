@@ -1,11 +1,12 @@
-package com.kakaotech.team25.data.network.dto.mapper
+package com.kakaotech.team25.data.entity.mapper
 
 import com.kakaotech.team25.data.network.dto.AccompanyDto
 import com.kakaotech.team25.domain.model.AccompanyInfo
 import java.time.LocalDateTime
 
-object AccompanyMapper {
-    fun asDomain(dto: List<AccompanyDto>): List<AccompanyInfo> {
+
+object AccompanyDomainMapper {
+    fun asDomainFromDto(dto: List<AccompanyDto>): List<AccompanyInfo> {
         return dto.map {
             AccompanyInfo(
                 status = it.status,
@@ -16,6 +17,6 @@ object AccompanyMapper {
     }
 }
 
-fun List<AccompanyDto>?.asDomain(): List<AccompanyInfo> {
-    return AccompanyMapper.asDomain(this.orEmpty())
+fun List<AccompanyDto>?.asDomainFromDto(): List<AccompanyInfo> {
+    return AccompanyDomainMapper.asDomainFromDto(this.orEmpty())
 }

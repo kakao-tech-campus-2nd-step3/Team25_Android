@@ -3,13 +3,11 @@ package com.kakaotech.team25.di
 import com.kakaotech.team25.data.repository.DefaultAccompanyRepository
 import com.kakaotech.team25.data.repository.DefaultMainRepository
 import com.kakaotech.team25.data.repository.DefaultManagerRepository
-import com.kakaotech.team25.data.repository.DefaultReportRepository
 import com.kakaotech.team25.data.repository.DefaultReservationRepository
 import com.kakaotech.team25.data.repository.DefaultS3Repository
 import com.kakaotech.team25.domain.repository.AccompanyRepository
 import com.kakaotech.team25.domain.repository.MainRepository
 import com.kakaotech.team25.domain.repository.ManagerRepository
-import com.kakaotech.team25.domain.repository.ReportRepository
 import com.kakaotech.team25.domain.repository.ReservationRepository
 import com.kakaotech.team25.domain.repository.S3Repository
 import dagger.Binds
@@ -39,12 +37,6 @@ abstract class RepositoryModule {
     abstract fun bindAccompanyRepository(
         defaultAccompanyRepository: DefaultAccompanyRepository
     ): AccompanyRepository
-
-    @Binds
-    @ViewModelScoped
-    abstract fun bindReportRepository(
-        defaultReportRepository: DefaultReportRepository
-    ): ReportRepository
 
     @Binds
     @ViewModelScoped

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.ActivityReservationCancelBinding
 import com.kakaotech.team25.domain.model.ReservationInfo
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -34,19 +33,10 @@ class ReservationCancelActivity : AppCompatActivity() {
     private fun setReservationInfo() {
         val reservationInfo: ReservationInfo? = intent.getParcelableExtra(KEY_RESERVATION_INFO)
         reservationInfo?.let {
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.KOREAN)
-            val outputFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
-            val dateString = it.reservationDateTime
-            val date = try {
-                dateString?.let { inputFormat.parse(it) }
-            } catch (e: ParseException) {
-                null
-            }
-
-            val formattedDate = date?.let { outputFormat.format(it) } ?: "날짜 없음"
+            val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
 
             binding.managerNameTextView.text = it.managerName
-            binding.reservationDateTextView.text = formattedDate
+            binding.reservationDateTextView.text = dateFormat.format(it.reservationDateTime)
         }
     }
 

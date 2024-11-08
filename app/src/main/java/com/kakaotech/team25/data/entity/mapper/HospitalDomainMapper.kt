@@ -1,11 +1,11 @@
-package com.kakaotech.team25.data.network.dto.mapper
+package com.kakaotech.team25.data.entity.mapper
 
 import com.kakaotech.team25.data.network.dto.HospitalDto
 import com.kakaotech.team25.domain.model.HospitalDomain
 
 object HospitalDomainMapper {
 
-    fun asDomain(dto: List<HospitalDto>): List<HospitalDomain> {
+    fun asDomainFromDto(dto: List<HospitalDto>): List<HospitalDomain> {
         return dto.map { hospitalDto ->
             HospitalDomain(
                 placeId = hospitalDto.id,
@@ -16,6 +16,6 @@ object HospitalDomainMapper {
     }
 }
 
-fun List<HospitalDto>?.asDomain(): List<HospitalDomain> {
-    return HospitalDomainMapper.asDomain(this.orEmpty())
+fun List<HospitalDto>?.asDomainFromDto(): List<HospitalDomain> {
+    return HospitalDomainMapper.asDomainFromDto(this.orEmpty())
 }

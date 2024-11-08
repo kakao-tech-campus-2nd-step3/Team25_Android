@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.domain.model.Report
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.domain.repository.ReportRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,10 +12,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class ReservationCheckReportViewModel @Inject constructor(
+class ReservationCheckReportViewModel(
     private val reportRepository: ReportRepository
 ) : ViewModel() {
     private val _reservationInfo = MutableStateFlow(ReservationInfo())
