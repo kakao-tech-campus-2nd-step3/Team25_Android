@@ -18,8 +18,8 @@
         android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32sp"
-        android:layout_marginTop="20sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="15dp"
         android:text="@string/check_reservation"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/payment_infor"
@@ -50,8 +50,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
-                android:text="@string/patient"
+                android:text="@string/patient_name"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,6 +73,7 @@
                 android:layout_marginTop="26dp"
                 android:text="@string/gender"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/patient_name_text_view"
                 app:layout_constraintTop_toBottomOf="@id/patient_name_text_view" />
 
@@ -92,6 +94,7 @@
                 android:layout_marginTop="26dp"
                 android:text="@string/phone_num"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/patient_gender_text_view"
                 app:layout_constraintTop_toBottomOf="@id/patient_gender_text_view" />
 
@@ -105,97 +108,73 @@
                 app:layout_constraintStart_toStartOf="@id/patient_phone_num"
                 app:layout_constraintTop_toBottomOf="@id/patient_phone_num" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/from_layout"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/from_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/patient_phone_num_text_view">
 
-                <ImageView
-                    android:id="@+id/from_location_img"
-                    android:layout_width="18dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/location_img"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/from_location_img"
+                android:layout_width="18dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/location_img"
+                app:layout_constraintStart_toStartOf="@id/patient_phone_num"
+                app:layout_constraintTop_toBottomOf="@id/patient_phone_num_text_view" />
 
-                <TextView
-                    android:id="@+id/from_location_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/from"
-                    app:layout_constraintStart_toEndOf="@+id/from_location_img"
-                    app:layout_constraintTop_toTopOf="@+id/from_location_img" />
+            <TextView
+                android:id="@+id/from_location_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/from"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/from_location_img"
+                app:layout_constraintTop_toTopOf="@+id/from_location_img" />
 
-                <TextView
-                    android:id="@+id/from_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text=""
-                    app:layout_constraintStart_toEndOf="@+id/from_location_name"
-                    app:layout_constraintTop_toTopOf="@+id/from_location_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/from_location_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text=""
+                app:layout_constraintStart_toStartOf="@id/from_location_img"
+                app:layout_constraintTop_toBottomOf="@id/from_location_name" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/to_layout"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/to_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/from_layout">
+            <ImageView
+                android:id="@+id/to_location_img"
+                android:layout_width="18dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/location_img"
+                app:layout_constraintStart_toStartOf="@id/from_location_img"
+                app:layout_constraintTop_toBottomOf="@id/from_location_text_view" />
 
-                <ImageView
-                    android:id="@+id/to_location_img"
-                    android:layout_width="18dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/location_img"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/to_location_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/to"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/to_location_img"
+                app:layout_constraintTop_toTopOf="@id/to_location_img" />
 
-                <TextView
-                    android:id="@+id/to_location_name_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/to"
-                    app:layout_constraintStart_toEndOf="@id/to_location_img"
-                    app:layout_constraintTop_toTopOf="@id/to_location_img" />
-
-                <TextView
-                    android:id="@+id/to_location_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text=""
-                    app:layout_constraintStart_toEndOf="@id/to_location_name_text_view"
-                    app:layout_constraintTop_toTopOf="@id/to_location_name_text_view" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <TextView
+                android:id="@+id/to_location_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text=""
+                app:layout_constraintStart_toStartOf="@id/to_location_img"
+                app:layout_constraintTop_toBottomOf="@id/to_location_name_text_view" />
 
             <TextView
                 android:id="@+id/manager_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/dedicated_manger"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/patient_phone_num_text_view"
-                app:layout_constraintTop_toBottomOf="@id/to_layout" />
+                app:layout_constraintTop_toBottomOf="@id/to_location_text_view" />
 
             <TextView
                 android:id="@+id/manager_name_text_view"
@@ -214,6 +193,7 @@
                 android:layout_marginTop="26dp"
                 android:text="@string/vehicle"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/manager_name_text_view"
                 app:layout_constraintTop_toBottomOf="@id/manager_name_text_view" />
 
@@ -224,7 +204,6 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/vehicle_02"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/vehicle_text_view"
                 app:layout_constraintTop_toBottomOf="@id/vehicle_text_view" />
 

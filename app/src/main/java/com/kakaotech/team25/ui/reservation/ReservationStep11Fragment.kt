@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationStep11Binding
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ReservationStep11Fragment : Fragment() {
     private var _binding: FragmentReservationStep11Binding? = null
     private val binding get() = _binding!!
+    private val reservationInfoViewModel: ReservationInfoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +43,7 @@ class ReservationStep11Fragment : Fragment() {
 
     private fun navigateToNext() {
         binding.selectWalkingLayout.setOnClickListener {
+            reservationInfoViewModel.updateTransportation("도보")
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, ReservationCheckFragment())
                 .addToBackStack(null)
@@ -48,6 +51,7 @@ class ReservationStep11Fragment : Fragment() {
         }
 
         binding.selectTaxiLayout.setOnClickListener {
+            reservationInfoViewModel.updateTransportation("택시")
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, ReservationCheckFragment())
                 .addToBackStack(null)
@@ -55,6 +59,7 @@ class ReservationStep11Fragment : Fragment() {
         }
 
         binding.selectPublicTransportationLayout.setOnClickListener {
+            reservationInfoViewModel.updateTransportation("대중교통")
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, ReservationCheckFragment())
                 .addToBackStack(null)
