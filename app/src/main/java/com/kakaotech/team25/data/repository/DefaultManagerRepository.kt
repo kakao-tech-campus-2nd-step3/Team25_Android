@@ -31,7 +31,7 @@ class DefaultManagerRepository @Inject constructor(
     override suspend fun getProfile(managerId: String): Result<ProfileDto?> {
         return try {
             val response = managerApiService.getProfile(managerId)
-            Log.d("profile", response.body().toString())
+            Log.d("profile", response.toString())
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 if (responseBody != null && responseBody.status == true) {

@@ -176,7 +176,8 @@ class ReservationStep10Fragment : Fragment() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 managerProfileViewModel.profileImageUri.collect { uri ->
                     uri?.let {
-                        binding.profileImgeView.setImageURI(it)
+                        binding.profileImageView.background = null
+                        binding.profileImageView.setImageURI(it)
                     }
                 }
             }

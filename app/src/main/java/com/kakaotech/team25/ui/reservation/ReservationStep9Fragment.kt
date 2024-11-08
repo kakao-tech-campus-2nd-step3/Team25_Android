@@ -59,7 +59,7 @@ class ReservationStep9Fragment : Fragment() {
 
                     Log.d("datt", date)
 
-                    managerViewModel.fetchManagers(date, region)
+                    managerViewModel.fetchManagers(date, "부산광역시 남구")
                 }
             }
         }
@@ -78,7 +78,7 @@ class ReservationStep9Fragment : Fragment() {
     private fun setManagerRecyclerView() {
         val managerClickListener = object : OnManagerClickListener {
             override fun onManagerClicked(item: ManagerDomain) {
-                managerViewModel.updateManagerId(item.managerId)
+                reservationInfoViewModel.updateManagerId(item.managerId)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep10Fragment())
                     .addToBackStack(null)
