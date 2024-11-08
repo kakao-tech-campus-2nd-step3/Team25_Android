@@ -8,6 +8,10 @@ class GetImageUriUseCase @Inject constructor(
     private val s3Repository: S3Repository
 ) {
     suspend operator fun invoke(s3url: String): Uri? {
-        return s3Repository.downloadImageFromS3(s3url)
+        return try {
+            s3Repository.downloadImageFromS3(s3url)
+        } catch (e: Exception) {
+            null
+        }
     }
 }
