@@ -107,7 +107,6 @@ class LiveCompanionActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 val kakaoMap = kakaoMapDeferred.await()
                 liveCompanionViewModel.coordinateInfo.collectLatest { coordinates ->
-                    Log.d("pjh","coord")
                     updateMapLocation(kakaoMap,coordinates)
                 }
             }
