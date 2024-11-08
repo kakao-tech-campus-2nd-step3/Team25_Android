@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationStep7Binding
@@ -28,6 +29,7 @@ class ReservationStep7Fragment : Fragment() {
     private var _binding: FragmentReservationStep7Binding? = null
     private val binding get() = _binding!!
     private lateinit var hospitalRecyclerViewAdapter: HospitalRecyclerViewAdapter
+    private val reservationInfoViewModel: ReservationInfoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -109,6 +111,7 @@ class ReservationStep7Fragment : Fragment() {
         val hospitalClickListener =
             object : OnHospitalClickListener {
                 override fun onHospitalClicked(hospital: HospitalDomain) {
+                    reservationInfoViewModel.updateDestination(hospital.name)
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_view, ReservationStep8Fragment())
                         .addToBackStack(null)

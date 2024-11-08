@@ -79,6 +79,7 @@ class ReservationStep9Fragment : Fragment() {
         val managerClickListener = object : OnManagerClickListener {
             override fun onManagerClicked(item: ManagerDomain) {
                 reservationInfoViewModel.updateManagerId(item.managerId)
+                reservationInfoViewModel.updateManagerName(item.name)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep10Fragment())
                     .addToBackStack(null)

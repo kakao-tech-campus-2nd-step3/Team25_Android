@@ -118,9 +118,11 @@
     </string-array>
 
     <string-array name="service_option">
-        <item>정기검진</item>
-        <item>하루동행</item>
-        <item>기타동행</item>
+        <item>정기동행</item>
+        <item>진료동행</item>
+        <item>입퇴원동행</item>
+        <item>전문동행</item>
+        <item>보호자대행</item>
     </string-array>
     <string name="reservation_history">예약 내역</string>
     <string name="reservation_cancel">예약 취소</string>
@@ -179,6 +181,8 @@
     <string name="saturday">토</string>
     <string name="sunday">일</string>
     <string name="yy_mm">YY/MM</string>
+    <string name="vehicle_02">vehicle</string>
+    <string name="patient_name">환자명</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>
