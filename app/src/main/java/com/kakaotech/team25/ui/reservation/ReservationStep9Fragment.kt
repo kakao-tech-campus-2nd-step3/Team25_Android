@@ -54,7 +54,7 @@ class ReservationStep9Fragment : Fragment() {
                     val date = reservationInfo.reservationDateTime.substringBefore(" ")
                     val region = reservationInfo.sido
 
-                    managerViewModel.fetchManagers(date, region)
+                    managerViewModel.updateManagers(date, region)
                 }
             }
         }
@@ -73,7 +73,6 @@ class ReservationStep9Fragment : Fragment() {
     private fun setManagerRecyclerView() {
         val managerClickListener = object : OnManagerClickListener {
             override fun onManagerClicked(item: ManagerDomain) {
-                managerViewModel.updateManagerId(item.managerId)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep10Fragment())
                     .addToBackStack(null)
