@@ -12,7 +12,7 @@ import retrofit2.http.POST
 
 interface ReservationApiService {
     @GET("/api/reservations")
-    suspend fun fetchReservations(): Result<ServiceResponse<List<ReservationDto>>>
+    suspend fun getReservations(): Result<ServiceResponse<List<ReservationDto>>>
 
     @POST("/api/reservations")
     suspend fun reserve(

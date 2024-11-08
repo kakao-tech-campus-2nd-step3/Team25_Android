@@ -27,7 +27,7 @@ fun ReservationInfo.toReserveDto(): ReserveDto {
         managerId = this.managerId.toIntOrNull() ?: 0,
         departureLocation = this.departureLocation,
         arrivalLocation = this.arrivalLocation,
-        reservationDateTime = this.reservationDateTime,
+        reservationDateTime = this.reservationDateTime ?: "",
         serviceType = this.serviceType,
         transportation = this.transportation,
         price = this.price,
