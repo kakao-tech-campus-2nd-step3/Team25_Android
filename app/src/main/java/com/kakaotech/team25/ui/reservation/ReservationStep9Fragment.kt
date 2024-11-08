@@ -58,8 +58,11 @@ class ReservationStep9Fragment : Fragment() {
                     val date = reservationInfo.reservationDateTime?.substringBefore(" ")
                     val region = reservationInfo.sido
 
+//                    if (date != null) {
+//                        managerViewModel.updateManagers(date, region)
+//                    }
                     if (date != null) {
-                        managerViewModel.updateManagers(date, region)
+                        managerViewModel.updateManagers(date, "부산광역시 남구")
                     }
                 }
             }

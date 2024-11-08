@@ -3,11 +3,6 @@ package com.kakaotech.team25.data.repository
 import com.kakaotech.team25.data.network.calladapter.Result.*
 import com.kakaotech.team25.data.network.dto.mapper.asDomain
 import android.util.Log
-import com.kakaotech.team25.data.dao.ManagerDao
-import com.kakaotech.team25.data.entity.mapper.asDomainFromDto
-import com.kakaotech.team25.data.entity.mapper.asDomainFromEntity
-import com.kakaotech.team25.data.entity.mapper.asEntity
-import com.kakaotech.team25.data.network.calladapter.Result.*
 import com.kakaotech.team25.data.network.dto.ProfileDto
 import com.kakaotech.team25.data.remote.ManagerApiService
 import com.kakaotech.team25.domain.model.ManagerDomain
@@ -27,9 +22,18 @@ class DefaultManagerRepository @Inject constructor(
     }
 
     override fun getManagerNameFlow(managerId: String): Flow<String> = flow {
-        val result = managerApiService.getManagerProfile(managerId)
-        if (result is Success) result.body?.data?.let { managerName ->
-            emit(managerName.name)
+        try {
+            val response = managerApiService.getProfile(managerId)
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                if (responseBody != null && responseBody.status == true) {
+                    responseBody.data?.name?.let { emit(it) }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
     override suspend fun getProfile(managerId: String): Result<ProfileDto?> {
         return try {
