@@ -76,7 +76,7 @@ class ReservationStep5Fragment : Fragment() {
         val day = binding.dayInput.text.toString()
 
         if (year.length == 4 && month.isNotEmpty() && day.isNotEmpty()) {
-            birthday = "$year${month.padStart(2, '0')}${day.padStart(2, '0')}"
+            birthday = "${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}"
             reservationInfoViewModel.updatePatientBirth(birthday)
         }
     }

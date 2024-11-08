@@ -1,26 +1,28 @@
 package com.kakaotech.team25.ui.reservation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import com.kakaotech.team25.security.CardInformationEncryption
 import com.kakaotech.team25.R
 import com.kakaotech.team25.data.network.dto.CreateBillingKeyRequest
 import com.kakaotech.team25.data.network.services.CardService
 import com.kakaotech.team25.databinding.ActivityAddCreditcardBinding
-import com.kakaotech.team25.security.CardInformationEncryption
 import com.kakaotech.team25.ui.main.status.data.CardInfor
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddCreditcardActivity : AppCompatActivity() {
+
     @Inject
     lateinit var cardService: CardService
     private lateinit var binding: ActivityAddCreditcardBinding
     private val viewModel: AddCreditcardViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddCreditcardBinding.inflate(layoutInflater)
@@ -49,7 +51,7 @@ class AddCreditcardActivity : AppCompatActivity() {
             val cardData = CreateBillingKeyRequest(
                 encData = encryptedData,
                 cardAlias = ""
-                )
+            )
             viewModel.createBillingKey(cardData)
         } else {
             presentError(validateCard(cardInfor))
@@ -93,19 +95,23 @@ class AddCreditcardActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.billingKeyResponse.observe(this, Observer { response ->
+        viewModel.billingKeyResponse.observe(this) { response ->
             response?.let {
                 if (it.status!!) {
+                    Log.d("AddCreditcardActivity", "Billing key created successfully: ${it.data}")
                     finish()
                 } else {
-                    Toast.makeText(this.getApplicationContext(),"${it.data!!.resultMsg}", Toast.LENGTH_SHORT).show();
+                    Log.e("AddCreditcardActivity", "Billing key creation failed: ${it.data?.resultMsg}")
+                    Toast.makeText(this, it.data?.resultMsg ?: "Billing key creation failed", Toast.LENGTH_SHORT).show()
                 }
             }
-        })
-        viewModel.error.observe(this, Observer { errorMessage ->
-            errorMessage?.let {
+        }
 
+        viewModel.error.observe(this) { errorMessage ->
+            errorMessage?.let {
+                Log.e("AddCreditcardActivity", "Error: $errorMessage")
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 }

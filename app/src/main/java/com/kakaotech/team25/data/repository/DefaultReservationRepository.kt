@@ -18,4 +18,29 @@ class DefaultReservationRepository @Inject constructor(
             emit(reservationDto.asDomain())
         }
     }
+    
+    override suspend fun reserve(reserveDto: ReserveDto): Result<String?> {
+        return try {
+            val response = reservationApiService.reserve(reserveDto)
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                if (responseBody != null && responseBody.status == true) {
+                    Result.success(responseBody.message)
+                } else {
+                    Log.e(TAG, "Invalid response body or status is false")
+                    Result.failure(Exception("Invalid response"))
+                }
+            } else {
+                Log.e(TAG, "Resevation failed with status code: ${response.code()}")
+                Result.failure(Exception("Registration failed"))
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception occurred: ${e.message}", e)
+            Result.failure(e)
+        }
+    }
+
+    companion object {
+        private const val TAG = "reservationRepository"
+    }
 }

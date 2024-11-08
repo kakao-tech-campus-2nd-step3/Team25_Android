@@ -4,6 +4,8 @@ import com.kakaotech.team25.data.network.calladapter.Result
 import com.kakaotech.team25.data.network.dto.ServiceResponse
 import com.kakaotech.team25.data.network.dto.ManagerDto
 import com.kakaotech.team25.data.network.dto.ManagerNameDto
+import com.kakaotech.team25.data.network.dto.ProfileDto
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -19,4 +21,8 @@ interface ManagerApiService {
     suspend fun getManagerProfile(
         @Path("manager_id") managerId: String,
     ): Result<ServiceResponse<ManagerNameDto>>
+  
+    suspend fun getProfile(
+        @Path("manager_id") managerId: String,
+    ): Response<ProfileDto?>
 }
