@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 data class ReportDto(
     @SerializedName("doctorSummary") val doctorSummary: String?,
     @SerializedName("frequency") val frequency: Int?,
-    @SerializedName("medicineTime") val medicineTime: MedicineTime?,
+    @SerializedName("medicinTime") val medicinTime: MedicineTime?,
     @SerializedName("timeOfDays") val timeOfDays: String?
 )

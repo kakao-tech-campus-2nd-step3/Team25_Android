@@ -1,8 +1,8 @@
 package com.kakaotech.team25.data.network.services
 
 import com.kakaotech.team25.BuildConfig
+import com.kakaotech.team25.data.entity.mapper.asDomainFromDto
 import com.kakaotech.team25.data.network.KakaoApi
-import com.kakaotech.team25.data.network.dto.mapper.asDomain
 import com.kakaotech.team25.domain.model.HospitalDomain
 import com.kakaotech.team25.ui.reservation.interfaces.SearchHospitalService
 import javax.inject.Inject
@@ -27,7 +27,7 @@ class RemoteSearchHospitalService
 
             if (response.isSuccessful) {
                 response.body()?.documents?.let { documents ->
-                    return documents.asDomain()
+                    return documents.asDomainFromDto()
                 }
             }
             throw RuntimeException("API 요청 실패: ${response.errorBody()?.string()}")

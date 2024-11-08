@@ -51,7 +51,7 @@ class ManagerRecyclerViewAdapter(private val clickListener: OnManagerClickListen
             oldItem: ManagerDomain,
             newItem: ManagerDomain,
         ): Boolean {
-            return oldItem.managerId == newItem.managerId
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(

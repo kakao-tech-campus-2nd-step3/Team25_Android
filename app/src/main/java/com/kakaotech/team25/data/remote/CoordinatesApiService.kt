@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface CoordinatesApiService {
-    @GET("/api/tracking/{reservation_id}/location")
+    @GET("/api/coord/{reservation_id}")
     suspend fun getCoordinates(
         @Path("reservation_id") reservationId: String
     ): Result<ServiceResponse<CoordinatesDto>>
