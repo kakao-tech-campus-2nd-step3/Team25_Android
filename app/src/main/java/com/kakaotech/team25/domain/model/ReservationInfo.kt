@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class ReservationInfo(
     val reservationId: String = "",
     val managerId: String = "",
-    val managerName: String = "",
+    var managerName: String = "",
     val reservationStatus: ReservationStatus = ReservationStatus.보류,
     val departureLocation: String = "",
     val sido : String = "",
