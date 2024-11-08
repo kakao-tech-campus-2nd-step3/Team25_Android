@@ -1,5 +1,7 @@
 package com.kakaotech.team25.ui.reservation
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.domain.model.ManagerDomain
@@ -8,7 +10,10 @@ import com.kakaotech.team25.domain.usecase.LoadReservationsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +26,8 @@ class ManagerDataViewModel @Inject constructor(
 
     fun updateManagers(date: String, region: String) {
         viewModelScope.launch {
-            _managers.value = managerRepository.getManagersFlow(date, region).first()
+            _managers.value = managerRepository.getManagersFlow(date, region)
+                .firstOrNull() ?: emptyList()
         }
     }
 
