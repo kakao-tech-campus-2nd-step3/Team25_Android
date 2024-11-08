@@ -5,13 +5,12 @@ import androidx.datastore.core.DataStore
 import com.kakaotech.team25.TokensProto.Tokens
 import com.kakaotech.team25.data.network.dto.AccountLoginDto
 import com.kakaotech.team25.data.network.dto.TokenDto
-import com.kakaotech.team25.data.network.dto.UserRole
 import com.kakaotech.team25.data.remote.SignIn
-import com.kakaotech.team25.data.remote.UserService
 import com.kakaotech.team25.di.TokenDataStore
 import com.kakaotech.team25.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
+import java.time.Instant
 import javax.inject.Inject
 
 class DefaultLoginRepository @Inject constructor(
@@ -53,12 +52,15 @@ class DefaultLoginRepository @Inject constructor(
         accessTokenExpiresIn: Long,
         refreshTokenExpiresIn: Long
     ) {
+        val currentTime = Instant.now().epochSecond
+
         tokenDataStore.updateData { currentTokens ->
             currentTokens.toBuilder()
                 .setAccessToken(accessToken)
                 .setRefreshToken(refreshToken)
                 .setAccessTokenExpiresIn(accessTokenExpiresIn)
                 .setRefreshTokenExpiresIn(refreshTokenExpiresIn)
+                .setLoginTime(currentTime)
                 .build()
         }
     }
@@ -74,6 +76,7 @@ class DefaultLoginRepository @Inject constructor(
                 .clearRefreshToken()
                 .clearAccessTokenExpiresIn()
                 .clearRefreshTokenExpiresIn()
+                .clearLoginTime()
                 .build()
         }
     }

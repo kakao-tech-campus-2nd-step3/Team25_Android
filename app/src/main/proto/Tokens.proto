@@ -8,4 +8,5 @@ message Tokens {
     string refreshToken = 2;
     int64 accessTokenExpiresIn = 3;
     int64 refreshTokenExpiresIn = 4;
+    int64 loginTime = 5;
 }

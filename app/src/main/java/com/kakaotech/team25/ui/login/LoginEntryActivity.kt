@@ -14,9 +14,9 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import com.kakaotech.team25.domain.usecase.Role
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.time.Instant
 
 @AndroidEntryPoint
 class LoginEntryActivity : AppCompatActivity() {
@@ -38,8 +38,15 @@ class LoginEntryActivity : AppCompatActivity() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val tokens = loginViewModel.getSavedTokens()
                 if (tokens != null && tokens.accessToken.isNotEmpty()) {
-                    val role = loginViewModel.getUserRole()
-                    navigateBasedOnRole(role)
+                    val currentTime = Instant.now().epochSecond * 1000
+                    val expirationTime = tokens.loginTime * 1000 + tokens.refreshTokenExpiresIn
+                    val timeThreshold = 7 * 24 * 60 * 60000L
+
+                    if (currentTime >= expirationTime - timeThreshold) {
+                        loginViewModel.logout()
+                    } else {
+                        navigateToMain()
+                    }
                 }
             }
         }
@@ -115,12 +122,6 @@ class LoginEntryActivity : AppCompatActivity() {
                 Log.d(TAG, accessToken)
                 navigateToMain()
             }
-        }
-    }
-
-    private fun navigateBasedOnRole(role: Role?) {
-        if (role == Role.ROLE_USER) {
-            navigateToMain()
         }
     }
 

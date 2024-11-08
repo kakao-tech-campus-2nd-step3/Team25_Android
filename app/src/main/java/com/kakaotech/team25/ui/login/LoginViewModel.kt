@@ -1,16 +1,12 @@
 package com.kakaotech.team25.ui.login
-
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.TokensProto.Tokens
 import com.kakaotech.team25.data.network.dto.TokenDto
-import com.kakaotech.team25.data.network.dto.UserRole
 import com.kakaotech.team25.di.IoDispatcher
 import com.kakaotech.team25.domain.usecase.GetSavedTokensUseCase
-import com.kakaotech.team25.domain.usecase.GetUserRoleUseCase
 import com.kakaotech.team25.domain.usecase.LoginUseCase
-import com.kakaotech.team25.domain.usecase.Role
+import com.kakaotech.team25.domain.usecase.LogoutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +20,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val getSavedTokensUseCase: GetSavedTokensUseCase,
-    private val getUserRoleUseCase: GetUserRoleUseCase,
+    private val logoutUseCase: LogoutUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
@@ -59,13 +55,9 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    suspend fun getUserRole(): Role? {
-        return try {
-            val role = getUserRoleUseCase()
-            role?.let { Role.valueOf(it) }
-        } catch (e: Exception) {
-            Log.d(TAG, e.message.toString())
-            null
+    fun logout() {
+        viewModelScope.launch(ioDispatcher) {
+            logoutUseCase()
         }
     }
 
