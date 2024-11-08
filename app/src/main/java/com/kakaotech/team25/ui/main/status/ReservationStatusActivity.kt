@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ReservationStatusActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationStatusBinding
-    private val viewModel: ReservationStatusViewModel by viewModels()
+    private val reservationStatusViewModel: ReservationStatusViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +76,7 @@ class ReservationStatusActivity : AppCompatActivity() {
     private fun collectReservationStatus(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.reservationStatus.collectLatest {
+                reservationStatusViewModel.reservationStatus.collectLatest {
                     (binding.reservationStatusRecyclerView.adapter as? ReservationStatusRecyclerViewAdapter)?.submitList(it)
                 }
             }
@@ -86,7 +86,7 @@ class ReservationStatusActivity : AppCompatActivity() {
     private fun collectReservationHistory(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.reservationStatus.collectLatest {
+                reservationStatusViewModel.reservationHistory.collectLatest {
                     (binding.reservationHistoryRecyclerView.adapter as? ReservationHistoryRecyclerViewAdapter)?.submitList(it)
                 }
             }

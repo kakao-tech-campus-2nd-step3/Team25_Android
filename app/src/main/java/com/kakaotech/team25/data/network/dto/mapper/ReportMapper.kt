@@ -1,19 +1,19 @@
-package com.kakaotech.team25.data.entity.mapper
+package com.kakaotech.team25.data.network.dto.mapper
 
 import com.kakaotech.team25.data.network.dto.ReportDto
 import com.kakaotech.team25.domain.model.Report
 
 object ReportMapper {
-    fun asDomainFromDto(reportDto: ReportDto): Report {
+    fun asDomain(reportDto: ReportDto): Report {
         return Report(
                 doctorSummary = reportDto.doctorSummary,
                 frequency = reportDto.frequency,
-                medicineTime = reportDto.medicinTime,
+                medicineTime = reportDto.medicineTime,
                 timeOfDays = reportDto.timeOfDays
             )
     }
 }
 
-fun ReportDto.asDomainFromDto(): Report {
-    return ReportMapper.asDomainFromDto(this)
+fun ReportDto.asDomain(): Report {
+    return ReportMapper.asDomain(this)
 }

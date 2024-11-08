@@ -5,12 +5,10 @@ import com.kakaotech.team25.domain.model.ManagerDomain
 import kotlinx.coroutines.flow.Flow
 
 interface ManagerRepository {
-    val managersFlow: Flow<List<ManagerDomain>>
+    fun getManagersFlow(formattedDate: String, region: String): Flow<List<ManagerDomain>>
 
-    suspend fun fetchManagers(formattedDate: String, region: String)
-
-    suspend fun updateManagers(managers: List<ManagerDomain>)
-
+    fun getManagerNameFlow(managerId: String): Flow<String>
+  
     suspend fun getProfile(managerId: String): Result<ProfileDto?>
-
+  
 }

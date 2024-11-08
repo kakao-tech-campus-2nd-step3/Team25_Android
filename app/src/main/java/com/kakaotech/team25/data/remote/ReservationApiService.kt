@@ -18,4 +18,5 @@ interface ReservationApiService {
     suspend fun reserve(
         @Body reserveDto: ReserveDto
     ): Response<ReserveResponse>
+
 }

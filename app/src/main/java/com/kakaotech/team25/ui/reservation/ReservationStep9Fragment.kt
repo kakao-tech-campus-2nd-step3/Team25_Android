@@ -21,6 +21,7 @@ import com.kakaotech.team25.ui.reservation.interfaces.OnManagerClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 @AndroidEntryPoint
 class ReservationStep9Fragment : Fragment() {
@@ -54,12 +55,12 @@ class ReservationStep9Fragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 reservationInfoViewModel.reservationInfo.collectLatest {reservationInfo ->
-                    val date = reservationInfo.reservationDateTime.substringBefore(" ")
+                    val date = reservationInfo.reservationDateTime?.substringBefore(" ")
                     val region = reservationInfo.sido
 
-                    Log.d("datt", date)
-
-                    managerViewModel.fetchManagers(date, "부산광역시 남구")
+                    if (date != null) {
+                        managerViewModel.updateManagers(date, region)
+                    }
                 }
             }
         }
@@ -80,6 +81,7 @@ class ReservationStep9Fragment : Fragment() {
             override fun onManagerClicked(item: ManagerDomain) {
                 reservationInfoViewModel.updateManagerId(item.managerId)
                 reservationInfoViewModel.updateManagerName(item.name)
+
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep10Fragment())
                     .addToBackStack(null)

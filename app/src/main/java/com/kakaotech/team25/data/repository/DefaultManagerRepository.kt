@@ -1,5 +1,7 @@
 package com.kakaotech.team25.data.repository
 
+import com.kakaotech.team25.data.network.calladapter.Result.*
+import com.kakaotech.team25.data.network.dto.mapper.asDomain
 import android.util.Log
 import com.kakaotech.team25.data.dao.ManagerDao
 import com.kakaotech.team25.data.entity.mapper.asDomainFromDto
@@ -11,22 +13,23 @@ import com.kakaotech.team25.data.remote.ManagerApiService
 import com.kakaotech.team25.domain.model.ManagerDomain
 import com.kakaotech.team25.domain.repository.ManagerRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class DefaultManagerRepository @Inject constructor(
-    private val managerDao: ManagerDao,
     private val managerApiService: ManagerApiService
 ) : ManagerRepository {
-    override val managersFlow: Flow<List<ManagerDomain>> = getAllManagersFlow()
-
-    private fun getAllManagersFlow(): Flow<List<ManagerDomain>> {
-        return managerDao.getAllManagers().map { it.asDomainFromEntity() }
+    override fun getManagersFlow(formattedDate: String, region: String): Flow<List<ManagerDomain>> = flow {
+        val result = managerApiService.getManagers(formattedDate, region)
+        if (result is Success) result.body?.data?.let { managerDto ->
+            emit(managerDto.asDomain())
+        }
     }
 
-    override suspend fun updateManagers(managers: List<ManagerDomain>) {
-        return managerDao.updateManagers(managers.asEntity())
-    }
+    override fun getManagerNameFlow(managerId: String): Flow<String> = flow {
+        val result = managerApiService.getManagerProfile(managerId)
+        if (result is Success) result.body?.data?.let { managerName ->
+            emit(managerName.name)
 
     override suspend fun getProfile(managerId: String): Result<ProfileDto?> {
         return try {
@@ -44,13 +47,6 @@ class DefaultManagerRepository @Inject constructor(
             }
         } catch (e: Exception) {
             Result.failure(e)
-        }
-    }
-
-    override suspend fun fetchManagers(formattedDate: String, region: String) {
-        val result = managerApiService.fetchManagers(formattedDate, region)
-        if (result is Success) result.body?.data?.let { managerDtos ->
-            updateManagers(managerDtos.asDomainFromDto())
         }
     }
 }
