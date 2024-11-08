@@ -1,5 +1,6 @@
 package com.kakaotech.team25.ui.reservation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.kakaotech.team25.domain.Gender
 import com.kakaotech.team25.domain.model.Patient

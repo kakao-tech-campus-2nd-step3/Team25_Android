@@ -1,5 +1,6 @@
 package com.kakaotech.team25.ui.reservation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,14 @@ class ReservationCheckFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setVehicle()
+        navigateToPay()
+    }
+
+    private fun navigateToPay() {
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(requireContext(), ReservationPaymentActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setVehicle() {

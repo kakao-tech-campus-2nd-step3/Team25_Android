@@ -16,7 +16,7 @@ interface ManagerApiService {
         @Query("region") region: String
     ): Result<ServiceResponse<List<ManagerDto>>>
 
-    @GET("/api/profile/manager/{manager_id}")
+    @GET("/api/manager/profile/{manager_id}")
     suspend fun getProfile(
         @Path("manager_id") managerId: String,
     ): Response<ProfileDto?>
