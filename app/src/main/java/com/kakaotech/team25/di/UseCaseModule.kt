@@ -2,7 +2,6 @@ package com.kakaotech.team25.di
 
 import com.kakaotech.team25.domain.repository.ManagerRepository
 import com.kakaotech.team25.domain.repository.ReservationRepository
-import com.kakaotech.team25.domain.usecase.FetchRepositoriesUseCase
 import com.kakaotech.team25.domain.usecase.LoadReservationsUseCase
 import dagger.Module
 import dagger.Provides
@@ -13,16 +12,6 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @Module
 @InstallIn(ViewModelComponent::class)
 object UseCaseModule {
-
-    @Provides
-    @ViewModelScoped
-    fun provideFetchRepositoriesUseCase(
-        reservationRepository: ReservationRepository,
-        managerRepository: ManagerRepository
-    ): FetchRepositoriesUseCase {
-        return FetchRepositoriesUseCase(reservationRepository, managerRepository)
-    }
-
     @Provides
     @ViewModelScoped
     fun provideLoadReservationsUseCase(
