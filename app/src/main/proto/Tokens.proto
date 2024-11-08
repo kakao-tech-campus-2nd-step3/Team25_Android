@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "com.example.team25";
+option java_package = "com.kakaotech.team25";
 option java_outer_classname = "TokensProto";
 
 message Tokens {
@@ -8,4 +8,5 @@ message Tokens {
     string refreshToken = 2;
     int64 accessTokenExpiresIn = 3;
     int64 refreshTokenExpiresIn = 4;
+    int64 loginTime = 5;
 }

@@ -1,6 +1,8 @@
 [versions]
 activityKtx = "1.9.2"
 agp = "8.3.2"
+awsAndroidSdkCognito = "2.77.0"
+awsAndroidSdkS3 = "2.77.0"
 datastore = "1.1.1"
 fragmentKtx = "1.8.3"
 kotlin = "1.9.0"
@@ -49,6 +51,10 @@ dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", vers
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobufJavalite" }
 androidx-datastore-core-android = { group = "androidx.datastore", name = "datastore-core-android", version.ref = "datastoreCoreAndroid" }
+aws-android-sdk-core = { module = "com.amazonaws:aws-android-sdk-core", version.ref = "awsAndroidSdkCognito" }
+aws-android-sdk-mobile-client = { module = "com.amazonaws:aws-android-sdk-mobile-client", version.ref = "awsAndroidSdkCognito" }
+aws-android-sdk-s3 = { module = "com.amazonaws:aws-android-sdk-s3", version.ref = "awsAndroidSdkS3" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

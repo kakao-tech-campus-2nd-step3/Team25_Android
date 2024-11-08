@@ -19,3 +19,88 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.kakaotech.team25.di.** { *; }
+-keep class com.kakaotech.team25.data.** { *; }
+
+# Keep Dagger Hilt classes and annotations
+-keep class dagger.hilt.** { *; }
+
+-keepclassmembers class * {
+    @dagger.hilt.android.qualifiers.ApplicationContext *;
+    @dagger.hilt.android.lifecycle.HiltViewModel *;
+}
+
+# Keep Retrofit classes and annotations
+-keep class retrofit2.** { *; }
+
+# Keep attributes for Retrofit
+-keepattributes Signature, Exceptions, RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+
+-keep class com.squareup.okhttp3.** { *; }
+-keepclassmembers class * {
+    @retrofit2.http.* <methods>;
+}
+# Keep OkHttp Callback interface
+-keep class okhttp3.Callback { *; }
+
+# Keep AndroidX Lifecycle classes
+-keep class androidx.lifecycle.ViewModel { *; }
+-keep class androidx.lifecycle.LiveData { *; }
+
+# Keep all classes extending Fragment
+-keep class * extends androidx.fragment.app.Fragment { *; }
+
+# Keep Gson classes and annotations
+-keep class com.google.gson.** { *; }
+
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+-keep class com.kakaotech.team25.domain.model.** { *; }
+
+-keepclassmembers,allowobfuscation class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+
+# kakao sdk
+-keep class com.kakao.sdk.** { *; }
+-keep class com.kakao.vectormap.** { *; }
+-keep class * extends com.google.gson.TypeAdapter
+-keep class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+-keep class com.kakao.vectormap.** { *; }
+
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+-keep,allowobfuscation,allowshrinking class kotlinx.coroutines.flow.Flow
+-keepclassmembers class * extends com.google.protobuf.GeneratedMessageLite* {
+   <fields>;
+}
+
+-dontwarn org.bouncycastle.jsse.BCSSLParameters
+-dontwarn org.bouncycastle.jsse.BCSSLSocket
+-dontwarn org.bouncycastle.jsse.provider.BouncyCastleJsseProvider
+-dontwarn org.conscrypt.Conscrypt$Version
+-dontwarn org.conscrypt.Conscrypt
+-dontwarn org.conscrypt.ConscryptHostnameVerifier
+-dontwarn org.openjsse.javax.net.ssl.SSLParameters
+-dontwarn org.openjsse.javax.net.ssl.SSLSocket
+-dontwarn org.openjsse.net.ssl.OpenJSSE
+-dontwarn com.amazonaws.mobile.auth.facebook.FacebookButton
+-dontwarn com.amazonaws.mobile.auth.facebook.FacebookSignInProvider
+-dontwarn com.amazonaws.mobile.auth.google.GoogleButton
+-dontwarn com.amazonaws.mobile.auth.google.GoogleSignInProvider
+-dontwarn com.amazonaws.mobile.auth.ui.AuthUIConfiguration$Builder
+-dontwarn com.amazonaws.mobile.auth.ui.AuthUIConfiguration
+-dontwarn com.amazonaws.mobile.auth.ui.SignInUI$LoginBuilder
+-dontwarn com.amazonaws.mobile.auth.ui.SignInUI
+-dontwarn com.amazonaws.mobile.auth.userpools.CognitoUserPoolsSignInProvider
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.Auth$Builder
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.Auth
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.activities.CustomTabsManagerActivity
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.exceptions.AuthClientException
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.exceptions.AuthServiceException
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.handlers.AuthHandler
+-dontwarn com.amazonaws.mobileconnectors.cognitoauth.util.Pkce
