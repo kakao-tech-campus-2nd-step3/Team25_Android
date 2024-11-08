@@ -179,6 +179,7 @@
     <string name="saturday">토</string>
     <string name="sunday">일</string>
     <string name="yy_mm">YY/MM</string>
+    <string name="vehicle_02">vehicle</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객변심</item>
