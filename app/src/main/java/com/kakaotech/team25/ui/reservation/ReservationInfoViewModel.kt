@@ -32,7 +32,7 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
                 patientBirth = "",
                 nokPhone = "",
 
-            ),
+                ),
         ),
     )
 
@@ -49,7 +49,8 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
     fun updateDeparture(departure: String) {
         _reservationInfo.value = _reservationInfo.value.copy(departureLocation = departure)
     }
-    fun updateSido(sido: String){
+
+    fun updateSido(sido: String) {
         _reservationInfo.value = _reservationInfo.value.copy(sido = sido)
     }
 
@@ -58,7 +59,10 @@ class ReservationInfoViewModel @Inject constructor() : ViewModel() {
     }
 
     fun updateServiceDate(year: Int, month: Int, day: Int, hour: Int, min: Int) {
-        val serviceDate = "${year}-${month}-${day} ${hour}:${min}"
+        val serviceDate = String.format(
+            "%04d-%02d-%02d %02d:%02d",
+            year, month, day, hour, min
+        )
         _reservationInfo.value = _reservationInfo.value.copy(reservationDateTime = serviceDate)
     }
 
