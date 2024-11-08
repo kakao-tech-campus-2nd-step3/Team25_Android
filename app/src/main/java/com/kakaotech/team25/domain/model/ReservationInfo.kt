@@ -13,7 +13,7 @@ data class ReservationInfo(
     val departureLocation: String = "",
     val sido : String = "",
     val arrivalLocation: String = "",
-    val reservationDateTime: String = "",
+    val reservationDateTime: String? = "",
     val serviceType: String = "",
     val transportation: String = "",
     val price: Int = 0,
