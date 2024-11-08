@@ -60,72 +60,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_manager_edit_text" />
 
-    <RadioGroup
-        android:id="@+id/select_gender_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/manager_list_text_vew">
-
-        <RadioButton
-            android:id="@+id/select_gender_all_radio_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/selector_radio_btn"
-
-            android:button="@null"
-            android:checked="true"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="@string/all"
-            android:textAlignment="center"
-            android:textColor="@drawable/selector_radio_text"
-            android:textSize="20sp" />
-
-        <RadioButton
-            android:id="@+id/select_gender_man_radio_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/selector_radio_btn"
-            android:button="@null"
-            android:checked="true"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="@string/man"
-            android:textAlignment="center"
-            android:textColor="@drawable/selector_radio_text"
-            android:textSize="20sp" />
-
-        <RadioButton
-            android:id="@+id/select_gender_woman_radio_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_radio_btn"
-            android:button="@null"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="@string/woman"
-            android:textAlignment="center"
-            android:textColor="@drawable/selector_radio_text"
-            android:textSize="20sp" />
-
-    </RadioGroup>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/manager_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/select_gender_radio_group"
-        app:layout_constraintStart_toStartOf="@id/select_gender_radio_group"
-        app:layout_constraintTop_toBottomOf="@+id/select_gender_radio_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manager_list_text_vew"
         tools:listitem="@layout/item_manager">
 
     </androidx.recyclerview.widget.RecyclerView>

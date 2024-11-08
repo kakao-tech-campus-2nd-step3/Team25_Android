@@ -19,8 +19,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/back_btn"
-        app:layout_constraintBottom_toTopOf="@id/bottom_move_layout">
+        app:layout_constraintBottom_toTopOf="@id/bottom_move_layout"
+        app:layout_constraintTop_toBottomOf="@id/back_btn">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -41,34 +41,118 @@
                 android:id="@+id/same_day_reservation_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="@string/same_day_reservation"
                 android:textColor="@color/red"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/choose_date_text_view"
                 app:layout_constraintStart_toStartOf="@id/choose_date_text_view"
-                android:layout_marginTop="10dp"
-                />
+                app:layout_constraintTop_toBottomOf="@id/choose_date_text_view" />
 
-            <DatePicker
-                android:id="@+id/date_picker"
-                style="@style/CustomDatePicker"
+
+            <TextView
+                android:id="@+id/year_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/same_day_reservation_text_view"
                 app:layout_constraintTop_toBottomOf="@id/same_day_reservation_text_view" />
+
+            <TextView
+                android:id="@+id/year_month_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/year"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/year_text_view"
+                app:layout_constraintStart_toEndOf="@id/year_text_view" />
+
+            <TextView
+                android:id="@+id/month_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="20dp"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/year_month_divider"
+                app:layout_constraintTop_toBottomOf="@id/same_day_reservation_text_view" />
+
+            <TextView
+                android:id="@+id/month_day_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/month"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/year_text_view"
+                app:layout_constraintStart_toEndOf="@id/month_text_view" />
+
+            <TextView
+                android:id="@+id/day_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="20dp"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/month_day_divider"
+                app:layout_constraintTop_toBottomOf="@id/same_day_reservation_text_view" />
+
+            <TextView
+                android:id="@+id/day_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/day"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/year_text_view"
+                app:layout_constraintStart_toEndOf="@id/day_text_view" />
+
+            <TextView
+                android:id="@+id/change_day_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/blue_btn_box"
+                android:padding="10dp"
+                android:text="@string/pick_day"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toEndOf="@id/day_divider"
+                app:layout_constraintTop_toBottomOf="@id/same_day_reservation_text_view" />
+
 
             <TextView
                 android:id="@+id/choose_time_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/choose_time"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/date_picker" />
+                app:layout_constraintTop_toBottomOf="@id/year_text_view" />
 
             <TimePicker
                 android:id="@+id/time_picker"
