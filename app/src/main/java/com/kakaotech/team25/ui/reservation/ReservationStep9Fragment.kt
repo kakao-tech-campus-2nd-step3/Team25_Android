@@ -19,6 +19,7 @@ import com.kakaotech.team25.ui.reservation.adapters.ManagerRecyclerViewAdapter
 import com.kakaotech.team25.ui.reservation.interfaces.OnManagerClickListener
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class ReservationStep9Fragment : Fragment() {
     private var _binding: FragmentReservationStep9Binding? = null
@@ -51,10 +52,11 @@ class ReservationStep9Fragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 reservationInfoViewModel.reservationInfo.collectLatest {reservationInfo ->
-                    val date = reservationInfo.reservationDateTime.substringBefore(" ")
+                    val date = reservationInfo.reservationDateTime?.substringBefore(" ")
                     val region = reservationInfo.sido
-
-                    managerViewModel.updateManagers(date, region)
+                    if (date != null) {
+                        managerViewModel.updateManagers(date, region)
+                    }
                 }
             }
         }
