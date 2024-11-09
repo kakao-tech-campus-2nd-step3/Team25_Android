@@ -30,6 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/service_description_text_view" />
 
     <ImageView
+        android:contentDescription="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shake_hands"
