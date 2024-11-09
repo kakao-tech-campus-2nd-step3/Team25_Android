@@ -11,6 +11,7 @@ import android.webkit.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.kakaotech.team25.BuildConfig
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationStep6Binding
 import dagger.hilt.android.AndroidEntryPoint
@@ -116,7 +117,7 @@ class ReservationStep6Fragment : Fragment() {
             }
 
             binding.fullscreenWebView.addJavascriptInterface(WebViewData(), "androidInterface")
-            loadUrl("https://ollagaljido.net/address") // URL 로드
+            loadUrl(BuildConfig.API_BASE_URL + "address") // URL 로드
         }
     }
 
