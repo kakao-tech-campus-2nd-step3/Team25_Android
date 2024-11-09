@@ -9,6 +9,7 @@ object ReservationMapper {
         return dto.map { reservationDto ->
             ReservationInfo(
                 managerId = reservationDto.managerId,
+                reservationId = reservationDto.reservationId,
                 managerName = "",
                 reservationStatus = reservationDto.reservationStatus,
                 departureLocation = reservationDto.departureLocation,

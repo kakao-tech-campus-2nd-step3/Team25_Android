@@ -2,6 +2,7 @@ package com.kakaotech.team25.ui.main.status
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 class ReservationStatusActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationStatusBinding
     private val reservationStatusViewModel: ReservationStatusViewModel by viewModels()
+    private val reservationCancelViewModel: ReservationCancelViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,11 @@ class ReservationStatusActivity : AppCompatActivity() {
         setReservationStatusRecyclerViewAdapter()
         setReservationHistoryRecyclerViewAdapter()
         setObserves()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        reservationStatusViewModel.updateReservations()
     }
 
     private fun setReservationStatusRecyclerViewAdapter() {
@@ -68,26 +75,30 @@ class ReservationStatusActivity : AppCompatActivity() {
         binding.reservationHistoryRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun setObserves(){
+    private fun setObserves() {
         collectReservationStatus()
         collectReservationHistory()
     }
 
-    private fun collectReservationStatus(){
+    private fun collectReservationStatus() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 reservationStatusViewModel.reservationStatus.collectLatest {
-                    (binding.reservationStatusRecyclerView.adapter as? ReservationStatusRecyclerViewAdapter)?.submitList(it)
+                    (binding.reservationStatusRecyclerView.adapter as? ReservationStatusRecyclerViewAdapter)?.submitList(
+                        it
+                    )
                 }
             }
         }
     }
 
-    private fun collectReservationHistory(){
+    private fun collectReservationHistory() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 reservationStatusViewModel.reservationHistory.collectLatest {
-                    (binding.reservationHistoryRecyclerView.adapter as? ReservationHistoryRecyclerViewAdapter)?.submitList(it)
+                    (binding.reservationHistoryRecyclerView.adapter as? ReservationHistoryRecyclerViewAdapter)?.submitList(
+                        it
+                    )
                 }
             }
         }

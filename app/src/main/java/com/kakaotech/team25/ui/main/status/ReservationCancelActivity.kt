@@ -7,13 +7,18 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.ActivityReservationCancelBinding
 import com.kakaotech.team25.domain.model.ReservationInfo
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+@AndroidEntryPoint
 class ReservationCancelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationCancelBinding
     private val reservationCancelViewModel: ReservationCancelViewModel by viewModels()
@@ -28,6 +33,7 @@ class ReservationCancelActivity : AppCompatActivity() {
         setCancelReasonDropDown()
         setCancelDetailsListener()
         setCancelBtnClickListener()
+        collectToastMessage()
         navigateToPrevious()
     }
 
@@ -58,6 +64,15 @@ class ReservationCancelActivity : AppCompatActivity() {
         }
     }
 
+    private fun collectToastMessage() {
+        lifecycleScope.launch {
+            reservationCancelViewModel.toastMessage.collectLatest { message ->
+                if (!message.isNullOrEmpty())
+                    Toast.makeText(this@ReservationCancelActivity, message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun setCancelReasonDropDown() {
         val cancelReasonOptions = resources.getStringArray(R.array.reservation_cancel_reason_option)
 
@@ -84,7 +99,14 @@ class ReservationCancelActivity : AppCompatActivity() {
 
     private fun setCancelBtnClickListener() {
         binding.cancelReservationBtn.setOnClickListener {
+            val cancelReason = binding.reservationCancelReasonAutoCompleteTextView.text.toString()
+            if (cancelReason.isBlank()) {
+                Toast.makeText(this, "취소 사유를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             reservationCancelViewModel.cancelReservation()
+            finish()
         }
     }
 

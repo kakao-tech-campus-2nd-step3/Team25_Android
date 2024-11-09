@@ -26,6 +26,10 @@ class ReservationStatusViewModel @Inject constructor(
     val reservationHistory: StateFlow<List<ReservationInfo>> = _reservationHistory
 
     init {
+        updateReservations()
+    }
+
+    fun updateReservations(){
         viewModelScope.launch {
             val reservations = loadReservationsUseCase.invoke()
 
