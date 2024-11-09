@@ -3,6 +3,7 @@ package com.kakaotech.team25.data.repository
 import com.kakaotech.team25.data.network.calladapter.Result.*
 import com.kakaotech.team25.data.network.dto.mapper.asDomain
 import android.util.Log
+import com.kakaotech.team25.data.network.dto.ReservationCancelDto
 import com.kakaotech.team25.data.network.dto.ReserveDto
 import com.kakaotech.team25.data.remote.ReservationApiService
 import com.kakaotech.team25.domain.model.ReservationInfo
@@ -19,6 +20,10 @@ class DefaultReservationRepository @Inject constructor(
         if (result is Success) result.body?.data?.let { reservationDto ->
             emit(reservationDto.asDomain())
         }
+    }
+
+    override suspend fun cancelReservation(reservationId: String, reservationCancelDto: ReservationCancelDto) {
+        reservationApiService.cancelReservation(reservationId, reservationCancelDto)
     }
 
     override suspend fun reserve(reserveDto: ReserveDto): Result<String?> {

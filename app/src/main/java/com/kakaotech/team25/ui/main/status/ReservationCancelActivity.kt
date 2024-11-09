@@ -1,8 +1,11 @@
 package com.kakaotech.team25.ui.main.status
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.ActivityReservationCancelBinding
@@ -13,6 +16,7 @@ import java.util.Locale
 
 class ReservationCancelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationCancelBinding
+    private val reservationCancelViewModel: ReservationCancelViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +26,8 @@ class ReservationCancelActivity : AppCompatActivity() {
 
         setReservationInfo()
         setCancelReasonDropDown()
+        setCancelDetailsListener()
+        setCancelBtnClickListener()
         navigateToPrevious()
     }
 
@@ -47,6 +53,8 @@ class ReservationCancelActivity : AppCompatActivity() {
 
             binding.managerNameTextView.text = it.managerName
             binding.reservationDateTextView.text = formattedDate
+
+            reservationCancelViewModel.updateReservationId(it.reservationId)
         }
     }
 
@@ -58,7 +66,25 @@ class ReservationCancelActivity : AppCompatActivity() {
 
         binding.reservationCancelReasonAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             val resCancelReason = parent.getItemAtPosition(position).toString()
-            Toast.makeText(this, "선택된 값: $resCancelReason", Toast.LENGTH_SHORT).show()
+            reservationCancelViewModel.updateCancelReason(resCancelReason)
+        }
+    }
+
+    private fun setCancelDetailsListener() {
+        binding.cancelDetailsEditTextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                reservationCancelViewModel.updateCancelDetails(s.toString())
+            }
+        })
+    }
+
+    private fun setCancelBtnClickListener() {
+        binding.cancelReservationBtn.setOnClickListener {
+            reservationCancelViewModel.cancelReservation()
         }
     }
 

@@ -3,6 +3,7 @@ package com.kakaotech.team25.ui.main.companion
 import LiveCompanionRecyclerViewAdapter
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -93,9 +94,10 @@ class LiveCompanionActivity : AppCompatActivity() {
 
     private fun collectAccompanyInfo() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 liveCompanionViewModel.accompanyInfoList.collectLatest { accompanyInfoList ->
-                    (binding.liveCompanionRecyclerView.adapter as? LiveCompanionRecyclerViewAdapter)
+                    if (accompanyInfoList.isEmpty()) binding.liveCompanionRecyclerView.visibility = View.GONE
+                    else (binding.liveCompanionRecyclerView.adapter as? LiveCompanionRecyclerViewAdapter)
                         ?.submitList(accompanyInfoList.map { it.statusDescribe })
                 }
             }
@@ -104,10 +106,10 @@ class LiveCompanionActivity : AppCompatActivity() {
 
     private fun collectCoordinateInfo() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val kakaoMap = kakaoMapDeferred.await()
                 liveCompanionViewModel.coordinateInfo.collectLatest { coordinates ->
-                    updateMapLocation(kakaoMap,coordinates)
+                    updateMapLocation(kakaoMap, coordinates)
                 }
             }
         }
