@@ -9,7 +9,7 @@ object AccompanyMapper {
         return dto.map {
             AccompanyInfo(
                 status = it.status,
-                statusDate = LocalDateTime.parse(it.statusDate),
+                statusDate = it.statusDate,
                 statusDescribe = it.statusDescribe
             )
         }.sortedBy { it.statusDate }
