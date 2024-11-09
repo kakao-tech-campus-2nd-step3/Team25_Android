@@ -127,6 +127,7 @@
         app:layout_constraintTop_toBottomOf="@id/reservation_cancel_reason_input" />
 
     <EditText
+        android:id="@+id/cancel_details_edit_text_view"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -137,7 +138,7 @@
         app:layout_constraintTop_toBottomOf="@id/reservation_cancel_reason_detail_text_view" />
 
     <TextView
-        android:id="@+id/call_manager_btn"
+        android:id="@+id/cancel_reservation_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/blue"
