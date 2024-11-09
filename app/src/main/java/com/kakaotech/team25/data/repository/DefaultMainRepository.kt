@@ -1,5 +1,6 @@
 package com.kakaotech.team25.data.repository
 
+import com.kakaotech.team25.data.network.dto.UserRole
 import com.kakaotech.team25.data.remote.UserService
 import com.kakaotech.team25.domain.repository.MainRepository
 import javax.inject.Inject
@@ -12,6 +13,15 @@ class DefaultMainRepository @Inject constructor(
         val response = userService.withdraw()
         return if (response.isSuccessful) {
             response.body()?.message
+        } else {
+            null
+        }
+    }
+
+    override suspend fun getRole(): UserRole? {
+        val response = userService.getRole()
+        return if (response.isSuccessful) {
+            response.body()?.data
         } else {
             null
         }

@@ -44,6 +44,7 @@
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:src="@drawable/kakao_login_large_wide"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
