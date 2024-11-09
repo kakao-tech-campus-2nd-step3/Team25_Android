@@ -33,7 +33,7 @@ class LiveCompanionViewModel @Inject constructor(
 
     val runningReservation = reservationRepository.getReservationsFlow()
         .map { reservations ->
-            reservations.first { it.reservationStatus == 진행중 }
+            reservations.firstOrNull { it.reservationStatus == 진행중 } ?: ReservationInfo()
         }
         .stateIn(
             scope = viewModelScope,
