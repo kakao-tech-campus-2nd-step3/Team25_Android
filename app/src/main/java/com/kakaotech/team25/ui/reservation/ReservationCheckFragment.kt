@@ -40,9 +40,16 @@ class ReservationCheckFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeReserveStatus()
+        navigateToPrevious()
         loadInfo()
         reserve()
         // navigateToPay()
+    }
+
+    private fun navigateToPrevious() {
+        binding.backBtn.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     private fun reserve() {
