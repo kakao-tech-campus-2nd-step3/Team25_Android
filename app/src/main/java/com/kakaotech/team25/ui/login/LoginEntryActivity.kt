@@ -3,6 +3,7 @@ package com.kakaotech.team25.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -14,6 +15,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.kakaotech.team25.domain.Role
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -43,10 +45,13 @@ class LoginEntryActivity : AppCompatActivity() {
                     val timeThreshold = 7 * 24 * 60 * 60000L
 
                     if (currentTime >= expirationTime - timeThreshold) {
-                        loginViewModel.logout()
+                        binding.kakaoLoginBtn.visibility = View.VISIBLE
                     } else {
-                        navigateToMain()
+                        val role = loginViewModel.getUserRole()
+                        navigateBasedOnRole(role)
                     }
+                } else {
+                    binding.kakaoLoginBtn.visibility = View.VISIBLE
                 }
             }
         }
@@ -122,6 +127,14 @@ class LoginEntryActivity : AppCompatActivity() {
                 Log.d(TAG, accessToken)
                 navigateToMain()
             }
+        }
+    }
+
+    private fun navigateBasedOnRole(role: Role?) {
+        if (role == Role.ROLE_USER) {
+            navigateToMain()
+        } else {
+            binding.kakaoLoginBtn.visibility = View.VISIBLE
         }
     }
 

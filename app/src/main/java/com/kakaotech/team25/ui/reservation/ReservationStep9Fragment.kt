@@ -3,7 +3,6 @@ package com.kakaotech.team25.ui.reservation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import com.kakaotech.team25.ui.reservation.interfaces.OnManagerClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 @AndroidEntryPoint
 class ReservationStep9Fragment : Fragment() {
@@ -58,11 +56,8 @@ class ReservationStep9Fragment : Fragment() {
                     val date = reservationInfo.reservationDateTime?.substringBefore(" ")
                     val region = reservationInfo.sido
 
-//                    if (date != null) {
-//                        managerViewModel.updateManagers(date, region)
-//                    }
                     if (date != null) {
-                        managerViewModel.updateManagers(date, "부산광역시 남구")
+                        managerViewModel.updateManagers(date, region)
                     }
                 }
             }

@@ -20,7 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.kakaotech.team25.di.** { *; }
 -keep class com.kakaotech.team25.data.** { *; }
 
 # Keep Dagger Hilt classes and annotations
