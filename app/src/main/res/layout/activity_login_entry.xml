@@ -38,6 +38,7 @@
 
     <ImageView
         android:id="@+id/kakao_login_btn"
+        android:contentDescription="@string/kakao_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="63dp"
@@ -50,6 +51,7 @@
 
     <TextView
         android:id="@+id/login_error_text_view"
+        android:contentDescription="@string/kakao_login_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"

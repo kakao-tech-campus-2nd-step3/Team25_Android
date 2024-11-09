@@ -84,6 +84,8 @@
     <string name="error_expired_day">유효 기간 입력 오류</string>
     <string name="error_password">비밀번호 입력 오류</string>
     <string name="birth">생년월일</string>
+    <string name="kakao_login_button">카카오 로그인 버튼</string>
+    <string name="kakao_login_error">카카오 로그인 에러</string>
     <string name="card_birth">생년월일 6자리 숫자</string>
 
     <string-array name="relation_option">
