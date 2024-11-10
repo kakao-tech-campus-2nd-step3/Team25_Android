@@ -75,8 +75,7 @@ class ReservationPaymentViewModel @Inject constructor(
                     amount = 1,
                     goodsName = "테스트 상품",
                     cardQuota = "0",
-                    useShopInterest = false,
-                    reservationId = 1
+                    useShopInterest = false
                 ))
             } else {
                 _billingKeyStatusMessage.value = "Billing key does not exist, navigate to add credit card."

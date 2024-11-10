@@ -6,8 +6,7 @@ data class BillingKeyDto (
     @SerializedName("amount") val amount : Int?,
     @SerializedName("goodsName") val goodsName : String?,
     @SerializedName("cardQuota") val cardQuota : String?,
-    @SerializedName("useShopInterest") val useShopInterest : Boolean?,
-    @SerializedName("reservationId") val reservationId : Int?
+    @SerializedName("useShopInterest") val useShopInterest : Boolean?
 )
 data class PaymentResponse(
     @SerializedName("status") val status: Boolean?,

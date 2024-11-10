@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.kakaotech.team25.security.CardInformationEncryption
+import com.example.team25.security.CardInformationEncryption
 import com.kakaotech.team25.R
 import com.kakaotech.team25.data.network.dto.CreateBillingKeyRequest
 import com.kakaotech.team25.data.network.services.CardService
@@ -47,7 +47,7 @@ class AddCreditcardActivity : AppCompatActivity() {
 
         if (validateCard(cardInfor).count { it } == 4) {
             presentError(validateCard(cardInfor))
-            val encryptedData = CardInformationEncryption().encryptCBC(cardInfor)
+            val encryptedData = CardInformationEncryption.encryptCBC(cardInfor)
             val cardData = CreateBillingKeyRequest(
                 encData = encryptedData,
                 cardAlias = ""
@@ -98,11 +98,12 @@ class AddCreditcardActivity : AppCompatActivity() {
         viewModel.billingKeyResponse.observe(this) { response ->
             response?.let {
                 if (it.status!!) {
-                    Log.d("AddCreditcardActivity", "Billing key created successfully: ${it.data}")
+                    Toast.makeText(this, "카드 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                    viewModel.resetBillingKeyResponse()
                     finish()
                 } else {
-                    Log.e("AddCreditcardActivity", "Billing key creation failed: ${it.data?.resultMsg}")
-                    Toast.makeText(this, it.data?.resultMsg ?: "Billing key creation failed", Toast.LENGTH_SHORT).show()
+                    viewModel.resetBillingKeyResponse()
+                    Toast.makeText(this, "잘못된 카드 정보입니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
