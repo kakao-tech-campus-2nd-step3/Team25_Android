@@ -31,13 +31,12 @@ class ReservationPaymentViewModel @Inject constructor(
             try {
                 val result = repository.requestPayment(payRequest)
                 _paymentStatusMessage.value = if (result.isSuccess) {
-                    "Payment successful: ${result.getOrNull()?.message}"
+                    "결제가 완료되었습니다."
                 } else {
-                    "Payment failed: ${result.exceptionOrNull()?.message}"
+                    "결제에 실패했습니다."
                 }
             } catch (e: Exception) {
                 _paymentStatusMessage.value = "Payment request error: ${e.localizedMessage}"
-                Log.e("ReservationPaymentViewModel", "Error in requestPayment: ", e)
             }
         }
     }
@@ -47,9 +46,9 @@ class ReservationPaymentViewModel @Inject constructor(
         viewModelScope.launch {
             val result = repository.expireBillingKey(deleteRequest)
             _billingKeyStatusMessage.value = if (result.isSuccess) {
-                "Billing key deletion successful"
+                "카드 정보 삭제가 완료되었습니다. "
             } else {
-                "Billing key deletion failed: ${result.exceptionOrNull()?.message}"
+                "카드 정보 삭제에 실패하였습니다."
             }
         }
     }
@@ -78,7 +77,7 @@ class ReservationPaymentViewModel @Inject constructor(
                     useShopInterest = false
                 ))
             } else {
-                _billingKeyStatusMessage.value = "Billing key does not exist, navigate to add credit card."
+                _billingKeyStatusMessage.value = "카드 정보가 존재하지 않습니다. 카드 등록 창으로 이동합니다."
 
             }
         }
