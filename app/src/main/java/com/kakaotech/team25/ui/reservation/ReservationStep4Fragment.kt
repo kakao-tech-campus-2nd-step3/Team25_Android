@@ -1,6 +1,8 @@
 package com.kakaotech.team25.ui.reservation
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +40,7 @@ class ReservationStep4Fragment : Fragment() {
         restoreForm()
         navigateToPrevious()
         navigateToNext()
+        setupPhoneNumberAutoMove()
     }
 
     private fun restoreForm() {
@@ -64,6 +67,20 @@ class ReservationStep4Fragment : Fragment() {
         binding.phoneNumAutoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             firstPhoneNum = parent.getItemAtPosition(position).toString()
         }
+    }
+
+    private fun setupPhoneNumberAutoMove() {
+        binding.numMiddleEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s?.length == 4) {
+                    binding.numEndEditText.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun navigateToPrevious() {

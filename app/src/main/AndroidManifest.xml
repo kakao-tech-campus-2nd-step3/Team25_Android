@@ -19,7 +19,7 @@
             android:name=".ui.reservation.ReservationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.reservation.AddCreditcardActivity"
+            android:name=".ui.reservation.AddCreditCardActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.status.ReservationCancelActivity"
@@ -29,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.status.ReservationStatusActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.reservation.ReservationPaymentActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.companion.LiveCompanionActivity"
@@ -51,11 +48,13 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakao${kakaoApiKey}" />
             </intent-filter>
         </activity>

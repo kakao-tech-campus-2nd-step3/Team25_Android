@@ -3,10 +3,12 @@ package com.kakaotech.team25.ui.reservation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kakaotech.team25.data.network.dto.ReservationCancelDto
 import com.kakaotech.team25.domain.Gender
 import com.kakaotech.team25.domain.model.Patient
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.domain.ReservationStatus
+import com.kakaotech.team25.domain.usecase.CancelReservationUseCase
 import com.kakaotech.team25.domain.usecase.ReserveUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ReservationInfoViewModel @Inject constructor(
     private val reserveUseCase: ReserveUseCase,
+    private val cancelReservationUseCase: CancelReservationUseCase
 ) : ViewModel() {
     private val _reservationInfo = MutableStateFlow(
         ReservationInfo(
@@ -42,10 +45,16 @@ class ReservationInfoViewModel @Inject constructor(
         ),
     )
 
+    private val _reservationID = MutableStateFlow("")
+    val reservationID: StateFlow<String> = _reservationID
+
     val reservationInfo: StateFlow<ReservationInfo> = _reservationInfo
 
     private val _reserveStatus = MutableStateFlow(ReserveStatus.DEFAULT)
     val reserveStatus: StateFlow<ReserveStatus> = _reserveStatus
+
+    private val _cancelStatus = MutableStateFlow(ReserveStatus.DEFAULT)
+    val cancelStatus: StateFlow<ReserveStatus> = _cancelStatus
 
     fun getReservationInfo(): ReservationInfo {
         return _reservationInfo.value
@@ -133,11 +142,13 @@ class ReservationInfoViewModel @Inject constructor(
 
     fun reserve() {
         viewModelScope.launch {
+            logReservationInfo()
             val result = reserveUseCase(_reservationInfo.value)
-            _reserveStatus.value = if (result.isSuccess) {
-                ReserveStatus.SUCCESS
+            if (result.isSuccess) {
+                _reservationID.value = result.getOrNull().toString()
+                _reserveStatus.value = ReserveStatus.SUCCESS
             } else {
-                ReserveStatus.FAILURE
+                _reserveStatus.value = ReserveStatus.FAILURE
             }
         }
     }
@@ -146,7 +157,28 @@ class ReservationInfoViewModel @Inject constructor(
         _reserveStatus.value = status
     }
 
-    fun logReservationInfo() {
+    fun updateCancelStatus(status: ReserveStatus) {
+        _cancelStatus.value = status
+    }
+
+    fun cancelReservation(reservationId: String, cancelReason: String, cancelDetail: String) {
+        viewModelScope.launch {
+            val reservationCancelDto = ReservationCancelDto(cancelReason, cancelDetail)
+
+            val result = cancelReservationUseCase(reservationId, reservationCancelDto)
+            if (result.isSuccess) {
+                _cancelStatus.value = ReserveStatus.SUCCESS
+            } else {
+                _cancelStatus.value = ReserveStatus.FAILURE
+            }
+        }
+    }
+
+    fun getReservationId(): String {
+        return _reservationID.value
+    }
+
+    private fun logReservationInfo() {
         Log.d("ReservationInfoViewModel", "Current Reservation Info: ${_reservationInfo.value}")
     }
 }

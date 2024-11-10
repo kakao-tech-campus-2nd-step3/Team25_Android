@@ -39,10 +39,12 @@
     <string name="to">도착지</string>
     <string name="dedicated_manger">담당 매니저</string>
     <string name="pay">결제하기</string>
+    <string name="remove_billing_key">등록된 카드 삭제하기</string>
     <string name="pay_info">결제정보</string>
     <string name="deposit">보증금</string>
     <string name="won">원</string>
     <string name="total_payment_amount">총 결제금액</string>
+    <string name="additional_fees">동행 시간에 따라 추과금이 부담될 수 있습니다.</string>
     <string name="pay_credit_card">신용/체크카드 결제하기</string>
     <string name="pay_toss">토스로 결제하기</string>
     <string name="manager_list">매니저 리스트</string>
@@ -159,7 +161,7 @@
     <string name="tuesday">화</string>
     <string name="monday">월</string>
     <string name="choose">선택하기</string>
-    <string name="_50000">50000</string>
+    <string name="basic_usage_fee">20000</string>
     <string name="basic_fee">기본 이용료</string>
     <string name="pusan_university_hospital">부산대학교병원</string>
     <string name="address_example">부산대학교 서구 구덕로 179(아미동...</string>

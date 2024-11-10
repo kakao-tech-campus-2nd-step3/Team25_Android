@@ -1,14 +1,13 @@
 package com.kakaotech.team25.ui.reservation
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.data.network.dto.BillingKeyDto
 import com.kakaotech.team25.data.network.dto.DeletePaymentRequest
 import com.kakaotech.team25.data.repository.DefaultPaymentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,28 +15,35 @@ import javax.inject.Inject
 class ReservationPaymentViewModel @Inject constructor(
     private val repository: DefaultPaymentRepository
 ) : ViewModel() {
-    private val _billingKeyStatusMessage = MutableLiveData<String>()
-    val billingKeyStatusMessage: LiveData<String> = _billingKeyStatusMessage
 
-    private val _paymentStatusMessage = MutableLiveData<String>()
-    val paymentStatusMessage: LiveData<String> = _paymentStatusMessage
+    private val _billingKeyStatus = MutableStateFlow(BillingKeyStatus.DEFAULT)
+    val billingKeyStatus: StateFlow<BillingKeyStatus> = _billingKeyStatus
 
-    private val _cardStatusText = MutableLiveData<String>()
-    val cardStatusText: LiveData<String> = _cardStatusText
+    private val _paymentStatus = MutableStateFlow(PayStatus.DEFAULT)
+    val paymentStatus: StateFlow<PayStatus> = _paymentStatus
+
+    private val _expireStatus = MutableStateFlow(PayStatus.DEFAULT)
+    val expireStatus: StateFlow<PayStatus> = _expireStatus
 
     // 결제 요청
-    private fun requestPayment(payRequest: BillingKeyDto) {
+    fun requestPayment() {
+        val billingKeyDto = BillingKeyDto(
+            amount = 1,
+            goodsName = "테스트 상품",
+            cardQuota = "0",
+            useShopInterest = false
+        )
+
         viewModelScope.launch {
             try {
-                val result = repository.requestPayment(payRequest)
-                _paymentStatusMessage.value = if (result.isSuccess) {
-                    "Payment successful: ${result.getOrNull()?.message}"
+                val result = repository.requestPayment(billingKeyDto)
+                _paymentStatus.value = if (result.isSuccess) {
+                    PayStatus.SUCCESS
                 } else {
-                    "Payment failed: ${result.exceptionOrNull()?.message}"
+                    PayStatus.FAILURE
                 }
             } catch (e: Exception) {
-                _paymentStatusMessage.value = "Payment request error: ${e.localizedMessage}"
-                Log.e("ReservationPaymentViewModel", "Error in requestPayment: ", e)
+                _paymentStatus.value = PayStatus.FAILURE
             }
         }
     }
@@ -46,10 +52,12 @@ class ReservationPaymentViewModel @Inject constructor(
     fun expireBillingKey(deleteRequest: DeletePaymentRequest) {
         viewModelScope.launch {
             val result = repository.expireBillingKey(deleteRequest)
-            _billingKeyStatusMessage.value = if (result.isSuccess) {
-                "Billing key deletion successful"
+
+            if (result.isSuccess) {
+                _billingKeyStatus.value = BillingKeyStatus.NOT_EXIST
+                _expireStatus.value = PayStatus.SUCCESS
             } else {
-                "Billing key deletion failed: ${result.exceptionOrNull()?.message}"
+                _expireStatus.value = PayStatus.FAILURE
             }
         }
     }
@@ -58,30 +66,33 @@ class ReservationPaymentViewModel @Inject constructor(
     fun checkCardStatus() {
         viewModelScope.launch {
             val result = repository.checkBillingKeyExists()
-            _cardStatusText.value = if (result.isSuccess && result.getOrNull()?.data?.exists == true) {
-                "${result.getOrNull()?.data?.cardName} (선택시 삭제)"
+            if (result.isSuccess) {
+                if (result.getOrNull()?.data?.exists == true) {
+                    _billingKeyStatus.value = BillingKeyStatus.EXIST
+                } else if (result.getOrNull()?.data?.exists == false){
+                    _billingKeyStatus.value = BillingKeyStatus.NOT_EXIST
+                } else {
+                    _billingKeyStatus.value = BillingKeyStatus.FAILURE
+                }
             } else {
-                "카드가 존재하지 않습니다."
+                _billingKeyStatus.value = BillingKeyStatus.FAILURE
             }
         }
     }
 
-    // 결제 시작 전 빌링 키 확인
-    fun initiatePaymentCheck() {
-        viewModelScope.launch {
-            val result = repository.checkBillingKeyExists()
-            if (result.isSuccess && result.getOrNull()?.data?.exists == true) {
-                requestPayment(BillingKeyDto(
-                    amount = 1,
-                    goodsName = "테스트 상품",
-                    cardQuota = "0",
-                    useShopInterest = false,
-                    reservationId = 1
-                ))
-            } else {
-                _billingKeyStatusMessage.value = "Billing key does not exist, navigate to add credit card."
+    fun getBillingKeyStatus(): BillingKeyStatus {
+        return _billingKeyStatus.value
+    }
 
-            }
-        }
+    fun updateBillingKeyStatus(billingKeyStatus: BillingKeyStatus) {
+        _billingKeyStatus.value = billingKeyStatus
+    }
+
+    fun updateExpireStatus(payStatus: PayStatus ) {
+        _expireStatus.value = payStatus
+    }
+
+    fun updatePaymentStatus(payStatus: PayStatus ) {
+        _paymentStatus.value = payStatus
     }
 }

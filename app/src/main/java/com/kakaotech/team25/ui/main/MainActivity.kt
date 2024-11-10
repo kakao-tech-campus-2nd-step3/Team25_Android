@@ -15,7 +15,6 @@ import com.kakaotech.team25.databinding.ActivityMainBinding
 import com.kakaotech.team25.ui.login.LoginEntryActivity
 import com.kakaotech.team25.ui.main.companion.LiveCompanionActivity
 import com.kakaotech.team25.ui.main.status.ReservationStatusActivity
-import com.kakaotech.team25.ui.reservation.AddCreditcardActivity
 import com.kakaotech.team25.ui.reservation.ReservationActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -45,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.withdrawEvent.collect { event ->
                     when (event) {
                         is WithdrawStatus.Success -> {
-                            mainViewModel.logout()
                             navigateToLogin()
                         }
 

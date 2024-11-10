@@ -31,6 +31,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val withdrawResult = withdrawUseCase()
             _withdrawEvent.value = if (withdrawResult != null) {
+                logout()
                 WithdrawStatus.Success
             } else {
                 WithdrawStatus.Failure
