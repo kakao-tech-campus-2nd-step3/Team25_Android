@@ -133,6 +133,7 @@ class ReservationInfoViewModel @Inject constructor(
 
     fun reserve() {
         viewModelScope.launch {
+            logReservationInfo()
             val result = reserveUseCase(_reservationInfo.value)
             _reserveStatus.value = if (result.isSuccess) {
                 ReserveStatus.SUCCESS

@@ -1,27 +1,23 @@
 package com.kakaotech.team25.ui.reservation
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.team25.security.CardInformationEncryption
+import com.kakaotech.team25.security.CardInformationEncryption
 import com.kakaotech.team25.R
 import com.kakaotech.team25.data.network.dto.CreateBillingKeyRequest
-import com.kakaotech.team25.data.network.services.CardService
 import com.kakaotech.team25.databinding.ActivityAddCreditcardBinding
 import com.kakaotech.team25.ui.main.status.data.CardInfor
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddCreditcardActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var cardService: CardService
+class AddCreditCardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddCreditcardBinding
-    private val viewModel: AddCreditcardViewModel by viewModels()
+    private val viewModel: AddCreditCardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +26,13 @@ class AddCreditcardActivity : AppCompatActivity() {
 
         observeViewModel()
         selectAddCreditCard()
+        navigateToPrevious()
+    }
+
+    private fun navigateToPrevious() {
+        binding.backBtn.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun initCardInfor() {
@@ -43,7 +46,7 @@ class AddCreditcardActivity : AppCompatActivity() {
         val twoPassword = binding.passwordEditText.text.toString()
         val birth = binding.birthEditText.text.toString()
 
-        val cardInfor = cardService.createCardInfo(creditCardNumber, expireDate, twoPassword, birth)
+        val cardInfor = CardInfor(creditCardNumber, expireDate, twoPassword, birth)
 
         if (validateCard(cardInfor).count { it } == 4) {
             presentError(validateCard(cardInfor))
@@ -97,9 +100,10 @@ class AddCreditcardActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.billingKeyResponse.observe(this) { response ->
             response?.let {
-                if (it.status!!) {
+                if (it.status == true) {
                     Toast.makeText(this, "카드 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     viewModel.resetBillingKeyResponse()
+                    setResult(Activity.RESULT_OK)
                     finish()
                 } else {
                     viewModel.resetBillingKeyResponse()
@@ -110,7 +114,7 @@ class AddCreditcardActivity : AppCompatActivity() {
 
         viewModel.error.observe(this) { errorMessage ->
             errorMessage?.let {
-                Log.e("AddCreditcardActivity", "Error: $errorMessage")
+                Log.e("AddCreditCardActivity", "Error: $errorMessage")
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
             }
         }
