@@ -9,14 +9,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.kakaotech.team25.R
+import com.kakaotech.team25.data.util.DateFormatter
 import com.kakaotech.team25.databinding.ActivityReservationCancelBinding
 import com.kakaotech.team25.domain.model.ReservationInfo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 @AndroidEntryPoint
 class ReservationCancelActivity : AppCompatActivity() {
@@ -46,19 +44,8 @@ class ReservationCancelActivity : AppCompatActivity() {
     private fun setReservationInfo() {
         val reservationInfo: ReservationInfo? = intent.getParcelableExtra(KEY_RESERVATION_INFO)
         reservationInfo?.let {
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.KOREAN)
-            val outputFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
-            val dateString = it.reservationDateTime
-            val date = try {
-                dateString?.let { inputFormat.parse(it) }
-            } catch (e: ParseException) {
-                null
-            }
-
-            val formattedDate = date?.let { outputFormat.format(it) } ?: "날짜 없음"
-
             binding.managerNameTextView.text = it.managerName
-            binding.reservationDateTextView.text = formattedDate
+            binding.reservationDateTextView.text = DateFormatter.formatDate(it.reservationDateTime)
 
             reservationCancelViewModel.updateReservationId(it.reservationId)
         }
