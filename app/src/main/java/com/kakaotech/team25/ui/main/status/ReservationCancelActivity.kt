@@ -68,7 +68,16 @@ class ReservationCancelActivity : AppCompatActivity() {
 
         binding.reservationCancelReasonAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             val resCancelReason = parent.getItemAtPosition(position).toString()
-            reservationCancelViewModel.updateCancelReason(resCancelReason)
+
+            val fetchedCancelReason = when (resCancelReason) {
+                "고객 변심" -> "단순변심"
+                "재예약 예정" -> "재예약예정"
+                "원하는 매니저 없음" -> "매니저매치안됨"
+                "예약 결제 실패" -> "예약 결제 실패"
+                else -> "단순변심"
+            }
+
+            reservationCancelViewModel.updateCancelReason(fetchedCancelReason)
         }
     }
 
