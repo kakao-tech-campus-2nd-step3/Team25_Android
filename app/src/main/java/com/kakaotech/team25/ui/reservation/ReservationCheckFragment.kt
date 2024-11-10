@@ -1,22 +1,15 @@
 package com.kakaotech.team25.ui.reservation
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.FragmentReservationCheckBinding
 import com.kakaotech.team25.domain.Gender
 import com.kakaotech.team25.domain.model.ReservationInfo
-import com.kakaotech.team25.ui.main.MainActivity
-import kotlinx.coroutines.launch
 
 class ReservationCheckFragment : Fragment() {
     private var _binding: FragmentReservationCheckBinding? = null

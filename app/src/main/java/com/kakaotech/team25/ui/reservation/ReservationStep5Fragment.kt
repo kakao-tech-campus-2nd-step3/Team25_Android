@@ -58,10 +58,16 @@ class ReservationStep5Fragment : Fragment() {
 
     private fun setBirthdayTextChangedListener() {
         binding.yearInput.addTextChangedListener { text ->
+            if (text?.length == 4) {
+                binding.monthInput.requestFocus()
+            }
             updateDate()
         }
 
         binding.monthInput.addTextChangedListener { text ->
+            if (text?.length == 2) {
+                binding.dayInput.requestFocus()
+            }
             updateDate()
         }
 
