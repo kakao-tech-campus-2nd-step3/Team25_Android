@@ -61,6 +61,7 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
+            android:theme="@style/CustomFontTheme"
             android:exported="false"/>
     </application>
 
