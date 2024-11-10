@@ -103,3 +103,6 @@
 -dontwarn com.amazonaws.mobileconnectors.cognitoauth.exceptions.AuthServiceException
 -dontwarn com.amazonaws.mobileconnectors.cognitoauth.handlers.AuthHandler
 -dontwarn com.amazonaws.mobileconnectors.cognitoauth.util.Pkce
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticMDCBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder

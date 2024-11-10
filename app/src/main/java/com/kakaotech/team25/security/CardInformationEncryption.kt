@@ -1,9 +1,11 @@
-package com.example.team25.security
+package com.kakaotech.team25.security
+
 import com.kakaotech.team25.BuildConfig
 import com.kakaotech.team25.ui.main.status.data.CardInfor
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
+
 class CardInformationEncryption {
     companion object {
         const val SECRET_KEY = BuildConfig.CARD_SECRET_KEY // localproperties에 숨길예정
