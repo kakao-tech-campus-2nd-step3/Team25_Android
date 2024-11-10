@@ -187,7 +187,7 @@
     <string name="patient_name">환자명</string>
 
     <string-array name="reservation_cancel_reason_option">
-        <item>고객변심</item>
+        <item>단순변심</item>
         <item>재예약</item>
         <item>원하는 매니저 없음</item>
         <item>기타</item>

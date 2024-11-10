@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.kakaotech.team25.R
+import com.kakaotech.team25.data.util.DateFormatter
 import com.kakaotech.team25.databinding.ActivityReservationCheckReportBinding
 import com.kakaotech.team25.domain.MedicineTime
 import com.kakaotech.team25.domain.model.Report
@@ -50,19 +51,11 @@ class ReservationCheckReportActivity : AppCompatActivity() {
     private fun collectReservationInfo() {
         lifecycleScope.launch {
             viewModel.reservationInfo.collectLatest { reservation ->
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.KOREAN)
-                val outputFormat = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
-                val dateString = reservation.reservationDateTime
-                val date = try {
-                    dateString?.let { inputFormat.parse(it) }
-                } catch (e: ParseException) {
-                    null
-                }
-
-                val formattedDate = date?.let { outputFormat.format(it) } ?: "날짜 없음"
-
                 binding.managerNameTextView.text = reservation.managerName
-                binding.dateTextView.text = formattedDate
+                binding.dateTextView.text = DateFormatter.formatDate(
+                    reservation.reservationDateTime,
+                    outputFormat = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
+                )
             }
         }
     }

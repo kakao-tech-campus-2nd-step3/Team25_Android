@@ -22,8 +22,14 @@ class DefaultReservationRepository @Inject constructor(
         }
     }
 
-    override suspend fun cancelReservation(reservationId: String, reservationCancelDto: ReservationCancelDto) {
-        reservationApiService.cancelReservation(reservationId, reservationCancelDto)
+    override suspend fun cancelReservation(reservationId: String, reservationCancelDto: ReservationCancelDto): Result<String> {
+        val result = reservationApiService.cancelReservation(reservationId, reservationCancelDto)
+        return when(result){
+            is Success -> Result.success("예약이 취소 되었습니다")
+            is Failure -> Result.failure(Exception("오류가 발생했습니다. 다시 시도해주세요"))
+            is NetworkError -> Result.failure(Exception("네트워크 연결 상태를 확인 해주세요"))
+            else -> Result.failure(Exception("알 수 없는 오류가 발생했습니다. 다시 시도해주세요"))
+        }
     }
 
     override suspend fun reserve(reserveDto: ReserveDto): Result<String?> {
