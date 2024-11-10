@@ -53,6 +53,7 @@ class ReservationPaymentViewModel @Inject constructor(
     fun expireBillingKey(deleteRequest: DeletePaymentRequest) {
         viewModelScope.launch {
             val result = repository.expireBillingKey(deleteRequest)
+
             if (result.isSuccess) {
                 _billingKeyStatus.value = BillingKeyStatus.NOT_EXIST
                 _expireStatus.value = PayStatus.SUCCESS
