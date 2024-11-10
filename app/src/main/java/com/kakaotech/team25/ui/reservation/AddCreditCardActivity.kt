@@ -16,6 +16,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddCreditCardActivity : AppCompatActivity() {
+    
+    @Inject
+    lateinit var cardInformationEncryption: CardInformationEncryption
+
     private lateinit var binding: ActivityAddCreditcardBinding
     private val viewModel: AddCreditCardViewModel by viewModels()
 
@@ -50,12 +54,16 @@ class AddCreditCardActivity : AppCompatActivity() {
 
         if (validateCard(cardInfor).count { it } == 4) {
             presentError(validateCard(cardInfor))
-            val encryptedData = CardInformationEncryption.encryptCBC(cardInfor)
+            val encryption = CardInformationEncryption()
+            val encryptedData = encryption.encryptCBC(cardInfor)
+
             val cardData = CreateBillingKeyRequest(
                 encData = encryptedData,
                 cardAlias = ""
             )
             viewModel.createBillingKey(cardData)
+
+
         } else {
             presentError(validateCard(cardInfor))
         }
@@ -102,11 +110,9 @@ class AddCreditCardActivity : AppCompatActivity() {
             response?.let {
                 if (it.status == true) {
                     Toast.makeText(this, "카드 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                    viewModel.resetBillingKeyResponse()
                     setResult(Activity.RESULT_OK)
                     finish()
                 } else {
-                    viewModel.resetBillingKeyResponse()
                     Toast.makeText(this, "잘못된 카드 정보입니다.", Toast.LENGTH_SHORT).show()
                 }
             }
