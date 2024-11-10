@@ -20,6 +20,8 @@ class AddCreditcardActivity : AppCompatActivity() {
 
     @Inject
     lateinit var cardService: CardService
+    @Inject
+    lateinit var cardInformationEncryption: CardInformationEncryption
     private lateinit var binding: ActivityAddCreditcardBinding
     private val viewModel: AddCreditcardViewModel by viewModels()
 
@@ -47,12 +49,16 @@ class AddCreditcardActivity : AppCompatActivity() {
 
         if (validateCard(cardInfor).count { it } == 4) {
             presentError(validateCard(cardInfor))
-            val encryptedData = CardInformationEncryption.encryptCBC(cardInfor)
+            val encryption = CardInformationEncryption()
+            val encryptedData = encryption.encryptCBC(cardInfor)
+
             val cardData = CreateBillingKeyRequest(
                 encData = encryptedData,
                 cardAlias = ""
             )
             viewModel.createBillingKey(cardData)
+
+
         } else {
             presentError(validateCard(cardInfor))
         }
@@ -99,10 +105,8 @@ class AddCreditcardActivity : AppCompatActivity() {
             response?.let {
                 if (it.status!!) {
                     Toast.makeText(this, "카드 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                    viewModel.resetBillingKeyResponse()
                     finish()
                 } else {
-                    viewModel.resetBillingKeyResponse()
                     Toast.makeText(this, "잘못된 카드 정보입니다.", Toast.LENGTH_SHORT).show()
                 }
             }

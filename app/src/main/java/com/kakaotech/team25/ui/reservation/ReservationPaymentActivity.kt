@@ -35,7 +35,7 @@ class ReservationPaymentActivity : AppCompatActivity() {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             if (message.contains("successful")) {
                 binding.checkCardTextview.text = "카드가 존재하지 않습니다."
-            } else if (message.contains("Billing key does not exist, navigate to add credit card.")) {
+            } else if (message.contains("카드 정보가 존재하지 않습니다. 카드 등록 창으로 이동합니다.")) {
                 navigateToAddCreditCardActivity()
             }
         }

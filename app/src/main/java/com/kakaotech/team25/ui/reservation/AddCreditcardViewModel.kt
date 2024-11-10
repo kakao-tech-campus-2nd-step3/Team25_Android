@@ -34,8 +34,5 @@ class AddCreditcardViewModel @Inject constructor(
             }
         }
     }
-    fun resetBillingKeyResponse() {
-        _billingKeyResponse.value = null
-    }
 }
 
