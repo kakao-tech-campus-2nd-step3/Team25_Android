@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec
 class CardInformationEncryption {
 
     companion object {
-         private const val SECRET_KEY = BuildConfig.CARD_SECRET_KEY
+         private val SECRET_KEY = BuildConfig.CARD_SECRET_KEY
     }
 
     fun encryptCBC(card: CardInfor): String {
