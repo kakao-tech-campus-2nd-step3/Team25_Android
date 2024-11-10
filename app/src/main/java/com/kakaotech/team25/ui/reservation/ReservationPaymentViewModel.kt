@@ -1,6 +1,5 @@
 package com.kakaotech.team25.ui.reservation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.data.network.dto.BillingKeyDto
@@ -91,5 +90,9 @@ class ReservationPaymentViewModel @Inject constructor(
 
     fun updateExpireStatus(payStatus: PayStatus ) {
         _expireStatus.value = payStatus
+    }
+
+    fun updatePaymentStatus(payStatus: PayStatus ) {
+        _paymentStatus.value = payStatus
     }
 }

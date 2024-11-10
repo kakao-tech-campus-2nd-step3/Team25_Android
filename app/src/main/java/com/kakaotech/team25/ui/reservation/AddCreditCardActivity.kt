@@ -16,10 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddCreditCardActivity : AppCompatActivity() {
-    
-    @Inject
-    lateinit var cardInformationEncryption: CardInformationEncryption
-
     private lateinit var binding: ActivityAddCreditcardBinding
     private val viewModel: AddCreditCardViewModel by viewModels()
 

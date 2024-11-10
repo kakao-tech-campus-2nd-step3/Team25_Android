@@ -5,12 +5,11 @@ import com.kakaotech.team25.ui.main.status.data.CardInfor
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
-import javax.inject.Inject
 
-class CardInformationEncryption @Inject constructor(){
+class CardInformationEncryption {
 
     companion object {
-         val SECRET_KEY = BuildConfig.CARD_SECRET_KEY
+         private const val SECRET_KEY = BuildConfig.CARD_SECRET_KEY
     }
 
     fun encryptCBC(card: CardInfor): String {
