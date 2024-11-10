@@ -1,6 +1,5 @@
 package com.kakaotech.team25.ui.main.status
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.data.network.dto.ReservationCancelDto
@@ -24,20 +23,20 @@ class ReservationCancelViewModel @Inject constructor(
     private val _reservationCancelDto = MutableStateFlow(
         ReservationCancelDto(
             cancelReason = "",
-            cancelDetail = ""
+            cancelDetail = "상세 사유 없음"
         )
     )
     val reservationCancelDto: StateFlow<ReservationCancelDto> = _reservationCancelDto
 
-    fun updateReservationId(reservationId: String){
+    fun updateReservationId(reservationId: String) {
         _reservationId.value = reservationId
     }
 
-    fun updateCancelReason(cancelReason: String){
+    fun updateCancelReason(cancelReason: String) {
         _reservationCancelDto.value = _reservationCancelDto.value.copy(cancelReason = cancelReason)
     }
 
-    fun updateCancelDetails(cancelDetails: String){
+    fun updateCancelDetails(cancelDetails: String) {
         _reservationCancelDto.value = _reservationCancelDto.value.copy(cancelDetail = cancelDetails)
     }
 

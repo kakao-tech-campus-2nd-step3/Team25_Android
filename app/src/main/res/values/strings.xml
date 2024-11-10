@@ -187,10 +187,10 @@
     <string name="patient_name">환자명</string>
 
     <string-array name="reservation_cancel_reason_option">
-        <item>단순변심</item>
-        <item>재예약</item>
+        <item>고객 변심</item>
+        <item>재예약 예정</item>
         <item>원하는 매니저 없음</item>
-        <item>기타</item>
+        <item>예약 결제 실패</item>
     </string-array>
 
 </resources>
