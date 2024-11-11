@@ -19,9 +19,6 @@
             android:name=".ui.reservation.ReservationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.reservation.AddCreditCardActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.status.ReservationCancelActivity"
             android:exported="false" />
         <activity

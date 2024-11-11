@@ -45,16 +45,10 @@ class ReservationInfoViewModel @Inject constructor(
         ),
     )
 
-    private val _reservationID = MutableStateFlow("")
-    val reservationID: StateFlow<String> = _reservationID
-
     val reservationInfo: StateFlow<ReservationInfo> = _reservationInfo
 
     private val _reserveStatus = MutableStateFlow(ReserveStatus.DEFAULT)
     val reserveStatus: StateFlow<ReserveStatus> = _reserveStatus
-
-    private val _cancelStatus = MutableStateFlow(ReserveStatus.DEFAULT)
-    val cancelStatus: StateFlow<ReserveStatus> = _cancelStatus
 
     fun getReservationInfo(): ReservationInfo {
         return _reservationInfo.value
@@ -145,7 +139,6 @@ class ReservationInfoViewModel @Inject constructor(
             logReservationInfo()
             val result = reserveUseCase(_reservationInfo.value)
             if (result.isSuccess) {
-                _reservationID.value = result.getOrNull().toString()
                 _reserveStatus.value = ReserveStatus.SUCCESS
             } else {
                 _reserveStatus.value = ReserveStatus.FAILURE
@@ -155,27 +148,6 @@ class ReservationInfoViewModel @Inject constructor(
 
     fun updateReserveStatus(status: ReserveStatus) {
         _reserveStatus.value = status
-    }
-
-    fun updateCancelStatus(status: ReserveStatus) {
-        _cancelStatus.value = status
-    }
-
-    fun cancelReservation(reservationId: String, cancelReason: String, cancelDetail: String) {
-        viewModelScope.launch {
-            val reservationCancelDto = ReservationCancelDto(cancelReason, cancelDetail)
-
-            val result = cancelReservationUseCase(reservationId, reservationCancelDto)
-            if (result.isSuccess) {
-                _cancelStatus.value = ReserveStatus.SUCCESS
-            } else {
-                _cancelStatus.value = ReserveStatus.FAILURE
-            }
-        }
-    }
-
-    fun getReservationId(): String {
-        return _reservationID.value
     }
 
     private fun logReservationInfo() {
