@@ -8,4 +8,10 @@
     <style name="Theme.Team25" parent="Base.Theme.Team25" >
         <item name="android:windowBackground">@color/light_gray</item>
     </style>
+
+    <style name="CustomFontTheme" parent="Theme.Team25">
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#363636</item>
+    </style>
 </resources>
