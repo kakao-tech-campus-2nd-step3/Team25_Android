@@ -3,12 +3,10 @@ package com.kakaotech.team25.ui.reservation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kakaotech.team25.data.network.dto.ReservationCancelDto
 import com.kakaotech.team25.domain.Gender
 import com.kakaotech.team25.domain.model.Patient
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.domain.ReservationStatus
-import com.kakaotech.team25.domain.usecase.CancelReservationUseCase
 import com.kakaotech.team25.domain.usecase.ReserveUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReservationInfoViewModel @Inject constructor(
-    private val reserveUseCase: ReserveUseCase,
-    private val cancelReservationUseCase: CancelReservationUseCase
+    private val reserveUseCase: ReserveUseCase
 ) : ViewModel() {
     private val _reservationInfo = MutableStateFlow(
         ReservationInfo(
