@@ -18,6 +18,8 @@ class DefaultManagerRepository @Inject constructor(
         val result = managerApiService.getManagers(formattedDate, region)
         if (result is Success) result.body?.data?.let { managerDto ->
             emit(managerDto.asDomain())
+        } else {
+            emit(listOf())
         }
     }
 
@@ -32,6 +34,7 @@ class DefaultManagerRepository @Inject constructor(
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            "Unknown"
         }
     }
 

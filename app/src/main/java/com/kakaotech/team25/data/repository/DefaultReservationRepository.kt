@@ -19,6 +19,9 @@ class DefaultReservationRepository @Inject constructor(
         val result = reservationApiService.getReservations()
         if (result is Success) result.body?.data?.let { reservationDto ->
             emit(reservationDto.asDomain())
+        } else {
+            Log.d("testt", "aa")
+            emit(listOf())
         }
     }
 

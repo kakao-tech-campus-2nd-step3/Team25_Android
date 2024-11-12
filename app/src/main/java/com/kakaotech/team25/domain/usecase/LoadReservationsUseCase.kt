@@ -1,12 +1,8 @@
 package com.kakaotech.team25.domain.usecase
 
-import android.util.Log
-import android.widget.Toast
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.domain.repository.ManagerRepository
 import com.kakaotech.team25.domain.repository.ReservationRepository
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
@@ -19,7 +15,8 @@ class LoadReservationsUseCase
         val reservations = reservationRepository.getReservationsFlow()
             .firstOrNull() ?: emptyList()
         val updatedReservations = reservations.map { reservation ->
-            val managerName = managerRepository.getManagerNameFlow(reservation.managerId).first()
+            val managerName = managerRepository.getManagerNameFlow(reservation.managerId)
+                .firstOrNull() ?: "탈퇴한"
             reservation.copy(managerName = managerName)
         }
 
