@@ -17,6 +17,6 @@ class DefaultAccompanyRepository @Inject constructor(
         val result = accompanyApiService.getAccompanyInfo(reservationId)
         if (result is Result.Success) result.body?.data?.let { accompanyDtos ->
             emit(accompanyDtos.asDomain())
-        }
+        } else emit(emptyList())
     }
 }

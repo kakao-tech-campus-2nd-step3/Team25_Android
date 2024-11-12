@@ -1,5 +1,6 @@
 package com.kakaotech.team25.ui.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.di.IoDispatcher
@@ -33,6 +34,9 @@ class MainViewModel @Inject constructor(
     private val _confirmedReservation = MutableStateFlow<ReservationInfo?>(null)
     val confirmedReservation: StateFlow<ReservationInfo?> = _confirmedReservation
 
+    private val _runningReservation = MutableStateFlow<ReservationInfo?>(null)
+    val runningReservation: StateFlow<ReservationInfo?> = _runningReservation
+
     private val _accompanyInfo = MutableStateFlow<AccompanyInfo?>(null)
     val accompanyInfo: StateFlow<AccompanyInfo?> = _accompanyInfo
 
@@ -42,6 +46,7 @@ class MainViewModel @Inject constructor(
 
     init {
         updateFilteredRunningReservation()
+        updateConfirmedReservation()
     }
 
     fun logout() {
@@ -63,6 +68,13 @@ class MainViewModel @Inject constructor(
     }
 
     fun updateFilteredRunningReservation() {
+        viewModelScope.launch {
+            _runningReservation.value =
+                getReservationsUseCase.invoke()?.firstOrNull { it.reservationStatus == 진행중 }
+        }
+    }
+
+    fun updateConfirmedReservation() {
         viewModelScope.launch {
             _confirmedReservation.value =
                 getReservationsUseCase.invoke()?.firstOrNull { it.reservationStatus == 확정 }

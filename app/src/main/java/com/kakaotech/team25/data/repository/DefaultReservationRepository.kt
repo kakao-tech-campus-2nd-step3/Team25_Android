@@ -18,8 +18,9 @@ class DefaultReservationRepository @Inject constructor(
     override fun getReservationsFlow(): Flow<List<ReservationInfo>> = flow{
         val result = reservationApiService.getReservations()
         if (result is Success) result.body?.data?.let { reservationDto ->
+            Log.d("DefaultReservationRepository", reservationDto.toString())
             emit(reservationDto.asDomain())
-        }
+        }else emit(emptyList())
     }
 
     override suspend fun cancelReservation(reservationId: String, reservationCancelDto: ReservationCancelDto): Result<String> {

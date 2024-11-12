@@ -3,6 +3,7 @@ package com.kakaotech.team25.ui.main
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -47,7 +48,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        mainViewModel.updateFilteredRunningReservation()
+        lifecycleScope.launch {
+            mainViewModel.updateFilteredRunningReservation()
+            mainViewModel.updateConfirmedReservation()
+        }
     }
 
     private fun observeWithdrawEvent() {
@@ -132,6 +136,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObserves() {
         collectRunningReservation()
+        collectConfirmedReservation()
         collectAccompanyInfo()
         collectManagerName()
     }
@@ -139,9 +144,18 @@ class MainActivity : AppCompatActivity() {
     private fun collectRunningReservation() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainViewModel.runningReservation.collect { reservationInfo ->
+                    updateRealTimeCompanionSeeAllBtn(reservationInfo)
+                }
+            }
+        }
+    }
+
+    private fun collectConfirmedReservation() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mainViewModel.confirmedReservation.collect { reservationInfo ->
                     updateReservationSeeAllBtn(reservationInfo)
-                    updateRealTimeCompanionSeeAllBtn(reservationInfo)
                     setReservationSeeAllBtnClickListener(reservationInfo?: ReservationInfo())
                 }
             }
