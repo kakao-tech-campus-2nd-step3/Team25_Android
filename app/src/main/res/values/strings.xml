@@ -141,7 +141,7 @@
     <string name="select">선택</string>
     <string name="deposit_refund_cancel">보증금 환불 및 취소</string>
     <string name="writer">작성자</string>
-    <string name="writer_date">작성일자</string>
+    <string name="writer_date">동행일자</string>
     <string name="doctor_opinion_summary">의사 소견 요약</string>
     <string name="medication_guidance">약 복용 방법</string>
     <string name="meal_before">식전</string>
