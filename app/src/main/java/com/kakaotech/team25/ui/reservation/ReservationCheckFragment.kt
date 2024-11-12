@@ -2,11 +2,13 @@ package com.kakaotech.team25.ui.reservation
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -43,11 +45,76 @@ class ReservationCheckFragment : Fragment() {
         observeReserveStatus()
         loadInfo()
         setReservationClickListener()
+        setPrivacyClickListener()
+        setThirdPrivacyClickListener()
+    }
+
+    private fun setPrivacyClickListener() {
+        binding.detailsButton.setOnClickListener {
+            val message = SpannableStringBuilder()
+                .bold { append("개인정보 수집 목적:\n") }
+                .append("서비스 제공\n\n")
+                .bold { append("수집 항목:\n") }
+                .append(
+                    "이름, 생년월일, 연락처, 성별,\n" +
+                        "출발지 주소, 도착지 이름, 보호자 연락처,\n" +
+                        "환자와의 관계, 예약 일자\n\n"
+                )
+                .bold { append("보유 및 이용 기간:\n") }
+                .append("3년 후 파기\n\n")
+
+            AlertDialog.Builder(requireContext())
+                .setTitle("개인정보 수집 및 이용 동의")
+                .setMessage(message)
+                .setPositiveButton("확인", null)
+                .show()
+        }
+    }
+
+    private fun setThirdPrivacyClickListener() {
+        binding.thirdDetailsButton.setOnClickListener {
+            val message = SpannableStringBuilder()
+                // 제공받는 자 (제목)
+                .append("제공받는 자:\n")
+                // 내용
+                .bold { append("선택한 매니저\n\n") }
+
+                // 제공받는 자의 이용 목적 (제목)
+                .append("제공받는 자의 개인정보 이용 목적:\n")
+                // 내용
+                .bold { append("서비스 이용 및 관리\n\n") }
+
+                // 제공하는 개인정보 항목 (제목)
+                .append("제공하는 개인정보 항목:\n")
+                // 내용
+                .bold {
+                    append(
+                        "이름, 생년월일, 연락처, 주소,\n" +
+                            "보호자 연락처, 주소, 환자와의 관계\n" +
+                            "출발지 주소, 도착지 이름, 예약 일자\n\n"
+                    )
+                }
+
+                // 보유 및 이용 기간 (제목)
+                .append("제공 받는자의 보유기간:\n")
+                // 내용
+                .bold { append("3년 후 파기\n") }
+
+            AlertDialog.Builder(requireContext())
+                .setTitle("개인정보 제3자 제공 동의")
+                .setMessage(message)
+                .setPositiveButton("확인", null)
+                .show()
+        }
     }
 
     private fun setReservationClickListener() {
         binding.nextBtn.setOnClickListener {
-            showConfirmationDialog()
+            if (binding.privacyAgreementCheckbox.isChecked && binding.thirdPartyAgreementCheckbox.isChecked) {
+                showConfirmationDialog()
+            } else {
+                Toast.makeText(requireContext(), "모든 항목에 동의해 주세요", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -61,10 +128,12 @@ class ReservationCheckFragment : Fragment() {
                             Toast.makeText(requireContext(), "예약 완료", Toast.LENGTH_SHORT).show()
                             navigateToMainActivity()
                         }
+
                         ReserveStatus.FAILURE -> {
                             reservationInfoViewModel.updateReserveStatus(ReserveStatus.DEFAULT)
                             Toast.makeText(requireContext(), "예약 실패", Toast.LENGTH_SHORT).show()
                         }
+
                         ReserveStatus.DEFAULT -> {}
                     }
                 }

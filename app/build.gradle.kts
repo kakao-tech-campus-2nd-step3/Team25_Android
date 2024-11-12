@@ -19,8 +19,8 @@ android {
         applicationId = "com.kakaotech.team25"
         minSdk = 27
         targetSdk = 34
-        versionCode = 8
-        versionName = "1.3.4"
+        versionCode = 10
+        versionName = "1.3.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
