@@ -36,9 +36,13 @@ class LiveCompanionActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 liveCompanionViewModel.accompanyInfo.collectLatest { accompanyInfoList ->
-                    if (accompanyInfoList.isNullOrEmpty()) binding.liveCompanionRecyclerView.visibility = View.GONE
+                    if (accompanyInfoList.isNullOrEmpty()) {
+                        binding.liveCompanionRecyclerView.visibility = View.GONE
+                        binding.notCompanionTextView.visibility = View.VISIBLE
+                    }
                     else {
                         binding.liveCompanionRecyclerView.visibility = View.VISIBLE
+                        binding.notCompanionTextView.visibility = View.GONE
                         (binding.liveCompanionRecyclerView.adapter as? LiveCompanionRecyclerViewAdapter)
                             ?.submitList(accompanyInfoList.map { it.statusDescribe })
                     }
