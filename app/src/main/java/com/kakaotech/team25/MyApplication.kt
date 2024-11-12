@@ -1,6 +1,7 @@
 package com.kakaotech.team25
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferNetworkLossHandler
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.vectormap.KakaoMapSdk
@@ -12,6 +13,11 @@ class MyApplication : Application() {
         super.onCreate()
         initializeKakaoSdk()
         initializeTransferNetworkLossHandler()
+        setLightMode()
+    }
+
+    private fun setLightMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     private fun initializeKakaoSdk() {

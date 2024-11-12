@@ -37,8 +37,8 @@ class DefaultReservationRepository @Inject constructor(
             val response = reservationApiService.reserve(reserveDto)
             if (response.isSuccessful) {
                 val responseBody = response.body()
-                if (responseBody != null && responseBody.status == true && responseBody.data != null) {
-                    Result.success(responseBody.data.reservationId.toString())
+                if (responseBody != null && responseBody.status == true) {
+                    Result.success(responseBody.message)
                 } else {
                     Log.e(TAG, "Invalid response body or status is false")
                     Result.failure(Exception("Invalid response"))
