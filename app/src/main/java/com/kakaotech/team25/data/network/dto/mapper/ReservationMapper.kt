@@ -1,6 +1,7 @@
 package com.kakaotech.team25.data.network.dto.mapper
 
 import com.kakaotech.team25.data.network.dto.ReservationDto
+import com.kakaotech.team25.domain.Gender
 import com.kakaotech.team25.domain.model.Patient
 import com.kakaotech.team25.domain.model.ReservationInfo
 import java.time.format.DateTimeFormatter
@@ -21,7 +22,18 @@ object ReservationMapper {
                 serviceType = reservationDto.serviceType,
                 transportation = reservationDto.transportation,
                 price = reservationDto.price,
-                patient = Patient()
+                patient = Patient(
+                    patientName = reservationDto.patient.name ?: "",
+                    patientPhone = reservationDto.patient.phoneNumber ?: "",
+                    patientRelation = reservationDto.patient.patientRelation ?: "",
+                    patientGender = when (reservationDto.patient.patientGender) {
+                        "남성" -> Gender.MALE
+                        "여성" -> Gender.FEMALE
+                        else -> Gender.UNKNOWN
+                    },
+                    patientBirth = reservationDto.patient.birthDate ?: "",
+                    nokPhone = reservationDto.patient.nokPhone ?: ""
+                )
             )
         }
     }
