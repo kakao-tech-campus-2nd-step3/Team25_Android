@@ -41,21 +41,14 @@ class MainActivity : AppCompatActivity() {
         navigateToReservation()
         setLogoutClickListener()
         setWithdrawClickListener()
+        setReservationSeeAllBtnClickListener()
         setObserves()
         setStatusBarTransparent()
     }
 
-    override fun onResume() {
-        super.onResume()
-        refreshData()
-    }
-
-    private fun refreshData() {
+    override fun onStart() {
+        super.onStart()
         mainViewModel.updateFilteredRunningReservation()
-        mainViewModel.runningReservation.value?.let {
-            mainViewModel.updateManagerName(it.managerId)
-            mainViewModel.updateAccompanyInfo(it.reservationId)
-        }
     }
 
     private fun observeWithdrawEvent() {
@@ -93,6 +86,13 @@ class MainActivity : AppCompatActivity() {
 
             dialogBuilder.show()
 
+        }
+    }
+
+    private fun setReservationSeeAllBtnClickListener() {
+        binding.reservationSeeAllBtn02.setOnClickListener {
+            val intent = Intent(this@MainActivity, ReservationStatusActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     private fun collectRunningReservation() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.runningReservation.collectLatest { reservationInfo ->
+                mainViewModel.runningReservation.collect { reservationInfo ->
                     updateReservationSeeAllBtn(reservationInfo)
                     updateRealTimeCompanionSeeAllBtn(reservationInfo)
                 }
@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
     private fun collectAccompanyInfo() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.accompanyInfo.collectLatest { accompanyInfo ->
+                mainViewModel.accompanyInfo.collect { accompanyInfo ->
                     updateAccompanyMessage(accompanyInfo)
                 }
             }
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
     private fun collectManagerName() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                mainViewModel.managerName.collectLatest {name ->
+                mainViewModel.managerName.collect {name ->
                     binding.runningManagerNameTextView.text = name
                 }
             }
