@@ -10,19 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kakaotech.team25.R
 import com.kakaotech.team25.databinding.ActivityLiveCompanionBinding
-import com.kakao.vectormap.KakaoMap
-import com.kakao.vectormap.KakaoMapReadyCallback
-import com.kakao.vectormap.LatLng
-import com.kakao.vectormap.MapLifeCycleCallback
-import com.kakao.vectormap.camera.CameraUpdateFactory
-import com.kakao.vectormap.label.LabelManager
-import com.kakao.vectormap.label.LabelOptions
-import com.kakao.vectormap.label.LabelStyle
-import com.kakao.vectormap.label.LabelStyles
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -39,16 +28,32 @@ class LiveCompanionActivity : AppCompatActivity() {
 
         setLiveCompanionRecyclerViewAdapter()
         collectAccompanyInfo()
+        collectReservationId()
         navigateToPrevious()
     }
 
     private fun collectAccompanyInfo() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                liveCompanionViewModel.accompanyInfoList.collectLatest { accompanyInfoList ->
-                    if (accompanyInfoList.isEmpty()) binding.liveCompanionRecyclerView.visibility = View.GONE
-                    else (binding.liveCompanionRecyclerView.adapter as? LiveCompanionRecyclerViewAdapter)
-                        ?.submitList(accompanyInfoList.map { it.statusDescribe })
+                liveCompanionViewModel.accompanyInfo.collectLatest { accompanyInfoList ->
+                    if (accompanyInfoList.isNullOrEmpty()) binding.liveCompanionRecyclerView.visibility = View.GONE
+                    else {
+                        binding.liveCompanionRecyclerView.visibility = View.VISIBLE
+                        (binding.liveCompanionRecyclerView.adapter as? LiveCompanionRecyclerViewAdapter)
+                            ?.submitList(accompanyInfoList.map { it.statusDescribe })
+                    }
+                }
+            }
+        }
+    }
+
+    private fun collectReservationId() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                liveCompanionViewModel.reservationId.collectLatest { reservationId ->
+                    reservationId?.let {
+                        liveCompanionViewModel.updateAccompanyInfo(it)
+                    }
                 }
             }
         }
