@@ -5,3 +5,11 @@ enum class Gender {
     FEMALE,
     UNKNOWN
 }
+
+fun Gender.toKorean(): String {
+    return when (this) {
+        Gender.MALE -> "남성"
+        Gender.FEMALE -> "여성"
+        Gender.UNKNOWN -> ""
+    }
+}
