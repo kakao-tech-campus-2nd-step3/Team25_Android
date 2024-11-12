@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.status.ReservationDetailsActivity">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="80dp"
+        app:layout_constraintTop_toBottomOf="@id/back_btn">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/reservation_details_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="예약 정보"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/location_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:paddingVertical="10dp"
+                android:background="@drawable/light_gray_outline_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reservation_details_text_view">
+
+                <ImageView
+                    android:id="@+id/location_depart_image_view"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="22dp"
+                    android:src="@drawable/marker_start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/location_arrive_image_view"
+                    android:layout_width="14dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/marker"
+                    app:layout_constraintTop_toBottomOf="@id/location_depart_text_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/depart_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/from"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/location_depart_image_view"
+                    app:layout_constraintStart_toEndOf="@id/location_depart_image_view"
+                    app:layout_constraintTop_toTopOf="@id/location_depart_image_view" />
+
+                <TextView
+                    android:id="@+id/arrive_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/to"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/location_arrive_image_view"
+                    app:layout_constraintStart_toEndOf="@id/location_arrive_image_view"
+                    app:layout_constraintTop_toTopOf="@id/location_arrive_image_view" />
+
+                <TextView
+                    android:id="@+id/location_depart_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@id/location_depart_image_view"
+                    app:layout_constraintTop_toBottomOf="@id/location_depart_image_view"
+                    tools:text="부산대학교\n" />
+
+                <TextView
+                    android:id="@+id/location_arrive_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@id/location_arrive_image_view"
+                    app:layout_constraintTop_toBottomOf="@id/location_arrive_image_view"
+                    tools:text="부산대학교\n" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/reservation_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/light_gray_outline_box"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/location_information">
+
+                <TextView
+                    android:id="@+id/companion_depart_time_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이용 시작 시간"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/companion_depart_time_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/companion_depart_time_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/companion_depart_time_text_view"
+                    tools:text="2024.07.14 오후 8시" />
+
+                <TextView
+                    android:id="@+id/transportation_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="교통수단"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/companion_depart_time_information_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/companion_depart_time_information_text_view" />
+
+                <TextView
+                    android:id="@+id/transportation_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/transportation_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/transportation_text_view"
+                    tools:text="자차" />
+
+                <TextView
+                    android:id="@+id/request_details_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="요청사항"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/transportation_information_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/transportation_information_text_view" />
+
+                <TextView
+                    android:id="@+id/request_details_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/request_details_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/request_details_text_view"
+                    tools:text="요청사항" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/user_information_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="이용자 정보"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/reservation_details"
+                app:layout_constraintTop_toBottomOf="@id/reservation_details" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/user_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/light_gray_outline_box"
+                android:padding="20dp"
+                app:layout_constraintStart_toStartOf="@id/user_information_text_view"
+                app:layout_constraintTop_toBottomOf="@id/user_information_text_view">
+
+                <TextView
+                    android:id="@+id/user_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/user_name_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/user_name_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_text_view"
+                    tools:text="이수환" />
+
+                <TextView
+                    android:id="@+id/user_gender_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/gender"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/user_name_information_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_information_text_view" />
+
+                <TextView
+                    android:id="@+id/user_gender_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/user_gender_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_gender_text_view"
+                    tools:text="남" />
+
+                <TextView
+                    android:id="@+id/user_birth_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="생년월일"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/user_gender_information_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_gender_information_text_view" />
+
+                <TextView
+                    android:id="@+id/user_birth_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/user_birth_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_birth_text_view"
+                    tools:text="640421-******" />
+
+                <TextView
+                    android:id="@+id/user_phone_number_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/phone_num"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/user_birth_information_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_birth_information_text_view" />
+
+                <TextView
+                    android:id="@+id/user_phone_number_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/deep_gray_02"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/user_phone_number_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_phone_number_text_view"
+                    tools:text="640421-******" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

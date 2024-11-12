@@ -17,10 +17,10 @@ import com.kakaotech.team25.domain.model.AccompanyInfo
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.ui.login.LoginEntryActivity
 import com.kakaotech.team25.ui.main.companion.LiveCompanionActivity
+import com.kakaotech.team25.ui.main.status.ReservationDetailsActivity
 import com.kakaotech.team25.ui.main.status.ReservationStatusActivity
 import com.kakaotech.team25.ui.reservation.ReservationActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         navigateToReservation()
         setLogoutClickListener()
         setWithdrawClickListener()
-        setReservationSeeAllBtnClickListener()
         setObserves()
         setStatusBarTransparent()
     }
@@ -89,9 +88,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setReservationSeeAllBtnClickListener() {
+    private fun setReservationSeeAllBtnClickListener(reservationInfo: ReservationInfo) {
         binding.reservationSeeAllBtn02.setOnClickListener {
-            val intent = Intent(this@MainActivity, ReservationStatusActivity::class.java)
+            val intent = Intent(this@MainActivity, ReservationDetailsActivity::class.java)
+                .putExtra("ReservationInfo", reservationInfo)
             startActivity(intent)
         }
     }
@@ -102,7 +102,6 @@ class MainActivity : AppCompatActivity() {
             navigateToLogin()
         }
     }
-
 
     private fun navigateToLiveCompanion() {
         binding.realTimeCompanionSeeAllBtn.setOnClickListener {
@@ -140,9 +139,10 @@ class MainActivity : AppCompatActivity() {
     private fun collectRunningReservation() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.runningReservation.collect { reservationInfo ->
+                mainViewModel.confirmedReservation.collect { reservationInfo ->
                     updateReservationSeeAllBtn(reservationInfo)
                     updateRealTimeCompanionSeeAllBtn(reservationInfo)
+                    setReservationSeeAllBtnClickListener(reservationInfo?: ReservationInfo())
                 }
             }
         }
@@ -180,21 +180,26 @@ class MainActivity : AppCompatActivity() {
     private fun updateReservationSeeAllBtnVisible(reservationInfo: ReservationInfo) {
         binding.reservationSeeAllBtn02.visibility = View.VISIBLE
 
-        val runningTime = DateFormatter.formatDate(
+        val confirmedResDate = DateFormatter.formatDate(
+            reservationInfo.reservationDateTime, outputFormat = SimpleDateFormat("M월 d일", Locale.KOREAN)
+        )
+
+        val confirmedResTime = DateFormatter.formatDate(
             reservationInfo.reservationDateTime, outputFormat = SimpleDateFormat("a", Locale.KOREAN)
         )
 
-        val runningHours = DateFormatter.formatDate(
+        val confirmedResHours = DateFormatter.formatDate(
             reservationInfo.reservationDateTime, outputFormat = SimpleDateFormat("h", Locale.KOREAN)
         )
 
-        val runningMinutes = DateFormatter.formatDate(
+        val confirmedResMinutes = DateFormatter.formatDate(
             reservationInfo.reservationDateTime, outputFormat = SimpleDateFormat("mm", Locale.KOREAN)
         )
 
-        binding.timeCycleTextView.text = runningTime
-        binding.hourTextView.text = runningHours
-        binding.minutesTextView.text = runningMinutes
+        binding.dateTextView.text = confirmedResDate
+        binding.timeCycleTextView.text = confirmedResTime
+        binding.hourTextView.text = confirmedResHours
+        binding.minutesTextView.text = confirmedResMinutes
     }
 
     private fun updateRealTimeCompanionSeeAllBtn(reservationInfo: ReservationInfo?) {

@@ -30,8 +30,8 @@ class MainViewModel @Inject constructor(
     private val _withdrawEvent = MutableStateFlow<WithdrawStatus>(WithdrawStatus.Idle)
     val withdrawEvent: StateFlow<WithdrawStatus> = _withdrawEvent
 
-    private val _runningReservation = MutableStateFlow<ReservationInfo?>(null)
-    val runningReservation: StateFlow<ReservationInfo?> = _runningReservation
+    private val _confirmedReservation = MutableStateFlow<ReservationInfo?>(null)
+    val confirmedReservation: StateFlow<ReservationInfo?> = _confirmedReservation
 
     private val _accompanyInfo = MutableStateFlow<AccompanyInfo?>(null)
     val accompanyInfo: StateFlow<AccompanyInfo?> = _accompanyInfo
@@ -64,8 +64,8 @@ class MainViewModel @Inject constructor(
 
     fun updateFilteredRunningReservation() {
         viewModelScope.launch {
-            _runningReservation.value =
-                getReservationsUseCase.invoke()?.firstOrNull { it.reservationStatus == 진행중 }
+            _confirmedReservation.value =
+                getReservationsUseCase.invoke()?.firstOrNull { it.reservationStatus == 확정 }
         }
     }
 
