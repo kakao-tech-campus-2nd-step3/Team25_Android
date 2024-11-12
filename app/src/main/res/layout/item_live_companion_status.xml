@@ -3,6 +3,6 @@
     android:id="@+id/live_companion_status_item"
     android:layout_width="266dp"
     android:layout_height="wrap_content"
-    android:textColor="@color/white"
+    android:textColor="@color/deep_gray"
     android:layout_marginBottom="10dp">
 </TextView>

@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -28,59 +29,27 @@ class LiveCompanionViewModel @Inject constructor(
     private val accompanyRepository: AccompanyRepository,
     private val reservationRepository: ReservationRepository
 ) : ViewModel() {
-    private val _reservationId = MutableStateFlow<String>("")
-    val reservationId: StateFlow<String> = _reservationId
+    private val _reservationId = MutableStateFlow<String?>(null)
+    val reservationId: StateFlow<String?> = _reservationId
 
-    val runningReservation = reservationRepository.getReservationsFlow()
-        .map { reservations ->
-            reservations.firstOrNull { it.reservationStatus == 진행중 } ?: ReservationInfo()
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000L),
-            initialValue = ReservationInfo()
-        )
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val accompanyInfoList: StateFlow<List<AccompanyInfo>> = _reservationId
-        .flatMapLatest { reservationId ->
-            pollingFlow(5_000L) {
-                accompanyRepository.getAccompanyFlow(reservationId)
-            }
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000L),
-            initialValue = emptyList()
-        )
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val coordinateInfo: StateFlow<LatLng> = _reservationId
-        .flatMapLatest { reservationId ->
-            pollingFlow(5_000L) {
-                accompanyRepository.getCoordinatesFlow(reservationId)
-            }
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000L),
-            initialValue = LatLng.from(35.55, 128.0)
-        )
+    private val _accompanyInfo = MutableStateFlow<List<AccompanyInfo>?>(null)
+    val accompanyInfo: StateFlow<List<AccompanyInfo>?> = _accompanyInfo
 
     init {
+        updateRunningReservationId()
+    }
+
+    fun updateRunningReservationId() {
         viewModelScope.launch {
-            runningReservation.collectLatest { reservation ->
-                _reservationId.value = reservation.reservationId
-            }
+            val runningReservationInfo = reservationRepository.getReservationsFlow().firstOrNull()
+                ?.firstOrNull { it.reservationStatus == 진행중 }
+            _reservationId.value = runningReservationInfo?.reservationId
         }
     }
 
-    private fun <T> pollingFlow(intervalMillis: Long = 5_000L, function: () -> Flow<T>): Flow<T> = flow {
-        while (true) {
-            function().collect { value ->
-                emit(value)
-            }
-            delay(intervalMillis)
+    fun updateAccompanyInfo(reservationId: String) {
+        viewModelScope.launch {
+            _accompanyInfo.value = accompanyRepository.getAccompanyFlow(reservationId).firstOrNull()
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.kakaotech.team25.data.repository
 
+import android.util.Log
 import com.kakaotech.team25.data.network.calladapter.Result
 import com.kakaotech.team25.data.network.dto.mapper.asDomain
 import com.kakaotech.team25.data.remote.ReportApiService
@@ -14,8 +15,9 @@ class DefaultReportRepository @Inject constructor(
 ) : ReportRepository {
     override fun getReportFlow(reservationId: String): Flow<Report> = flow {
         val result = reportApiService.getReportInfo(reservationId)
-        if (result is Result.Success) result.body?.data?.let { reservationInfo ->
-            emit(reservationInfo.asDomain())
+        if (result is Result.Success) result.body?.data?.let { reportDtoList ->
+            Log.d("DefaultReportRepository", reportDtoList.first().toString())
+            emit(reportDtoList.first().asDomain())
         }
     }
 }

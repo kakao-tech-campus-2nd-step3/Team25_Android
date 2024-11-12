@@ -6,6 +6,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface AccompanyRepository {
     fun getAccompanyFlow(reservationId: String): Flow<List<AccompanyInfo>>
-
-    fun getCoordinatesFlow(reservationId: String): Flow<LatLng>
 }

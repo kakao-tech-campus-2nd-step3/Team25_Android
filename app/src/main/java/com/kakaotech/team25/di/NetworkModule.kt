@@ -10,7 +10,6 @@ import com.kakaotech.team25.data.network.interceptor.TokenInterceptor
 import com.kakaotech.team25.data.network.services.RemoteSearchHospitalService
 import com.kakaotech.team25.data.network.typeadapter.LocalDateTypeAdapter
 import com.kakaotech.team25.data.remote.AccompanyApiService
-import com.kakaotech.team25.data.remote.CoordinatesApiService
 import com.kakaotech.team25.data.remote.ManagerApiService
 import com.kakaotech.team25.data.remote.ReportApiService
 import com.kakaotech.team25.data.remote.ReservationApiService
@@ -103,11 +102,6 @@ object NetworkModule {
     @Singleton
     fun provideAccompanyApiService(@ServerRetrofit retrofit: Retrofit): AccompanyApiService =
         retrofit.create(AccompanyApiService::class.java)
-
-    @Provides
-    @Singleton
-    fun provideCoordinateApiService(@ServerRetrofit retrofit: Retrofit): CoordinatesApiService =
-        retrofit.create(CoordinatesApiService::class.java)
 
     @Provides
     @Singleton

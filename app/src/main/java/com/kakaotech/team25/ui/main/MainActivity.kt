@@ -2,7 +2,6 @@ package com.kakaotech.team25.ui.main
 
 import android.content.Intent
 import android.graphics.Color
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -42,8 +41,14 @@ class MainActivity : AppCompatActivity() {
         navigateToReservation()
         setLogoutClickListener()
         setWithdrawClickListener()
+        setReservationSeeAllBtnClickListener()
         setObserves()
         setStatusBarTransparent()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mainViewModel.updateFilteredRunningReservation()
     }
 
     private fun observeWithdrawEvent() {
@@ -81,6 +86,13 @@ class MainActivity : AppCompatActivity() {
 
             dialogBuilder.show()
 
+        }
+    }
+
+    private fun setReservationSeeAllBtnClickListener() {
+        binding.reservationSeeAllBtn02.setOnClickListener {
+            val intent = Intent(this@MainActivity, ReservationStatusActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -122,12 +134,13 @@ class MainActivity : AppCompatActivity() {
     private fun setObserves() {
         collectRunningReservation()
         collectAccompanyInfo()
+        collectManagerName()
     }
 
     private fun collectRunningReservation() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.runningReservation.collectLatest { reservationInfo ->
+                mainViewModel.runningReservation.collect { reservationInfo ->
                     updateReservationSeeAllBtn(reservationInfo)
                     updateRealTimeCompanionSeeAllBtn(reservationInfo)
                 }
@@ -138,8 +151,18 @@ class MainActivity : AppCompatActivity() {
     private fun collectAccompanyInfo() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.accompanyInfo.collectLatest { accompanyInfo ->
+                mainViewModel.accompanyInfo.collect { accompanyInfo ->
                     updateAccompanyMessage(accompanyInfo)
+                }
+            }
+        }
+    }
+
+    private fun collectManagerName() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                mainViewModel.managerName.collect {name ->
+                    binding.runningManagerNameTextView.text = name
                 }
             }
         }
@@ -188,9 +211,7 @@ class MainActivity : AppCompatActivity() {
         binding.onSignalLayout.visibility = View.VISIBLE
         binding.offSignalLayout.visibility = View.GONE
 
-        val managerName = reservationInfo.managerName
-        binding.runningManagerNameTextView.text = managerName
-
+        mainViewModel.updateManagerName(reservationInfo.managerId)
         mainViewModel.updateAccompanyInfo(reservationInfo.reservationId)
     }
 
@@ -215,5 +236,4 @@ class MainActivity : AppCompatActivity() {
                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
     }
-
 }
