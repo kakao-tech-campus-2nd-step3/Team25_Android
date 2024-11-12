@@ -10,13 +10,8 @@ import dagger.hilt.android.HiltAndroidApp
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        initializeKakaoMapSdk()
         initializeKakaoSdk()
         initializeTransferNetworkLossHandler()
-    }
-
-    private fun initializeKakaoMapSdk() {
-        KakaoMapSdk.init(this, BuildConfig.KAKAO_API_KEY)
     }
 
     private fun initializeKakaoSdk() {

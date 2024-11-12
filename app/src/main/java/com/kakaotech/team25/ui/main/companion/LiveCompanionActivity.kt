@@ -29,7 +29,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class LiveCompanionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLiveCompanionBinding
-    private val kakaoMapDeferred = CompletableDeferred<KakaoMap>()
     private val liveCompanionViewModel: LiveCompanionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,58 +37,9 @@ class LiveCompanionActivity : AppCompatActivity() {
         binding = ActivityLiveCompanionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startMapView()
         setLiveCompanionRecyclerViewAdapter()
         collectAccompanyInfo()
-        collectCoordinateInfo()
         navigateToPrevious()
-    }
-
-    private fun startMapView() {
-        binding.mapView.start(
-            createMapLifeCycleCallback(),
-            createMapReadyCallback(),
-        )
-    }
-
-    private fun createMapLifeCycleCallback(): MapLifeCycleCallback {
-        return object : MapLifeCycleCallback() {
-            override fun onMapDestroy() {}
-
-            override fun onMapError(error: Exception?) {}
-        }
-    }
-
-    private fun createMapReadyCallback(): KakaoMapReadyCallback {
-        return object : KakaoMapReadyCallback() {
-            override fun onMapReady(kakaoMap: KakaoMap) {
-                kakaoMapDeferred.complete(kakaoMap)
-            }
-        }
-    }
-
-    private fun updateLabelsToMap(labelManager: LabelManager, latLng: LatLng) {
-        val styles =
-            LabelStyles.from(
-                LabelStyle.from(R.drawable.marker).setZoomLevel(8),
-            )
-
-        val labelOptions =
-            LabelOptions.from(
-                LatLng.from(latLng),
-            )
-                .setStyles(styles)
-
-        labelManager.layer?.removeAll()
-        labelManager.layer?.addLabel(labelOptions)
-    }
-
-    private fun updateMapLocation(kakaoMap: KakaoMap, latLng: LatLng) {
-        val labelManager = kakaoMap.labelManager
-
-        kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(latLng))
-
-        if (labelManager != null) updateLabelsToMap(labelManager, latLng)
     }
 
     private fun collectAccompanyInfo() {
@@ -99,17 +49,6 @@ class LiveCompanionActivity : AppCompatActivity() {
                     if (accompanyInfoList.isEmpty()) binding.liveCompanionRecyclerView.visibility = View.GONE
                     else (binding.liveCompanionRecyclerView.adapter as? LiveCompanionRecyclerViewAdapter)
                         ?.submitList(accompanyInfoList.map { it.statusDescribe })
-                }
-            }
-        }
-    }
-
-    private fun collectCoordinateInfo() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val kakaoMap = kakaoMapDeferred.await()
-                liveCompanionViewModel.coordinateInfo.collectLatest { coordinates ->
-                    updateMapLocation(kakaoMap, coordinates)
                 }
             }
         }
@@ -125,17 +64,5 @@ class LiveCompanionActivity : AppCompatActivity() {
         binding.mapPreviousBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-    }
-
-    @Override
-    override fun onResume() {
-        super.onResume()
-        binding.mapView.resume()
-    }
-
-    @Override
-    public override fun onPause() {
-        super.onPause()
-        binding.mapView.pause()
     }
 }

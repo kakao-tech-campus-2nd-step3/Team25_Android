@@ -44,9 +44,7 @@ class LiveCompanionViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     val accompanyInfoList: StateFlow<List<AccompanyInfo>> = _reservationId
         .flatMapLatest { reservationId ->
-            pollingFlow(5_000L) {
-                accompanyRepository.getAccompanyFlow(reservationId)
-            }
+            accompanyRepository.getAccompanyFlow(reservationId)
         }
         .stateIn(
             scope = viewModelScope,
@@ -54,33 +52,11 @@ class LiveCompanionViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val coordinateInfo: StateFlow<LatLng> = _reservationId
-        .flatMapLatest { reservationId ->
-            pollingFlow(5_000L) {
-                accompanyRepository.getCoordinatesFlow(reservationId)
-            }
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000L),
-            initialValue = LatLng.from(35.55, 128.0)
-        )
-
     init {
         viewModelScope.launch {
             runningReservation.collectLatest { reservation ->
                 _reservationId.value = reservation.reservationId
             }
-        }
-    }
-
-    private fun <T> pollingFlow(intervalMillis: Long = 5_000L, function: () -> Flow<T>): Flow<T> = flow {
-        while (true) {
-            function().collect { value ->
-                emit(value)
-            }
-            delay(intervalMillis)
         }
     }
 }

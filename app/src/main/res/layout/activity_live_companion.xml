@@ -7,10 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.companion.LiveCompanionActivity">
 
-    <com.kakao.vectormap.MapView
-        android:id="@+id/map_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/map_previous_btn"
@@ -31,17 +27,6 @@
         android:layout_marginBottom="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/call_manager_btn" />
-
-    <TextView
-        android:id="@+id/call_manager_btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/blue"
-        android:gravity="center"
-        android:text="@string/call_manager"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
