@@ -7,6 +7,7 @@ import com.kakaotech.team25.domain.ReservationStatus.*
 import com.kakaotech.team25.domain.model.AccompanyInfo
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.domain.usecase.GetAccompanyInfoUseCase
+import com.kakaotech.team25.domain.usecase.GetManagerNameUseCase
 import com.kakaotech.team25.domain.usecase.GetReservationsUseCase
 import com.kakaotech.team25.domain.usecase.LogoutUseCase
 import com.kakaotech.team25.domain.usecase.WithdrawUseCase
@@ -23,6 +24,7 @@ class MainViewModel @Inject constructor(
     private val withdrawUseCase: WithdrawUseCase,
     private val getReservationsUseCase: GetReservationsUseCase,
     private val getAccompanyInfoUseCase: GetAccompanyInfoUseCase,
+    private val getManagerNameUseCase: GetManagerNameUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _withdrawEvent = MutableStateFlow<WithdrawStatus>(WithdrawStatus.Idle)
@@ -33,6 +35,8 @@ class MainViewModel @Inject constructor(
 
     private val _accompanyInfo = MutableStateFlow<AccompanyInfo?>(null)
     val accompanyInfo: StateFlow<AccompanyInfo?> = _accompanyInfo
+
+    var mangerName: String? = null
 
     init {
         getFilteredRunningReservation()
@@ -60,6 +64,12 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _runningReservation.value =
                 getReservationsUseCase.invoke()?.firstOrNull { it.reservationStatus == 진행중 }
+        }
+    }
+
+    fun getManagerName(managerId: String) {
+        viewModelScope.launch {
+            mangerName = getManagerNameUseCase.invoke(managerId)
         }
     }
 

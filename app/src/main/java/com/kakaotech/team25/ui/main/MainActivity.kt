@@ -188,8 +188,8 @@ class MainActivity : AppCompatActivity() {
         binding.onSignalLayout.visibility = View.VISIBLE
         binding.offSignalLayout.visibility = View.GONE
 
-        val managerName = reservationInfo.managerName
-        binding.runningManagerNameTextView.text = managerName
+        val managerName = mainViewModel.getManagerName(reservationInfo.managerId)
+        binding.runningManagerNameTextView.text = managerName.toString()
 
         mainViewModel.updateAccompanyInfo(reservationInfo.reservationId)
     }
