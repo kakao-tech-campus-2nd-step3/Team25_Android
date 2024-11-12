@@ -15,15 +15,6 @@
 
 </br>
 
-## ERD
-
-![image](https://github.com/user-attachments/assets/3e494ae1-4385-4df8-b7f3-7ec5ba2e4e89)
-
-## API 명세서
-![image](https://github.com/user-attachments/assets/dd0d407e-b23b-4311-830b-2f6f1df9cfd5)
-![image](https://github.com/user-attachments/assets/64739142-1154-4576-a57e-3595c429d8f3)
-![image](https://github.com/user-attachments/assets/e116606d-f276-4389-ac36-bb7a6b8ebe5a)
-
 ## 🏥 서비스 기획 의도
 
 <table>
@@ -82,6 +73,15 @@
 </table>
 
 </br>
+
+## ERD
+
+![image](https://github.com/user-attachments/assets/3e494ae1-4385-4df8-b7f3-7ec5ba2e4e89)
+
+## API 명세서
+![image](https://github.com/user-attachments/assets/dd0d407e-b23b-4311-830b-2f6f1df9cfd5)
+![image](https://github.com/user-attachments/assets/64739142-1154-4576-a57e-3595c429d8f3)
+![image](https://github.com/user-attachments/assets/e116606d-f276-4389-ac36-bb7a6b8ebe5a)
 
 ## 코드 유지 관리자
 |      | **노신**                 | **박정훈**                  | **이창욱**                    |
