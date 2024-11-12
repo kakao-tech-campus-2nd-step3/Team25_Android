@@ -36,10 +36,12 @@ class MainViewModel @Inject constructor(
     private val _accompanyInfo = MutableStateFlow<AccompanyInfo?>(null)
     val accompanyInfo: StateFlow<AccompanyInfo?> = _accompanyInfo
 
-    var mangerName: String? = null
+    private val _mangerName = MutableStateFlow<String>("")
+    val managerName: StateFlow<String> = _mangerName
+
 
     init {
-        getFilteredRunningReservation()
+        updateFilteredRunningReservation()
     }
 
     fun logout() {
@@ -60,16 +62,16 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getFilteredRunningReservation() {
+    fun updateFilteredRunningReservation() {
         viewModelScope.launch {
             _runningReservation.value =
                 getReservationsUseCase.invoke()?.firstOrNull { it.reservationStatus == 진행중 }
         }
     }
 
-    fun getManagerName(managerId: String) {
+    fun updateManagerName(managerId: String) {
         viewModelScope.launch {
-            mangerName = getManagerNameUseCase.invoke(managerId)
+            _mangerName.value = getManagerNameUseCase.invoke(managerId)?: ""
         }
     }
 

@@ -2,7 +2,6 @@ package com.kakaotech.team25.ui.main
 
 import android.content.Intent
 import android.graphics.Color
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -44,6 +43,19 @@ class MainActivity : AppCompatActivity() {
         setWithdrawClickListener()
         setObserves()
         setStatusBarTransparent()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshData()
+    }
+
+    private fun refreshData() {
+        mainViewModel.updateFilteredRunningReservation()
+        mainViewModel.runningReservation.value?.let {
+            mainViewModel.updateManagerName(it.managerId)
+            mainViewModel.updateAccompanyInfo(it.reservationId)
+        }
     }
 
     private fun observeWithdrawEvent() {
@@ -122,6 +134,7 @@ class MainActivity : AppCompatActivity() {
     private fun setObserves() {
         collectRunningReservation()
         collectAccompanyInfo()
+        collectManagerName()
     }
 
     private fun collectRunningReservation() {
@@ -140,6 +153,16 @@ class MainActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mainViewModel.accompanyInfo.collectLatest { accompanyInfo ->
                     updateAccompanyMessage(accompanyInfo)
+                }
+            }
+        }
+    }
+
+    private fun collectManagerName() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                mainViewModel.managerName.collectLatest {name ->
+                    binding.runningManagerNameTextView.text = name
                 }
             }
         }
@@ -188,9 +211,7 @@ class MainActivity : AppCompatActivity() {
         binding.onSignalLayout.visibility = View.VISIBLE
         binding.offSignalLayout.visibility = View.GONE
 
-        val managerName = mainViewModel.getManagerName(reservationInfo.managerId)
-        binding.runningManagerNameTextView.text = managerName.toString()
-
+        mainViewModel.updateManagerName(reservationInfo.managerId)
         mainViewModel.updateAccompanyInfo(reservationInfo.reservationId)
     }
 
@@ -215,5 +236,4 @@ class MainActivity : AppCompatActivity() {
                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
     }
-
 }

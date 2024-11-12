@@ -81,8 +81,14 @@ class ReservationCheckReportActivity : AppCompatActivity() {
 
         reportInfo.medicineTime.let { medicineTime ->
             when (medicineTime) {
-                MedicineTime.AFTER_MEAL -> binding.mealAfterBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                MedicineTime.BEFORE_MEAL -> binding.mealBeforeBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                MedicineTime.AFTER_MEAL -> {
+                    binding.mealAfterBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                    binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                }
+                MedicineTime.BEFORE_MEAL -> {
+                    binding.mealBeforeBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                    binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                }
                 null -> {}
             }
         }
@@ -97,13 +103,5 @@ class ReservationCheckReportActivity : AppCompatActivity() {
                 }
             }
         }
-
-        /* api 멤버 추가 예정
-        reportInfo.let { 시간 ->
-            when (시간) {
-                "30분" -> binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                "1시간" -> binding.time1hourBtn.setBackgroundResource(R.drawable.purple_btn_box)
-            }
-        }*/
     }
 }
