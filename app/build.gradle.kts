@@ -19,8 +19,8 @@ android {
         applicationId = "com.kakaotech.team25"
         minSdk = 27
         targetSdk = 34
-        versionCode = 10
-        versionName = "1.3.6"
+        versionCode = 11
+        versionName = "1.3.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -96,6 +96,9 @@ dependencies {
     implementation(libs.aws.android.sdk.mobile.client)
     implementation(libs.aws.android.sdk.core)
     implementation(libs.auth)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
 }
 
 protobuf {

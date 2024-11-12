@@ -141,7 +141,7 @@
     <string name="select">선택</string>
     <string name="deposit_refund_cancel">보증금 환불 및 취소</string>
     <string name="writer">작성자</string>
-    <string name="writer_date">작성일자</string>
+    <string name="writer_date">동행일자</string>
     <string name="doctor_opinion_summary">의사 소견 요약</string>
     <string name="medication_guidance">약 복용 방법</string>
     <string name="meal_before">식전</string>
@@ -190,6 +190,7 @@
     <string name="agree_personal_infor">(필수) 개인정보 수집 및 이용 동의</string>
     <string name="see_privacy_detail">자세히</string>
     <string name="agree_personal_infor_third">(필수) 개인정보 제3자 제공 동의</string>
+    <string name="not_companion">현재 동행중이 아닙니다</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객 변심</item>
