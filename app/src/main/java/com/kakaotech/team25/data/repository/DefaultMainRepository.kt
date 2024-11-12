@@ -1,5 +1,6 @@
 package com.kakaotech.team25.data.repository
 
+import android.util.Log
 import com.kakaotech.team25.data.network.dto.UserRole
 import com.kakaotech.team25.data.remote.UserService
 import com.kakaotech.team25.domain.repository.MainRepository
@@ -11,6 +12,7 @@ class DefaultMainRepository @Inject constructor(
 
     override suspend fun withdraw(): String? {
         val response = userService.withdraw()
+        Log.d("testt", response.toString())
         return if (response.isSuccessful) {
             response.body()?.message
         } else {
