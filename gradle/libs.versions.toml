@@ -26,6 +26,9 @@ ksp = "1.9.0-1.0.13"
 protobuf = "0.9.4"
 protobufJavalite = "3.22.3"
 datastoreCoreAndroid = "1.1.1"
+kotlinxCoroutinesTest = "1.6.0"
+mockk = "1.13.4"
+coreTesting = "2.2.0"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
@@ -56,6 +59,10 @@ androidx-datastore-core-android = { group = "androidx.datastore", name = "datast
 aws-android-sdk-core = { module = "com.amazonaws:aws-android-sdk-core", version.ref = "awsAndroidSdkCognito" }
 aws-android-sdk-mobile-client = { module = "com.amazonaws:aws-android-sdk-mobile-client", version.ref = "awsAndroidSdkCognito" }
 aws-android-sdk-s3 = { module = "com.amazonaws:aws-android-sdk-s3", version.ref = "awsAndroidSdkS3" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+
 
 
 [plugins]
