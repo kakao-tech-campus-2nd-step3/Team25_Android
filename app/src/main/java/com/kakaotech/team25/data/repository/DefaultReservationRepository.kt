@@ -21,7 +21,7 @@ class DefaultReservationRepository @Inject constructor(
             Log.d("DefaultReservationRepository", reservationDto.toString())
             emit(reservationDto.asDomain())
         } else {
-          emit(emptyList())
+            emit(emptyList())
         }
     }
 

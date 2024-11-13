@@ -191,6 +191,27 @@
     <string name="see_privacy_detail">자세히</string>
     <string name="agree_personal_infor_third">(필수) 개인정보 제3자 제공 동의</string>
     <string name="not_companion">현재 동행중이 아닙니다</string>
+    <string name="companion_service">병원동행 서비스</string>
+    <string name="reservation_companion">병원동행 예약하기</string>
+    <string name="hours">시</string>
+    <string name="mininute_02">분</string>
+    <string name="have_reservation">예약 일정이 있습니다</string>
+    <string name="reservation_see_more">확정된 예약 자세히 보기</string>
+    <string name="live_companion_status">실시간 동행 현황</string>
+    <string name="with_companion">님과 동행 중입니다</string>
+    <string name="no_companion">실시간 동행 중인 내역이 없습니다</string>
+    <string name="no_received_message">수신된 매니저 메세지가 없습니다</string>
+    <string name="reservation_status_02">예약 현황</string>
+    <string name="withdraw_02"><![CDATA[회원 탈퇴 >]]></string>
+    <string name="live_companion_infor">실시간 동행 정보</string>
+    <string name="please_write_detail">구체적인 사유를 적어주세요</string>
+    <string name="reservation_infor">예약 정보</string>
+    <string name="start_time">이용 시작 시간</string>
+    <string name="transportation">교통수단</string>
+    <string name="request">요청사항</string>
+    <string name="user_info">이용자 정보</string>
+    <string name="month_02">월</string>
+    <string name="day_02">일</string>
 
     <string-array name="reservation_cancel_reason_option">
         <item>고객 변심</item>

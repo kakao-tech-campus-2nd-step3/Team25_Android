@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="월"
+            android:text="@string/month_02"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="일"
+            android:text="@string/day_02"
             android:textSize="20sp"
             android:textStyle="bold" />
 
