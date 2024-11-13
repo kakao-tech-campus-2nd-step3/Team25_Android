@@ -22,13 +22,27 @@
         android:id="@+id/live_companion_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="실시간 동행 정보"
+        android:text="@string/live_companion_infor"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/map_previous_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/map_previous_btn" />
+
+    <TextView
+        android:id="@+id/not_companion_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/not_companion"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/live_companion_title_text_view" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/live_companion_recycler_view"

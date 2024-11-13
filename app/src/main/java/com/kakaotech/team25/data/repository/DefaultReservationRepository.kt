@@ -20,7 +20,9 @@ class DefaultReservationRepository @Inject constructor(
         if (result is Success) result.body?.data?.let { reservationDto ->
             Log.d("DefaultReservationRepository", reservationDto.toString())
             emit(reservationDto.asDomain())
-        }else emit(emptyList())
+        } else {
+            emit(emptyList())
+        }
     }
 
     override suspend fun cancelReservation(reservationId: String, reservationCancelDto: ReservationCancelDto): Result<String> {
