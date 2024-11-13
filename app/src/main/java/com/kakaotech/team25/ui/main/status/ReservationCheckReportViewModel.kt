@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.domain.model.Report
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.domain.repository.ReportRepository
+import com.kakaotech.team25.domain.usecase.GetReportUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReservationCheckReportViewModel @Inject constructor(
-    private val reportRepository: ReportRepository
+    private val getReportUseCase: GetReportUseCase
 ) : ViewModel() {
     private val _reservationInfo = MutableStateFlow(ReservationInfo())
     val reservationInfo: StateFlow<ReservationInfo> = _reservationInfo
@@ -25,7 +26,7 @@ class ReservationCheckReportViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     val reportInfo: StateFlow<Report> = _reservationInfo
         .flatMapLatest { reservationInfo ->
-            reportRepository.getReportFlow(reservationInfo.reservationId)
+            getReportUseCase(reservationInfo.reservationId)
         }
         .stateIn(
             scope = viewModelScope,
