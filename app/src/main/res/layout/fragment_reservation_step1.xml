@@ -84,6 +84,7 @@
                 android:id="@+id/phone_num_auto_complete_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="14sp"
                 android:inputType="none"
                 android:text="@string/_010" />
         </com.google.android.material.textfield.TextInputLayout>

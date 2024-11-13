@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/light_gray_input_box"
-        android:hint="구체적인 사유를 적어주세요"
+        android:hint="@string/please_write_detail"
         android:padding="20dp"
         app:layout_constraintStart_toStartOf="@id/reservation_cancel_reason_detail_text_view"
         app:layout_constraintTop_toBottomOf="@id/reservation_cancel_reason_detail_text_view" />
