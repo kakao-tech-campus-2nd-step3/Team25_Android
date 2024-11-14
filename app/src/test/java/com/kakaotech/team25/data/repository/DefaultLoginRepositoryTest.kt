@@ -21,7 +21,6 @@ import org.junit.Test
 import retrofit2.Response
 
 class DefaultLoginRepositoryTest {
-
     private lateinit var signInService: SignIn
     private lateinit var tokenDataStore: DataStore<Tokens>
     private lateinit var loginRepository: DefaultLoginRepository
