@@ -1,3 +1,5 @@
+package com.kakaotech.team25.ui.main.companion.adapters
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

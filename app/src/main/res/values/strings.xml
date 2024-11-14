@@ -39,10 +39,12 @@
     <string name="to">도착지</string>
     <string name="dedicated_manger">담당 매니저</string>
     <string name="pay">결제하기</string>
+    <string name="remove_billing_key">등록된 카드 삭제하기</string>
     <string name="pay_info">결제정보</string>
     <string name="deposit">보증금</string>
     <string name="won">원</string>
     <string name="total_payment_amount">총 결제금액</string>
+    <string name="additional_fees">동행 시간에 따라 추과금이 부담될 수 있습니다.</string>
     <string name="pay_credit_card">신용/체크카드 결제하기</string>
     <string name="pay_toss">토스로 결제하기</string>
     <string name="manager_list">매니저 리스트</string>
@@ -84,6 +86,8 @@
     <string name="error_expired_day">유효 기간 입력 오류</string>
     <string name="error_password">비밀번호 입력 오류</string>
     <string name="birth">생년월일</string>
+    <string name="kakao_login_button">카카오 로그인 버튼</string>
+    <string name="kakao_login_error">카카오 로그인 에러</string>
     <string name="card_birth">생년월일 6자리 숫자</string>
 
     <string-array name="relation_option">
@@ -135,9 +139,9 @@
     <string name="cancel_reason_detail">취소 상세</string>
     <string name="cancel_reason_detail_description">구체적인 사유를 적어주세요</string>
     <string name="select">선택</string>
-    <string name="deposit_refund_cancel">보증금 환불 및 취소</string>
+    <string name="deposit_refund_cancel">예약 취소하기</string>
     <string name="writer">작성자</string>
-    <string name="writer_date">작성일자</string>
+    <string name="writer_date">동행일자</string>
     <string name="doctor_opinion_summary">의사 소견 요약</string>
     <string name="medication_guidance">약 복용 방법</string>
     <string name="meal_before">식전</string>
@@ -157,7 +161,7 @@
     <string name="tuesday">화</string>
     <string name="monday">월</string>
     <string name="choose">선택하기</string>
-    <string name="_50000">50000</string>
+    <string name="basic_usage_fee">20000</string>
     <string name="basic_fee">기본 이용료</string>
     <string name="pusan_university_hospital">부산대학교병원</string>
     <string name="address_example">부산대학교 서구 구덕로 179(아미동...</string>
@@ -183,12 +187,37 @@
     <string name="yy_mm">YY/MM</string>
     <string name="vehicle_02">vehicle</string>
     <string name="patient_name">환자명</string>
+    <string name="agree_personal_infor">(필수) 개인정보 수집 및 이용 동의</string>
+    <string name="see_privacy_detail">자세히</string>
+    <string name="agree_personal_infor_third">(필수) 개인정보 제3자 제공 동의</string>
+    <string name="not_companion">현재 동행중이 아닙니다</string>
+    <string name="companion_service">병원동행 서비스</string>
+    <string name="reservation_companion">병원동행 예약하기</string>
+    <string name="hours">시</string>
+    <string name="mininute_02">분</string>
+    <string name="have_reservation">예약 일정이 있습니다</string>
+    <string name="reservation_see_more">확정된 예약 자세히 보기</string>
+    <string name="live_companion_status">실시간 동행 현황</string>
+    <string name="with_companion">님과 동행 중입니다</string>
+    <string name="no_companion">실시간 동행 중인 내역이 없습니다</string>
+    <string name="no_received_message">수신된 매니저 메세지가 없습니다</string>
+    <string name="reservation_status_02">예약 현황</string>
+    <string name="withdraw_02"><![CDATA[회원 탈퇴 >]]></string>
+    <string name="live_companion_infor">실시간 동행 정보</string>
+    <string name="please_write_detail">구체적인 사유를 적어주세요</string>
+    <string name="reservation_infor">예약 정보</string>
+    <string name="start_time">이용 시작 시간</string>
+    <string name="transportation">교통수단</string>
+    <string name="request">요청사항</string>
+    <string name="user_info">이용자 정보</string>
+    <string name="month_02">월</string>
+    <string name="day_02">일</string>
 
     <string-array name="reservation_cancel_reason_option">
-        <item>고객변심</item>
-        <item>재예약</item>
+        <item>고객 변심</item>
+        <item>재예약 예정</item>
         <item>원하는 매니저 없음</item>
-        <item>기타</item>
+        <item>예약 결제 실패</item>
     </string-array>
 
 </resources>

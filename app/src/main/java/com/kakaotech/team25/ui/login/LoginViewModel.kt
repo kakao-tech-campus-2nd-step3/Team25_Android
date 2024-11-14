@@ -4,7 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.kakaotech.team25.TokensProto.Tokens
 import com.kakaotech.team25.data.network.dto.TokenDto
 import com.kakaotech.team25.di.IoDispatcher
+import com.kakaotech.team25.domain.Role
 import com.kakaotech.team25.domain.usecase.GetSavedTokensUseCase
+import com.kakaotech.team25.domain.usecase.GetUserRoleUseCase
 import com.kakaotech.team25.domain.usecase.LoginUseCase
 import com.kakaotech.team25.domain.usecase.LogoutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +23,7 @@ class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val getSavedTokensUseCase: GetSavedTokensUseCase,
     private val logoutUseCase: LogoutUseCase,
+    private val getUserRoleUseCase: GetUserRoleUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
@@ -58,6 +61,15 @@ class LoginViewModel @Inject constructor(
     fun logout() {
         viewModelScope.launch(ioDispatcher) {
             logoutUseCase()
+        }
+    }
+
+    suspend fun getUserRole(): Role? {
+        return try {
+            val role = getUserRoleUseCase()
+            role?.let { Role.valueOf(it) }
+        } catch (e: Exception) {
+            null
         }
     }
 

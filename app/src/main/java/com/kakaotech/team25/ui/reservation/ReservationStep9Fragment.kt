@@ -3,7 +3,6 @@ package com.kakaotech.team25.ui.reservation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,12 +53,12 @@ class ReservationStep9Fragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 reservationInfoViewModel.reservationInfo.collectLatest {reservationInfo ->
-                    val date = reservationInfo.reservationDateTime.substringBefore(" ")
+                    val date = reservationInfo.reservationDateTime?.substringBefore(" ")
                     val region = reservationInfo.sido
 
-                    Log.d("datt", date)
-
-                    managerViewModel.fetchManagers(date, "부산광역시 남구")
+                    if (date != null) {
+                        managerViewModel.updateManagers(date, region)
+                    }
                 }
             }
         }
@@ -80,6 +79,7 @@ class ReservationStep9Fragment : Fragment() {
             override fun onManagerClicked(item: ManagerDomain) {
                 reservationInfoViewModel.updateManagerId(item.managerId)
                 reservationInfoViewModel.updateManagerName(item.name)
+
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, ReservationStep10Fragment())
                     .addToBackStack(null)

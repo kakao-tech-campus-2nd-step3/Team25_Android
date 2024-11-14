@@ -1,8 +1,7 @@
 package com.kakaotech.team25.di
 
 import android.content.Context
-import com.amazonaws.auth.AWSCredentials
-import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.auth.CognitoCachingCredentialsProvider
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
@@ -21,12 +20,16 @@ object S3Module {
 
     @Provides
     @ViewModelScoped
-    fun provideS3Client(): AmazonS3Client {
-        val credentials: AWSCredentials = BasicAWSCredentials(
-            BuildConfig.S3_ACCESS_KEY,
-            BuildConfig.S3_SECRET_KEY
+    fun provideS3Client(
+        @ApplicationContext context: Context
+    ): AmazonS3Client {
+        val credentialsProvider = CognitoCachingCredentialsProvider(
+            context,
+            BuildConfig.S3_COGNITO_ID,
+            Regions.AP_NORTHEAST_2
         )
-        return AmazonS3Client(credentials, Region.getRegion(Regions.AP_NORTHEAST_2))
+
+        return AmazonS3Client(credentialsProvider, Region.getRegion(Regions.AP_NORTHEAST_2))
     }
 
     @Provides

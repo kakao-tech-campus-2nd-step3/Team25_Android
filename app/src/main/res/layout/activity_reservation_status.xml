@@ -44,10 +44,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservation_status_recycler_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@id/reservation_status_text_view"
-        app:layout_constraintTop_toBottomOf="@id/reservation_status_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/reservation_status_text_view"/>
 
     <TextView
         android:id="@+id/reservation_history_text_view"
@@ -62,10 +62,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservation_history_recycler_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintStart_toStartOf="@id/reservation_history_text_view"
-        app:layout_constraintTop_toBottomOf="@id/reservation_history_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/reservation_history_text_view"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

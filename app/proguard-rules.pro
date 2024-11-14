@@ -20,7 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.kakaotech.team25.di.** { *; }
 -keep class com.kakaotech.team25.data.** { *; }
 
 # Keep Dagger Hilt classes and annotations
@@ -104,3 +103,6 @@
 -dontwarn com.amazonaws.mobileconnectors.cognitoauth.exceptions.AuthServiceException
 -dontwarn com.amazonaws.mobileconnectors.cognitoauth.handlers.AuthHandler
 -dontwarn com.amazonaws.mobileconnectors.cognitoauth.util.Pkce
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticMDCBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder

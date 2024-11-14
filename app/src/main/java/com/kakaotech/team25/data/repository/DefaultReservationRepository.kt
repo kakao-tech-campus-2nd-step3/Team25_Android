@@ -1,31 +1,38 @@
 package com.kakaotech.team25.data.repository
 
-import android.util.Log
-import com.kakaotech.team25.data.dao.ReservationDao
-import com.kakaotech.team25.data.entity.mapper.asDomainFromDto
-import com.kakaotech.team25.data.entity.mapper.asDomainFromEntity
-import com.kakaotech.team25.data.entity.mapper.asEntity
 import com.kakaotech.team25.data.network.calladapter.Result.*
+import com.kakaotech.team25.data.network.dto.mapper.asDomain
+import android.util.Log
+import com.kakaotech.team25.data.network.dto.ReservationCancelDto
 import com.kakaotech.team25.data.network.dto.ReserveDto
 import com.kakaotech.team25.data.remote.ReservationApiService
 import com.kakaotech.team25.domain.model.ReservationInfo
-import com.kakaotech.team25.domain.ReservationStatus
 import com.kakaotech.team25.domain.repository.ReservationRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class DefaultReservationRepository @Inject constructor(
-    private val reservationDao: ReservationDao,
     private val reservationApiService: ReservationApiService
 ) : ReservationRepository {
-    override val reservationsFlow: Flow<List<ReservationInfo>> = getAllReservationsFlow()
-    private fun getAllReservationsFlow(): Flow<List<ReservationInfo>> {
-        return reservationDao.getAllReservationsFlow().map { it.asDomainFromEntity()}
+    override fun getReservationsFlow(): Flow<List<ReservationInfo>> = flow{
+        val result = reservationApiService.getReservations()
+        if (result is Success) result.body?.data?.let { reservationDto ->
+            Log.d("DefaultReservationRepository", reservationDto.toString())
+            emit(reservationDto.asDomain())
+        } else {
+            emit(emptyList())
+        }
     }
 
-    override suspend fun getReservationsByStatus(status: ReservationStatus): List<ReservationInfo> {
-        return reservationDao.getReservationsByStatus(status).asDomainFromEntity()
+    override suspend fun cancelReservation(reservationId: String, reservationCancelDto: ReservationCancelDto): Result<String> {
+        val result = reservationApiService.cancelReservation(reservationId, reservationCancelDto)
+        return when(result){
+            is Success -> Result.success("예약이 취소 되었습니다")
+            is Failure -> Result.failure(Exception("오류가 발생했습니다. 다시 시도해주세요"))
+            is NetworkError -> Result.failure(Exception("네트워크 연결 상태를 확인 해주세요"))
+            else -> Result.failure(Exception("알 수 없는 오류가 발생했습니다. 다시 시도해주세요"))
+        }
     }
 
     override suspend fun reserve(reserveDto: ReserveDto): Result<String?> {
@@ -46,17 +53,6 @@ class DefaultReservationRepository @Inject constructor(
         } catch (e: Exception) {
             Log.e(TAG, "Exception occurred: ${e.message}", e)
             Result.failure(e)
-        }
-    }
-
-    override suspend fun insertReservation(reservations: List<ReservationInfo>) {
-        return reservationDao.insertReservations(reservations.asEntity())
-    }
-
-    override suspend fun fetchReservations() {
-        val result = reservationApiService.fetchReservations()
-        if (result is Success) result.body?.data?.let { reservationDtos ->
-            insertReservation(reservationDtos.asDomainFromDto())
         }
     }
 

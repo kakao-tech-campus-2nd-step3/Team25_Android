@@ -6,15 +6,19 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.kakaotech.team25.R
+import com.kakaotech.team25.data.util.DateFormatter
 import com.kakaotech.team25.databinding.ActivityReservationCheckReportBinding
 import com.kakaotech.team25.domain.MedicineTime
 import com.kakaotech.team25.domain.model.Report
 import com.kakaotech.team25.domain.model.ReservationInfo
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+@AndroidEntryPoint
 class ReservationCheckReportActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationCheckReportBinding
     private val viewModel: ReservationCheckReportViewModel by viewModels()
@@ -47,10 +51,11 @@ class ReservationCheckReportActivity : AppCompatActivity() {
     private fun collectReservationInfo() {
         lifecycleScope.launch {
             viewModel.reservationInfo.collectLatest { reservation ->
-                val dateFormat = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
-
                 binding.managerNameTextView.text = reservation.managerName
-                binding.dateTextView.text = dateFormat.format(reservation.reservationDateTime)
+                binding.dateTextView.text = DateFormatter.formatDate(
+                    reservation.reservationDateTime,
+                    outputFormat = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
+                )
             }
         }
     }
@@ -76,8 +81,14 @@ class ReservationCheckReportActivity : AppCompatActivity() {
 
         reportInfo.medicineTime.let { medicineTime ->
             when (medicineTime) {
-                MedicineTime.AFTER_MEAL -> binding.mealAfterBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                MedicineTime.BEFORE_MEAL -> binding.mealBeforeBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                MedicineTime.AFTER_MEAL -> {
+                    binding.mealAfterBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                    binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                }
+                MedicineTime.BEFORE_MEAL -> {
+                    binding.mealBeforeBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                    binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
+                }
                 null -> {}
             }
         }
@@ -92,13 +103,5 @@ class ReservationCheckReportActivity : AppCompatActivity() {
                 }
             }
         }
-
-        /* api 멤버 추가 예정
-        reportInfo.let { 시간 ->
-            when (시간) {
-                "30분" -> binding.time30minBtn.setBackgroundResource(R.drawable.purple_btn_box)
-                "1시간" -> binding.time1hourBtn.setBackgroundResource(R.drawable.purple_btn_box)
-            }
-        }*/
     }
 }
