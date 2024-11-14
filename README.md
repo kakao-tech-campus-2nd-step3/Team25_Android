@@ -2,40 +2,71 @@
 
 ![image](https://github.com/user-attachments/assets/121ff619-5adf-49ca-8128-5d677da23bc6)
 
-> 이 저장소는 병원 동행 매니저 서비스를 제공합니다. 혼자서 병원 이용이 어려우신 분들이 이 서비스를 통해 진료부터 귀가까지 모든 과정을 전문 매니저에게 도움 받으실 수 있습니다.
+> 목차
+> - [📌 프로젝트 소개](#프로젝트-소개)
+> - [👩‍👩‍👧‍👧 팀원 소개](#팀원-소개)
+> - [✏️ 주요 기능](#주요-기능)
+> - [🔗 링크 모음](#링크-모음)
+> - [📜 ERD](#erd)
+> - [📄 API 모아보기](#api-모아보기)
+> - [🖥️ 기술 스택](#기술-스택)
 
-</br>
+<br>
 
-## 🔗 배포 링크
+## 프로젝트 소개
 
-| 문서 | 
-|:--------:|
-| [안드로이드 앱]() |
-| [백엔드]() |
+### 개발 동기 및 목적
 
-</br>
+저희 칠전팔기 팀은 **“병원 동행 서비스 매칭 플랫폼”** 을 주제로 선정했습니다. 고령화 사회로 접어들면서 의료 이용에 어려움을 겪는 고령층이 늘어나고 있습니다. 특히 무인 접수기 등 디지털 도구의 도입으로 인해 익숙하지 않은 어르신들은 병원 이용에 불편함을 겪고 있습니다.
 
-## 🏥 서비스 기획 의도
+이 문제를 해결하기 위해 저희는 **도움이 필요한 환자와 전문 매니저를 매칭**하여 환자가 안전하게 의료 서비스를 이용할 수 있는 플랫폼을 제안합니다. 병원 동행 서비스의 수요는 고령화와 1인 가구 증가로 인해 지속적으로 증가하고 있으며, 병원 동행 매니저 업무는 비교적 낮은 노동 강도로 중장년층의 새로운 직업으로 주목받고 있습니다.
 
-<table>
-  <tr>
-    <td><b>Problem</b></td>
-    <td>병원에 갈 때 혼자서 이동하기 힘들거나 의료 절차를 이해하는데 어려움이 있는 환자가 많음</td>
-  </tr>
-  <tr>
-    <td><b>Persona</b></td>
-    <td>노인 환자, 거동이 불편한 환자, 보호자 동반 검사가 필요한 환자</td>
-  </tr>
-  <tr>
-    <td><b>사용하는 이유</b></td>
-    <td>혼자서 병원을 방문할 수 없거나, 병원 내 복잡한 절차를 혼자 해결하기 어려움<br>
-        보호자가 없는 환자가 안전하게 의료 서비스를 이용할 수 있는 서비스가 필요</td>
-  </tr>
-  <tr>
-    <td><b>Aha 모먼트</b></td>
-    <td style="color:red"><b>혼자서 병원 이용이 어려웠는데, 이 서비스를 통해 진료부터 귀가까지 모든 과정을 도움 받을 수 있겠구나!</b></td>
-  </tr>
-</table>
+저희 플랫폼은 **환자와 전문 매니저 간의 매칭**을 통해 병원 이용을 지원하며, **실시간 조회 및 리포트 기능**을 통해 자녀들도 안심하고 서비스를 이용할 수 있도록 돕겠습니다.
+
+<br>
+
+### 서비스 소개
+
+> 투명한 서비스로 환자와 병원 동행 매니저를 매칭하다, '메디투게더'
+
+1. ✏️ **로그인 및 회원가입**
+
+    - SNS 간편 로그인 (카카오)으로 회원가입이 가능해요.
+    - 로그아웃 및 탈퇴 기능도 제공하고 있어요.
+
+2. 🗂️ 환자의 **프로필 관리**
+
+    - 환자 개인 정보를 입력하고 의료 관련 정보를 관리할 수 있어요 (이름, 나이, 성별, 병력 등).
+    - 주치의 정보도 등록해두면 서비스 이용에 도움이 돼요.
+
+3. 📅 **서비스 예약**으로 병원 동행을 미리 준비해요
+
+    - 동행 서비스 예약을 통해 병원 정보와 예약 시간을 쉽게 설정할 수 있어요.
+    - 예약 후에도 수정이나 관리가 가능해요.
+
+4. 📍 실시간 동행 현황 알림
+
+    - 동행 서비스 이용 중 실시간으로 환자와 동행자의 위치를 확인할 수 있어요.
+    - 보호자나 환자 본인이 어플에서 이동 경로와 위치를 실시간으로 확인할 수 있어요.
+
+5. 📝 **진료 리포트 제공**으로 진료 정보를 한눈에
+
+    - 진료가 끝나면 리포트를 자동으로 생성해줘요 (진료 정보, 처방 내역 등 포함).
+
+<br>
+
+### 개발 기간
+
+2024.09 ~ 2024.11 (카카오 테크 캠퍼스 2기 - STEP3)
+
+## 팀원 소개
+|      | **노신**                 | **박정훈**                  | **이창욱**                    |
+|:----:|:--------------------------:|:---------------------------:|:-----------------------------:|
+|E-Mail| normengdie@pusan.ac.kr     | hoondb@naver.com          | ckddnr5527@gmail.com                |
+|GitHub| [Normenghub](https://github.com/Normenghub) | [Pjhn](https://github.com/Pjhn) | [ichanguk](https://github.com/ichanguk) |
+|      | <img src="https://github.com/Normenghub.png" width=100px> | <img src="https://github.com/Pjhn.png" width=100px> | <img src="https://github.com/ichanguk.png" width=100px> |
+
+<br>
 
 ## ✨ 주요 기능
 <table>
@@ -72,16 +103,41 @@
   </tr>
 </table>
 
-</br>
+<br>
 
-## ERD
+## Android 개발 주안점
 
-![image](https://github.com/user-attachments/assets/3e494ae1-4385-4df8-b7f3-7ec5ba2e4e89)
+### 📌 MVVM 패턴 적용
 
-## API 명세서
-![image](https://github.com/user-attachments/assets/dd0d407e-b23b-4311-830b-2f6f1df9cfd5)
-![image](https://github.com/user-attachments/assets/64739142-1154-4576-a57e-3595c429d8f3)
-![image](https://github.com/user-attachments/assets/e116606d-f276-4389-ac36-bb7a6b8ebe5a)
+> 각 구성 요소(data, domain, ui)의 역할이 분리되어 코드 수정과 확장이 용이
+>
+> 비즈니스 로직이 UI와 분리되어 있어 단위 테스트가 간편
+
+### 📌 DataStore 사용
+
+> JWT 토큰 저장시 SharedPreferences에 비해 데이터 무결성과 보안성이 높음
+>
+> 코루틴을 사용하여 비동기적으로 데이터를 저장하고 불러올 수 있어 효율적
+
+### 📌 Authenticator와 Interceptor 사용
+
+> 토큰이 만료된 경우 refresh 토큰을 사용해 자동으로 갱신된 액세스 토큰을 받아 사용자가 로그아웃하지 않고도 앱 내에서 계속해서 작업을 수행할 수 있게 함.
+>
+> 모든 API 요청 헤더에 JWT를 자동으로 포함하여 각 요청마다 사용자 인증을 처리
+
+### 📌 DI 사용
+
+> 객체의 생성과 관리를 Hilt가 담당해 원하는 인터페이스를 주입받을 수 있도록 함
+>
+> 클래스 간의 결합도가 낮아지고 의존 관계를 모듈 단위로 분리하여 코드의 가독성과 유지 보수성 향상
+
+### 📌 Fragment와 ViewModel 결합 사용
+
+> ViewModel을 통해 데이터를 관리하고 Fragment에서는 UI에 집중
+>
+> StateFlow를 사용하여 데이터가 변경될 때마다 자동으로 UI가 업데이트되도록 구성
+
+<br>
 
 ## 코드 유지 관리자
 |      | **노신**                 | **박정훈**                  | **이창욱**                    |
@@ -90,8 +146,21 @@
 |GitHub| [Normenghub](https://github.com/Normenghub) | [Pjhn](https://github.com/Pjhn) | [ichanguk](https://github.com/ichanguk) |
 |      | <img src="https://github.com/Normenghub.png" width=100px> | <img src="https://github.com/Pjhn.png" width=100px> | <img src="https://github.com/ichanguk.png" width=100px> |
 
-</br>
+<br>
 
-## 추후 개발 예정 사항
-- 결제 기능 업데이트(개발 완료, 업데이트 예정)
-- 카카오톡 알림 기능
+## ERD
+
+![ERD](https://github.com/user-attachments/assets/9d17fb57-9a4c-4a0c-83e5-eb12b6f233e9)
+
+<br>
+
+## API 모아보기
+
+📝 [API 문서](https://quickest-asterisk-75d.notion.site/API-5f451248315e4bca9f6de224fa1215a1)
+
+![API 명세서](https://github.com/user-attachments/assets/8a8f2ae2-5d71-4f5d-83e3-8babdabe84a2)
+
+<br>
+
+## 기술 스택
+![image](https://github.com/user-attachments/assets/9e96dfa1-fd50-4f0e-b86e-1803e080ae61)
