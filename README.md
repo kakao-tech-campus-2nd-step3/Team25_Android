@@ -68,7 +68,7 @@
 
 <br>
 
-## ✨ 주요 기능
+## 주요 기능
 <table>
   <tr>
     <th>기능</th>
@@ -145,6 +145,19 @@
 |E-Mail| normengdie@pusan.ac.kr     | hoondb@naver.com          | ckddnr5527@gmail.com                |
 |GitHub| [Normenghub](https://github.com/Normenghub) | [Pjhn](https://github.com/Pjhn) | [ichanguk](https://github.com/ichanguk) |
 |      | <img src="https://github.com/Normenghub.png" width=100px> | <img src="https://github.com/Pjhn.png" width=100px> | <img src="https://github.com/ichanguk.png" width=100px> |
+
+<br>
+
+## 링크 모음
+
+|                                               기획                                                |                                                                                          디자인                                                                                           |                                     개발                                     |                                                                      배포                                                                       |
+|:-----------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------:|
+| [노션](https://www.notion.so/28ef94a6ccd4459280e549b658e3e3ab?v=79a3e414d3ad44a5ac32a21a64aea358) | [와이어프레임](https://www.figma.com/design/MOl5hc5iBjWT8XPTGfsdkm/%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84-%EC%B9%A0%EC%A0%84%ED%8C%94%EA%B8%B0?node-id=0-1&node-type=canvas) |    [백엔드 깃허브](https://github.com/kakao-tech-campus-2nd-step3/Team25_BE)     |                                                   [백엔드 배포 주소](https://meditogetherapp.com)                                                    |
+|                [최종 기획안](https://www.notion.so/6618de8cc3e14655b28816d3adb80607)                 |                                                                                                                                                                                        | [안드로이드(이용자 앱) 깃허브](https://github.com/kakao-tech-campus-2nd-step3/Team25_Android) |                              [메디투게더 원스토어](https://m.onestore.co.kr/ko-kr/apps/appsDetail.omp?prodId=0000779535)                               |
+|                                                                                                 |                                                                                                                                                                                        |          [안드로이드(매니저 앱) 깃허브](https://github.com/kakao-tech-campus-2nd-step3/Team25_Android_2)           |                            [메디투게더 매니저앱 원스토어](https://m.onestore.co.kr/ko-kr/apps/appsDetail.omp?prodId=0000779536)                            |
+|                                                                                                 |                                                                                                                                                                                        |    [API 문서](https://www.notion.so/API-5f451248315e4bca9f6de224fa1215a1)    | [Vault 서버 배포 주소](http://ec2-13-125-34-52.ap-northeast-2.compute.amazonaws.com:8200/ui/vault/auth?redirect_to=%2Fvault%2Fdashboard&with=token) |
+|                                                                                                 |                                                                                                                                                                                        |     [테스트 시나리오](https://www.notion.so/bf50e3dcdb444b298734142ab6bcde29)     |                                                                                                                                               |
+|                                                                                                 |                                                                                                                                                                                        |    [테스트 결과보고서](https://www.notion.so/4b60db4392514af4ba1d8ddd3970f1fa)     |                                                                                                                                               |
 
 <br>
 
