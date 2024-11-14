@@ -139,7 +139,7 @@
     <string name="cancel_reason_detail">취소 상세</string>
     <string name="cancel_reason_detail_description">구체적인 사유를 적어주세요</string>
     <string name="select">선택</string>
-    <string name="deposit_refund_cancel">보증금 환불 및 취소</string>
+    <string name="deposit_refund_cancel">예약 취소하기</string>
     <string name="writer">작성자</string>
     <string name="writer_date">동행일자</string>
     <string name="doctor_opinion_summary">의사 소견 요약</string>

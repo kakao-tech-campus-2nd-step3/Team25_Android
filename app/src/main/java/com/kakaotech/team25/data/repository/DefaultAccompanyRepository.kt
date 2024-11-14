@@ -4,7 +4,6 @@ import com.kakaotech.team25.data.network.calladapter.Result
 import com.kakaotech.team25.data.remote.AccompanyApiService
 import com.kakaotech.team25.domain.model.AccompanyInfo
 import com.kakaotech.team25.domain.repository.AccompanyRepository
-import com.kakao.vectormap.LatLng
 import com.kakaotech.team25.data.network.dto.mapper.asDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

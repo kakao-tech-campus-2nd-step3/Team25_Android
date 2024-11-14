@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.protobuf)
     id("kotlin-parcelize")
-
 }
 
 android {
@@ -19,8 +18,8 @@ android {
         applicationId = "com.kakaotech.team25"
         minSdk = 27
         targetSdk = 34
-        versionCode = 12
-        versionName = "1.3.8"
+        versionCode = 14
+        versionName = "1.4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -76,7 +75,6 @@ dependencies {
     implementation(libs.retrofit2.retrofit)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.kakao.sdk.all)
-    implementation(libs.kakao.map)
     implementation(libs.v2.user)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -117,4 +115,5 @@ protobuf {
 }
 
 fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
+
 fun getApiUrl(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
