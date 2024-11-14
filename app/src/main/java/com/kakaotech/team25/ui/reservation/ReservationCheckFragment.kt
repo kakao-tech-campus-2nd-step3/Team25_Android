@@ -153,8 +153,8 @@ class ReservationCheckFragment : Fragment() {
         binding.patientNameTextView.text = reservationInfo.patient.patientName
         when (reservationInfo.patient.patientGender) {
             Gender.MALE -> binding.patientGenderTextView.text = "남성"
-            Gender.FEMALE -> binding.patientGender.text = "여성"
-            else -> binding.patientGender.text = "오류"
+            Gender.FEMALE -> binding.patientGenderTextView.text = "여성"
+            else -> binding.patientGenderTextView.text = "오류"
         }
         binding.patientPhoneNumTextView.text = reservationInfo.patient.patientPhone
         binding.fromLocationTextView.text = reservationInfo.departureLocation
