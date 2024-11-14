@@ -1,8 +1,6 @@
 package com.kakaotech.team25.ui.main.companion
 
-import LiveCompanionRecyclerViewAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kakaotech.team25.databinding.ActivityLiveCompanionBinding
+import com.kakaotech.team25.ui.main.companion.adapters.LiveCompanionRecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
