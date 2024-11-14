@@ -139,15 +139,6 @@
 
 <br>
 
-## 코드 유지 관리자
-|      | **노신**                 | **박정훈**                  | **이창욱**                    |
-|:----:|:--------------------------:|:---------------------------:|:-----------------------------:|
-|E-Mail| normengdie@pusan.ac.kr     | hoondb@naver.com          | ckddnr5527@gmail.com                |
-|GitHub| [Normenghub](https://github.com/Normenghub) | [Pjhn](https://github.com/Pjhn) | [ichanguk](https://github.com/ichanguk) |
-|      | <img src="https://github.com/Normenghub.png" width=100px> | <img src="https://github.com/Pjhn.png" width=100px> | <img src="https://github.com/ichanguk.png" width=100px> |
-
-<br>
-
 ## 링크 모음
 
 |                                               기획                                                |                                                                                          디자인                                                                                           |                                     개발                                     |                                                                      배포                                                                       |
