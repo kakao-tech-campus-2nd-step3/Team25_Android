@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.kakaotech.team25.data.util.DateFormatter
 import com.kakaotech.team25.databinding.ItemReservationStatusBinding
 import com.kakaotech.team25.domain.model.ReservationInfo
 import com.kakaotech.team25.ui.main.status.interfaces.OnRequestCancelClickListener
-import java.text.SimpleDateFormat
-import java.util.Locale
+
 
 class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestCancelClickListener) :
     ListAdapter<
@@ -21,10 +21,8 @@ class ReservationStatusRecyclerViewAdapter(private val clicklistener: OnRequestC
         private val clickListener: OnRequestCancelClickListener,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ReservationInfo) {
-            val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
-
             binding.userNameTextView.text = item.managerName
-            binding.reservationDateTextView.text = dateFormat.format(item.reservationDateTime)
+            binding.reservationDateTextView.text = DateFormatter.formatDate(item.reservationDateTime)
 
             binding.requestCancelBtn.setOnClickListener {
                 clickListener.onRequestCancelClicked(item)

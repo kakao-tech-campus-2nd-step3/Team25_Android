@@ -30,6 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/service_description_text_view" />
 
     <ImageView
+        android:contentDescription="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shake_hands"
@@ -38,18 +39,21 @@
 
     <ImageView
         android:id="@+id/kakao_login_btn"
+        android:contentDescription="@string/kakao_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="63dp"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:src="@drawable/kakao_login_large_wide"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/login_error_text_view"
+        android:contentDescription="@string/kakao_login_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"

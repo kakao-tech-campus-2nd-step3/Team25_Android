@@ -1,17 +1,25 @@
 package com.kakaotech.team25.ui.main.status
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.kakaotech.team25.R
+import com.kakaotech.team25.data.util.DateFormatter
 import com.kakaotech.team25.databinding.ActivityReservationCancelBinding
 import com.kakaotech.team25.domain.model.ReservationInfo
-import java.text.SimpleDateFormat
-import java.util.Locale
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ReservationCancelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationCancelBinding
+    private val reservationCancelViewModel: ReservationCancelViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +29,9 @@ class ReservationCancelActivity : AppCompatActivity() {
 
         setReservationInfo()
         setCancelReasonDropDown()
+        setCancelDetailsListener()
+        setCancelBtnClickListener()
+        collectToastMessage()
         navigateToPrevious()
     }
 
@@ -33,10 +44,19 @@ class ReservationCancelActivity : AppCompatActivity() {
     private fun setReservationInfo() {
         val reservationInfo: ReservationInfo? = intent.getParcelableExtra(KEY_RESERVATION_INFO)
         reservationInfo?.let {
-            val dateFormat = SimpleDateFormat("M월 d일 a h시", Locale.KOREAN)
-
             binding.managerNameTextView.text = it.managerName
-            binding.reservationDateTextView.text = dateFormat.format(it.reservationDateTime)
+            binding.reservationDateTextView.text = DateFormatter.formatDate(it.reservationDateTime)
+
+            reservationCancelViewModel.updateReservationId(it.reservationId)
+        }
+    }
+
+    private fun collectToastMessage() {
+        lifecycleScope.launch {
+            reservationCancelViewModel.toastMessage.collectLatest { message ->
+                if (!message.isNullOrEmpty())
+                    Toast.makeText(this@ReservationCancelActivity, message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -48,7 +68,41 @@ class ReservationCancelActivity : AppCompatActivity() {
 
         binding.reservationCancelReasonAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             val resCancelReason = parent.getItemAtPosition(position).toString()
-            Toast.makeText(this, "선택된 값: $resCancelReason", Toast.LENGTH_SHORT).show()
+
+            val fetchedCancelReason = when (resCancelReason) {
+                "고객 변심" -> "단순변심"
+                "재예약 예정" -> "재예약예정"
+                "원하는 매니저 없음" -> "매니저매치안됨"
+                "예약 결제 실패" -> "예약 결제 실패"
+                else -> "단순변심"
+            }
+
+            reservationCancelViewModel.updateCancelReason(fetchedCancelReason)
+        }
+    }
+
+    private fun setCancelDetailsListener() {
+        binding.cancelDetailsEditTextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                reservationCancelViewModel.updateCancelDetails(s.toString())
+            }
+        })
+    }
+
+    private fun setCancelBtnClickListener() {
+        binding.cancelReservationBtn.setOnClickListener {
+            val cancelReason = binding.reservationCancelReasonAutoCompleteTextView.text.toString()
+            if (cancelReason.isBlank()) {
+                Toast.makeText(this, "취소 사유를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            reservationCancelViewModel.cancelReservation()
+            finish()
         }
     }
 

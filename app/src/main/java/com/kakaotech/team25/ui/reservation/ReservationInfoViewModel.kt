@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReservationInfoViewModel @Inject constructor(
-    private val reserveUseCase: ReserveUseCase,
+    private val reserveUseCase: ReserveUseCase
 ) : ViewModel() {
     private val _reservationInfo = MutableStateFlow(
         ReservationInfo(
@@ -81,7 +81,7 @@ class ReservationInfoViewModel @Inject constructor(
     }
 
     fun updateServiceDate(year: Int, month: Int, day: Int, hour: Int, min: Int) {
-        val serviceDate = String.format("%04d-%02d-%02d %02d:%02d:00", year, month, day, hour, min)
+        val serviceDate = String.format("%04d-%02d-%02d %02d:%02d", year, month, day, hour, min)
         _reservationInfo.value = _reservationInfo.value.copy(reservationDateTime = serviceDate)
     }
 
@@ -133,11 +133,12 @@ class ReservationInfoViewModel @Inject constructor(
 
     fun reserve() {
         viewModelScope.launch {
+            logReservationInfo()
             val result = reserveUseCase(_reservationInfo.value)
-            _reserveStatus.value = if (result.isSuccess) {
-                ReserveStatus.SUCCESS
+            if (result.isSuccess) {
+                _reserveStatus.value = ReserveStatus.SUCCESS
             } else {
-                ReserveStatus.FAILURE
+                _reserveStatus.value = ReserveStatus.FAILURE
             }
         }
     }
@@ -146,7 +147,7 @@ class ReservationInfoViewModel @Inject constructor(
         _reserveStatus.value = status
     }
 
-    fun logReservationInfo() {
+    private fun logReservationInfo() {
         Log.d("ReservationInfoViewModel", "Current Reservation Info: ${_reservationInfo.value}")
     }
 }

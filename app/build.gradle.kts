@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.protobuf)
     id("kotlin-parcelize")
-
 }
 
 android {
@@ -19,16 +18,15 @@ android {
         applicationId = "com.kakaotech.team25"
         minSdk = 27
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.3"
+        versionCode = 15
+        versionName = "1.4.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "KAKAO_API_KEY", getApiKey("KAKAO_API_KEY"))
         buildConfigField("String", "KAKAO_REST_API_KEY", getApiKey("KAKAO_REST_API_KEY"))
         buildConfigField("String", "KAKAO_BASE_URL", getApiUrl("KAKAO_BASE_URL"))
-        buildConfigField("String", "S3_ACCESS_KEY", getApiKey("S3_ACCESS_KEY"))
-        buildConfigField("String", "S3_SECRET_KEY", getApiKey("S3_SECRET_KEY"))
+        buildConfigField("String", "S3_COGNITO_ID", getApiKey("S3_COGNITO_ID"))
         buildConfigField("String", "API_BASE_URL", getApiUrl("API_BASE_URL"))
         buildConfigField("String", "CARD_SECRET_KEY", getApiKey("CARD_SECRET_KEY"))
         manifestPlaceholders["kakaoApiKey"] = getApiKey("KAKAO_API_KEY_NO_QUOTES")
@@ -77,7 +75,6 @@ dependencies {
     implementation(libs.retrofit2.retrofit)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.kakao.sdk.all)
-    implementation(libs.kakao.map)
     implementation(libs.v2.user)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -96,6 +93,10 @@ dependencies {
     implementation(libs.aws.android.sdk.s3)
     implementation(libs.aws.android.sdk.mobile.client)
     implementation(libs.aws.android.sdk.core)
+    implementation(libs.auth)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
 }
 
 protobuf {
@@ -114,4 +115,5 @@ protobuf {
 }
 
 fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
+
 fun getApiUrl(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key, "")
