@@ -1,5 +1,13 @@
 # Team25_Android
 
+> 테스트 시 관리자 페이지에서 매니저 승인이 가능합니다. <br>
+[admin 페이지 주소](https://meditogetherapp.com/admin) <br>
+비밀번호: admin (평가 기간 후 변경 예정입니다) <br>
+매니저 등록 후 매니저 앱의 프로필 페이지에서 근무 지역과 근무 시간을 설정해야 그에 맞게 이용자 앱에서 검색됩니다.
+자세한 앱 사용법은 [테스트 시나리오](https://quickest-asterisk-75d.notion.site/bf50e3dcdb444b298734142ab6bcde29)에서 확인 가능합니다.
+
+<br>
+
 ![image](https://github.com/user-attachments/assets/121ff619-5adf-49ca-8128-5d677da23bc6)
 
 > 목차
