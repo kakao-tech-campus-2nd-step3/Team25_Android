@@ -161,10 +161,14 @@
 ## API 모아보기
 
 📝 [API 문서](https://quickest-asterisk-75d.notion.site/API-5f451248315e4bca9f6de224fa1215a1)
-
-![API 명세서](https://github.com/user-attachments/assets/8a8f2ae2-5d71-4f5d-83e3-8babdabe84a2)
+![API-문서](https://github.com/user-attachments/assets/70cf3abe-67d9-49fc-98ae-8016c8f2a22d)
 
 <br>
 
 ## 기술 스택
 ![image](https://github.com/user-attachments/assets/9e96dfa1-fd50-4f0e-b86e-1803e080ae61)
+
+<br>
+
+## 구현 화면
+<img width="691" alt="이용자앱2x" src="https://github.com/user-attachments/assets/c5e382dc-0404-4ecb-ac1c-e7504d2b02d5">
