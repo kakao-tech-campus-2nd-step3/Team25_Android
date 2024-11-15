@@ -1,5 +1,7 @@
 # Team25_Android
 
+### ❗ 테스트 안내
+
 > 테스트 시 관리자 페이지에서 매니저 승인이 가능합니다. <br>
 [admin 페이지 주소](https://meditogetherapp.com/admin) <br>
 비밀번호: admin (평가 기간 후 변경 예정입니다) <br>
