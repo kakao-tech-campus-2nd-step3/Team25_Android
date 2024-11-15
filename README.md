@@ -181,4 +181,4 @@
 <br>
 
 ## 구현 화면
-<img width="691" alt="이용자앱2x" src="https://github.com/user-attachments/assets/c5e382dc-0404-4ecb-ac1c-e7504d2b02d5">
+<img width="691" alt="이용자앱2x" src="https://github.com/user-attachments/assets/d44f4e25-e9ee-40b5-b872-beb3f7d043e9">
